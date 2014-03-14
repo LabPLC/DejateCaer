@@ -8,12 +8,15 @@
 
 #import "DescripcionViewController.h"
 #import "ViewController.h"
+#import "MapaViewController.h"
 @interface DescripcionViewController ()
 
 @end
 
 @implementation DescripcionViewController
-
+{
+    BOOL touch_map;
+}
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -25,6 +28,12 @@
 
 - (void)viewDidLoad
 {
+    touch_map=FALSE;
+    UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc]
+                                      initWithTarget:self action:@selector(touchMap)];
+    [_mapa addGestureRecognizer:tapRec];
+    
+    
     _nombre.text=[_evento objectForKey:@"nombre"];
     _lugar.text=[_evento objectForKey:@"lugar"];
     _horario.text=[_evento objectForKey:@"hora"];
@@ -44,6 +53,11 @@
     [_mapa setRegion:region animated:YES];
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+-(void)touchMap{
+    MapaViewController *mapa= [[self storyboard] instantiateViewControllerWithIdentifier:@"mapa"];//[[MapaViewController alloc]init];
+    mapa.view.backgroundColor=[UIColor whiteColor];
+[self.navigationController pushViewController:mapa animated:YES];
 }
 -(IBAction)regresar:(id)sender
 {

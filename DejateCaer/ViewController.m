@@ -17,10 +17,21 @@
 @implementation ViewController
 {
  NSArray *eventos;
+ NSString *currentLatitud;
+ NSString *currentLongitud;
+    NSString *radio;
 }
 @synthesize mapa,LocationManager;
 - (void)viewDidLoad
 {
+
+    radio=@"2000";
+    LocationManager = [[CLLocationManager alloc] init];
+    LocationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
+    LocationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
+    [LocationManager startUpdatingLocation];
+    
+  
     self.view.layer.shadowOpacity = 0.75f;
     self.view.layer.shadowRadius = 10.0f;
     self.view.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -37,10 +48,15 @@
 }
 
 -(void)getEventos{
-
+    currentLatitud=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.latitude];
+    currentLongitud=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.longitude];
+    NSLog(@"%@" ,currentLongitud);
+    NSLog(@"%@",currentLatitud );
+    
    // NSString *urlString =@"http://codigo.labplc.mx/~rockarloz/dejatecaer/prueba.php";
    NSString *urlString =@"http://codigo.labplc.mx/~rockarloz/dejatecaer/dejatecaer.php";
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+   NSString *url=[NSString stringWithFormat:@"%@?longitud=%@&latitud=%@&radio=%@",urlString,currentLongitud,currentLatitud,radio];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSOperationQueue *queue =[[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      
@@ -73,10 +89,7 @@
                   annotationPoint.subtitle = [lugar objectForKey:@"direccion"];
                   [mapa addAnnotation:annotationPoint];
                   
-               
-                 MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(SCL, 2000, 2000);
-                 
-                 [mapa setRegion:region animated:YES];
+                 [self getCurrentLocation:nil];
                  
                  
                  
@@ -88,7 +101,7 @@
              _tableView.backgroundColor=[UIColor blueColor];
              [self.view addSubview:_tableView];
              
-             [self.tableView reloadData];
+            
              
              
          }
@@ -97,7 +110,7 @@
              
          }
          
-         
+          [self.tableView reloadData];
          
          
          //Termina el método asíncrono
@@ -139,11 +152,32 @@ detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     }
     cell.nombre.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"nombre"];
     cell.hora.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"hora"];
-    cell.distancia.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"];
-
+    int metros= [[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"] integerValue];
+    if (metros>=1000) {
+        metros=(metros/1000);
+        NSLog(@"%i",metros);
+        cell.distancia.text= [NSString stringWithFormat:(@"%i Km"),metros];
+    }
+    else{
+    cell.distancia.text= [NSString stringWithFormat:(@"%i m"),metros];
+    }
     
    // cell.textLabel.text = [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"nombre"];
     return cell;
+}
+
+
+- (IBAction)getCurrentLocation:(id)sender {
+    CLLocationCoordinate2D SCL;
+    NSString *lat=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.latitude];
+    ;
+    NSString *lot=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.longitude];
+    ;
+    SCL.latitude = [lat doubleValue];
+    SCL.longitude = [lot doubleValue];
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(SCL, 2000, 2000);
+    
+    [mapa setRegion:region animated:YES];
 }
 
 

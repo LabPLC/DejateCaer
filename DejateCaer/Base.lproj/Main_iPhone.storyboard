@@ -45,6 +45,14 @@
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4R-JT-BJV">
+                                <rect key="frame" x="269" y="192" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <connections>
+                                    <action selector="getCurrentLocation:" destination="vXZ-lx-hvc" eventType="touchDown" id="gKR-aW-N2Z"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -198,6 +206,33 @@
             </objects>
             <point key="canvasLocation" x="769" y="-104"/>
         </scene>
+        <!--Mapa View Controller-->
+        <scene sceneID="Pg8-i6-Gsh">
+            <objects>
+                <viewController storyboardIdentifier="mapa" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eBg-Qr-97k" customClass="MapaViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ODM-ho-tfP"/>
+                        <viewControllerLayoutGuide type="bottom" id="nH1-y8-toK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gDI-AM-MjT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cTg-gn-gTw">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapa" destination="cTg-gn-gTw" id="STh-ey-tg1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OuA-Th-hMV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="735" y="537"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="LXA-u4-zVK">
             <objects>
@@ -226,6 +261,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ZHB-NT-HmK"/>
+        <segue reference="cAq-4s-3aG"/>
     </inferredMetricsTieBreakers>
 </document>
