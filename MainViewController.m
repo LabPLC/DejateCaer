@@ -12,6 +12,7 @@
 
 @interface MainViewController ()
 @property (nonatomic, strong) UITableView *menu;
+@property (nonatomic, strong) IBOutlet UIImageView *foto_perfil;
 @property (nonatomic, strong) NSArray *viewControllers;
 @property (nonatomic, strong) NSArray *menuTitles;
 
@@ -72,14 +73,47 @@ int flag;
 
 - (void)viewDidLoad
 {
+    CGRect frame_foto;
+    frame_foto.size.height=74;
+    frame_foto.size.width=74;
+    frame_foto.origin.x=63;
+    frame_foto.origin.y=47;
+    UIImage *image = [UIImage imageNamed:@"sin_perfil.jpg"];
+    self.foto_perfil = [[UIImageView alloc] initWithImage:image];
+    self.foto_perfil.backgroundColor = [UIColor clearColor];
+    self.foto_perfil.frame=frame_foto;
+    //self.foto_perfil.layer.cornerRadius = image.size.width / 2;
+    //self.foto_perfil.layer.cornerRadius = 2000;
+    UIGraphicsBeginImageContextWithOptions( self.foto_perfil.bounds.size, NO, [UIScreen mainScreen].scale);
+    
+    // Add a clip before drawing anything, in the shape of an rounded rect
+    [[UIBezierPath bezierPathWithRoundedRect: self.foto_perfil.bounds
+                                cornerRadius:50.0] addClip];
+    // Draw your image
+    [image drawInRect: self.foto_perfil.bounds];
+    
+    // Get the image, here setting the UIImageView image
+     self.foto_perfil.image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // Lets forget about that we were drawing
+    UIGraphicsEndImageContext();
+    [self.view addSubview: self.foto_perfil];
+    
     flag=1;
     //fondo de la vista que contiene la tabla del menu
-    self.view.backgroundColor=[UIColor purpleColor];
+    self.view.backgroundColor=[UIColor whiteColor];
     [super viewDidLoad];
     //table del menu
     [self.menu registerClass:[UITableViewCell class] forCellReuseIdentifier:kMenuCellID];
     self.menu.frame = self.view.bounds;
     //añadimos el menu a la vista actual
+    CGRect frame;
+    frame.size.height=self.view.frame.size.width;
+    frame.size.width=self.view.frame.size.height;
+    frame.origin.x=0;
+    frame.origin.y=150;
+    self.menu.frame=frame;
+   // CGRectMake(0, 150,self.view.frame.size.width , self.view.frame.size.height)];
     [self.view addSubview:self.menu];
     // se guarda el index (de la posicion en el array del controller que se mostrata primero)
     self.indexOfVisibleController = 0;
@@ -233,7 +267,8 @@ int flag;
 // cuando seleccion una celda (opcion ) del menu
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self replaceVisibleViewControllerWithViewControllerAtIndex:indexPath.row];
+    [self replaceVisibleViewControllerWithViewControllerAtIndex:0];//indexPath.row];
+    [self toggleMenuVisibility:self];
 }
 
 - (CGRect)offScreenFrame

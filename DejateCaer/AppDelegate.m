@@ -24,11 +24,12 @@
     
     
     // Creamos un rootControlles y lepasamos array con titulos y array con vistas
-    MainViewController *menuController = [[MainViewController alloc]
+    
+ MainViewController *   menuController = [[MainViewController alloc]
                                       initWithViewControllers:@[navController]
-                                      andMenuTitles:@[@"Tab", @"Red", @"Green", @"Nav"]];
+                                      andMenuTitles:@[@"Eventos", @"Mis Eventos", @"Agregar Evento", @"Configuraciones?"]];
     
-    
+   
     self.window.rootViewController = menuController;
     self.window.backgroundColor = [UIColor yellowColor];
     [self.window makeKeyAndVisible];

@@ -28,6 +28,7 @@
 		F332E87518D185AD00DF538D /* DescripcionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F332E87418D185AD00DF538D /* DescripcionViewController.m */; };
 		F332E87D18D197B300DF538D /* menuButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F332E87C18D197B300DF538D /* menuButton@2x.png */; };
 		F3AECC7818D36D210012748D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AECC7718D36D210012748D /* MainViewController.m */; };
+		F3AECC7B18D3746F0012748D /* sin_perfil.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F3AECC7A18D3746F0012748D /* sin_perfil.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		F332E87C18D197B300DF538D /* menuButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuButton@2x.png"; sourceTree = "<group>"; };
 		F3AECC7618D36D210012748D /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ../MainViewController.h; sourceTree = "<group>"; };
 		F3AECC7718D36D210012748D /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ../MainViewController.m; sourceTree = "<group>"; };
+		F3AECC7A18D3746F0012748D /* sin_perfil.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sin_perfil.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +137,7 @@
 			children = (
 				F3AECC7618D36D210012748D /* MainViewController.h */,
 				F3AECC7718D36D210012748D /* MainViewController.m */,
-				F332E87C18D197B300DF538D /* menuButton@2x.png */,
+				F3AECC7C18D374810012748D /* Imagenes */,
 				F332E84318D161BA00DF538D /* AppDelegate.h */,
 				F332E84418D161BA00DF538D /* AppDelegate.m */,
 				F332E84618D161BA00DF538D /* Main_iPhone.storyboard */,
@@ -186,6 +188,15 @@
 				F332E87118D16CB100DF538D /* eventCell.m */,
 			);
 			name = Celdas;
+			sourceTree = "<group>";
+		};
+		F3AECC7C18D374810012748D /* Imagenes */ = {
+			isa = PBXGroup;
+			children = (
+				F332E87C18D197B300DF538D /* menuButton@2x.png */,
+				F3AECC7A18D3746F0012748D /* sin_perfil.jpg */,
+			);
+			name = Imagenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +280,7 @@
 				F332E84818D161BA00DF538D /* Main_iPhone.storyboard in Resources */,
 				F332E87D18D197B300DF538D /* menuButton@2x.png in Resources */,
 				F332E83F18D161BA00DF538D /* InfoPlist.strings in Resources */,
+				F3AECC7B18D3746F0012748D /* sin_perfil.jpg in Resources */,
 				F332E86F18D16C1900DF538D /* evento_cell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
