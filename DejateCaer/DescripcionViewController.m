@@ -37,7 +37,7 @@
     annotationPoint.title = [_evento objectForKey:@"nombre"];
     annotationPoint.subtitle = [_evento objectForKey:@"direccion"];
     [_mapa addAnnotation:annotationPoint];
-    
+    [_mapa setShowsUserLocation:YES];
     
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(SCL, 2000, 2000);
     
