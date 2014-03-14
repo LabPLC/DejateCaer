@@ -27,6 +27,7 @@
 		F332E87218D16CB100DF538D /* eventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F332E87118D16CB100DF538D /* eventCell.m */; };
 		F332E87518D185AD00DF538D /* DescripcionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F332E87418D185AD00DF538D /* DescripcionViewController.m */; };
 		F332E87D18D197B300DF538D /* menuButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F332E87C18D197B300DF538D /* menuButton@2x.png */; };
+		F3AECC7818D36D210012748D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AECC7718D36D210012748D /* MainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,8 @@
 		F332E87318D185AD00DF538D /* DescripcionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescripcionViewController.h; sourceTree = "<group>"; };
 		F332E87418D185AD00DF538D /* DescripcionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescripcionViewController.m; sourceTree = "<group>"; };
 		F332E87C18D197B300DF538D /* menuButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuButton@2x.png"; sourceTree = "<group>"; };
+		F3AECC7618D36D210012748D /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ../MainViewController.h; sourceTree = "<group>"; };
+		F3AECC7718D36D210012748D /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ../MainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				F332E86E18D16C1900DF538D /* evento_cell.xib */,
-				F332E87018D16CB100DF538D /* eventCell.h */,
-				F332E87118D16CB100DF538D /* eventCell.m */,
+				F3AECC7918D36D2B0012748D /* Celdas */,
 				F332E83A18D161BA00DF538D /* DejateCaer */,
 				F332E85C18D161BA00DF538D /* DejateCaerTests */,
 				F332E83318D161BA00DF538D /* Frameworks */,
@@ -131,6 +133,8 @@
 		F332E83A18D161BA00DF538D /* DejateCaer */ = {
 			isa = PBXGroup;
 			children = (
+				F3AECC7618D36D210012748D /* MainViewController.h */,
+				F3AECC7718D36D210012748D /* MainViewController.m */,
 				F332E87C18D197B300DF538D /* menuButton@2x.png */,
 				F332E84318D161BA00DF538D /* AppDelegate.h */,
 				F332E84418D161BA00DF538D /* AppDelegate.m */,
@@ -173,6 +177,15 @@
 				F332E85F18D161BA00DF538D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F3AECC7918D36D2B0012748D /* Celdas */ = {
+			isa = PBXGroup;
+			children = (
+				F332E87018D16CB100DF538D /* eventCell.h */,
+				F332E87118D16CB100DF538D /* eventCell.m */,
+			);
+			name = Celdas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F332E87218D16CB100DF538D /* eventCell.m in Sources */,
+				F3AECC7818D36D210012748D /* MainViewController.m in Sources */,
 				F332E84E18D161BA00DF538D /* ViewController.m in Sources */,
 				F332E84518D161BA00DF538D /* AppDelegate.m in Sources */,
 				F332E84118D161BA00DF538D /* main.m in Sources */,
@@ -498,6 +512,7 @@
 				F332E86818D161BA00DF538D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F332E86918D161BA00DF538D /* Build configuration list for PBXNativeTarget "DejateCaerTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +521,7 @@
 				F332E86B18D161BA00DF538D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
