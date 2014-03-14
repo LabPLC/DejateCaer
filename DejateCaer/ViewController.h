@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface ViewController : UIViewController
 
+@interface ViewController : UIViewController  <MKMapViewDelegate ,UITableViewDelegate, UITableViewDataSource>
+@property (strong, nonatomic) CLLocationManager *LocationManager;
+@property (nonatomic, retain) IBOutlet MKMapView *mapa;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+- (IBAction)revealMenu:(id)sender;
 @end
