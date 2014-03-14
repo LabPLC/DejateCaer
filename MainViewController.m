@@ -51,8 +51,21 @@ int flag;
                 [tempVCs addObject:vc];
             
             //creamos el boton del menu y le asignamos una accion
-            UIBarButtonItem *revealMenuBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenuVisibility:)]; // (3)
             
+            
+          
+            
+            UIImage *menu_image = [UIImage imageNamed:@"menuButton@2x.png"];
+            UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+            [face addTarget:self
+                       action:@selector(toggleMenuVisibility:)
+             forControlEvents:UIControlEventTouchDown];
+            face.bounds = CGRectMake( 0, 0, 35, 30 );
+            [face setImage:menu_image forState:UIControlStateNormal];
+            UIBarButtonItem *faceBtn = [[UIBarButtonItem alloc] initWithCustomView:face];
+            
+            UIBarButtonItem *revealMenuBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenuVisibility:)]; // (3)
+            revealMenuBarButtonItem.customView=face;
             //si existe boton el navigation controller lo recorre a la derecha y pone el del menu al principio
             UIViewController *topVC = ((UINavigationController *)tempVCs.lastObject).topViewController;
             topVC.navigationItem.leftBarButtonItems = [@[revealMenuBarButtonItem] arrayByAddingObjectsFromArray:topVC.navigationItem.leftBarButtonItems];
@@ -108,8 +121,8 @@ int flag;
     self.menu.frame = self.view.bounds;
     //añadimos el menu a la vista actual
     CGRect frame;
-    frame.size.height=self.view.frame.size.width;
-    frame.size.width=self.view.frame.size.height;
+    frame.size.height=self.view.frame.size.height;
+    frame.size.width=self.view.frame.size.width;
     frame.origin.x=0;
     frame.origin.y=150;
     self.menu.frame=frame;

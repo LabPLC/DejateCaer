@@ -10,5 +10,6 @@
 
 @interface eventCell : UITableViewCell
 @property (nonatomic,retain) IBOutlet UILabel *nombre;
+@property (nonatomic,retain) IBOutlet UILabel *hora;
 @property (nonatomic,retain) IBOutlet UILabel *distancia;
 @end

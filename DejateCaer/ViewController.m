@@ -137,6 +137,7 @@ detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
        // cell = [topLevelObjects objectAtIndex:0];
     }
     cell.nombre.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"nombre"];
+    cell.hora.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"hora"];
     cell.distancia.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"];
 
     
