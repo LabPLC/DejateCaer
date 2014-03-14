@@ -7,12 +7,31 @@
 //
 
 #import "AppDelegate.h"
-
+#import "MainViewController.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    //Para identificar los diferentes StoryBoards que puedan Existir
+    UIStoryboard *navStoryBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    
+    //Creammo un Navigation Controller con el identificador de storyboard que tenga
+    UINavigationController *navController = [navStoryBoard instantiateViewControllerWithIdentifier:@"nav"];
+    
+
+    
+    
+    // Creamos un rootControlles y lepasamos array con titulos y array con vistas
+    MainViewController *menuController = [[MainViewController alloc]
+                                      initWithViewControllers:@[navController]
+                                      andMenuTitles:@[@"Tab", @"Red", @"Green", @"Nav"]];
+    
+    
+    self.window.rootViewController = menuController;
+    self.window.backgroundColor = [UIColor yellowColor];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 							
