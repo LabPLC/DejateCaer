@@ -56,6 +56,9 @@
 }
 -(void)touchMap{
     MapaViewController *mapa= [[self storyboard] instantiateViewControllerWithIdentifier:@"mapa"];//[[MapaViewController alloc]init];
+    mapa.latitud=[_evento objectForKey:@"latitud"];
+    mapa.longitud=[_evento objectForKey:@"longitud"];
+    mapa.nombre=[_evento objectForKey:@"nombre"];
     mapa.view.backgroundColor=[UIColor whiteColor];
 [self.navigationController pushViewController:mapa animated:YES];
 }

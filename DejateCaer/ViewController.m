@@ -36,15 +36,48 @@
     self.view.layer.shadowRadius = 10.0f;
     self.view.layer.shadowColor = [UIColor blackColor].CGColor;
     
-        [mapa setDelegate:self];
+    [mapa setDelegate:self];
     [mapa setShowsUserLocation:YES];
 
-    //eventos = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
-
-    [self getEventos];
-   
+   // eventos = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 222, 320, 346)];
+    _tableView.dataSource=self;
+    _tableView.delegate=self;
+    _tableView.rowHeight=75;
+    _tableView.backgroundColor=[UIColor blueColor];
+    
+   // [self getEventos];
+    [self llamada_asincrona];
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+}
+-(void)getLista {
+    
+
+    [self.view addSubview:_tableView];
+    [self.tableView reloadData];
+    [self getMapa];
+}
+-(void)getMapa
+{
+    for(int i=0;i<[eventos count];i++) {
+        NSLog(@"%i",i);
+        NSMutableDictionary *lugar=[[NSMutableDictionary alloc]init];
+        lugar=[eventos objectAtIndex:i];
+        
+        CLLocationCoordinate2D SCL;
+        SCL.latitude = [[lugar objectForKey:@"latitud"] doubleValue];
+        SCL.longitude = [[lugar objectForKey:@"longitud"]doubleValue];
+        MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
+        annotationPoint.coordinate = SCL;
+        annotationPoint.title = [lugar objectForKey:@"nombre"];
+        annotationPoint.subtitle = [lugar objectForKey:@"direccion"];
+        [mapa addAnnotation:annotationPoint];
+        
+        
+    }
+    [self getCurrentLocation:nil];
+
 }
 
 -(void)getEventos{
@@ -55,7 +88,7 @@
     
    // NSString *urlString =@"http://codigo.labplc.mx/~rockarloz/dejatecaer/prueba.php";
    NSString *urlString =@"http://codigo.labplc.mx/~rockarloz/dejatecaer/dejatecaer.php";
-   NSString *url=[NSString stringWithFormat:@"%@?longitud=%@&latitud=%@&radio=%@",urlString,currentLongitud,currentLatitud,radio];
+   NSString *url=[NSString stringWithFormat:@"%@?longitud=%@&latitud=%@&radio=%@&fecha=2014-03-14",urlString,currentLongitud,currentLatitud,radio];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSOperationQueue *queue =[[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
@@ -63,6 +96,7 @@
      {
          if ([data length] >0  && error == nil)
          {
+                 NSLog(@"dentro del asyn");
              NSArray *lugares;
              NSString *dato=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
              NSMutableString * miCadena = [NSMutableString stringWithString: dato];
@@ -74,34 +108,7 @@
              consulta = [jsonObject objectForKey:@"eventos"];
              lugares= [jsonObject objectForKey:@"eventos"];//[consulta objectForKey:@"ubicaciones"];
              eventos=lugares;
-             
-             for(int i=0;i<[lugares count];i++) {
-                 NSLog(@"%i",i);
-                 NSMutableDictionary *lugar=[[NSMutableDictionary alloc]init];
-                 lugar=[lugares objectAtIndex:i];
-                 
-                  CLLocationCoordinate2D SCL;
-                  SCL.latitude = [[lugar objectForKey:@"latitud"] doubleValue];
-                  SCL.longitude = [[lugar objectForKey:@"longitud"]doubleValue];
-                  MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
-                  annotationPoint.coordinate = SCL;
-                  annotationPoint.title = [lugar objectForKey:@"nombre"];
-                  annotationPoint.subtitle = [lugar objectForKey:@"direccion"];
-                  [mapa addAnnotation:annotationPoint];
-                  
-                 [self getCurrentLocation:nil];
-                 
-                 
-                 
-             }
-             _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 222, 320, 346)];
-             _tableView.dataSource=self;
-             _tableView.delegate=self;
-             _tableView.rowHeight=75;
-             _tableView.backgroundColor=[UIColor blueColor];
-             [self.view addSubview:_tableView];
-             
-            
+             [self getLista];
              
              
          }
@@ -109,12 +116,9 @@
           //   respuesta = nil;             NSLog(@"Contenido vacio");
              
          }
-         
-          [self.tableView reloadData];
-         
-         
-         //Termina el método asíncrono
+        //Termina el método asíncrono
      }];
+    NSLog(@"fuera del asyn");
 
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -140,6 +144,7 @@ detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"paso a celda");
    // static NSString *simpleTableIdentifier = @"SimpleTableItem";
    // eventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell"];
     eventCell *cell=[[eventCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"customCell"];
@@ -152,14 +157,14 @@ detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     }
     cell.nombre.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"nombre"];
     cell.hora.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"hora"];
-    int metros= [[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"] integerValue];
+    double metros= [[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"] doubleValue];
     if (metros>=1000) {
         metros=(metros/1000);
-        NSLog(@"%i",metros);
-        cell.distancia.text= [NSString stringWithFormat:(@"%i Km"),metros];
+       
+        cell.distancia.text= [NSString stringWithFormat:(@"%.2f Km"),metros];
     }
     else{
-    cell.distancia.text= [NSString stringWithFormat:(@"%i m"),metros];
+    cell.distancia.text= [NSString stringWithFormat:(@"%@ m"),[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"]];
     }
     
    // cell.textLabel.text = [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"nombre"];
@@ -180,6 +185,48 @@ detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [mapa setRegion:region animated:YES];
 }
 
-
+-(void)llamada_asincrona{
+    
+    currentLatitud=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.latitude];
+    currentLongitud=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.longitude];
+    NSLog(@"%@" ,currentLongitud);
+    NSLog(@"%@",currentLatitud );
+    
+    // NSString *urlString =@"http://codigo.labplc.mx/~rockarloz/dejatecaer/prueba.php";
+    NSString *urlString =@"http://codigo.labplc.mx/~rockarloz/dejatecaer/dejatecaer.php";
+    NSString *url=[NSString stringWithFormat:@"%@?longitud=%@&latitud=%@&radio=%@&fecha=2014-03-14",urlString,currentLongitud,currentLatitud,radio];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+        
+        if ([data length] >0  )
+        {
+            NSLog(@"dentro del asyn");
+            NSArray *lugares;
+            NSString *dato=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSMutableString * miCadena = [NSMutableString stringWithString: dato];
+            NSData *data1 = [miCadena dataUsingEncoding:NSUTF8StringEncoding];
+            
+            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data1 options:NSJSONReadingAllowFragments error:nil];
+            
+            NSMutableDictionary *consulta=[[NSMutableDictionary alloc]init];
+            consulta = [jsonObject objectForKey:@"eventos"];
+            lugares= [jsonObject objectForKey:@"eventos"];//[consulta objectForKey:@"ubicaciones"];
+            eventos=lugares;
+            [self getLista];
+            
+            
+            }
+        
+   
+            
+          //  [spinner stopAnimating];
+          
+        
+        
+    });
+    
+}
 
 @end

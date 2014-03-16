@@ -10,5 +10,7 @@
 #import <MapKit/MapKit.h>
 @interface MapaViewController : UIViewController  <MKMapViewDelegate>
 @property (nonatomic, retain) IBOutlet MKMapView *mapa;
-
+@property (nonatomic, retain) NSString *latitud;
+@property (nonatomic, retain) NSString *longitud;
+@property (nonatomic, retain) NSString *nombre;
 @end
