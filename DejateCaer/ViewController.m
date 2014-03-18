@@ -20,6 +20,10 @@
  NSString *currentLatitud;
  NSString *currentLongitud;
     NSString *radio;
+    
+    NSInteger depth;
+    NSMutableString *currentName;
+    NSString *currentElement;
 }
 @synthesize mapa,LocationManager;
 - (void)viewDidLoad
@@ -40,16 +44,23 @@
     [mapa setShowsUserLocation:YES];
 
    // eventos = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
+    
+   
+    
+
+    
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 222, 320, 346)];
     _tableView.dataSource=self;
     _tableView.delegate=self;
     _tableView.rowHeight=75;
     _tableView.backgroundColor=[UIColor blueColor];
-    
-   // [self getEventos];
+    [self leerXML];
     [self llamada_asincrona];
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+}
+-(void)pull{
+NSLog (@"pull");
 }
 -(void)getLista {
     
@@ -144,7 +155,7 @@ detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"paso a celda");
+  //  NSLog(@"paso a celda");
    // static NSString *simpleTableIdentifier = @"SimpleTableItem";
    // eventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell"];
     eventCell *cell=[[eventCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"customCell"];
@@ -202,7 +213,7 @@ detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         
         if ([data length] >0  )
         {
-            NSLog(@"dentro del asyn");
+           // NSLog(@"dentro del asyn");
             NSArray *lugares;
             NSString *dato=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSMutableString * miCadena = [NSMutableString stringWithString: dato];
@@ -228,5 +239,144 @@ detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     });
     
 }
+-(void)leerXML{
+    NSString *url=@"http://paw.dev.datos.labplc.mx/movilidad/transporte/planner/01/1394999266.xml?lat_origin=19.4527656&lon_origin=-99.1211996&lat_destination=19.4257912&lon_destination=-99.132911";
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+        NSXMLParser* parser = [[NSXMLParser alloc] initWithData: data];
+        
+        [parser setDelegate:self];
+        [parser parse];
+        if ([data length] >0  )
+        {
+           
+            
+            
+        }
+        
+        
+        
+        //  [spinner stopAnimating];
+        
+        
+        
+    });
 
+
+}/*
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict{
+    
+    if ([elementName isEqualToString:@"options"]) {
+        NSDictionary *segmento;
+        segmento=attributeDict;
+        NSLog(@"");
+       // NSString* title = [attributeDict valueForKey:@"title"];
+       // int id = [[attributeDict valueForKey:@"id"] intValue];
+        //NSLog(@"Title: %@, ID: %i", title, id);
+    }
+}
+*/
+
+/*
+
+#pragma mark -
+#pragma mark NSXMLParserDelegate methods
+
+- (void)parserDidStartDocument:(NSXMLParser *)parser
+{
+    NSLog(@"Document started", nil);
+    depth = 0;
+    currentElement = nil;
+}
+
+- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
+{
+    NSLog(@"Error: %@", [parseError localizedDescription]);
+}
+
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName
+  namespaceURI:(NSString *)namespaceURI
+ qualifiedName:(NSString *)qName
+    attributes:(NSDictionary *)attributeDict
+{
+    currentElement = [elementName copy];
+    
+    if ([currentElement isEqualToString:@"routes"])
+    {
+        ++depth;
+        [self showCurrentDepth];
+    }
+    else if ([currentElement isEqualToString:@"options"])
+    {
+       // [currentName release];
+        currentName = [[NSMutableString alloc] init];
+    }
+    else if ([currentElement isEqualToString:@"segments"])
+    {
+    }
+}
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName
+  namespaceURI:(NSString *)namespaceURI
+ qualifiedName:(NSString *)qName
+{
+    
+    if ([elementName isEqualToString:@"routes"])
+    {
+        --depth;
+        [self showCurrentDepth];
+    }
+    else if ([elementName isEqualToString:@"options"])
+    {
+        if (depth == 1)
+        {
+            NSLog(@"Outer name tag: %@", currentName);
+        }
+        else
+        {
+            NSLog(@"Inner name tag: %@", currentName);
+        }
+    }
+    else if ([elementName isEqualToString:@"stop_origin_id"])
+    {
+        if (depth == 1)
+        {
+            NSLog(@"Outer name tag: %@", currentName);
+        }
+        else
+        {
+            NSLog(@"Inner name tag: %@", currentName);
+        }
+    }
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+   // if ([currentElement isEqualToString:@"name"])
+   // {
+        [currentName appendString:string];
+    //}
+}
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser
+{
+    NSLog(@"Document finished", nil);
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (void)showCurrentDepth
+{
+    NSLog(@"Current depth: %d", depth);
+}*/
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    NSIndexPath *firstVisibleIndexPath = [[self.tableView indexPathsForVisibleRows] objectAtIndex:0];
+    if (firstVisibleIndexPath.row==0) {
+         NSLog(@"first visible cell's section: %i, row: %i", firstVisibleIndexPath.section, firstVisibleIndexPath.row);
+    }
+  
+}
 @end

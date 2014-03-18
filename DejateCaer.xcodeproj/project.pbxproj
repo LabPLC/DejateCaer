@@ -31,6 +31,7 @@
 		F3AECC7B18D3746F0012748D /* sin_perfil.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F3AECC7A18D3746F0012748D /* sin_perfil.jpg */; };
 		F3AECC7E18D3849F0012748D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECC7D18D3849F0012748D /* CoreLocation.framework */; };
 		F3AECC8118D3881B0012748D /* MapaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AECC8018D3881B0012748D /* MapaViewController.m */; };
+		F3AECE7F18D8B5C50012748D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECE7E18D8B5C50012748D /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		F3AECC7D18D3849F0012748D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F3AECC7F18D3881B0012748D /* MapaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapaViewController.h; sourceTree = "<group>"; };
 		F3AECC8018D3881B0012748D /* MapaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapaViewController.m; sourceTree = "<group>"; };
+		F3AECE7E18D8B5C50012748D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				F332E83718D161BA00DF538D /* CoreGraphics.framework in Frameworks */,
 				F332E83918D161BA00DF538D /* UIKit.framework in Frameworks */,
 				F332E83518D161BA00DF538D /* Foundation.framework in Frameworks */,
+				F3AECE7F18D8B5C50012748D /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +132,7 @@
 		F332E83318D161BA00DF538D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F3AECE7E18D8B5C50012748D /* FacebookSDK.framework */,
 				F3AECC7D18D3849F0012748D /* CoreLocation.framework */,
 				F332E86C18D1630600DF538D /* MapKit.framework */,
 				F332E83418D161BA00DF538D /* Foundation.framework */,
@@ -267,6 +271,7 @@
 			knownRegions = (
 				en,
 				Base,
+				he,
 			);
 			mainGroup = F332E82818D161BA00DF538D;
 			productRefGroup = F332E83218D161BA00DF538D /* Products */;
@@ -452,6 +457,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/carloscastellanos/Documents/DejateCaer/FacebookSDK,
+					/Users/carloscastellanos/Documents/DejateCaer,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DejateCaer/DejateCaer-Prefix.pch";
 				INFOPLIST_FILE = "DejateCaer/DejateCaer-Info.plist";
@@ -465,6 +475,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/carloscastellanos/Documents/DejateCaer/FacebookSDK,
+					/Users/carloscastellanos/Documents/DejateCaer,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DejateCaer/DejateCaer-Prefix.pch";
 				INFOPLIST_FILE = "DejateCaer/DejateCaer-Info.plist";

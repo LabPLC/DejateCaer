@@ -28,6 +28,19 @@
 	<string>Main_iPhone</string>
 	<key>UIMainStoryboardFile~ipad</key>
 	<string>Main_iPad</string>
+	<key>FacebookAppID</key>
+	<string>1485880884966319</string>
+	<key>FacebookDisplayName</key>
+	<string>DejateCaer</string>
+	<key> URL types</key>
+	<array>
+		<dict>
+			<key>URL Schemas</key>
+			<array>
+				<string>fb1485880884966319</string>
+			</array>
+		</dict>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

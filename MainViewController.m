@@ -7,12 +7,15 @@
 //
 
 #import "MainViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 #define kExposedWidth 200.0
 #define kMenuCellID @"MenuCell"
+
 
 @interface MainViewController ()
 @property (nonatomic, strong) UITableView *menu;
 @property (nonatomic, strong) IBOutlet UIImageView *foto_perfil;
+@property (nonatomic, strong) IBOutlet FBProfilePictureView *foto_perfil1;
 @property (nonatomic, strong) NSArray *viewControllers;
 @property (nonatomic, strong) NSArray *menuTitles;
 
@@ -93,9 +96,10 @@ int flag;
     frame_foto.origin.y=47;
     UIImage *image = [UIImage imageNamed:@"sin_perfil.jpg"];
     self.foto_perfil = [[UIImageView alloc] initWithImage:image];
+    self.foto_perfil1=[[FBProfilePictureView alloc]initWithFrame:frame_foto];
     self.foto_perfil.backgroundColor = [UIColor clearColor];
     self.foto_perfil.frame=frame_foto;
-    //self.foto_perfil.layer.cornerRadius = image.size.width / 2;
+    self.foto_perfil.layer.cornerRadius = image.size.width / 2;
     //self.foto_perfil.layer.cornerRadius = 2000;
     UIGraphicsBeginImageContextWithOptions( self.foto_perfil.bounds.size, NO, [UIScreen mainScreen].scale);
     
@@ -110,28 +114,47 @@ int flag;
     
     // Lets forget about that we were drawing
     UIGraphicsEndImageContext();
-    [self.view addSubview: self.foto_perfil];
+   // self.foto_perfil.profileID = nil;
+    [self.view addSubview: self.foto_perfil1];
     
     flag=1;
     //fondo de la vista que contiene la tabla del menu
-    self.view.backgroundColor=[UIColor whiteColor];
+    self.view.backgroundColor=[UIColor grayColor];
     [super viewDidLoad];
     //table del menu
     [self.menu registerClass:[UITableViewCell class] forCellReuseIdentifier:kMenuCellID];
     self.menu.frame = self.view.bounds;
     //añadimos el menu a la vista actual
     CGRect frame;
-    frame.size.height=self.view.frame.size.height;
+    frame.size.height=176;//self.view.frame.size.height;
     frame.size.width=self.view.frame.size.width;
     frame.origin.x=0;
     frame.origin.y=150;
     self.menu.frame=frame;
+    self.menu.scrollEnabled = NO;
    // CGRectMake(0, 150,self.view.frame.size.width , self.view.frame.size.height)];
     [self.view addSubview:self.menu];
     // se guarda el index (de la posicion en el array del controller que se mostrata primero)
     self.indexOfVisibleController = 0;
     // le decimos cual sera el controller con el que habra con que comenzar
     UIViewController *visibleViewController = self.viewControllers[0];
+   
+    //Añadimos boton de fb
+    
+    FBLoginView *loginView = [[FBLoginView alloc] init];
+    loginView.delegate = self;
+    loginView.readPermissions = @[@"basic_info", @"email", @"user_likes"];
+    
+    // Align the button in the center horizontally
+    CGRect frame_fb;
+    frame_fb.size.height=35;//self.view.frame.size.height;
+    frame_fb.size.width=200;
+    frame_fb.origin.x=0;
+    frame_fb.origin.y=361;
+    loginView.frame=frame_fb;
+    [self.view addSubview:loginView];
+    //
+    
     
     visibleViewController.view.layer.shadowOpacity = 0.75f;
     visibleViewController.view.layer.shadowRadius = 10.0f;
@@ -290,4 +313,38 @@ int flag;
 }
 
 
+//metodos de FB
+- (BOOL)application:(UIApplication *)application
+didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // Override point for customization after application launch.
+    [FBLoginView class];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    // Call FBAppCall's handleOpenURL:sourceApplication to handle Facebook app responses
+    BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    
+    // You can add your app-specific url handling code here if needed
+    
+    return wasHandled;
+}
+
+- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
+                            user:(id<FBGraphUser>)user {
+   self.foto_perfil1.profileID = user.id;
+   NSLog(@"%@", user.name);
+}
+// Logged-out user experience
+- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
+    self.foto_perfil1.profileID=nil;//[UIImage imageNamed:@"sin_perfil.jpg"];
+    
+   // self.nameLabel.text = @"";
+    //self.statusLabel.text= @"You're not logged in!";
+}
 @end
