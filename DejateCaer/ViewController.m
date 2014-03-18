@@ -48,13 +48,13 @@
    
     
 
-    
+    //Cambiar 346 por el largo de la pantalla -222
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 222, 320, 346)];
     _tableView.dataSource=self;
     _tableView.delegate=self;
     _tableView.rowHeight=75;
     _tableView.backgroundColor=[UIColor blueColor];
-    [self leerXML];
+    //[self leerXML];
     [self llamada_asincrona];
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
@@ -205,7 +205,7 @@ detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     
     // NSString *urlString =@"http://codigo.labplc.mx/~rockarloz/dejatecaer/prueba.php";
     NSString *urlString =@"http://codigo.labplc.mx/~rockarloz/dejatecaer/dejatecaer.php";
-    NSString *url=[NSString stringWithFormat:@"%@?longitud=%@&latitud=%@&radio=%@&fecha=2014-03-14",urlString,currentLongitud,currentLatitud,radio];
+    NSString *url=[NSString stringWithFormat:@"%@?longitud=%@&latitud=%@&radio=%@&fecha=2014-03-18",urlString,currentLongitud,currentLatitud,radio];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         

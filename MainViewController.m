@@ -94,11 +94,16 @@ int flag;
     frame_foto.size.width=74;
     frame_foto.origin.x=63;
     frame_foto.origin.y=47;
+    
+ 
+    
+    
     UIImage *image = [UIImage imageNamed:@"sin_perfil.jpg"];
     self.foto_perfil = [[UIImageView alloc] initWithImage:image];
-    self.foto_perfil1=[[FBProfilePictureView alloc]initWithFrame:frame_foto];
+    self.foto_perfil1=[[FBProfilePictureView alloc]initWithFrame:CGRectMake(0, 0, 63, 47)];
     self.foto_perfil.backgroundColor = [UIColor clearColor];
     self.foto_perfil.frame=frame_foto;
+    
     self.foto_perfil.layer.cornerRadius = image.size.width / 2;
     //self.foto_perfil.layer.cornerRadius = 2000;
     UIGraphicsBeginImageContextWithOptions( self.foto_perfil.bounds.size, NO, [UIScreen mainScreen].scale);
@@ -115,7 +120,8 @@ int flag;
     // Lets forget about that we were drawing
     UIGraphicsEndImageContext();
    // self.foto_perfil.profileID = nil;
-    [self.view addSubview: self.foto_perfil1];
+    [self.view addSubview: self.foto_perfil];
+   // [self.view addSubview: self.foto_perfil1];
     
     flag=1;
     //fondo de la vista que contiene la tabla del menu
@@ -197,14 +203,14 @@ int flag;
         
         if(velocity.x < 0) {
             if (self.isMenuVisible) {
-                [self toggleMenuVisibility:self];
+                [self toggleMenuVisibility:nil];
             }
         } else {
             // if (!_showingLeftPanel) {
             //   childView = [self getRightView];
             // }
             if (!self.isMenuVisible) {
-                [self toggleMenuVisibility:self];
+                [self toggleMenuVisibility:nil];
             }
         }
         // Make sure the view you're working with is front and center.
@@ -338,12 +344,48 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user {
    self.foto_perfil1.profileID = user.id;
+      self.menuTitles=[[NSArray alloc]initWithObjects:@"Eventos",@"Mis Eventos",@"Agregar Evento",@"Configuraciones", nil];
+    [self.menu reloadData];
+    [self performSelector:@selector(getImage) withObject:nil afterDelay:3];
+    
+
    NSLog(@"%@", user.name);
+}
+-(void)getImage{
+    UIImage *image2 = nil;
+    
+    for (NSObject *obj in [self.foto_perfil1 subviews]) {
+        if ([obj isMemberOfClass:[UIImageView class]]) {
+            UIImageView *objImg = (UIImageView *)obj;
+            image2 = objImg.image;
+            break;
+        }
+    }
+    self.foto_perfil.image=image2;
+    
+    self.foto_perfil.layer.cornerRadius = image2.size.width / 2;
+    //self.foto_perfil.layer.cornerRadius = 2000;
+    UIGraphicsBeginImageContextWithOptions( self.foto_perfil.bounds.size, NO, [UIScreen mainScreen].scale);
+    
+    // Add a clip before drawing anything, in the shape of an rounded rect
+    [[UIBezierPath bezierPathWithRoundedRect: self.foto_perfil.bounds
+                                cornerRadius:50.0] addClip];
+    // Draw your image
+    [image2 drawInRect: self.foto_perfil.bounds];
+    
+    // Get the image, here setting the UIImageView image
+    self.foto_perfil.image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // Lets forget about that we were drawing
+    UIGraphicsEndImageContext();
+    
 }
 // Logged-out user experience
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
     self.foto_perfil1.profileID=nil;//[UIImage imageNamed:@"sin_perfil.jpg"];
-    
+     [self performSelector:@selector(getImage) withObject:nil afterDelay:1];
+    self.menuTitles=[[NSArray alloc]initWithObjects:@"Eventos",@"Configuraciones", nil];
+        [self.menu reloadData];
    // self.nameLabel.text = @"";
     //self.statusLabel.text= @"You're not logged in!";
 }

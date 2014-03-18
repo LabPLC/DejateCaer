@@ -17,9 +17,23 @@
     //Para identificar los diferentes StoryBoards que puedan Existir
     UIStoryboard *navStoryBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     
-    //Creammo un Navigation Controller con el identificador de storyboard que tenga
-    UINavigationController *navController = [navStoryBoard instantiateViewControllerWithIdentifier:@"nav"];
+   
+    //Idenfica El Tamaño de la Pantalla
+    UINavigationController *navController;
     
+    if ( [_alto intValue] < 568) {
+        //Creammo un Navigation Controller con el identificador de storyboard que tenga
+        navController = [navStoryBoard instantiateViewControllerWithIdentifier:@"nav1"];
+        
+    }
+    else{
+        //Creammo un Navigation Controller con el identificador de storyboard que tenga
+       navController = [navStoryBoard instantiateViewControllerWithIdentifier:@"nav"];
+        
+    }
+
+    
+
 
     
     
