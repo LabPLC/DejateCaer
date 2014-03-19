@@ -32,6 +32,7 @@
 		F3AECC7E18D3849F0012748D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECC7D18D3849F0012748D /* CoreLocation.framework */; };
 		F3AECC8118D3881B0012748D /* MapaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AECC8018D3881B0012748D /* MapaViewController.m */; };
 		F3AECE7F18D8B5C50012748D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECE7E18D8B5C50012748D /* FacebookSDK.framework */; };
+		F3AECEBA18DA57970012748D /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AECEB918DA57970012748D /* testViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,8 @@
 		F3AECC7F18D3881B0012748D /* MapaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapaViewController.h; sourceTree = "<group>"; };
 		F3AECC8018D3881B0012748D /* MapaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapaViewController.m; sourceTree = "<group>"; };
 		F3AECE7E18D8B5C50012748D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		F3AECEB818DA57970012748D /* testViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testViewController.h; sourceTree = "<group>"; };
+		F3AECEB918DA57970012748D /* testViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +164,8 @@
 				F332E84D18D161BA00DF538D /* ViewController.m */,
 				F332E84F18D161BA00DF538D /* Images.xcassets */,
 				F332E83B18D161BA00DF538D /* Supporting Files */,
+				F3AECEB818DA57970012748D /* testViewController.h */,
+				F3AECEB918DA57970012748D /* testViewController.m */,
 			);
 			path = DejateCaer;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 				F332E84518D161BA00DF538D /* AppDelegate.m in Sources */,
 				F3AECC8118D3881B0012748D /* MapaViewController.m in Sources */,
 				F332E84118D161BA00DF538D /* main.m in Sources */,
+				F3AECEBA18DA57970012748D /* testViewController.m in Sources */,
 				F332E87518D185AD00DF538D /* DescripcionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
