@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E7486E2D-08B3-40C1-92AF-236331F82091</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DejateCaer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3CDB9553-444D-46D4-8F60-E99E93250466</key>
+		<string>ssh://github.com/LabPLC/DejateCaer.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DejateCaer.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3CDB9553-444D-46D4-8F60-E99E93250466</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/LabPLC/DejateCaer.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3CDB9553-444D-46D4-8F60-E99E93250466</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3CDB9553-444D-46D4-8F60-E99E93250466</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DejateCaer</string>
+		</dict>
+	</array>
+</dict>
+</plist>
