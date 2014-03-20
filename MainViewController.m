@@ -319,6 +319,13 @@ int flag;
 }
 
 
+
+
+
+
+
+
+
 //metodos de FB
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

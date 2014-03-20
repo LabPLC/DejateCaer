@@ -12,41 +12,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //definimos por default un radio de 500 metros
+    _user_radio=@"500";
+    // Change the background color of navigation bar
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     
-    //Para identificar los diferentes StoryBoards que puedan Existir
-    UIStoryboard *navStoryBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    
-   
-    //Idenfica El Tamaño de la Pantalla
-    UINavigationController *navController;
-    
-    if ( [_alto intValue] < 568) {
-        //Creammo un Navigation Controller con el identificador de storyboard que tenga
-        navController = [navStoryBoard instantiateViewControllerWithIdentifier:@"nav1"];
-        
-    }
-    else{
-        //Creammo un Navigation Controller con el identificador de storyboard que tenga
-       navController = [navStoryBoard instantiateViewControllerWithIdentifier:@"nav"];
-        
-    }
-
-    
-
-
-    
-    
-    // Creamos un rootControlles y lepasamos array con titulos y array con vistas
-    
- MainViewController *   menuController = [[MainViewController alloc]
-                                      initWithViewControllers:@[navController]
-                                      andMenuTitles:@[@"Eventos", @"Mis Eventos", @"Agregar Evento", @"Configuraciones?"]];
-    
-   
-    self.window.rootViewController = menuController;
-    self.window.backgroundColor = [UIColor yellowColor];
-    [self.window makeKeyAndVisible];
+    // Change the font style of the navigation bar
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
+    shadow.shadowOffset = CGSizeMake(0, 0);
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor colorWithRed:10.0/255.0 green:10.0/255.0 blue:10.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
+                                                           shadow, NSShadowAttributeName,
+                                                           [UIFont fontWithName:@"Helvetica-Light" size:21.0], NSFontAttributeName, nil]];
     return YES;
 }
 							

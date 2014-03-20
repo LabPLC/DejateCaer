@@ -9,7 +9,8 @@
 #import "ViewController.h"
 #import "eventCell.h"
 #import "DescripcionViewController.h"
-
+#import "SWRevealViewController.h"
+#import "AppDelegate.h"
 @interface ViewController ()
 
 @end
@@ -24,21 +25,32 @@
     NSInteger depth;
     NSMutableString *currentName;
     NSString *currentElement;
+    AppDelegate *delegate;
 }
 @synthesize mapa,LocationManager;
 - (void)viewDidLoad
 {
-
-    radio=@"2000";
+    delegate= (AppDelegate *) [[UIApplication sharedApplication] delegate];
+   
+    self.title=@"Eventos";
+    // Change button color
+    
+    _sidebarButton.tintColor = [UIColor colorWithWhite:0.1f alpha:0.9f];
+    
+    // Set the side bar button action. When it's tapped, it'll show up the sidebar.
+    _sidebarButton.target = self.revealViewController;
+    _sidebarButton.action = @selector(revealToggle:);
+    
+    // Set the gesture
+    [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    
+    radio=delegate.user_radio;//@"2000";
     LocationManager = [[CLLocationManager alloc] init];
     LocationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
     LocationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
     [LocationManager startUpdatingLocation];
     
   
-    self.view.layer.shadowOpacity = 0.75f;
-    self.view.layer.shadowRadius = 10.0f;
-    self.view.layer.shadowColor = [UIColor blackColor].CGColor;
     
     [mapa setDelegate:self];
     [mapa setShowsUserLocation:YES];
@@ -91,47 +103,6 @@ NSLog (@"pull");
 
 }
 
--(void)getEventos{
-    currentLatitud=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.latitude];
-    currentLongitud=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.longitude];
-    NSLog(@"%@" ,currentLongitud);
-    NSLog(@"%@",currentLatitud );
-    
-   // NSString *urlString =@"http://codigo.labplc.mx/~rockarloz/dejatecaer/prueba.php";
-   NSString *urlString =@"http://codigo.labplc.mx/~rockarloz/dejatecaer/dejatecaer.php";
-   NSString *url=[NSString stringWithFormat:@"%@?longitud=%@&latitud=%@&radio=%@&fecha=2014-03-14",urlString,currentLongitud,currentLatitud,radio];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    NSOperationQueue *queue =[[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-     
-     {
-         if ([data length] >0  && error == nil)
-         {
-                 NSLog(@"dentro del asyn");
-             NSArray *lugares;
-             NSString *dato=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-             NSMutableString * miCadena = [NSMutableString stringWithString: dato];
-             NSData *data1 = [miCadena dataUsingEncoding:NSUTF8StringEncoding];
-             
-             NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data1 options:NSJSONReadingAllowFragments error:nil];
-             
-             NSMutableDictionary *consulta=[[NSMutableDictionary alloc]init];
-             consulta = [jsonObject objectForKey:@"eventos"];
-             lugares= [jsonObject objectForKey:@"eventos"];//[consulta objectForKey:@"ubicaciones"];
-             eventos=lugares;
-             [self getLista];
-             
-             
-         }
-         else{
-          //   respuesta = nil;             NSLog(@"Contenido vacio");
-             
-         }
-        //Termina el método asíncrono
-     }];
-    NSLog(@"fuera del asyn");
-
-}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
@@ -239,139 +210,7 @@ detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     });
     
 }
--(void)leerXML{
-    NSString *url=@"http://paw.dev.datos.labplc.mx/movilidad/transporte/planner/01/1394999266.xml?lat_origin=19.4527656&lon_origin=-99.1211996&lat_destination=19.4257912&lon_destination=-99.132911";
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-        NSXMLParser* parser = [[NSXMLParser alloc] initWithData: data];
-        
-        [parser setDelegate:self];
-        [parser parse];
-        if ([data length] >0  )
-        {
-           
-            
-            
-        }
-        
-        
-        
-        //  [spinner stopAnimating];
-        
-        
-        
-    });
 
-
-}/*
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict{
-    
-    if ([elementName isEqualToString:@"options"]) {
-        NSDictionary *segmento;
-        segmento=attributeDict;
-        NSLog(@"");
-       // NSString* title = [attributeDict valueForKey:@"title"];
-       // int id = [[attributeDict valueForKey:@"id"] intValue];
-        //NSLog(@"Title: %@, ID: %i", title, id);
-    }
-}
-*/
-
-/*
-
-#pragma mark -
-#pragma mark NSXMLParserDelegate methods
-
-- (void)parserDidStartDocument:(NSXMLParser *)parser
-{
-    NSLog(@"Document started", nil);
-    depth = 0;
-    currentElement = nil;
-}
-
-- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
-{
-    NSLog(@"Error: %@", [parseError localizedDescription]);
-}
-
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName
-  namespaceURI:(NSString *)namespaceURI
- qualifiedName:(NSString *)qName
-    attributes:(NSDictionary *)attributeDict
-{
-    currentElement = [elementName copy];
-    
-    if ([currentElement isEqualToString:@"routes"])
-    {
-        ++depth;
-        [self showCurrentDepth];
-    }
-    else if ([currentElement isEqualToString:@"options"])
-    {
-       // [currentName release];
-        currentName = [[NSMutableString alloc] init];
-    }
-    else if ([currentElement isEqualToString:@"segments"])
-    {
-    }
-}
-
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName
-  namespaceURI:(NSString *)namespaceURI
- qualifiedName:(NSString *)qName
-{
-    
-    if ([elementName isEqualToString:@"routes"])
-    {
-        --depth;
-        [self showCurrentDepth];
-    }
-    else if ([elementName isEqualToString:@"options"])
-    {
-        if (depth == 1)
-        {
-            NSLog(@"Outer name tag: %@", currentName);
-        }
-        else
-        {
-            NSLog(@"Inner name tag: %@", currentName);
-        }
-    }
-    else if ([elementName isEqualToString:@"stop_origin_id"])
-    {
-        if (depth == 1)
-        {
-            NSLog(@"Outer name tag: %@", currentName);
-        }
-        else
-        {
-            NSLog(@"Inner name tag: %@", currentName);
-        }
-    }
-}
-
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
-{
-   // if ([currentElement isEqualToString:@"name"])
-   // {
-        [currentName appendString:string];
-    //}
-}
-
-- (void)parserDidEndDocument:(NSXMLParser *)parser
-{
-    NSLog(@"Document finished", nil);
-}
-
-#pragma mark -
-#pragma mark Private methods
-
-- (void)showCurrentDepth
-{
-    NSLog(@"Current depth: %d", depth);
-}*/
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     NSIndexPath *firstVisibleIndexPath = [[self.tableView indexPathsForVisibleRows] objectAtIndex:0];
     if (firstVisibleIndexPath.row==0) {

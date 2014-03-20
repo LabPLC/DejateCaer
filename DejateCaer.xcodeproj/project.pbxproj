@@ -14,7 +14,6 @@
 		F332E84118D161BA00DF538D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F332E84018D161BA00DF538D /* main.m */; };
 		F332E84518D161BA00DF538D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F332E84418D161BA00DF538D /* AppDelegate.m */; };
 		F332E84818D161BA00DF538D /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F332E84618D161BA00DF538D /* Main_iPhone.storyboard */; };
-		F332E84B18D161BA00DF538D /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F332E84918D161BA00DF538D /* Main_iPad.storyboard */; };
 		F332E84E18D161BA00DF538D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F332E84D18D161BA00DF538D /* ViewController.m */; };
 		F332E85018D161BA00DF538D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F332E84F18D161BA00DF538D /* Images.xcassets */; };
 		F332E85718D161BA00DF538D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F332E85618D161BA00DF538D /* XCTest.framework */; };
@@ -27,6 +26,13 @@
 		F332E87218D16CB100DF538D /* eventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F332E87118D16CB100DF538D /* eventCell.m */; };
 		F332E87518D185AD00DF538D /* DescripcionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F332E87418D185AD00DF538D /* DescripcionViewController.m */; };
 		F332E87D18D197B300DF538D /* menuButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F332E87C18D197B300DF538D /* menuButton@2x.png */; };
+		F348B40F18DA5B1300566356 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F348B40E18DA5B1300566356 /* SWRevealViewController.m */; };
+		F348B41218DA5D1500566356 /* DescubreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F348B41118DA5D1500566356 /* DescubreViewController.m */; };
+		F348B41518DA5DEF00566356 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F348B41418DA5DEF00566356 /* MenuViewController.m */; };
+		F348B41818DA6C2800566356 /* AgregarEventosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F348B41718DA6C2800566356 /* AgregarEventosViewController.m */; };
+		F348B41A18DA86B500566356 /* news.png in Resources */ = {isa = PBXBuildFile; fileRef = F348B41918DA86B500566356 /* news.png */; };
+		F348B41C18DA925800566356 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F348B41B18DA925800566356 /* Accounts.framework */; };
+		F348B41E18DA925E00566356 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F348B41D18DA925E00566356 /* Social.framework */; };
 		F3AECC7818D36D210012748D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AECC7718D36D210012748D /* MainViewController.m */; };
 		F3AECC7B18D3746F0012748D /* sin_perfil.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F3AECC7A18D3746F0012748D /* sin_perfil.jpg */; };
 		F3AECC7E18D3849F0012748D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECC7D18D3849F0012748D /* CoreLocation.framework */; };
@@ -56,7 +62,6 @@
 		F332E84318D161BA00DF538D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F332E84418D161BA00DF538D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		F332E84718D161BA00DF538D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		F332E84A18D161BA00DF538D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		F332E84C18D161BA00DF538D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F332E84D18D161BA00DF538D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F332E84F18D161BA00DF538D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -72,6 +77,17 @@
 		F332E87318D185AD00DF538D /* DescripcionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescripcionViewController.h; sourceTree = "<group>"; };
 		F332E87418D185AD00DF538D /* DescripcionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescripcionViewController.m; sourceTree = "<group>"; };
 		F332E87C18D197B300DF538D /* menuButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuButton@2x.png"; sourceTree = "<group>"; };
+		F348B40D18DA5B1300566356 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = DejateCaer/SWRevealViewController.h; sourceTree = "<group>"; };
+		F348B40E18DA5B1300566356 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = DejateCaer/SWRevealViewController.m; sourceTree = "<group>"; };
+		F348B41018DA5D1500566356 /* DescubreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescubreViewController.h; sourceTree = "<group>"; };
+		F348B41118DA5D1500566356 /* DescubreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescubreViewController.m; sourceTree = "<group>"; };
+		F348B41318DA5DEF00566356 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		F348B41418DA5DEF00566356 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		F348B41618DA6C2800566356 /* AgregarEventosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgregarEventosViewController.h; path = DejateCaer/AgregarEventosViewController.h; sourceTree = "<group>"; };
+		F348B41718DA6C2800566356 /* AgregarEventosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AgregarEventosViewController.m; path = DejateCaer/AgregarEventosViewController.m; sourceTree = "<group>"; };
+		F348B41918DA86B500566356 /* news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = news.png; sourceTree = "<group>"; };
+		F348B41B18DA925800566356 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		F348B41D18DA925E00566356 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		F3AECC7618D36D210012748D /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ../MainViewController.h; sourceTree = "<group>"; };
 		F3AECC7718D36D210012748D /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ../MainViewController.m; sourceTree = "<group>"; };
 		F3AECC7A18D3746F0012748D /* sin_perfil.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sin_perfil.jpg; sourceTree = "<group>"; };
@@ -86,6 +102,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F348B41E18DA925E00566356 /* Social.framework in Frameworks */,
+				F348B41C18DA925800566356 /* Accounts.framework in Frameworks */,
 				F3AECC7E18D3849F0012748D /* CoreLocation.framework in Frameworks */,
 				F332E86D18D1630600DF538D /* MapKit.framework in Frameworks */,
 				F332E83718D161BA00DF538D /* CoreGraphics.framework in Frameworks */,
@@ -111,6 +129,14 @@
 		F332E82818D161BA00DF538D = {
 			isa = PBXGroup;
 			children = (
+				F348B41018DA5D1500566356 /* DescubreViewController.h */,
+				F348B41118DA5D1500566356 /* DescubreViewController.m */,
+				F348B41318DA5DEF00566356 /* MenuViewController.h */,
+				F348B41418DA5DEF00566356 /* MenuViewController.m */,
+				F348B40D18DA5B1300566356 /* SWRevealViewController.h */,
+				F348B40E18DA5B1300566356 /* SWRevealViewController.m */,
+				F348B41618DA6C2800566356 /* AgregarEventosViewController.h */,
+				F348B41718DA6C2800566356 /* AgregarEventosViewController.m */,
 				F332E86E18D16C1900DF538D /* evento_cell.xib */,
 				F3AECC7918D36D2B0012748D /* Celdas */,
 				F332E83A18D161BA00DF538D /* DejateCaer */,
@@ -132,6 +158,8 @@
 		F332E83318D161BA00DF538D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F348B41D18DA925E00566356 /* Social.framework */,
+				F348B41B18DA925800566356 /* Accounts.framework */,
 				F3AECE7E18D8B5C50012748D /* FacebookSDK.framework */,
 				F3AECC7D18D3849F0012748D /* CoreLocation.framework */,
 				F332E86C18D1630600DF538D /* MapKit.framework */,
@@ -156,7 +184,6 @@
 				F3AECC8018D3881B0012748D /* MapaViewController.m */,
 				F332E87318D185AD00DF538D /* DescripcionViewController.h */,
 				F332E87418D185AD00DF538D /* DescripcionViewController.m */,
-				F332E84918D161BA00DF538D /* Main_iPad.storyboard */,
 				F332E84C18D161BA00DF538D /* ViewController.h */,
 				F332E84D18D161BA00DF538D /* ViewController.m */,
 				F332E84F18D161BA00DF538D /* Images.xcassets */,
@@ -206,6 +233,7 @@
 		F3AECC7C18D374810012748D /* Imagenes */ = {
 			isa = PBXGroup;
 			children = (
+				F348B41918DA86B500566356 /* news.png */,
 				F332E87C18D197B300DF538D /* menuButton@2x.png */,
 				F3AECC7A18D3746F0012748D /* sin_perfil.jpg */,
 			);
@@ -289,11 +317,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F332E84B18D161BA00DF538D /* Main_iPad.storyboard in Resources */,
 				F332E85018D161BA00DF538D /* Images.xcassets in Resources */,
 				F332E84818D161BA00DF538D /* Main_iPhone.storyboard in Resources */,
 				F332E87D18D197B300DF538D /* menuButton@2x.png in Resources */,
 				F332E83F18D161BA00DF538D /* InfoPlist.strings in Resources */,
+				F348B41A18DA86B500566356 /* news.png in Resources */,
 				F3AECC7B18D3746F0012748D /* sin_perfil.jpg in Resources */,
 				F332E86F18D16C1900DF538D /* evento_cell.xib in Resources */,
 			);
@@ -317,10 +345,14 @@
 				F332E87218D16CB100DF538D /* eventCell.m in Sources */,
 				F3AECC7818D36D210012748D /* MainViewController.m in Sources */,
 				F332E84E18D161BA00DF538D /* ViewController.m in Sources */,
+				F348B40F18DA5B1300566356 /* SWRevealViewController.m in Sources */,
 				F332E84518D161BA00DF538D /* AppDelegate.m in Sources */,
+				F348B41218DA5D1500566356 /* DescubreViewController.m in Sources */,
+				F348B41818DA6C2800566356 /* AgregarEventosViewController.m in Sources */,
 				F3AECC8118D3881B0012748D /* MapaViewController.m in Sources */,
 				F332E84118D161BA00DF538D /* main.m in Sources */,
 				F332E87518D185AD00DF538D /* DescripcionViewController.m in Sources */,
+				F348B41518DA5DEF00566356 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,14 +389,6 @@
 				F332E84718D161BA00DF538D /* Base */,
 			);
 			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		F332E84918D161BA00DF538D /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F332E84A18D161BA00DF538D /* Base */,
-			);
-			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		F332E85F18D161BA00DF538D /* InfoPlist.strings */ = {

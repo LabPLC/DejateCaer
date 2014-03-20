@@ -12,4 +12,5 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSString *alto;
+@property (strong, nonatomic) NSString *user_radio;
 @end
