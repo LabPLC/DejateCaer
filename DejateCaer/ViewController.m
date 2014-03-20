@@ -17,14 +17,12 @@
 
 @implementation ViewController
 {
- NSArray *eventos;
- NSString *currentLatitud;
- NSString *currentLongitud;
+    NSArray *eventos;
+    NSString *currentLatitud;
+    NSString *currentLongitud;
     NSString *radio;
     
-    NSInteger depth;
-    NSMutableString *currentName;
-    NSString *currentElement;
+
     AppDelegate *delegate;
 }
 @synthesize mapa,LocationManager;
@@ -55,18 +53,17 @@
     [mapa setDelegate:self];
     [mapa setShowsUserLocation:YES];
 
-   // eventos = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
-    
    
     
 
     //Cambiar 346 por el largo de la pantalla -222
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 222, 320, 346)];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 222, 320, self.view.frame.size.height-222)];
     _tableView.dataSource=self;
     _tableView.delegate=self;
     _tableView.rowHeight=75;
-    _tableView.backgroundColor=[UIColor blueColor];
+    _tableView.backgroundColor=[UIColor redColor];
     //[self leerXML];
+  
     [self llamada_asincrona];
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
@@ -76,9 +73,15 @@ NSLog (@"pull");
 }
 -(void)getLista {
     
-
-    [self.view addSubview:_tableView];
-    [self.tableView reloadData];
+    if ([eventos count] >0) {
+        [self.view addSubview:_tableView];
+        [self.tableView reloadData];
+    }
+    else{
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"No tenemos eventos cercanos a ti con ese radio intenta ampliando el radio de busqueda" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
     [self getMapa];
 }
 -(void)getMapa
@@ -210,12 +213,13 @@ detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     });
     
 }
-
+/*
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     NSIndexPath *firstVisibleIndexPath = [[self.tableView indexPathsForVisibleRows] objectAtIndex:0];
     if (firstVisibleIndexPath.row==0) {
          NSLog(@"first visible cell's section: %i, row: %i", firstVisibleIndexPath.section, firstVisibleIndexPath.row);
     }
   
-}
+}*/
+
 @end

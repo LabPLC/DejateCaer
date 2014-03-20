@@ -9,6 +9,7 @@
 #import "DescripcionViewController.h"
 #import "ViewController.h"
 #import "MapaViewController.h"
+#import "RutaViewController.h"
 #import <Social/Social.h>
 @interface DescripcionViewController ()
 
@@ -88,5 +89,14 @@
         [tweetSheet setInitialText:cuerpo];
         [self presentViewController:tweetSheet animated:YES completion:nil];
     }
+}
+-(IBAction)ruta:(id)sender{
+    RutaViewController *ruta= [[self storyboard] instantiateViewControllerWithIdentifier:@"ruta"];//[[MapaViewController alloc]init];
+    ruta.latitud_destino=[_evento objectForKey:@"latitud"];
+    ruta.longitud_destino=[_evento objectForKey:@"longitud"];
+    //mapa.nombre=[_evento objectForKey:@"nombre"];
+    //mapa.view.backgroundColor=[UIColor whiteColor];
+    [self.navigationController pushViewController:ruta animated:YES];
+
 }
 @end

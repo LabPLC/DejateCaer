@@ -17,4 +17,5 @@
 @property (nonatomic, retain) IBOutlet MKMapView *mapa;
 -(IBAction)regresar:(id)sender;
 -(IBAction)twittear:(id)sender;
+-(IBAction)ruta:(id)sender;
 @end

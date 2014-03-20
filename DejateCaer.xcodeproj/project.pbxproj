@@ -33,6 +33,7 @@
 		F348B41A18DA86B500566356 /* news.png in Resources */ = {isa = PBXBuildFile; fileRef = F348B41918DA86B500566356 /* news.png */; };
 		F348B41C18DA925800566356 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F348B41B18DA925800566356 /* Accounts.framework */; };
 		F348B41E18DA925E00566356 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F348B41D18DA925E00566356 /* Social.framework */; };
+		F348B42218DB6D5600566356 /* RutaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F348B42118DB6D5600566356 /* RutaViewController.m */; };
 		F3AECC7818D36D210012748D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AECC7718D36D210012748D /* MainViewController.m */; };
 		F3AECC7B18D3746F0012748D /* sin_perfil.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F3AECC7A18D3746F0012748D /* sin_perfil.jpg */; };
 		F3AECC7E18D3849F0012748D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECC7D18D3849F0012748D /* CoreLocation.framework */; };
@@ -88,6 +89,8 @@
 		F348B41918DA86B500566356 /* news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = news.png; sourceTree = "<group>"; };
 		F348B41B18DA925800566356 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		F348B41D18DA925E00566356 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		F348B42018DB6D5600566356 /* RutaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RutaViewController.h; sourceTree = "<group>"; };
+		F348B42118DB6D5600566356 /* RutaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RutaViewController.m; sourceTree = "<group>"; };
 		F3AECC7618D36D210012748D /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		F3AECC7718D36D210012748D /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		F3AECC7A18D3746F0012748D /* sin_perfil.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sin_perfil.jpg; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 		F332E82818D161BA00DF538D = {
 			isa = PBXGroup;
 			children = (
+				F348B42018DB6D5600566356 /* RutaViewController.h */,
+				F348B42118DB6D5600566356 /* RutaViewController.m */,
 				F348B41F18DB51D100566356 /* sin usar */,
 				F348B41318DA5DEF00566356 /* MenuViewController.h */,
 				F348B41418DA5DEF00566356 /* MenuViewController.m */,
@@ -360,6 +365,7 @@
 				F3AECC8118D3881B0012748D /* MapaViewController.m in Sources */,
 				F332E84118D161BA00DF538D /* main.m in Sources */,
 				F332E87518D185AD00DF538D /* DescripcionViewController.m in Sources */,
+				F348B42218DB6D5600566356 /* RutaViewController.m in Sources */,
 				F348B41518DA5DEF00566356 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

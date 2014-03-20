@@ -174,6 +174,16 @@
                                     <action selector="twittear:" destination="TNA-jl-Jhe" eventType="touchDown" id="Pa6-1I-OLl"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tL6-GO-D3p">
+                                <rect key="frame" x="10" y="335" width="101" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="¿Cómo llegar?">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ruta:" destination="TNA-jl-Jhe" eventType="touchDown" id="zQs-yf-IbG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -188,6 +198,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1UU-u3-XOG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="635" y="1901"/>
+        </scene>
+        <!--Ruta View Controller-->
+        <scene sceneID="DuD-p9-HMO">
+            <objects>
+                <viewController storyboardIdentifier="ruta" useStoryboardIdentifierAsRestorationIdentifier="YES" id="liP-po-qvU" customClass="RutaViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zIw-u3-zOt"/>
+                        <viewControllerLayoutGuide type="bottom" id="QvI-de-Fz1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jwp-gv-84E">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hJq-tW-Oqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="696" y="2894"/>
         </scene>
         <!--Mapa View Controller-->
         <scene sceneID="Pg8-i6-Gsh">
