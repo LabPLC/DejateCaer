@@ -15,6 +15,7 @@
 @property (strong, nonatomic) CLLocationManager *LocationManager;
 @property (nonatomic, retain) IBOutlet MKMapView *mapa;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 
 - (IBAction)getCurrentLocation:(id)sender;

@@ -112,6 +112,8 @@ typedef enum
 
 
 @interface SWRevealViewController : UIViewController
+//Flag para ver el estado del menu
+@property (assign, nonatomic) BOOL showMenu;
 
 // Object instance init and rear view setting
 - (id)initWithRearViewController:(UIViewController *)rearViewController frontViewController:(UIViewController *)frontViewController;

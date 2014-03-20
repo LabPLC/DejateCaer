@@ -35,6 +35,10 @@
                                       initWithTarget:self action:@selector(touchMap)];
     [_mapa addGestureRecognizer:tapRec];
     
+    _LocationManager = [[CLLocationManager alloc] init];
+    _LocationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
+    _LocationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
+    [_LocationManager startUpdatingLocation];
     
     _nombre.text=[_evento objectForKey:@"nombre"];
     _lugar.text=[_evento objectForKey:@"lugar"];
@@ -91,9 +95,15 @@
     }
 }
 -(IBAction)ruta:(id)sender{
+    
+    NSString* currentLatitud=[NSString stringWithFormat:@"%.8f", _LocationManager.location.coordinate.latitude];
+    NSString*currentLongitud=[NSString stringWithFormat:@"%.8f", _LocationManager.location.coordinate.longitude];
+    
     RutaViewController *ruta= [[self storyboard] instantiateViewControllerWithIdentifier:@"ruta"];//[[MapaViewController alloc]init];
     ruta.latitud_destino=[_evento objectForKey:@"latitud"];
     ruta.longitud_destino=[_evento objectForKey:@"longitud"];
+    ruta.latitud_origen=currentLatitud;
+    ruta.longitud_origen=currentLongitud;
     //mapa.nombre=[_evento objectForKey:@"nombre"];
     //mapa.view.backgroundColor=[UIColor whiteColor];
     [self.navigationController pushViewController:ruta animated:YES];

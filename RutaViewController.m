@@ -48,7 +48,7 @@ NSArray *segmentos;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        NSString *url= [NSString stringWithFormat:@"http://paw.dev.datos.labplc.mx/movilidad/transporte/planner/sunday/1394999266.json?lat_origin=19.4527656&lon_origin=-99.1211996&lat_destination=%@&lon_destination=%@",_latitud_destino,_longitud_destino];
+        NSString *url= [NSString stringWithFormat:@"http://paw.dev.datos.labplc.mx/movilidad/transporte/planner/sunday/1394999266.json?lat_origin=%@&lon_origin=%@&lat_destination=%@&lon_destination=%@",_latitud_origen,_longitud_origen,_latitud_destino,_longitud_destino];
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
         
         if ([data length] >0  )
@@ -58,6 +58,10 @@ NSArray *segmentos;
             NSString *dato=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             
             NSArray *listItems = [dato componentsSeparatedByString:@"<b>Warning</b>:  Cannot modify header information - headers already sent by (output started at /home/paw/datos/web/modules/movilidad/transporte.php:65) in <b>/home/paw/datos/web/outputs/Output_JSON.php</b> on line <b>23</b><br />"];
+            if ([listItems count]==1) {
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"No tenemos una ruta que sugerirte :( lo sentimos" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+                [alert show];
+            }else{
             NSMutableString * miCadena = [NSMutableString stringWithString: [listItems objectAtIndex:1]];
             NSData *data1 = [miCadena dataUsingEncoding:NSUTF8StringEncoding];
             
@@ -74,6 +78,8 @@ NSArray *segmentos;
             }
             segmentos=[consulta objectForKey:@"segments"];
             [_tableView reloadData];
+            }
+        
         }});
 }
 //http://paw.dev.datos.labplc.mx/movilidad/transporte/planner/sunday/1394999266.json?lat_origin=19.4527656&lon_origin=-99.1211996&lat_destination=19.4257912&lon_destination=-99.132911
@@ -88,7 +94,7 @@ NSArray *segmentos;
     //  NSLog(@"paso a celda");
     // static NSString *simpleTableIdentifier = @"SimpleTableItem";
     // eventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell"];
-    UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"customCell"];
+    UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"customCell"];
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if (cell == nil) {
@@ -98,6 +104,7 @@ NSArray *segmentos;
     }
    
     cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@",[[segmentos objectAtIndex:indexPath.row ]   objectForKey:@"stop_origin_name"],[[segmentos objectAtIndex:indexPath.row ]   objectForKey:@"stop_destination_name"]];
+    cell.detailTextLabel.text=[[[[segmentos objectAtIndex:indexPath.row ]   objectForKey:@"trips"] objectAtIndex:0] objectForKey:@"agency_name"];//@"en Metro";
     return cell;
 }
 

@@ -649,8 +649,13 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
 - (void)revealToggleAnimated:(BOOL)animated
 {
     FrontViewPosition toogledFrontViewPosition = FrontViewPositionLeft;
-    if (_frontViewPosition <= FrontViewPositionLeft)
+    if (_frontViewPosition <= FrontViewPositionLeft){
         toogledFrontViewPosition = FrontViewPositionRight;
+        _showMenu=TRUE;
+    }
+    else{
+    _showMenu=FALSE;
+    }
     
     [self setFrontViewPosition:toogledFrontViewPosition animated:animated];
 }

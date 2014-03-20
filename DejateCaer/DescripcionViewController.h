@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-@interface DescripcionViewController : UIViewController <MKMapViewDelegate>
+@interface DescripcionViewController : UIViewController <MKMapViewDelegate,CLLocationManagerDelegate>
 @property (nonatomic,retain) NSMutableDictionary *evento;
+@property (strong, nonatomic) CLLocationManager *LocationManager;
 @property (strong, nonatomic) IBOutlet UILabel *nombre;
 @property (strong, nonatomic) IBOutlet UILabel *lugar;
 @property (strong, nonatomic) IBOutlet UILabel *horario;
