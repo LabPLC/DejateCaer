@@ -16,4 +16,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *direccion;
 @property (nonatomic, retain) IBOutlet MKMapView *mapa;
 -(IBAction)regresar:(id)sender;
+-(IBAction)twittear:(id)sender;
 @end

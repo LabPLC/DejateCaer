@@ -88,8 +88,8 @@
 		F348B41918DA86B500566356 /* news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = news.png; sourceTree = "<group>"; };
 		F348B41B18DA925800566356 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		F348B41D18DA925E00566356 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		F3AECC7618D36D210012748D /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ../MainViewController.h; sourceTree = "<group>"; };
-		F3AECC7718D36D210012748D /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ../MainViewController.m; sourceTree = "<group>"; };
+		F3AECC7618D36D210012748D /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		F3AECC7718D36D210012748D /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		F3AECC7A18D3746F0012748D /* sin_perfil.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sin_perfil.jpg; sourceTree = "<group>"; };
 		F3AECC7D18D3849F0012748D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F3AECC7F18D3881B0012748D /* MapaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapaViewController.h; sourceTree = "<group>"; };
@@ -129,8 +129,7 @@
 		F332E82818D161BA00DF538D = {
 			isa = PBXGroup;
 			children = (
-				F348B41018DA5D1500566356 /* DescubreViewController.h */,
-				F348B41118DA5D1500566356 /* DescubreViewController.m */,
+				F348B41F18DB51D100566356 /* sin usar */,
 				F348B41318DA5DEF00566356 /* MenuViewController.h */,
 				F348B41418DA5DEF00566356 /* MenuViewController.m */,
 				F348B40D18DA5B1300566356 /* SWRevealViewController.h */,
@@ -174,8 +173,6 @@
 		F332E83A18D161BA00DF538D /* DejateCaer */ = {
 			isa = PBXGroup;
 			children = (
-				F3AECC7618D36D210012748D /* MainViewController.h */,
-				F3AECC7718D36D210012748D /* MainViewController.m */,
 				F3AECC7C18D374810012748D /* Imagenes */,
 				F332E84318D161BA00DF538D /* AppDelegate.h */,
 				F332E84418D161BA00DF538D /* AppDelegate.m */,
@@ -219,6 +216,17 @@
 				F332E85F18D161BA00DF538D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F348B41F18DB51D100566356 /* sin usar */ = {
+			isa = PBXGroup;
+			children = (
+				F3AECC7618D36D210012748D /* MainViewController.h */,
+				F3AECC7718D36D210012748D /* MainViewController.m */,
+				F348B41018DA5D1500566356 /* DescubreViewController.h */,
+				F348B41118DA5D1500566356 /* DescubreViewController.m */,
+			);
+			name = "sin usar";
 			sourceTree = "<group>";
 		};
 		F3AECC7918D36D2B0012748D /* Celdas */ = {

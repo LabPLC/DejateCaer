@@ -9,6 +9,7 @@
 #import "DescripcionViewController.h"
 #import "ViewController.h"
 #import "MapaViewController.h"
+#import <Social/Social.h>
 @interface DescripcionViewController ()
 
 @end
@@ -77,5 +78,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(IBAction)twittear:(id)sender
+{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+    {
+        SLComposeViewController *tweetSheet = [SLComposeViewController
+                                               composeViewControllerForServiceType:SLServiceTypeTwitter];
+        NSString *cuerpo=[NSString stringWithFormat:@"Me gusta el evento:%@ que será en %@ . #DejateCaerApp #DejateCaer #EventosCDMX",[_evento objectForKey:@"nombre"],[_evento objectForKey:@"lugar"]];
+        [tweetSheet setInitialText:cuerpo];
+        [self presentViewController:tweetSheet animated:YES completion:nil];
+    }
+}
 @end
