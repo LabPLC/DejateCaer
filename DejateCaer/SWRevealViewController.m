@@ -1312,6 +1312,8 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
 // animation completion, or right after return in case of non-animated deployment.
 - (void (^)(void))_deployForViewController:(UIViewController*)controller inView:(UIView*)view
 {
+    //slide para mostrar menu
+    _showMenu=TRUE;
     if ( !controller || !view )
         return ^(void){};
     
@@ -1345,6 +1347,8 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
 // animation completion, or right after return in case of non-animated deployment.
 - (void (^)(void))_undeployForViewController:(UIViewController*)controller
 {
+    //slide para ocultar menu
+    _showMenu=FALSE;
     if (!controller)
         return ^(void){};
 
