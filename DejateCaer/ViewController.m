@@ -28,6 +28,7 @@
 @synthesize mapa,LocationManager;
 - (void)viewDidLoad
 {
+    
     delegate= (AppDelegate *) [[UIApplication sharedApplication] delegate];
    
     self.title=@"Eventos";
@@ -38,6 +39,11 @@
     // Set the side bar button action. When it's tapped, it'll show up the sidebar.
     _sidebarButton.target = self.revealViewController;
     _sidebarButton.action = @selector(revealToggle:);
+    
+    
+  
+    
+    
     
     // Set the gesture
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
@@ -67,6 +73,11 @@
     [self llamada_asincrona];
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+}
+-(void)touchView{
+    SWRevealViewController *s=[[SWRevealViewController alloc]init];
+[s revealToggle:self ];
+    NSLog(@"view touch %f", self.view.frame.origin.x);
 }
 -(void)pull{
 NSLog (@"pull");
@@ -108,13 +119,24 @@ NSLog (@"pull");
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([self.revealViewController showMenu]) {
+        [self.revealViewController revealToggle:self];
+    }
+    /*
+    UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc]
+                                      initWithTarget:self.revealViewController action:@selector(revealToggle:)];
+    
+    [self.view addGestureRecognizer:tapRec];
+    BOOL t=[self.revealViewController showMenu];
+    //[self.view removeGestureRecognizer:tapRec];*/
+    else{
     DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
   
     detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
       detalles.evento=[eventos objectAtIndex:indexPath.row];
 detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 //[self presentViewController:detalles animated:YES completion:NULL];
- [self.navigationController pushViewController:detalles animated:YES];
+        [self.navigationController pushViewController:detalles animated:YES];}
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
