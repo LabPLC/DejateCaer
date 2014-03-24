@@ -71,7 +71,7 @@
     frame_fb.size.height=35;//self.view.frame.size.height;
     frame_fb.size.width=213;
     frame_fb.origin.x=20;
-    frame_fb.origin.y=411;
+    frame_fb.origin.y=440;
     loginView.frame=frame_fb;
     [self.view addSubview:loginView];
     
@@ -386,10 +386,10 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     }
     if (radio>=1000) {
         radio=radio/1000;
-        _radiolbl.text= [NSString stringWithFormat:@"%i kms.",radio];
+        _radiolbl.text= [NSString stringWithFormat:@"%i km.",radio];
     }
     else{
-    _radiolbl.text= [NSString stringWithFormat:@"%i mts.",radio];
+    _radiolbl.text= [NSString stringWithFormat:@"%i m.",radio];
 	}
         NSLog(@"%i",radio );
 }
