@@ -35,8 +35,9 @@
 
 - (void)viewDidLoad
 {
+    [[NSUserDefaults standardUserDefaults] stringForKey:@"nombre"];
     delegate= (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    _tw=FALSE;
+   
     /*
     _tabla= [[UITableView alloc] init];
     _tabla.delegate = self;
@@ -73,6 +74,16 @@
     frame_fb.origin.y=411;
     loginView.frame=frame_fb;
     [self.view addSubview:loginView];
+    
+    NSString *session =[[NSUserDefaults standardUserDefaults] stringForKey:@"twitter"];
+    if ([session isEqualToString:@"si"]) {
+        _tw=FALSE;
+        [self twitter:nil];
+    }
+    else{
+        _tw=TRUE;
+        [self twitter:nil];
+    }
     //
 
 	// Do any additional setup after loading the view.
@@ -251,7 +262,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 // twitter
 -(IBAction)twitter:(id)sender
 {
-    //estas logeado con twitter? _tw=TRUE = no
+    //estas logeado con twitter? _tw=TRUE = si estas logeado deslogealo
     if (_tw) {
         loginView.hidden=FALSE;
         self.foto_perfil1.profileID=nil;//[UIImage imageNamed:@"sin_perfil.jpg"];
@@ -265,10 +276,12 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         menuItems = @[@"Eventos",  @"Configuraciones"];
         [_tabla reloadData];
         _tw=FALSE;
+        [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"twitter"];
+        NSString *b =[[NSUserDefaults standardUserDefaults] stringForKey:@"twitter"];
     }
-    else{ // si estas logeado con twitter
+    else{ // no estas logeado , logealo
         loginView.hidden=TRUE;
-
+        [[NSUserDefaults standardUserDefaults] setValue:@"si" forKey:@"twitter"];
         _tw=TRUE;
         // Request access to the Twitter accounts
         ACAccountStore *accountStore = [[ACAccountStore alloc] init];
