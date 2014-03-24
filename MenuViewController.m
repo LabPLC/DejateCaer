@@ -78,9 +78,11 @@
     NSString *session =[[NSUserDefaults standardUserDefaults] stringForKey:@"twitter"];
     if ([session isEqualToString:@"si"]) {
         _tw=FALSE;
+        [_twtBtn setTitle:@"Cerrar Sesión TW" forState:UIControlStateNormal];
         [self twitter:nil];
     }
     else{
+        [_twtBtn setTitle:@"Iniciar Sesión TW" forState:UIControlStateNormal];
         _tw=TRUE;
         [self twitter:nil];
     }
@@ -264,6 +266,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //estas logeado con twitter? _tw=TRUE = si estas logeado deslogealo
     if (_tw) {
+        [_twtBtn setTitle:@"Iniciar Sesión TW" forState:UIControlStateNormal];
         loginView.hidden=FALSE;
         self.foto_perfil1.profileID=nil;//[UIImage imageNamed:@"sin_perfil.jpg"];
         [self performSelector:@selector(getImage) withObject:nil afterDelay:1];
@@ -277,9 +280,10 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         [_tabla reloadData];
         _tw=FALSE;
         [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"twitter"];
-        NSString *b =[[NSUserDefaults standardUserDefaults] stringForKey:@"twitter"];
-    }
-    else{ // no estas logeado , logealo
+           }
+    else{
+        [_twtBtn setTitle:@"Cerrar Sesión TW" forState:UIControlStateNormal];
+        // no estas logeado , logealo
         loginView.hidden=TRUE;
         [[NSUserDefaults standardUserDefaults] setValue:@"si" forKey:@"twitter"];
         _tw=TRUE;
