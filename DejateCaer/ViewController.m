@@ -85,6 +85,12 @@ NSLog (@"pull");
 -(void)getLista {
     
     if ([eventos count] >0) {
+        CGRect frame;
+        frame.size.height=([eventos count]*75);
+        frame.size.width=320;
+        frame.origin.x=0;
+        frame.origin.y=222;
+        _tableView.frame=frame;
         [self.view addSubview:_tableView];
         [self.tableView reloadData];
     }
