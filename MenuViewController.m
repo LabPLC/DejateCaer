@@ -21,6 +21,8 @@
 {
     NSArray *menuItems;
     AppDelegate *delegate;
+    
+    FBLoginView *loginView;
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,7 +61,7 @@
     
     //Añadimos boton de fb
     
-    FBLoginView *loginView = [[FBLoginView alloc] init];
+    loginView = [[FBLoginView alloc] init];
     loginView.delegate = self;
     loginView.readPermissions = @[@"basic_info", @"email", @"user_likes"];
     
@@ -148,6 +150,8 @@
     _tabla.frame=frame;
 
 }*/
+
+//Creo que esto ya no lo uso asi que podría borralo
 -(IBAction)fb:(id)sender{
     CGRect frame;
     frame.origin.x=0;
@@ -192,6 +196,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     menuItems = @[@"Eventos", @"Mis Eventos", @"Agregar Evento", @"Configuraciones"];
     [_tabla reloadData];
     [self performSelector:@selector(getImage) withObject:nil afterDelay:3];
+    _twtBtn.hidden=TRUE;
     
     
     NSLog(@"%@", user.name);
@@ -227,6 +232,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 }
 // Logged-out user experience
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
+    _twtBtn.hidden=FALSE;
     self.foto_perfil1.profileID=nil;//[UIImage imageNamed:@"sin_perfil.jpg"];
     [self performSelector:@selector(getImage) withObject:nil afterDelay:1];
     CGRect frame;
@@ -245,7 +251,9 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 // twitter
 -(IBAction)twitter:(id)sender
 {
+    //estas logeado con twitter? _tw=TRUE = no
     if (_tw) {
+        loginView.hidden=FALSE;
         self.foto_perfil1.profileID=nil;//[UIImage imageNamed:@"sin_perfil.jpg"];
         [self performSelector:@selector(getImage) withObject:nil afterDelay:1];
         CGRect frame;
@@ -258,7 +266,9 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         [_tabla reloadData];
         _tw=FALSE;
     }
-    else{
+    else{ // si estas logeado con twitter
+        loginView.hidden=TRUE;
+
         _tw=TRUE;
         // Request access to the Twitter accounts
         ACAccountStore *accountStore = [[ACAccountStore alloc] init];

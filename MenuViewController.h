@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UILabel *radiolbl;
 
+@property (weak, nonatomic) IBOutlet UIButton *twtBtn;
 - (IBAction) slideRadioChangee:(id)sender;
 -(IBAction)twitter:(id)sender;
 -(IBAction)fb:(id)sender;
