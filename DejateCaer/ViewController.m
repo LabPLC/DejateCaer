@@ -121,6 +121,7 @@ NSLog (@"pull");
 {
     if ([self.revealViewController showMenu]) {
         [self.revealViewController revealToggle:self];
+        [self viewDidLoad];
     }
     /*
     UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc]
