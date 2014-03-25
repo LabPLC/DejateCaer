@@ -84,7 +84,7 @@ NSLog (@"pull");
 }
 -(void)getLista {
     
-    if ([eventos count] >0) {
+    if ([eventos count] <5 && [eventos count] >0) {
         CGRect frame;
         frame.size.height=([eventos count]*75);
         frame.size.width=320;
@@ -94,15 +94,22 @@ NSLog (@"pull");
         [self.view addSubview:_tableView];
         [self.tableView reloadData];
     }
+    else if ([eventos count]>5){
+        [self.view addSubview:_tableView];
+        [self.tableView reloadData];
+    }
     else{
+        
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"No tenemos eventos cercanos a ti con ese radio intenta ampliando el radio de busqueda" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
         [alert show];
+      
     }
     
     [self getMapa];
 }
 -(void)getMapa
 {
+    [mapa removeAnnotations:mapa.annotations];
     for(int i=0;i<[eventos count];i++) {
         NSLog(@"%i",i);
         NSMutableDictionary *lugar=[[NSMutableDictionary alloc]init];
@@ -127,6 +134,7 @@ NSLog (@"pull");
 {
     if ([self.revealViewController showMenu]) {
         [self.revealViewController revealToggle:self];
+        [_tableView removeFromSuperview];
         [self viewDidLoad];
     }
     /*
@@ -228,7 +236,9 @@ detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
             consulta = [jsonObject objectForKey:@"eventos"];
             lugares= [jsonObject objectForKey:@"eventos"];//[consulta objectForKey:@"ubicaciones"];
             eventos=lugares;
-            [self getLista];
+           
+                [self getLista];
+            
             
             
             }
