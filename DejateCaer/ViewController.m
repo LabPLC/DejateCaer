@@ -23,7 +23,7 @@
     NSString *radio;
     BOOL touchMap;
     BOOL isDidLoad;
-    
+    UITapGestureRecognizer* touchViewGest;
 
     AppDelegate *delegate;
 }
@@ -34,7 +34,7 @@
     isDidLoad=TRUE;
     touchMap=FALSE;
     delegate= (AppDelegate *) [[UIApplication sharedApplication] delegate];
-   
+    ;
     self.title=@"Eventos";
     // Change button color
     
@@ -125,10 +125,24 @@
         
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"No tenemos eventos cercanos a ti con ese radio intenta ampliando el radio de busqueda" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
         [alert show];
-      
+      //Agregar a la vista el gesto que reconozca el touch
+         touchViewGest = [[UITapGestureRecognizer alloc]
+                                          initWithTarget:self action:@selector(touchView)];
+        [self.view addGestureRecognizer:touchViewGest];
+        
     }
     
     [self getMapa];
+}
+-(void)touchView{
+    
+    if ([self.revealViewController showMenu]) {
+        [self.revealViewController revealToggle:self];
+     //   [_tableView removeFromSuperview];
+        [self viewDidLoad];
+        [self.view removeGestureRecognizer:touchViewGest];
+    }
+
 }
 -(void)getMapa
 {
