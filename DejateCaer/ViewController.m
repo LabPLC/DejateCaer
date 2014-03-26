@@ -21,6 +21,8 @@
     NSString *currentLatitud;
     NSString *currentLongitud;
     NSString *radio;
+    BOOL touchMap;
+    BOOL isDidLoad;
     
 
     AppDelegate *delegate;
@@ -28,7 +30,9 @@
 @synthesize mapa,LocationManager;
 - (void)viewDidLoad
 {
-    
+    self.revealViewController.showMenu=FALSE;
+    isDidLoad=TRUE;
+    touchMap=FALSE;
     delegate= (AppDelegate *) [[UIApplication sharedApplication] delegate];
    
     self.title=@"Eventos";
@@ -41,8 +45,10 @@
     _sidebarButton.action = @selector(revealToggle:);
     
     
-  
-    
+  //evento al tocar el mapa
+    UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc]
+                                      initWithTarget:self action:@selector(touchMaps)];
+    [mapa addGestureRecognizer:tapRec];
     
     
     // Set the gesture
@@ -74,13 +80,30 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 }
--(void)touchView{
-    SWRevealViewController *s=[[SWRevealViewController alloc]init];
-[s revealToggle:self ];
-    NSLog(@"view touch %f", self.view.frame.origin.x);
-}
--(void)pull{
-NSLog (@"pull");
+
+-(void)touchMaps{
+    isDidLoad=FALSE;
+    touchMap=TRUE;
+    [UIView animateWithDuration:0.5
+                          delay:0.2
+                        options: 1
+                     animations:^{
+                         //mapa.frame = CGRectMake(0, 64, 320, 500);
+                         
+                         
+                         
+                     }
+                     completion:^(BOOL finished){
+                         if (finished){
+                             mapa.frame = CGRectMake(0, 64, 320, self.view.frame.size.height-75);
+                         CGRect frame;
+                         frame.origin.x=0;
+                         frame.size.height=([eventos count]*75);
+                         frame.size.width=320;
+                         frame.origin.y=self.view.frame.size.height-75;
+                             _tableView.frame=frame;
+                             NSLog(@"falso");}
+                     }];
 }
 -(void)getLista {
     
@@ -129,29 +152,59 @@ NSLog (@"pull");
     [self getCurrentLocation:nil];
 
 }
+-(void)resizeMap{
+    touchMap=FALSE;
+    isDidLoad=FALSE;
+    [UIView animateWithDuration:0.5
+                          delay:0.1
+                        options: UIViewAnimationCurveEaseIn
+                     animations:^{
+                          mapa.frame = CGRectMake(0, 64, 320,158);
+                         //mapa.frame = CGRectMake(0, 64, 320, 500);
+                         CGRect frame;
+                         frame.origin.x=0;
+                         frame.size.height=self.view.frame.size.height-222;//([eventos count]*75);
+                         frame.size.width=320;
+                         frame.origin.y=222;
+                         _tableView.frame=frame;
+                         
+                     }
+                     completion:^(BOOL finished){
+                         if (finished)
+                           //  mapa.backgroundColor=[UIColor blackColor];
+                        
+                         //  [top_menu removeFromSuperview];
+                         NSLog(@"falso");
+                     }];
+
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.revealViewController showMenu]) {
-        [self.revealViewController revealToggle:self];
-        [_tableView removeFromSuperview];
-        [self viewDidLoad];
-    }
-    /*
-    UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc]
-                                      initWithTarget:self.revealViewController action:@selector(revealToggle:)];
-    
-    [self.view addGestureRecognizer:tapRec];
-    BOOL t=[self.revealViewController showMenu];
-    //[self.view removeGestureRecognizer:tapRec];*/
-    else{
-    DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
-  
-    detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
-      detalles.evento=[eventos objectAtIndex:indexPath.row];
-detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-//[self presentViewController:detalles animated:YES completion:NULL];
-        [self.navigationController pushViewController:detalles animated:YES];}
+   
+        
+        if ([self.revealViewController showMenu]) {
+            [self.revealViewController revealToggle:self];
+            [_tableView removeFromSuperview];
+            [self viewDidLoad];
+        }
+        
+        else{
+            if (indexPath.row==0 && touchMap==TRUE) {
+            
+                [self resizeMap];
+            }
+            else{
+                
+                DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
+                detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
+                detalles.evento=[eventos objectAtIndex:indexPath.row];
+                detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+                [self.navigationController pushViewController:detalles animated:YES];
+            }
+        }
+   
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -261,4 +314,16 @@ detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
   
 }*/
 
+- (void)viewWillAppear:(BOOL)animated {
+
+    if (!isDidLoad) { //paso al didLoad?
+    NSLog(@"volviste");
+    CGRect frame;
+    frame.origin.x=0;
+        frame.size.height=self.view.frame.size.height-222;//([eventos count]*75);
+    frame.size.width=320;
+    frame.origin.y=222;
+        _tableView.frame=frame;
+    }
+}
 @end

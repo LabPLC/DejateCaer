@@ -200,6 +200,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user {
     self.foto_perfil1.profileID = user.id;
+    /*
     CGRect frame;
     frame.origin.x=0;
     frame.origin.y=150;
@@ -207,7 +208,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     frame.size.width=self.view.frame.size.width;
     _tabla.frame=frame;
     menuItems = @[@"Eventos", @"Mis Eventos", @"Agregar Evento", @"Configuraciones"];
-    [_tabla reloadData];
+    [_tabla reloadData];*/
     [self performSelector:@selector(getImage) withObject:nil afterDelay:3];
     _twtBtn.hidden=TRUE;
     
@@ -248,6 +249,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     _twtBtn.hidden=FALSE;
     self.foto_perfil1.profileID=nil;//[UIImage imageNamed:@"sin_perfil.jpg"];
     [self performSelector:@selector(getImage) withObject:nil afterDelay:1];
+    /*
     CGRect frame;
     frame.origin.x=0;
     frame.origin.y=150;
@@ -255,7 +257,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     frame.size.width=self.view.frame.size.width;
     _tabla.frame=frame;
     menuItems = @[@"Eventos",  @"Configuraciones"];
-    [_tabla reloadData];    // self.nameLabel.text = @"";
+    [_tabla reloadData];    // self.nameLabel.text = @"";*/
     //self.statusLabel.text= @"You're not logged in!";
 }
 
@@ -270,6 +272,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         loginView.hidden=FALSE;
         self.foto_perfil1.profileID=nil;//[UIImage imageNamed:@"sin_perfil.jpg"];
         [self performSelector:@selector(getImage) withObject:nil afterDelay:1];
+       /*
         CGRect frame;
         frame.origin.x=0;
         frame.origin.y=150;
@@ -278,6 +281,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         _tabla.frame=frame;
         menuItems = @[@"Eventos",  @"Configuraciones"];
         [_tabla reloadData];
+        */
         _tw=FALSE;
         [[NSUserDefaults standardUserDefaults] setValue:@"no" forKey:@"twitter"];
            }
@@ -305,7 +309,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
                     // Creating a request to get the info about a user on Twitter
                     NSString *d=twitterAccount.username;
                     
-                    SLRequest *twitterInfoRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:[NSURL URLWithString:@"https://api.twitter.com/1.1/users/show.json"] parameters:[NSDictionary dictionaryWithObject:@"rockarloz" forKey:@"screen_name"]];
+                    SLRequest *twitterInfoRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:[NSURL URLWithString:@"https://api.twitter.com/1.1/users/show.json"] parameters:[NSDictionary dictionaryWithObject:d forKey:@"screen_name"]];
                     [twitterInfoRequest setAccount:twitterAccount];
                     
                     // Making the request
@@ -356,6 +360,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
 - (void) getProfileImageForURLString:(NSString *)urlString;
 {
+    /*
     CGRect frame;
     frame.origin.x=0;
     frame.origin.y=150;
@@ -363,7 +368,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     frame.size.width=self.view.frame.size.width;
     _tabla.frame=frame;
     menuItems = @[@"Eventos", @"Mis Eventos", @"Agregar Evento", @"Configuraciones"];
-    [_tabla reloadData];
+    [_tabla reloadData];*/
 
     NSURL *url = [NSURL URLWithString:urlString];
     NSData *data = [NSData dataWithContentsOfURL:url];
