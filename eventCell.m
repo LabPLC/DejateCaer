@@ -18,13 +18,14 @@
         UIView *selectedView = [[UIView alloc]init];
         selectedView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:255 alpha:0.3];
         
-        _nombre=[[UILabel alloc]initWithFrame:CGRectMake(10, 15, 300, 34)];
+        _nombre=[[UILabel alloc]initWithFrame:CGRectMake(10, 5, 250, 70)];
         _nombre.textColor=[UIColor blueColor];
-        [_nombre setFont:[UIFont systemFontOfSize:18]];
+        [_nombre setFont:[UIFont systemFontOfSize:16]];
+        _nombre.numberOfLines = 3;
         
         [self   addSubview:_nombre];
         
-        _hora=[[UILabel alloc]initWithFrame:CGRectMake(10, 53, 300, 34)];
+        _hora=[[UILabel alloc]initWithFrame:CGRectMake(10, 60, 300, 34)];
         _hora.textColor=[UIColor blackColor];
         [_hora setFont:[UIFont systemFontOfSize:10]];
         

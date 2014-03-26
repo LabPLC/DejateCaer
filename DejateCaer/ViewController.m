@@ -72,7 +72,7 @@
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 222, 320, self.view.frame.size.height-222)];
     _tableView.dataSource=self;
     _tableView.delegate=self;
-    _tableView.rowHeight=75;
+    _tableView.rowHeight=90;
     _tableView.backgroundColor=[UIColor redColor];
     //[self leerXML];
   
@@ -95,12 +95,12 @@
                      }
                      completion:^(BOOL finished){
                          if (finished){
-                             mapa.frame = CGRectMake(0, 64, 320, self.view.frame.size.height-75);
+                             mapa.frame = CGRectMake(0, 64, 320, self.view.frame.size.height-90);
                          CGRect frame;
                          frame.origin.x=0;
-                         frame.size.height=([eventos count]*75);
+                         frame.size.height=([eventos count]*90);
                          frame.size.width=320;
-                         frame.origin.y=self.view.frame.size.height-75;
+                         frame.origin.y=self.view.frame.size.height-90;
                              _tableView.frame=frame;
                              NSLog(@"falso");}
                      }];
@@ -109,7 +109,7 @@
     
     if ([eventos count] <5 && [eventos count] >0) {
         CGRect frame;
-        frame.size.height=([eventos count]*75);
+        frame.size.height=([eventos count]*90);
         frame.size.width=320;
         frame.origin.x=0;
         frame.origin.y=222;
