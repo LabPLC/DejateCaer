@@ -61,7 +61,7 @@
     [super viewDidLoad];
     
     //Añadimos boton de fb
-    
+    [self.view addSubview:self.foto_perfil1];
     loginView = [[FBLoginView alloc] init];
     loginView.delegate = self;
     loginView.readPermissions = @[@"basic_info", @"email", @"user_likes"];
@@ -74,19 +74,19 @@
     frame_fb.origin.y=440;
     loginView.frame=frame_fb;
     [self.view addSubview:loginView];
-    
     NSString *session =[[NSUserDefaults standardUserDefaults] stringForKey:@"twitter"];
-    if ([session isEqualToString:@"si"]) {
+    if ([session isEqualToString:@"si"] ) {
         _tw=FALSE;
         [_twtBtn setTitle:@"Cerrar Sesión TW" forState:UIControlStateNormal];
         [self twitter:nil];
     }
-    else{
+    else if([session isEqualToString:@"no"]){
         [_twtBtn setTitle:@"Iniciar Sesión TW" forState:UIControlStateNormal];
         _tw=TRUE;
         [self twitter:nil];
     }
-    //
+    
+        //
 
 	// Do any additional setup after loading the view.
 }
@@ -209,13 +209,19 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     _tabla.frame=frame;
     menuItems = @[@"Eventos", @"Mis Eventos", @"Agregar Evento", @"Configuraciones"];
     [_tabla reloadData];*/
-    [self performSelector:@selector(getImage) withObject:nil afterDelay:3];
+    delegate.isInFacebook=@"si";
+    [self performSelector:@selector(getImage) withObject:nil afterDelay:1];
+    NSLog(@"lo llame desde facebook iniciado");
     _twtBtn.hidden=TRUE;
     
     
     NSLog(@"%@", user.name);
 }
 -(void)getImage{
+    
+    if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"twitter"] isEqualToString:@"no"]) {
+           NSLog(@"deberia poner foto");
+    
     UIImage *image2 = nil;
     
     for (NSObject *obj in [self.foto_perfil1 subviews]) {
@@ -226,29 +232,27 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         }
     }
     self.foto_perfil.image=image2;
-    
     self.foto_perfil.layer.cornerRadius = image2.size.width / 2;
-    //self.foto_perfil.layer.cornerRadius = 2000;
     UIGraphicsBeginImageContextWithOptions( self.foto_perfil.bounds.size, NO, [UIScreen mainScreen].scale);
     
-    // Add a clip before drawing anything, in the shape of an rounded rect
     [[UIBezierPath bezierPathWithRoundedRect: self.foto_perfil.bounds
                                 cornerRadius:50.0] addClip];
-    // Draw your image
     [image2 drawInRect: self.foto_perfil.bounds];
-    
-    // Get the image, here setting the UIImageView image
     self.foto_perfil.image = UIGraphicsGetImageFromCurrentImageContext();
-    
-    // Lets forget about that we were drawing
     UIGraphicsEndImageContext();
+    }
+    
+  
+
     
 }
 // Logged-out user experience
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
     _twtBtn.hidden=FALSE;
+    delegate.isInFacebook=@"no";
     self.foto_perfil1.profileID=nil;//[UIImage imageNamed:@"sin_perfil.jpg"];
     [self performSelector:@selector(getImage) withObject:nil afterDelay:1];
+       NSLog(@"lo llame desde facebook cerrado");
     /*
     CGRect frame;
     frame.origin.x=0;
@@ -272,6 +276,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         loginView.hidden=FALSE;
         self.foto_perfil1.profileID=nil;//[UIImage imageNamed:@"sin_perfil.jpg"];
         [self performSelector:@selector(getImage) withObject:nil afterDelay:1];
+           NSLog(@"lo llame desde twitter cerrado");
        /*
         CGRect frame;
         frame.origin.x=0;
