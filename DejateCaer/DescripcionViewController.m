@@ -94,6 +94,14 @@
         [self presentViewController:tweetSheet animated:YES completion:nil];
     }
 }
+- (IBAction)postToFacebook:(id)sender {
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+        [controller setInitialText:[NSString stringWithFormat:@"Me gusta el evento:%@ que será en %@ . #DejateCaerApp #DejateCaer #EventosCDMX",[_evento objectForKey:@"nombre"],[_evento objectForKey:@"lugar"]]];
+        [self presentViewController:controller animated:YES completion:Nil];
+    }
+}
 -(IBAction)ruta:(id)sender{
     
     NSString* currentLatitud=[NSString stringWithFormat:@"%.8f", _LocationManager.location.coordinate.latitude];
