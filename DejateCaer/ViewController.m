@@ -30,6 +30,9 @@
 
     AppDelegate *delegate;
     Mipin *annotationPointUbication;
+    
+    UIView *loading;
+    UIActivityIndicatorView *spinner;
 }
 @synthesize mapa,LocationManager;
 - (void)viewDidLoad
@@ -40,6 +43,19 @@
     delegate= (AppDelegate *) [[UIApplication sharedApplication] delegate];
     ;
     self.title=@"Eventos";
+    
+    loading=[[UIView alloc]initWithFrame:CGRectMake(10, 75
+                                                    , self.view.frame.size.width-20, self.view.frame.size.height-84)];
+    loading.backgroundColor=[UIColor blackColor];
+    loading.alpha=0.8;
+    loading.layer.cornerRadius = 5;
+    loading.layer.masksToBounds = YES;
+    
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [spinner setCenter:CGPointMake(loading.frame.size.width/2.0, loading.frame.size.height/2.0)];
+    [spinner startAnimating];
+    [loading addSubview:spinner];
+    [self.view addSubview:loading];
     // Change button color
     
     _sidebarButton.tintColor = [UIColor colorWithWhite:0.1f alpha:0.9f];
@@ -80,7 +96,12 @@
     _tableView.backgroundColor=[UIColor redColor];
     //[self leerXML];
   
+    
+    
     [self llamada_asincrona];
+    
+    
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -177,7 +198,8 @@
         Mipin *annotationPoint = [[Mipin alloc] initWithTitle:[lugar objectForKey:@"nombre"] subtitle:[lugar objectForKey:@"direccion"] andCoordinate:newCoord tipo:@"" evento:i];
         
         [mapa addAnnotation:annotationPoint];
-        
+        [spinner stopAnimating];
+        [loading removeFromSuperview];
         
     }
     [self getCurrentLocation:nil];
