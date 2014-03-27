@@ -36,6 +36,8 @@
 		F348B42218DB6D5600566356 /* RutaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F348B42118DB6D5600566356 /* RutaViewController.m */; };
 		F3A6401918E490F6004AF17F /* Mipin.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A6401818E490F6004AF17F /* Mipin.m */; };
 		F3A6401B18E49BB6004AF17F /* markerblue.png in Resources */ = {isa = PBXBuildFile; fileRef = F3A6401A18E49BB6004AF17F /* markerblue.png */; };
+		F3A6401F18E4A693004AF17F /* CalloutAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A6401E18E4A693004AF17F /* CalloutAnnotation.m */; };
+		F3A6402118E4BA67004AF17F /* findme.png in Resources */ = {isa = PBXBuildFile; fileRef = F3A6402018E4BA67004AF17F /* findme.png */; };
 		F3AE746718E3A4E900109BF2 /* here.png in Resources */ = {isa = PBXBuildFile; fileRef = F3AE746618E3A4E900109BF2 /* here.png */; };
 		F3AECC7818D36D210012748D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AECC7718D36D210012748D /* MainViewController.m */; };
 		F3AECC7B18D3746F0012748D /* sin_perfil.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F3AECC7A18D3746F0012748D /* sin_perfil.jpg */; };
@@ -97,6 +99,9 @@
 		F3A6401718E490F6004AF17F /* Mipin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mipin.h; sourceTree = "<group>"; };
 		F3A6401818E490F6004AF17F /* Mipin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mipin.m; sourceTree = "<group>"; };
 		F3A6401A18E49BB6004AF17F /* markerblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = markerblue.png; sourceTree = "<group>"; };
+		F3A6401D18E4A693004AF17F /* CalloutAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalloutAnnotation.h; sourceTree = "<group>"; };
+		F3A6401E18E4A693004AF17F /* CalloutAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalloutAnnotation.m; sourceTree = "<group>"; };
+		F3A6402018E4BA67004AF17F /* findme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = findme.png; sourceTree = "<group>"; };
 		F3AE746618E3A4E900109BF2 /* here.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = here.png; sourceTree = "<group>"; };
 		F3AECC7618D36D210012748D /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		F3AECC7718D36D210012748D /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -198,6 +203,8 @@
 				F332E87418D185AD00DF538D /* DescripcionViewController.m */,
 				F332E84C18D161BA00DF538D /* ViewController.h */,
 				F332E84D18D161BA00DF538D /* ViewController.m */,
+				F3A6401D18E4A693004AF17F /* CalloutAnnotation.h */,
+				F3A6401E18E4A693004AF17F /* CalloutAnnotation.m */,
 				F332E84F18D161BA00DF538D /* Images.xcassets */,
 				F332E83B18D161BA00DF538D /* Supporting Files */,
 			);
@@ -248,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				F3A6401A18E49BB6004AF17F /* markerblue.png */,
+				F3A6402018E4BA67004AF17F /* findme.png */,
 				F332E87018D16CB100DF538D /* eventCell.h */,
 				F332E87118D16CB100DF538D /* eventCell.m */,
 			);
@@ -350,6 +358,7 @@
 				F3AECC7B18D3746F0012748D /* sin_perfil.jpg in Resources */,
 				F332E86F18D16C1900DF538D /* evento_cell.xib in Resources */,
 				F3AE746718E3A4E900109BF2 /* here.png in Resources */,
+				F3A6402118E4BA67004AF17F /* findme.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F332E87218D16CB100DF538D /* eventCell.m in Sources */,
+				F3A6401F18E4A693004AF17F /* CalloutAnnotation.m in Sources */,
 				F3AECC7818D36D210012748D /* MainViewController.m in Sources */,
 				F332E84E18D161BA00DF538D /* ViewController.m in Sources */,
 				F348B40F18DA5B1300566356 /* SWRevealViewController.m in Sources */,

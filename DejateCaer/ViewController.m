@@ -12,6 +12,7 @@
 #import "SWRevealViewController.h"
 #import "AppDelegate.h"
 #import "Mipin.h"
+#import "CalloutAnnotation.h"
 @interface ViewController ()
 
 @end
@@ -25,6 +26,7 @@
     BOOL touchMap;
     BOOL isDidLoad;
     UITapGestureRecognizer* touchViewGest;
+    UITapGestureRecognizer* tapRecMap;
 
     AppDelegate *delegate;
     Mipin *annotationPointUbication;
@@ -48,9 +50,9 @@
     
     
   //evento al tocar el mapa
-    UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc]
+    tapRecMap = [[UITapGestureRecognizer alloc]
                                       initWithTarget:self action:@selector(touchMaps)];
-    [mapa addGestureRecognizer:tapRec];
+    [mapa addGestureRecognizer:tapRecMap];
     
     
     // Set the gesture
@@ -106,6 +108,7 @@
                              _tableView.frame=frame;
                              NSLog(@"falso");}
                      }];
+    [self.mapa removeGestureRecognizer:tapRecMap];
 }
 -(void)getLista {
     
@@ -157,11 +160,13 @@
         CLLocationCoordinate2D SCL;
         SCL.latitude = [[lugar objectForKey:@"latitud"] doubleValue];
         SCL.longitude = [[lugar objectForKey:@"longitud"]doubleValue];
-       /* MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
+      /*
+        MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
         annotationPoint.coordinate = SCL;
         annotationPoint.title = [lugar objectForKey:@"nombre"];
         annotationPoint.subtitle = [lugar objectForKey:@"direccion"];
-        
+      
+      
         */
         
         CGFloat newLat = [[lugar objectForKey:@"latitud"] doubleValue];
@@ -169,7 +174,7 @@
         
         CLLocationCoordinate2D newCoord = {newLat, newLon};
         
-        Mipin *annotationPoint = [[Mipin alloc] initWithTitle:[lugar objectForKey:@"nombre"] subtitle:[lugar objectForKey:@"direccion"] andCoordinate:newCoord tipo:@""];
+        Mipin *annotationPoint = [[Mipin alloc] initWithTitle:[lugar objectForKey:@"nombre"] subtitle:[lugar objectForKey:@"direccion"] andCoordinate:newCoord tipo:@"" evento:i];
         
         [mapa addAnnotation:annotationPoint];
         
@@ -179,6 +184,7 @@
 
 }
 -(void)resizeMap{
+     [mapa addGestureRecognizer:tapRecMap];
     touchMap=FALSE;
     isDidLoad=FALSE;
     [UIView animateWithDuration:0.5
@@ -294,7 +300,7 @@
     
     CLLocationCoordinate2D newCoord = {newLat, newLon};
     
-    annotationPointUbication = [[Mipin alloc] initWithTitle:@"" subtitle:@"" andCoordinate:newCoord tipo:@"ubicacion"];
+    annotationPointUbication = [[Mipin alloc] initWithTitle:@"" subtitle:@"" andCoordinate:newCoord tipo:@"ubicacion" evento:0];
 
     
    /* SCL.latitude = [lat doubleValue];
@@ -362,13 +368,17 @@
   
 }*/
 
-- (MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation: (id) annotation {
+- (MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation: (id<MKAnnotation>) annotation {
+   
     
+    if ([annotation isKindOfClass:[CalloutAnnotation class]]) {
+        return nil;
+        NSLog(@"fue letrerito");
+    }
+    else{
     Mipin  *anotacion1 = (Mipin*)annotation;
     
-   
         
-    
     // Comprobamos si se trata de la anotación correspondiente al usuario.
     if ([annotation isKindOfClass:[MKUserLocation class]])
     {
@@ -376,7 +386,9 @@
     }
     
     MKAnnotationView *aView = [[MKAnnotationView alloc] initWithAnnotation:anotacion1 reuseIdentifier:@"pinView"];
-    
+        UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        [rightButton setTitle:annotation.title forState:UIControlStateNormal];
+        [aView setRightCalloutAccessoryView:rightButton];
     
     //\\-------------------------------------------------------------------------------///
     //Creo el nombre de la imagen
@@ -390,7 +402,7 @@
     aView.canShowCallout = YES;
     aView.enabled = YES;
     aView.centerOffset = CGPointMake(0, -20);
-    
+    aView.tag=anotacion1.id_event;
     aView.draggable = YES;
     UIImage *imagen;
     if ([anotacion1.tipo isEqualToString:@"ubicacion"]) {
@@ -413,23 +425,34 @@
     }
     else{
         CGRect frame = aView.frame;
-        frame.size.width = 47;
+        frame.size.width = 35;
         frame.size.height = 40;
         aView.frame = frame;
 
     }
     
     
-    return aView;
+        return aView;}
     
     
 }
 
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view
+calloutAccessoryControlTapped:(UIControl *)control
+{
+    
+    DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
+    detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
+    detalles.evento=[eventos objectAtIndex:view.tag];
+    detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self.navigationController pushViewController:detalles animated:YES];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
 
     if (!isDidLoad) { //paso al didLoad?
     NSLog(@"volviste");
+         [mapa addGestureRecognizer:tapRecMap];
     CGRect frame;
     frame.origin.x=0;
         frame.size.height=self.view.frame.size.height-222;//([eventos count]*75);
@@ -438,4 +461,5 @@
         _tableView.frame=frame;
     }
 }
+
 @end
