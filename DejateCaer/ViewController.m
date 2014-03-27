@@ -11,6 +11,7 @@
 #import "DescripcionViewController.h"
 #import "SWRevealViewController.h"
 #import "AppDelegate.h"
+#import "Mipin.h"
 @interface ViewController ()
 
 @end
@@ -26,6 +27,7 @@
     UITapGestureRecognizer* touchViewGest;
 
     AppDelegate *delegate;
+    Mipin *annotationPointUbication;
 }
 @synthesize mapa,LocationManager;
 - (void)viewDidLoad
@@ -63,7 +65,7 @@
   
     
     [mapa setDelegate:self];
-    [mapa setShowsUserLocation:YES];
+    //[mapa setShowsUserLocation:YES];
 
    
     
@@ -155,10 +157,20 @@
         CLLocationCoordinate2D SCL;
         SCL.latitude = [[lugar objectForKey:@"latitud"] doubleValue];
         SCL.longitude = [[lugar objectForKey:@"longitud"]doubleValue];
-        MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
+       /* MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
         annotationPoint.coordinate = SCL;
         annotationPoint.title = [lugar objectForKey:@"nombre"];
         annotationPoint.subtitle = [lugar objectForKey:@"direccion"];
+        
+        */
+        
+        CGFloat newLat = [[lugar objectForKey:@"latitud"] doubleValue];
+        CGFloat newLon = [[lugar objectForKey:@"longitud"] doubleValue];
+        
+        CLLocationCoordinate2D newCoord = {newLat, newLon};
+        
+        Mipin *annotationPoint = [[Mipin alloc] initWithTitle:[lugar objectForKey:@"nombre"] subtitle:[lugar objectForKey:@"direccion"] andCoordinate:newCoord tipo:@""];
+        
         [mapa addAnnotation:annotationPoint];
         
         
@@ -262,6 +274,9 @@
 
 
 - (IBAction)getCurrentLocation:(id)sender {
+    
+    [mapa removeAnnotation:annotationPointUbication];
+    annotationPointUbication=nil;
     CLLocationCoordinate2D SCL;
     NSString *lat=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.latitude];
     ;
@@ -272,6 +287,25 @@
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(SCL, 2000, 2000);
     
     [mapa setRegion:region animated:YES];
+    //aqui debemos añadir un pin personalizado
+   
+    CGFloat newLat = [lat doubleValue];
+    CGFloat newLon = [lot doubleValue];
+    
+    CLLocationCoordinate2D newCoord = {newLat, newLon};
+    
+    annotationPointUbication = [[Mipin alloc] initWithTitle:@"" subtitle:@"" andCoordinate:newCoord tipo:@"ubicacion"];
+
+    
+   /* SCL.latitude = [lat doubleValue];
+    SCL.longitude = [lot doubleValue];
+    Mipin *annotationPoint = [[Mipin alloc] init];
+    annotationPoint.coordinate = SCL;
+    annotationPoint.tipo=@"ubicacion";*/
+   // annotationPoint.title = [lugar objectForKey:@"nombre"];
+    //annotationPoint.subtitle = [lugar objectForKey:@"direccion"];
+    [mapa addAnnotation:annotationPointUbication];
+
 }
 
 -(void)llamada_asincrona{
@@ -327,6 +361,70 @@
     }
   
 }*/
+
+- (MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation: (id) annotation {
+    
+    Mipin  *anotacion1 = (Mipin*)annotation;
+    
+   
+        
+    
+    // Comprobamos si se trata de la anotación correspondiente al usuario.
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+    {
+        return nil;
+    }
+    
+    MKAnnotationView *aView = [[MKAnnotationView alloc] initWithAnnotation:anotacion1 reuseIdentifier:@"pinView"];
+    
+    
+    //\\-------------------------------------------------------------------------------///
+    //Creo el nombre de la imagen
+    //\\-------------------------------------------------------------------------------///
+    
+    
+    
+    //\\-------------------------------------------------------------------------------///
+    // Configuramos la vista del mapa
+    //\\-------------------------------------------------------------------------------///
+    aView.canShowCallout = YES;
+    aView.enabled = YES;
+    aView.centerOffset = CGPointMake(0, -20);
+    
+    aView.draggable = YES;
+    UIImage *imagen;
+    if ([anotacion1.tipo isEqualToString:@"ubicacion"]) {
+           imagen = [UIImage imageNamed:@"here.png"];
+    }
+    else{
+            imagen = [UIImage imageNamed:@"markerblue.png"];
+    }
+    
+    aView.image = imagen;
+    //\\-------------------------------------------------------------------------------///
+    // Establecemos el tamaño óptimo para el Pin
+    //\\-------------------------------------------------------------------------------///
+    
+    if ([anotacion1.tipo isEqualToString:@"ubicacion"]) {
+        CGRect frame = aView.frame;
+        frame.size.width = 20;
+        frame.size.height = 20;
+        aView.frame = frame;
+    }
+    else{
+        CGRect frame = aView.frame;
+        frame.size.width = 47;
+        frame.size.height = 40;
+        aView.frame = frame;
+
+    }
+    
+    
+    return aView;
+    
+    
+}
+
 
 - (void)viewWillAppear:(BOOL)animated {
 
