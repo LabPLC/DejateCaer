@@ -120,14 +120,14 @@
                      }
                      completion:^(BOOL finished){
                          if (finished){
-                             mapa.frame = CGRectMake(0, 64, 320, self.view.frame.size.height-90);
+                         mapa.frame = CGRectMake(0, 64, 320, self.view.frame.size.height-90);
                          CGRect frame;
                          frame.origin.x=0;
                          frame.size.height=([eventos count]*90);
                          frame.size.width=320;
                          frame.origin.y=self.view.frame.size.height-90;
                              _tableView.frame=frame;
-                             NSLog(@"falso");}
+                            }
                      }];
     [self.mapa removeGestureRecognizer:tapRecMap];
 }
@@ -140,6 +140,7 @@
         frame.origin.x=0;
         frame.origin.y=222;
         _tableView.frame=frame;
+        _tableView.scrollEnabled=FALSE;
         [self.view addSubview:_tableView];
         [self.tableView reloadData];
     }
@@ -165,6 +166,7 @@
     if ([self.revealViewController showMenu]) {
         [self.revealViewController revealToggle:self];
      //   [_tableView removeFromSuperview];
+        
         [self viewDidLoad];
         [self.view removeGestureRecognizer:touchViewGest];
     }
@@ -216,11 +218,32 @@
                           mapa.frame = CGRectMake(0, 64, 320,158);
                          //mapa.frame = CGRectMake(0, 64, 320, 500);
                          CGRect frame;
+                         if ([eventos count] <5 && [eventos count] >0) {
+                             
+                             frame.size.height=([eventos count]*90);
+                             frame.size.width=320;
+                             frame.origin.x=0;
+                             frame.origin.y=222;
+                             _tableView.frame=frame;
+                             _tableView.scrollEnabled=FALSE;
+                             [self.view addSubview:_tableView];
+                             [self.tableView reloadData];
+                         }
+                         else if ([eventos count]>5){
+                             frame.origin.x=0;
+                             frame.size.height=self.view.frame.size.height-222;//([eventos count]*75);
+                             frame.size.width=320;
+                             frame.origin.y=222;
+                             _tableView.frame=frame;
+                             [self.view addSubview:_tableView];
+                             [self.tableView reloadData];
+                         }
+                         /*CGRect frame;
                          frame.origin.x=0;
                          frame.size.height=self.view.frame.size.height-222;//([eventos count]*75);
                          frame.size.width=320;
                          frame.origin.y=222;
-                         _tableView.frame=frame;
+                         _tableView.frame=frame;*/
                          
                      }
                      completion:^(BOOL finished){
@@ -475,12 +498,28 @@ calloutAccessoryControlTapped:(UIControl *)control
     if (!isDidLoad) { //paso al didLoad?
     NSLog(@"volviste");
          [mapa addGestureRecognizer:tapRecMap];
-    CGRect frame;
-    frame.origin.x=0;
-        frame.size.height=self.view.frame.size.height-222;//([eventos count]*75);
-    frame.size.width=320;
-    frame.origin.y=222;
-        _tableView.frame=frame;
+        CGRect frame;
+        if ([eventos count] <5 && [eventos count] >0) {
+            
+            frame.size.height=([eventos count]*90);
+            frame.size.width=320;
+            frame.origin.x=0;
+            frame.origin.y=222;
+            _tableView.frame=frame;
+            _tableView.scrollEnabled=FALSE;
+            [self.view addSubview:_tableView];
+            [self.tableView reloadData];
+        }
+        else if ([eventos count]>5){
+            frame.origin.x=0;
+            frame.size.height=self.view.frame.size.height-222;//([eventos count]*75);
+            frame.size.width=320;
+            frame.origin.y=222;
+            _tableView.frame=frame;
+            [self.view addSubview:_tableView];
+            [self.tableView reloadData];
+        }
+
     }
 }
 
