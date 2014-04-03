@@ -652,9 +652,11 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
     if (_frontViewPosition <= FrontViewPositionLeft){
         toogledFrontViewPosition = FrontViewPositionRight;
         _showMenu=TRUE;
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowMenu" object:nil];
     }
     else{
     _showMenu=FALSE;
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"HiddenMenu" object:nil];
     }
     
     [self setFrontViewPosition:toogledFrontViewPosition animated:animated];
@@ -1315,6 +1317,7 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
 {
     //slide para mostrar menu
     _showMenu=TRUE;
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowMenu" object:nil];
     if ( !controller || !view )
         return ^(void){};
     
@@ -1352,6 +1355,7 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
     //slide para ocultar menu
      
     _showMenu=FALSE;
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"HiddenMenu" object:nil];
     if (!controller)
         return ^(void){};
 

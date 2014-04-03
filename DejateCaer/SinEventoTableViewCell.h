@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SinEventoTableViewCell : UITableViewCell
-
+@property (nonatomic,retain) IBOutlet UILabel *nombre;
 @end

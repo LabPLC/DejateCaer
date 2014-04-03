@@ -8,13 +8,33 @@
 
 #import "ViewController.h"
 #import "eventCell.h"
+#import "SinEventoTableViewCell.h"
 #import "DescripcionViewController.h"
 #import "SWRevealViewController.h"
 #import "AppDelegate.h"
 #import "Mipin.h"
 #import "CalloutAnnotation.h"
+
+#define SCREEN_HEIGHT_WITHOUT_STATUS_BAR     [[UIScreen mainScreen] bounds].size.height - 65
+#define HEIGHT_STATUS_BAR                    64
+#define Y_DOWN_TABLEVIEW                     SCREEN_HEIGHT_WITHOUT_STATUS_BAR - 40
+#define DEFAULT_HEIGHT_HEADER                100.0f
+#define MIN_HEIGHT_HEADER                    0.0f
+#define DEFAULT_Y_OFFSET                     ([[UIScreen mainScreen] bounds].size.height == 480.0f) ? -200.0f : -250.0f
+#define FULL_Y_OFFSET                        20.0f
+#define MIN_Y_OFFSET_TO_REACH                -30
+#define OPEN_SHUTTER_LATITUDE_MINUS          .005
+#define CLOSE_SHUTTER_LATITUDE_MINUS         .018
+
 @interface ViewController ()
 
+
+@property (strong, nonatomic)   UITapGestureRecognizer  *tapMapViewGesture;
+@property (strong, nonatomic)   UITapGestureRecognizer  *tapTableViewGesture;
+@property (nonatomic)           CGRect                  headerFrame;
+@property (nonatomic)           float                   headerYOffSet;
+@property (nonatomic)           BOOL                    isShutterOpen;
+@property (nonatomic)           BOOL                    displayMap;
 @end
 
 @implementation ViewController
@@ -26,6 +46,8 @@
     NSString *radio_anterior;
     BOOL touchMap;
     BOOL isDidLoad;
+    BOOL isEmpty;
+    UIView *vista;
     UITapGestureRecognizer* touchViewGest;
     UITapGestureRecognizer* tapRecMap;
     
@@ -36,13 +58,58 @@
     UIActivityIndicatorView *spinner;
 }
 @synthesize mapa,LocationManager;
+@synthesize heighTableViewHeader    = _heighTableViewHeader;
+@synthesize minHeighTableViewHeader = _minHeighTableViewHeader;
+@synthesize heighTableView          = _heighTableView;
+@synthesize default_Y_mapView       = _default_Y_mapView;
+@synthesize default_Y_tableView     = _default_Y_tableView;
+@synthesize Y_tableViewOnBottom     = _Y_tableViewOnBottom;
+@synthesize latitudeUserUp          = _latitudeUserUp;
+@synthesize latitudeUserDown        = _latitudeUserDown;
+@synthesize minYOffsetToReach       = _minYOffsetToReach;
 -(void)slideMenu{
     
+}
+-(id)init{
+    self =  [super init];
+    if(self){
+        [self setup];
+    }
+    return self;
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if(self){
+        [self setup];
+    }
+    return self;
+}
+
+// Set all view we will need
+-(void)setup{
+    _heighTableViewHeader       = DEFAULT_HEIGHT_HEADER;
+    _heighTableView             = SCREEN_HEIGHT_WITHOUT_STATUS_BAR;
+    _minHeighTableViewHeader    = MIN_HEIGHT_HEADER;
+    _default_Y_tableView        = HEIGHT_STATUS_BAR;
+    _Y_tableViewOnBottom        = Y_DOWN_TABLEVIEW;
+    _minYOffsetToReach          = MIN_Y_OFFSET_TO_REACH;
+    _latitudeUserUp             = CLOSE_SHUTTER_LATITUDE_MINUS;
+    _latitudeUserDown           = OPEN_SHUTTER_LATITUDE_MINUS;
+    _default_Y_mapView          = DEFAULT_Y_OFFSET;
+}
+-(void)putView{
+[self.view addSubview:vista];
+}
+-(void) quitView{
+    [vista removeFromSuperview];
 }
 - (void)viewDidLoad
 {
     //Añadimos un escuchado de eventos de notificationController  para recargar la pagina
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:@"SlideMenu" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(putView) name:@"ShowMenu" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quitView) name:@"HiddenMenu" object:nil];
     
     //Le asignamos el valor falso a la variable ShowMenu ya que en un
     //principio el menu esta escondido
@@ -61,7 +128,7 @@
     self.title=@"Eventos";
     
     //llamamos metodo para crear vista de loading
-    [self crearLoadingView];
+    
     
     //Asiganamos delegado de SWRevalmenu para un boto y tenga una accion
     _sidebarButton.tintColor = [UIColor colorWithWhite:0.1f alpha:0.9f];
@@ -70,9 +137,9 @@
     
     
     //Creamos gesto para que un evento suceda cuando tocamos el mapa y lo pegamos a la vista mapa
-    tapRecMap = [[UITapGestureRecognizer alloc]
-                 initWithTarget:self action:@selector(touchMaps)];
-    [mapa addGestureRecognizer:tapRecMap];
+    //tapRecMap = [[UITapGestureRecognizer alloc]
+      //           initWithTarget:self action:@selector(touchMaps)];
+    //[mapa addGestureRecognizer:tapRecMap];
     
     
     // Damos gesto de SWReveal para mostrar el menu al hacer Slide en la vista
@@ -95,9 +162,12 @@
     //llamamos metodo para crear la tabla
     [self crearTabla];
     
-    
+    [self setupMapView];
+    [self crearLoadingView];
     //obtenemos los eventos
     [self llamada_asincrona];
+    vista=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    vista.backgroundColor=[UIColor clearColor];
     
     
     
@@ -105,6 +175,25 @@
 	
 }
 -(void)crearTabla{
+    _tableView                  = [[UITableView alloc]  initWithFrame: CGRectMake(0, 70, 320, _heighTableView)];
+    _tableView.tableHeaderView  = [[UIView alloc]       initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, _heighTableViewHeader)];
+    _tableView.rowHeight=90;
+    [_tableView setBackgroundColor:[UIColor clearColor]];
+    
+    // Add gesture to gestures
+    _tapMapViewGesture      = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                      action:@selector(handleTapMapView:)];
+    _tapTableViewGesture    = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                      action:@selector(handleTapTableView:)];
+    [_tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
+    //[_tableView addGestureRecognizer:_tapTableViewGesture];
+    
+    // Init selt as default tableview's delegate & datasource
+    _tableView.dataSource   = self;
+    _tableView.delegate     = self;
+    [self.view addSubview:_tableView];
+    //esto es lo mio
+    /*
     //Creamos la tabla  y la escondemos
     //Cambiar 346 por el largo de la pantalla -222
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 222, 320, self.view.frame.size.height-222)];
@@ -113,8 +202,110 @@
     _tableView.rowHeight=90;
     _tableView.backgroundColor=[UIColor redColor];
     _tableView.hidden=TRUE;
-    [self.view addSubview:_tableView];
+    [self.view addSubview:_tableView];*/
 }
+
+-(void)setupMapView{
+    mapa                        = [[MKMapView alloc] initWithFrame:CGRectMake(0, self.default_Y_mapView, 320, _heighTableView)];
+    [mapa setShowsUserLocation:YES];
+    mapa.delegate = self;
+    [self.view insertSubview:mapa
+                belowSubview: _tableView];
+}
+
+#pragma mark - Internal Methods
+
+- (void)handleTapMapView:(UIGestureRecognizer *)gesture {
+    if(!self.isShutterOpen){
+        // Move the tableView down to let the map appear entirely
+        [self openShutter];
+        // Inform the delegate
+        if([self.delegate respondsToSelector:@selector(didTapOnMapView)]){
+            [self.delegate didTapOnMapView];
+        }
+    }
+}
+
+- (void)handleTapTableView:(UIGestureRecognizer *)gesture {
+    if(self.isShutterOpen){
+        // Move the tableView up to reach is origin position
+        [self closeShutter];
+        // Inform the delegate
+        if([self.delegate respondsToSelector:@selector(didTapOnTableView)]){
+            [self.delegate didTapOnTableView];
+        }
+    }
+}
+
+// Move DOWN the tableView to show the "entire" mapView
+-(void) openShutter{
+    touchMap=TRUE;
+    [UIView animateWithDuration:0.2
+                          delay:0.1
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         mapa.frame                 = CGRectMake(0, FULL_Y_OFFSET, mapa.frame.size.width, mapa.frame.size.height);
+                         self.tableView.tableHeaderView     = [[UIView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, self.minHeighTableViewHeader)];
+                         self.tableView.frame               = CGRectMake(0, self.Y_tableViewOnBottom, self.tableView.frame.size.width, self.tableView.frame.size.height);
+                     }
+                     completion:^(BOOL finished){
+                         self.isShutterOpen = YES;
+                         [self.tableView setScrollEnabled:NO];
+                         // Center the user 's location
+                         [self zoomToUserLocation:mapa.userLocation minLatitude:self.latitudeUserDown];
+                         
+                         // Inform the delegate
+                         if([self.delegate respondsToSelector:@selector(didTableViewMoveDown)]){
+                             [self.delegate didTableViewMoveDown];
+                         }
+                     }];
+}
+
+// Move UP the tableView to get its original position
+-(void) closeShutter{
+    touchMap=FALSE;
+    [UIView animateWithDuration:0.2
+                          delay:0.1
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         mapa.frame             = CGRectMake(0, self.default_Y_mapView, mapa.frame.size.width, mapa.frame.size.height);
+                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, _headerYOffSet, self.view.frame.size.width, self.heighTableViewHeader)];
+                         self.tableView.frame           = CGRectMake(0, self.default_Y_tableView, self.tableView.frame.size.width, self.tableView.frame.size.height);
+                     }
+                     completion:^(BOOL finished){
+                         self.isShutterOpen = NO;
+                         [self.tableView setScrollEnabled:YES];
+                         [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
+                         // Center the user 's location
+                         [self zoomToUserLocation:mapa.userLocation minLatitude:self.latitudeUserUp];
+                         
+                         // Inform the delegate
+                         if([self.delegate respondsToSelector:@selector(didTableViewMoveUp)]){
+                             [self.delegate didTableViewMoveUp];
+                         }
+                     }];
+}
+
+#pragma mark - Table view Delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    // check if the Y offset is under the minus Y to reach
+    if (self.tableView.contentOffset.y < self.minYOffsetToReach){
+        if(!self.displayMap)
+            self.displayMap                      = YES;
+    }else{
+        if(self.displayMap)
+            self.displayMap                      = NO;
+    }
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if(self.displayMap)
+        [self openShutter];
+}
+
+
 -(void)crearLoadingView{
     //Creamos vista que contiene el spinner y lo enseñamos al usuario
     loading=[[UIView alloc]initWithFrame:CGRectMake(10, 75
@@ -159,9 +350,27 @@
             consulta = [jsonObject objectForKey:@"eventos"];
             lugares= [jsonObject objectForKey:@"eventos"];//[consulta objectForKey:@"ubicaciones"];
             eventos=lugares;
-            
+            if ([eventos count]==0) {
+                _tableView.rowHeight=450;
+                NSArray *vacio=[[NSArray alloc]initWithObjects:@"VACIO", nil];
+                eventos=vacio;
+                isEmpty=TRUE;
+                
+                /*radio= [NSString stringWithFormat:@"%i",[radio integerValue]+1000];
+                NSLog(@"nuevo radio %@",radio);
+                [self llamada_asincrona];*/
+                [self getMapa];
+                [self.tableView reloadData];
+            }
+            else{
+                  _tableView.rowHeight=90;
+                isEmpty=FALSE;
             //Mandamos a llamar la lista para llenarla y enseñarla
-            [self getLista];
+                [self getMapa];
+                [self.tableView reloadData];
+            
+            }
+            //[self getLista];
         }
     });
     
@@ -211,6 +420,9 @@
     //Quitamos todo los markers que pueda tener el mapa
     [mapa removeAnnotations:mapa.annotations];
     
+    if (!isEmpty) {
+        
+    
     for(int i=0;i<[eventos count];i++) {
         
         NSMutableDictionary *lugar=[[NSMutableDictionary alloc]init];
@@ -235,7 +447,7 @@
         
         Mipin *annotationPoint = [[Mipin alloc] initWithTitle:[lugar objectForKey:@"nombre"] subtitle:[lugar objectForKey:@"direccion"] andCoordinate:newCoord tipo:@"" evento:i];
         [mapa addAnnotation:annotationPoint];
-    }
+    }}
     
     //Quitamos la vista de loading y paramos el spinner
     [spinner stopAnimating];
@@ -276,7 +488,7 @@
      [mapa addAnnotation:annotationPointUbication];*/
     
 }
-
+/*
 -(void)touchMaps{
     isDidLoad=FALSE;
     touchMap=TRUE;
@@ -355,7 +567,7 @@
                           frame.origin.y=222;
                           _tableView.frame=frame;*/
                          
-                     }
+                    /***** }
                      completion:^(BOOL finished){
                          if (finished)
                          {}
@@ -366,30 +578,34 @@
                      }];
     
 }
-
+*/
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+   
     
     if ([self.revealViewController showMenu]) {
         [self.revealViewController revealToggle:self];
         // [_tableView removeFromSuperview];
-        _tableView.hidden=TRUE;
-        [self reload];
+                [self reload];
     }
     
     else{
         if (indexPath.row==0 && touchMap==TRUE) {
-            
-            [self resizeMap];
+              [self closeShutter];
+           /* _tapTableViewGesture    = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                              action:@selector(handleTapTableView:)];
+           [_tableView addGestureRecognizer:_tapTableViewGesture];*/
+
         }
         else{
-            
-            DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
+            if (!isEmpty) {
+                   DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
             detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
             detalles.evento=[eventos objectAtIndex:indexPath.row];
             detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
             [self.navigationController pushViewController:detalles animated:YES];
+            }
+         
         }
     }
     
@@ -408,6 +624,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (!isEmpty) {
+        
+    
     //  NSLog(@"paso a celda");
     // static NSString *simpleTableIdentifier = @"SimpleTableItem";
     // eventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell"];
@@ -430,9 +649,24 @@
     else{
         cell.distancia.text= [NSString stringWithFormat:(@"%@ m"),[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"]];
     }
+    return cell;
+    }
+    else{
+        SinEventoTableViewCell *cell=[[SinEventoTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"customCell"];
+        //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        
+        if (cell == nil) {
+            //  NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"evento_cell" owner:self options:nil];
+            //  cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+            // cell = [topLevelObjects objectAtIndex:0];
+        }
+        cell.nombre.text= @"No encontramos eventos";
+        return cell;
+    
+    }
     
     // cell.textLabel.text = [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"nombre"];
-    return cell;
+    
 }
 
 
@@ -563,5 +797,29 @@ calloutAccessoryControlTapped:(UIControl *)control
     radio=delegate.user_radio;
     [self llamada_asincrona];
 }
+#pragma mark - MapView Delegate
+
+- (void)zoomToUserLocation:(MKUserLocation *)userLocation minLatitude:(float)minLatitude
+{
+    if (!userLocation)
+        return;
+    MKCoordinateRegion region;
+    CLLocationCoordinate2D loc  = userLocation.location.coordinate;
+    loc.latitude                = loc.latitude - minLatitude;
+    region.center               = loc;
+    region.span                 = MKCoordinateSpanMake(.05, .05);       //Zoom distance
+    region                      = [mapa regionThatFits:region];
+    [mapa setRegion:region
+                   animated:YES];
+    
+}
+
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+  /*  if(_isShutterOpen)
+        [self zoomToUserLocation:mapa.userLocation minLatitude:self.latitudeUserDown];
+    else
+        [self zoomToUserLocation:mapa.userLocation minLatitude:self.latitudeUserUp];*/
+}
+
 
 @end

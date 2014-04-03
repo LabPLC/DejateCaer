@@ -43,6 +43,7 @@
 		F3AECC7E18D3849F0012748D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECC7D18D3849F0012748D /* CoreLocation.framework */; };
 		F3AECC8118D3881B0012748D /* MapaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AECC8018D3881B0012748D /* MapaViewController.m */; };
 		F3AECE7F18D8B5C50012748D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECE7E18D8B5C50012748D /* FacebookSDK.framework */; };
+		F3D6F0B318ED1759007F9E31 /* SinEventoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D6F0B218ED1759007F9E31 /* SinEventoTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,8 @@
 		F3AECC7F18D3881B0012748D /* MapaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapaViewController.h; sourceTree = "<group>"; };
 		F3AECC8018D3881B0012748D /* MapaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapaViewController.m; sourceTree = "<group>"; };
 		F3AECE7E18D8B5C50012748D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		F3D6F0B118ED1759007F9E31 /* SinEventoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SinEventoTableViewCell.h; path = DejateCaer/SinEventoTableViewCell.h; sourceTree = "<group>"; };
+		F3D6F0B218ED1759007F9E31 /* SinEventoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SinEventoTableViewCell.m; path = DejateCaer/SinEventoTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +258,8 @@
 				F3A6402018E4BA67004AF17F /* findme.png */,
 				F332E87018D16CB100DF538D /* eventCell.h */,
 				F332E87118D16CB100DF538D /* eventCell.m */,
+				F3D6F0B118ED1759007F9E31 /* SinEventoTableViewCell.h */,
+				F3D6F0B218ED1759007F9E31 /* SinEventoTableViewCell.m */,
 			);
 			name = Celdas;
 			sourceTree = "<group>";
@@ -373,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3D6F0B318ED1759007F9E31 /* SinEventoTableViewCell.m in Sources */,
 				F332E87218D16CB100DF538D /* eventCell.m in Sources */,
 				F3A6401F18E4A693004AF17F /* CalloutAnnotation.m in Sources */,
 				F3AECC7818D36D210012748D /* MainViewController.m in Sources */,
