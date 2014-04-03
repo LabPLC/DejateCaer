@@ -21,7 +21,6 @@
 {
     NSArray *menuItems;
     AppDelegate *delegate;
-    
     FBLoginView *loginView;
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -35,6 +34,9 @@
 
 - (void)viewDidLoad
 {
+    [_slider addTarget:self action:@selector(slidingStopped:)forControlEvents:UIControlEventTouchUpInside];
+    [_slider addTarget:self action:@selector(slidingStopped:)forControlEvents:UIControlEventTouchUpOutside];
+
     [[NSUserDefaults standardUserDefaults] stringForKey:@"nombre"];
     delegate= (AppDelegate *) [[UIApplication sharedApplication] delegate];
    
@@ -77,12 +79,15 @@
     NSString *session =[[NSUserDefaults standardUserDefaults] stringForKey:@"twitter"];
     if ([session isEqualToString:@"si"] ) {
         _tw=FALSE;
+        delegate.TW=TRUE;
         [_twtBtn setTitle:@"Cerrar Sesión TW" forState:UIControlStateNormal];
         [self twitter:nil];
     }
     else if([session isEqualToString:@"no"]){
         [_twtBtn setTitle:@"Iniciar Sesión TW" forState:UIControlStateNormal];
         _tw=TRUE;
+        delegate.TW=FALSE;
+
         [self twitter:nil];
     }
     
@@ -131,6 +136,43 @@
     UINavigationController *destViewController = (UINavigationController*)segue.destinationViewController;
     destViewController.title = [[menuItems objectAtIndex:indexPath.row] capitalizedString];
     
+    if ([segue.identifier isEqualToString:@"agregar"]) {
+        if (delegate.FB) {
+            
+            if ( [segue isKindOfClass: [SWRevealViewControllerSegue class]] ) {
+             SWRevealViewControllerSegue *swSegue = (SWRevealViewControllerSegue*) segue;
+             
+             swSegue.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, UIViewController* dvc) {
+             
+             UINavigationController* navController = (UINavigationController*)self.revealViewController.frontViewController;
+             [navController setViewControllers: @[dvc] animated: NO ];
+             [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+             };
+             
+             }
+        }
+        else{
+        
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"Inicia Sesion para Acceder aqui" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+            [alert show];
+        
+        }
+    }
+    if ([segue.identifier isEqualToString:@"explorar"]) {
+        if ( [segue isKindOfClass: [SWRevealViewControllerSegue class]] ) {
+            SWRevealViewControllerSegue *swSegue = (SWRevealViewControllerSegue*) segue;
+            
+            swSegue.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, UIViewController* dvc) {
+                
+                UINavigationController* navController = (UINavigationController*)self.revealViewController.frontViewController;
+                [navController setViewControllers: @[dvc] animated: NO ];
+                [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+            };
+            
+        }
+    
+    
+    }
     // Set the photo if it navigates to the PhotoView
     /*if ([segue.identifier isEqualToString:@"showPhoto"]) {
         PhotoViewController *photoController = (PhotoViewController*)segue.destinationViewController;
@@ -138,7 +180,7 @@
         photoController.photoFilename = photoFilename;
     } */
     
-    if ( [segue isKindOfClass: [SWRevealViewControllerSegue class]] ) {
+    /*if ( [segue isKindOfClass: [SWRevealViewControllerSegue class]] ) {
         SWRevealViewControllerSegue *swSegue = (SWRevealViewControllerSegue*) segue;
         
         swSegue.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, UIViewController* dvc) {
@@ -148,7 +190,7 @@
             [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
         };
         
-    }
+    }*/
     
 }
 
@@ -210,6 +252,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     menuItems = @[@"Eventos", @"Mis Eventos", @"Agregar Evento", @"Configuraciones"];
     [_tabla reloadData];*/
     delegate.isInFacebook=@"si";
+    delegate.FB=TRUE;
     [self performSelector:@selector(getImage) withObject:nil afterDelay:1];
     NSLog(@"lo llame desde facebook iniciado");
     _twtBtn.hidden=TRUE;
@@ -250,6 +293,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
     _twtBtn.hidden=FALSE;
     delegate.isInFacebook=@"no";
+    delegate.FB=FALSE;
     self.foto_perfil1.profileID=nil;//[UIImage imageNamed:@"sin_perfil.jpg"];
     [self performSelector:@selector(getImage) withObject:nil afterDelay:1];
        NSLog(@"lo llame desde facebook cerrado");
@@ -404,6 +448,11 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         NSLog(@"%i",radio );
 }
 
+- (void) slidingStopped:(id)sender
+{
+    NSLog(@"stopped sliding");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SlideMenu" object:nil];
+}
 
 
 @end

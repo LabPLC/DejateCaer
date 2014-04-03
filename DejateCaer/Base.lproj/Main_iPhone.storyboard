@@ -57,7 +57,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-207" y="1901"/>
+            <point key="canvasLocation" x="-207" y="2065"/>
         </scene>
         <!--Descripcion View Controller-->
         <scene sceneID="VsT-EY-vbV">
@@ -196,7 +196,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1UU-u3-XOG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="619" y="1933"/>
+            <point key="canvasLocation" x="579" y="2021"/>
         </scene>
         <!--Ruta View Controller-->
         <scene sceneID="DuD-p9-HMO">
@@ -278,7 +278,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4VS-Nf-iYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1093" y="1901"/>
+            <point key="canvasLocation" x="-1037" y="2065"/>
         </scene>
         <!--Agregar Eventos View Controller-->
         <scene sceneID="z8Z-MV-Iog">
@@ -424,7 +424,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="vXZ-lx-hvc" kind="custom" customClass="SWRevealViewControllerSegue" id="SZx-md-b2O"/>
+                                            <segue destination="vXZ-lx-hvc" kind="custom" identifier="explorar" customClass="SWRevealViewControllerSegue" id="SZx-md-b2O"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Mis Eventos" id="39U-we-4Jx">
@@ -467,7 +467,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="7EM-rk-Uyg" kind="custom" customClass="SWRevealViewControllerSegue" id="POH-gF-E23"/>
+                                            <segue destination="7EM-rk-Uyg" kind="custom" identifier="agregar" customClass="SWRevealViewControllerSegue" id="POH-gF-E23"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Configuraciones" id="ZCy-eR-VFr">

@@ -1310,6 +1310,7 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
 
 // Containment Deploy method. Returns a block to be invoked at the
 // animation completion, or right after return in case of non-animated deployment.
+//el menu esta cerrado y deslizamos para abrirlo
 - (void (^)(void))_deployForViewController:(UIViewController*)controller inView:(UIView*)view
 {
     //slide para mostrar menu
@@ -1345,9 +1346,11 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
 
 // Containment Undeploy method. Returns a block to be invoked at the
 // animation completion, or right after return in case of non-animated deployment.
+//el menu esta abierto y lo deslizamos para cerrarlo
 - (void (^)(void))_undeployForViewController:(UIViewController*)controller
 {
     //slide para ocultar menu
+     
     _showMenu=FALSE;
     if (!controller)
         return ^(void){};

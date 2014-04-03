@@ -14,4 +14,7 @@
 @property (strong, nonatomic) NSString *alto;
 @property (strong, nonatomic) NSString *user_radio;
 @property (strong, nonatomic) NSString *isInFacebook;
+@property (assign, nonatomic) BOOL FB;
+@property (assign, nonatomic) BOOL TW;
+
 @end
