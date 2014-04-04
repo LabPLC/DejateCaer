@@ -4,7 +4,7 @@
 //
 //  Created by Carlos Castellanos on 12/03/14.
 //  Copyright (c) 2014 Carlos Castellanos. All rights reserved.
-//
+//master
 
 #import "ViewController.h"
 #import "eventCell.h"
@@ -183,7 +183,7 @@
     vista=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     vista.backgroundColor=[UIColor clearColor];
     
-       
+    
     [super viewDidLoad];
 	
 }
