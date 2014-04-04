@@ -52,6 +52,8 @@
     UITapGestureRecognizer* touchViewGest;
     UITapGestureRecognizer* tapRecMap;
     
+    UIView *vista_atras;
+    
     CLLocationCoordinate2D centre;
     AppDelegate *delegate;
     Mipin *annotationPointUbication;
@@ -181,12 +183,16 @@
     vista=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     vista.backgroundColor=[UIColor clearColor];
     
-    
-    
+       
     [super viewDidLoad];
 	
 }
 -(void)crearTabla{
+    
+    vista_atras=[[UIView alloc]initWithFrame:CGRectMake(0, 70, self.view.frame.size.width, _heighTableViewHeader)];
+    vista_atras.backgroundColor=[UIColor greenColor];
+    [self.view addSubview:vista_atras];
+    
     _tableView                  = [[UITableView alloc]  initWithFrame: CGRectMake(0, 70, 320, _heighTableView)];
     _tableView.tableHeaderView  = [[UIView alloc]       initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, _heighTableViewHeader)];
     _tableView.rowHeight=90;
@@ -362,7 +368,9 @@
             NSMutableDictionary *consulta=[[NSMutableDictionary alloc]init];
             consulta = [jsonObject objectForKey:@"eventos"];
             lugares= [jsonObject objectForKey:@"eventos"];//[consulta objectForKey:@"ubicaciones"];
+            
             eventos=lugares;
+            
             if ([eventos count]==0) {
                 _tableView.rowHeight=450;
                 NSArray *vacio=[[NSArray alloc]initWithObjects:@"VACIO", nil];
@@ -380,7 +388,9 @@
                 isEmpty=FALSE;
             //Mandamos a llamar la lista para llenarla y enseñarla
                 [self getMapa];
+                
                 [self.tableView reloadData];
+                
                 
             
             }
@@ -439,7 +449,7 @@
     if (!isEmpty) {
         
     
-    for(int i=0;i<[eventos count];i++) {
+    for(int i=0;i<([eventos count]);i++) {
         
         NSMutableDictionary *lugar=[[NSMutableDictionary alloc]init];
         lugar=[eventos objectAtIndex:i];
@@ -642,17 +652,23 @@
 {
     if (!isEmpty) {
         
+        
+        eventCell *cell=[[eventCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"customCell"];
+        if(indexPath.row == 0){
+          
+         
+                
+                CGRect shadowFrame      = cell.layer.bounds;
+                CGPathRef shadowPath    = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+                cell.layer.shadowPath   = shadowPath;
+                [cell.layer setShadowOffset:CGSizeMake(-2, -2)];
+                [cell.layer setShadowColor:[[UIColor grayColor] CGColor]];
+                [cell.layer setShadowOpacity:.75];
+            
+        }
+
     
-    //  NSLog(@"paso a celda");
-    // static NSString *simpleTableIdentifier = @"SimpleTableItem";
-    // eventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell"];
-    eventCell *cell=[[eventCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"customCell"];
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
-    if (cell == nil) {
-        //  NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"evento_cell" owner:self options:nil];
-        //  cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-        // cell = [topLevelObjects objectAtIndex:0];
+        if (cell == nil) {
     }
     cell.nombre.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"nombre"];
     cell.hora.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"hora"];
@@ -667,6 +683,7 @@
     }
     return cell;
     }
+    
     else{
         SinEventoTableViewCell *cell=[[SinEventoTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"customCell"];
         //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -929,5 +946,26 @@ calloutAccessoryControlTapped:(UIControl *)control
         }
     });
     
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    //first get total rows in that section by current indexPath.
+    NSInteger totalRow = [tableView numberOfRowsInSection:indexPath.section];
+    
+    //this is the last row in section.
+    if(indexPath.row == totalRow -1){
+        // get total of cells's Height
+        float cellsHeight = totalRow * cell.frame.size.height;
+        // calculate tableView's Height with it's the header
+        float tableHeight = (tableView.frame.size.height - tableView.tableHeaderView.frame.size.height);
+        
+        // Check if we need to create a foot to hide the backView (the map)
+        if((cellsHeight - tableView.frame.origin.y)  < tableHeight){
+            // Add a footer to hide the background
+            int footerHeight = tableHeight - cellsHeight;
+            tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, footerHeight)];
+            [tableView.tableFooterView setBackgroundColor:[UIColor whiteColor]];
+        }
+    }
 }
 @end
