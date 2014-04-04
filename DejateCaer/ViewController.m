@@ -10,7 +10,7 @@
 #import "eventCell.h"
 #import "SinEventoTableViewCell.h"
 #import "DescripcionViewController.h"
-#import "SWRevealViewController.h"
+
 #import "AppDelegate.h"
 #import "Mipin.h"
 #import "CalloutAnnotation.h"
@@ -51,6 +51,7 @@
     UIView *vista;
     UITapGestureRecognizer* touchViewGest;
     UITapGestureRecognizer* tapRecMap;
+    UIButton *bucar_aqui;
     
     UIView *vista_atras;
     
@@ -117,8 +118,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quitView) name:@"HiddenMenu" object:nil];
     
     //Le asignamos el valor falso a la variable ShowMenu ya que en un
-    //principio el menu esta escondido
-    self.revealViewController.showMenu=FALSE;
+
     
     //Decimos que isDidload es True cada que se comienza cargando esta vew
     isDidLoad=TRUE;
@@ -132,23 +132,6 @@
     //Titulo para la vista en el navegation controller
     self.title=@"Eventos";
     
-    //llamamos metodo para crear vista de loading
-    
-    
-    //Asiganamos delegado de SWRevalmenu para un boto y tenga una accion
-    _sidebarButton.tintColor = [UIColor colorWithWhite:0.1f alpha:0.9f];
-    _sidebarButton.target = self.revealViewController;
-    _sidebarButton.action = @selector(revealToggle:);
-    
-    
-    //Creamos gesto para que un evento suceda cuando tocamos el mapa y lo pegamos a la vista mapa
-    //tapRecMap = [[UITapGestureRecognizer alloc]
-      //           initWithTarget:self action:@selector(touchMaps)];
-    //[mapa addGestureRecognizer:tapRecMap];
-    
-    
-    // Damos gesto de SWReveal para mostrar el menu al hacer Slide en la vista
-    [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     
     //Copiamos el radio del delegado por default es  2000 metros
     radio=delegate.user_radio;//@"2000";
@@ -183,6 +166,15 @@
     vista=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     vista.backgroundColor=[UIColor clearColor];
     
+     bucar_aqui = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [bucar_aqui addTarget:self
+               action:@selector(getCenter:)
+     forControlEvents:UIControlEventTouchUpInside];
+    [bucar_aqui setTitle:@"Bucar en esta zona" forState:UIControlStateNormal];
+    bucar_aqui.frame = CGRectMake(80 , 70, 160.0, 40.0);
+    bucar_aqui.backgroundColor=[UIColor whiteColor];
+    bucar_aqui.hidden=TRUE;
+    [mapa addSubview:bucar_aqui];
        
     [super viewDidLoad];
 	
@@ -258,6 +250,7 @@
 // Move DOWN the tableView to show the "entire" mapView
 -(void) openShutter{
     touchMap=TRUE;
+    bucar_aqui.hidden=FALSE;
     [UIView animateWithDuration:0.2
                           delay:0.1
                         options: UIViewAnimationOptionCurveEaseOut
@@ -282,6 +275,7 @@
 // Move UP the tableView to get its original position
 -(void) closeShutter{
     touchMap=FALSE;
+    bucar_aqui.hidden=true;
     [UIView animateWithDuration:0.2
                           delay:0.1
                         options: UIViewAnimationOptionCurveEaseOut
@@ -609,13 +603,7 @@
 {
    
     
-    if ([self.revealViewController showMenu]) {
-        [self.revealViewController revealToggle:self];
-        // [_tableView removeFromSuperview];
-                [self reload];
-    }
-    
-    else{
+ 
         if (indexPath.row==0 && touchMap==TRUE) {
               [self closeShutter];
            /* _tapTableViewGesture    = [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -633,7 +621,7 @@
             }
          
         }
-    }
+    
     
     
 }
