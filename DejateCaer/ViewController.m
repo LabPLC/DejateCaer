@@ -24,7 +24,7 @@
 #define FULL_Y_OFFSET                        20.0f
 #define MIN_Y_OFFSET_TO_REACH                -30
 #define OPEN_SHUTTER_LATITUDE_MINUS          .005
-#define CLOSE_SHUTTER_LATITUDE_MINUS         .018
+#define CLOSE_SHUTTER_LATITUDE_MINUS         -0.013
 
 @interface ViewController ()
 
@@ -47,10 +47,12 @@
     BOOL touchMap;
     BOOL isDidLoad;
     BOOL isEmpty;
+    BOOL findCenter;
     UIView *vista;
     UITapGestureRecognizer* touchViewGest;
     UITapGestureRecognizer* tapRecMap;
     
+    CLLocationCoordinate2D centre;
     AppDelegate *delegate;
     Mipin *annotationPointUbication;
     
@@ -106,6 +108,7 @@
 }
 - (void)viewDidLoad
 {
+    findCenter=FALSE;
     //Añadimos un escuchado de eventos de notificationController  para recargar la pagina
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:@"SlideMenu" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(putView) name:@"ShowMenu" object:nil];
@@ -163,6 +166,15 @@
     [self crearTabla];
     
     [self setupMapView];
+    
+    CLLocationCoordinate2D SCL;
+   
+    SCL.latitude = LocationManager.location.coordinate.latitude-0.020;
+    SCL.longitude = LocationManager.location.coordinate.longitude;
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(SCL, 4000, 4000);
+    [mapa setShowsUserLocation:YES];
+    [mapa setRegion:region animated:YES];
+    
     [self crearLoadingView];
     //obtenemos los eventos
     [self llamada_asincrona];
@@ -206,7 +218,7 @@
 }
 
 -(void)setupMapView{
-    mapa                        = [[MKMapView alloc] initWithFrame:CGRectMake(0, self.default_Y_mapView, 320, _heighTableView)];
+    mapa                        = [[MKMapView alloc] initWithFrame:CGRectMake(0, 64, 320, _heighTableView)];
     [mapa setShowsUserLocation:YES];
     mapa.delegate = self;
     [self.view insertSubview:mapa
@@ -276,6 +288,7 @@
                          self.isShutterOpen = NO;
                          [self.tableView setScrollEnabled:YES];
                          [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
+                         
                          // Center the user 's location
                          [self zoomToUserLocation:mapa.userLocation minLatitude:self.latitudeUserUp];
                          
@@ -368,6 +381,7 @@
             //Mandamos a llamar la lista para llenarla y enseñarla
                 [self getMapa];
                 [self.tableView reloadData];
+                
             
             }
             //[self getLista];
@@ -419,7 +433,9 @@
 {
     //Quitamos todo los markers que pueda tener el mapa
     [mapa removeAnnotations:mapa.annotations];
-    
+    if (findCenter) {
+        [mapa addAnnotation:annotationPointUbication];
+    }
     if (!isEmpty) {
         
     
@@ -455,7 +471,7 @@
     loading.hidden=TRUE;
     
     //obtememos la localizacion actual del usuario
-    [self getCurrentLocation:nil];
+    //[self getCurrentLocation:nil];
     
 }
 
@@ -718,7 +734,7 @@
         aView.draggable = YES;
         UIImage *imagen;
         if ([anotacion1.tipo isEqualToString:@"ubicacion"]) {
-            imagen = [UIImage imageNamed:@"here.png"];
+            imagen = [UIImage imageNamed:@"yo.png"];
         }
         else{
             imagen = [UIImage imageNamed:@"markerblue.png"];
@@ -731,8 +747,8 @@
         
         if ([anotacion1.tipo isEqualToString:@"ubicacion"]) {
             CGRect frame = aView.frame;
-            frame.size.width = 20;
-            frame.size.height = 20;
+            frame.size.width = 37;
+            frame.size.height = 37;
             aView.frame = frame;
         }
         else{
@@ -803,14 +819,47 @@ calloutAccessoryControlTapped:(UIControl *)control
 {
     if (!userLocation)
         return;
-    MKCoordinateRegion region;
-    CLLocationCoordinate2D loc  = userLocation.location.coordinate;
-    loc.latitude                = loc.latitude - minLatitude;
-    region.center               = loc;
-    region.span                 = MKCoordinateSpanMake(.05, .05);       //Zoom distance
-    region                      = [mapa regionThatFits:region];
-    [mapa setRegion:region
-                   animated:YES];
+    
+    
+    /*CLLocationCoordinate2D SCL;
+    NSString *lat=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.latitude];
+    ;
+    NSString *lot=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.longitude];
+    ;
+    SCL.latitude = [lat doubleValue];
+    SCL.longitude = [lot doubleValue];
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(SCL, 2000, 2000);
+    */
+    if (!findCenter) {
+        MKCoordinateRegion region;
+        CLLocationCoordinate2D loc  = userLocation.location.coordinate;
+        NSLog(@"%f, %f ,%f",loc.latitude,loc.longitude ,minLatitude);
+        loc.latitude                = loc.latitude - minLatitude;
+        NSLog(@"%f, %f",loc.latitude, loc.longitude);
+        
+        region.center               = loc;
+        region.span                 = MKCoordinateSpanMake(.05, .05);       //Zoom distance
+        region                      = [mapa regionThatFits:region];
+        [mapa setRegion:region
+               animated:YES];
+  
+    }
+    else{
+    
+        MKCoordinateRegion region;
+        CLLocationCoordinate2D loc  = centre;
+        NSLog(@"%f, %f ,%f",loc.latitude,loc.longitude ,minLatitude);
+        loc.latitude                = loc.latitude +0.018;
+        NSLog(@"%f, %f",loc.latitude, loc.longitude);
+        
+        region.center               = loc;
+        region.span                 = MKCoordinateSpanMake(.05, .05);       //Zoom distance
+        region                      = [mapa regionThatFits:region];
+        [mapa setRegion:region
+               animated:YES];
+
+    }
+    
     
 }
 
@@ -820,6 +869,65 @@ calloutAccessoryControlTapped:(UIControl *)control
     else
         [self zoomToUserLocation:mapa.userLocation minLatitude:self.latitudeUserUp];*/
 }
-
-
+-(IBAction)getCenter:(id)sender{
+    findCenter=TRUE;
+    centre = [mapa centerCoordinate];
+    NSLog(@"%f, %f", centre.latitude, centre.longitude);
+    //[mapa removeAnnotation:annotationPointUbication];
+    
+    annotationPointUbication = [[Mipin alloc] initWithTitle:@"Centro" subtitle:@"" andCoordinate:centre tipo:@"ubicacion" evento:0];
+    
+   // [mapa addAnnotation:annotationPointUbication];
+    
+    //obtenemos la posicion del usuario
+    currentLatitud=[NSString stringWithFormat:@"%.8f", centre.latitude];
+    currentLongitud=[NSString stringWithFormat:@"%.8f", centre.longitude];
+    // guardamos el radio anteriot
+    radio_anterior=radio;
+    
+    NSString *urlString =@"http://codigo.labplc.mx/~rockarloz/dejatecaer/dejatecaer.php";
+    NSString *url=[NSString stringWithFormat:@"%@?longitud=%@&latitud=%@&radio=%@&fecha=2014-03-18",urlString,currentLongitud,currentLatitud,radio];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+        
+        if ([data length] >0  )
+        {
+            NSArray *lugares;
+            NSString *dato=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSMutableString * miCadena = [NSMutableString stringWithString: dato];
+            NSData *data1 = [miCadena dataUsingEncoding:NSUTF8StringEncoding];
+            
+            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data1 options:NSJSONReadingAllowFragments error:nil];
+            
+            NSMutableDictionary *consulta=[[NSMutableDictionary alloc]init];
+            consulta = [jsonObject objectForKey:@"eventos"];
+            lugares= [jsonObject objectForKey:@"eventos"];//[consulta objectForKey:@"ubicaciones"];
+            eventos=lugares;
+            if ([eventos count]==0) {
+                _tableView.rowHeight=450;
+                NSArray *vacio=[[NSArray alloc]initWithObjects:@"VACIO", nil];
+                eventos=vacio;
+                isEmpty=TRUE;
+                
+                /*radio= [NSString stringWithFormat:@"%i",[radio integerValue]+1000];
+                 NSLog(@"nuevo radio %@",radio);
+                 [self llamada_asincrona];*/
+                [self getMapa];
+                [self.tableView reloadData];
+            }
+            else{
+                _tableView.rowHeight=90;
+                isEmpty=FALSE;
+                //Mandamos a llamar la lista para llenarla y enseñarla
+                [self getMapa];
+                [self.tableView reloadData];
+                
+            }
+            //[self getLista];
+        }
+    });
+    
+}
 @end
