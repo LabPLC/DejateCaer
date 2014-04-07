@@ -13,4 +13,5 @@
 @property (nonatomic, retain) NSString *latitud;
 @property (nonatomic, retain) NSString *longitud;
 @property (nonatomic, retain) NSString *nombre;
+-(IBAction)getCurrentLocation:(id)sender;
 @end

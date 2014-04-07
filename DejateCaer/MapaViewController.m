@@ -43,7 +43,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
-
+-(IBAction)getCurrentLocation:(id)sender
+{
+    [self viewDidLoad];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
