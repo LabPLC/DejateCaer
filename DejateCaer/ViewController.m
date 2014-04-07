@@ -117,7 +117,7 @@
     //Añadimos un escuchado de eventos de notificationController  para recargar la pagina
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cerrarOpcciones) name:@"aceptar" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:@"SlideMenu" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(actualizar) name:@"actualizar" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(putView) name:@"ShowMenu" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quitView) name:@"HiddenMenu" object:nil];
     
@@ -745,11 +745,17 @@ calloutAccessoryControlTapped:(UIControl *)control
     }*/
 }
 
--(void)reload{
+-(void)actualizar{
     NSLog(@"reload");
     radio=delegate.user_radio;
     loading.hidden=TRUE;
-    [self llamada_asincrona];
+    if (!findCenter) {
+        [self getCurrentLocation:nil];
+    }
+    else{
+        [self getCenter:nil];
+    }
+    //[self llamada_asincrona];
 }
 #pragma mark - MapView Delegate
 
@@ -807,7 +813,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     else
         [self zoomToUserLocation:mapa.userLocation minLatitude:self.latitudeUserUp];*/
 }
--(IBAction)xnter:(id)sender{
+-(IBAction)getCenter:(id)sender{
     findCenter=TRUE;
     loading.hidden=FALSE;
     centre = [mapa centerCoordinate];

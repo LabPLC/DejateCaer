@@ -82,7 +82,7 @@
 - (void) slidingStopped:(id)sender
 {
     NSLog(@"stopped sliding");
-   // [[NSNotificationCenter defaultCenter] postNotificationName:@"SlideMenu" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"actualizar" object:nil];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [self inicio];

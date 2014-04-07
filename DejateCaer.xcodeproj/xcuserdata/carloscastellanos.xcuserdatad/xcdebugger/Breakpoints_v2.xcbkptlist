@@ -854,11 +854,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "418596993.781572"
+            timestampString = "418597745.057621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "760"
-            endingLineNumber = "760"
+            startingLineNumber = "766"
+            endingLineNumber = "766"
             landmarkName = "-zoomToUserLocation:minLatitude:"
             landmarkType = "5">
          </BreakpointContent>
@@ -870,11 +870,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "418596993.781572"
+            timestampString = "418597745.057621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "759"
-            endingLineNumber = "759"
+            startingLineNumber = "765"
+            endingLineNumber = "765"
             landmarkName = "-zoomToUserLocation:minLatitude:"
             landmarkType = "5">
          </BreakpointContent>
@@ -998,11 +998,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "418596993.781572"
+            timestampString = "418597745.057621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "924"
-            endingLineNumber = "924"
+            startingLineNumber = "930"
+            endingLineNumber = "930"
             landmarkName = "-cerrarOpcciones"
             landmarkType = "5">
          </BreakpointContent>
@@ -1078,11 +1078,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "418596993.781572"
+            timestampString = "418597745.057621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "827"
-            endingLineNumber = "827"
+            startingLineNumber = "833"
+            endingLineNumber = "833"
             landmarkName = "-getCenter:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1222,11 +1222,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "418596993.781572"
+            timestampString = "418597745.057621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "811"
-            endingLineNumber = "811"
+            startingLineNumber = "817"
+            endingLineNumber = "817"
             landmarkName = "-getCenter:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1238,11 +1238,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "418596993.781572"
+            timestampString = "418597745.057621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "771"
-            endingLineNumber = "771"
+            startingLineNumber = "777"
+            endingLineNumber = "777"
             landmarkName = "-zoomToUserLocation:minLatitude:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1270,11 +1270,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "418597164.721356"
+            timestampString = "418597745.057621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "813"
-            endingLineNumber = "813"
+            startingLineNumber = "819"
+            endingLineNumber = "819"
             landmarkName = "-getCenter:"
             landmarkType = "5">
          </BreakpointContent>
