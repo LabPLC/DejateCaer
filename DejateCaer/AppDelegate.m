@@ -7,27 +7,36 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
+#import "ViewController.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenBound.size;
+    CGFloat screenHeight = screenSize.height;
+    _alto= [NSString stringWithFormat:@"%f",screenHeight];
     //definimos por default un radio de 500 metros
     _user_radio=@"2000";
-    // Change the background color of navigation bar
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    //Idenfica El Tamaño de la Pantalla
+    ViewController *controller;
     
-    // Change the font style of the navigation bar
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
-    shadow.shadowOffset = CGSizeMake(0, 0);
-    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor colorWithRed:10.0/255.0 green:10.0/255.0 blue:10.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
-                                                           shadow, NSShadowAttributeName,
-                                                           [UIFont fontWithName:@"Helvetica-Light" size:21.0], NSFontAttributeName, nil]];
+    if ( [_alto intValue] < 568) {
+        controller = (ViewController*)[mainStoryboard
+                                       instantiateViewControllerWithIdentifier: @"main2"];
+        
+    }
+    else{
+        controller = (ViewController*)[mainStoryboard
+                                       instantiateViewControllerWithIdentifier: @"main"];
+    }
+    
+     self.window.rootViewController = controller;
+
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

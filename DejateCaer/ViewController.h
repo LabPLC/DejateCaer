@@ -26,6 +26,7 @@
 @property (nonatomic, retain) IBOutlet MKMapView *mapa;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 
+  @property (nonatomic, retain) IBOutlet UIView *Opcciones;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 
 @property (nonatomic, weak)     id<SLParallaxControllerDelegate>    delegate;
