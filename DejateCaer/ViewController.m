@@ -10,7 +10,6 @@
 #import "eventCell.h"
 #import "SinEventoTableViewCell.h"
 #import "DescripcionViewController.h"
-
 #import "AppDelegate.h"
 #import "Mipin.h"
 #import "CalloutAnnotation.h"
@@ -624,14 +623,6 @@
 
 
 
-/*
- - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
- NSIndexPath *firstVisibleIndexPath = [[self.tableView indexPathsForVisibleRows] objectAtIndex:0];
- if (firstVisibleIndexPath.row==0) {
- NSLog(@"first visible cell's section: %i, row: %i", firstVisibleIndexPath.section, firstVisibleIndexPath.row);
- }
- 
- }*/
 
 - (MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation: (id<MKAnnotation>) annotation {
     
@@ -713,37 +704,6 @@ calloutAccessoryControlTapped:(UIControl *)control
     [self.navigationController pushViewController:detalles animated:YES];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-   /*
-    if (!isDidLoad) { //paso al didLoad?
-        // NSLog(@"volviste");
-        [mapa addGestureRecognizer:tapRecMap];
-        CGRect frame;
-        if ([eventos count] <5 && [eventos count] >0) {
-            
-            frame.size.height=([eventos count]*90);
-            frame.size.width=320;
-            frame.origin.x=0;
-            frame.origin.y=222;
-            _tableView.frame=frame;
-            _tableView.scrollEnabled=FALSE;
-            _tableView.hidden=FALSE;
-            //[self.view addSubview:_tableView];
-            [self.tableView reloadData];
-        }
-        else if ([eventos count]>5){
-            frame.origin.x=0;
-            frame.size.height=self.view.frame.size.height-222;//([eventos count]*75);
-            frame.size.width=320;
-            frame.origin.y=222;
-            _tableView.frame=frame;
-            _tableView.hidden=FALSE;
-            //[self.view addSubview:_tableView];
-            [self.tableView reloadData];
-        }
-        
-    }*/
-}
 
 -(void)actualizar{
     NSLog(@"reload");
@@ -763,17 +723,7 @@ calloutAccessoryControlTapped:(UIControl *)control
 {
     if (!userLocation)
         return;
-    
-    
-    /*CLLocationCoordinate2D SCL;
-    NSString *lat=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.latitude];
-    ;
-    NSString *lot=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.longitude];
-    ;
-    SCL.latitude = [lat doubleValue];
-    SCL.longitude = [lot doubleValue];
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(SCL, 2000, 2000);
-    */
+ 
     if (!findCenter) {
         MKCoordinateRegion region;
         CLLocationCoordinate2D loc  = userLocation.location.coordinate;
@@ -807,12 +757,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     
 }
 
--(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
-  /*  if(_isShutterOpen)
-        [self zoomToUserLocation:mapa.userLocation minLatitude:self.latitudeUserDown];
-    else
-        [self zoomToUserLocation:mapa.userLocation minLatitude:self.latitudeUserUp];*/
-}
+
 -(IBAction)getCenter:(id)sender{
     findCenter=TRUE;
     loading.hidden=FALSE;
