@@ -44,7 +44,7 @@
         
        // cell.selectedBackgroundView =  selectedView;
         self.selectedBackgroundView=selectedView;
-        self.backgroundColor=[UIColor clearColor];
+       // self.backgroundColor=[UIColor clearColor];
     }
     return self;
 }

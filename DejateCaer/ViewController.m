@@ -425,11 +425,6 @@
         [alert show];
         _tableView.hidden=TRUE;
         
-        //Como la tabla no se muestra por que esta vacia Agregamos Gesto a la vista vacia
-        //Agregar a la vista el gesto que reconozca el touch
-        touchViewGest = [[UITapGestureRecognizer alloc]
-                         initWithTarget:self action:@selector(touchView)];
-        [self.view addGestureRecognizer:touchViewGest];
         
     }
     
@@ -521,97 +516,6 @@
      [mapa addAnnotation:annotationPointUbication];*/
     
 }
-/*
--(void)touchMaps{
-    isDidLoad=FALSE;
-    touchMap=TRUE;
-    [UIView animateWithDuration:0.5
-                          delay:0.2
-                        options: 1
-                     animations:^{
-                         //mapa.frame = CGRectMake(0, 64, 320, 500);
-                         
-                         
-                         
-                     }
-                     completion:^(BOOL finished){
-                         if (finished){
-                             mapa.frame = CGRectMake(0, 64, 320, self.view.frame.size.height-90);
-                             CGRect frame;
-                             frame.origin.x=0;
-                             frame.size.height=([eventos count]*90);
-                             frame.size.width=320;
-                             frame.origin.y=self.view.frame.size.height-90;
-                             _tableView.frame=frame;
-                         }
-                     }];
-    [self.mapa removeGestureRecognizer:tapRecMap];
-}
-
--(void)touchView{
-    
-    if ([self.revealViewController showMenu]) {
-        [self.revealViewController revealToggle:self];
-        //   [_tableView removeFromSuperview];
-        
-        [self viewDidLoad];
-        [self.view removeGestureRecognizer:touchViewGest];
-    }
-    
-}
-
--(void)resizeMap{
-    [mapa addGestureRecognizer:tapRecMap];
-    touchMap=FALSE;
-    isDidLoad=FALSE;
-    [UIView animateWithDuration:0.5
-                          delay:0.1
-                        options: UIViewAnimationCurveEaseIn
-                     animations:^{
-                         mapa.frame = CGRectMake(0, 64, 320,158);
-                         //mapa.frame = CGRectMake(0, 64, 320, 500);
-                         CGRect frame;
-                         if ([eventos count] <5 && [eventos count] >0) {
-                             
-                             frame.size.height=([eventos count]*90);
-                             frame.size.width=320;
-                             frame.origin.x=0;
-                             frame.origin.y=222;
-                             _tableView.frame=frame;
-                             _tableView.scrollEnabled=FALSE;
-                             //[self.view addSubview:_tableView];
-                             _tableView.hidden=FALSE;
-                             [self.tableView reloadData];
-                         }
-                         else if ([eventos count]>5){
-                             frame.origin.x=0;
-                             frame.size.height=self.view.frame.size.height-222;//([eventos count]*75);
-                             frame.size.width=320;
-                             frame.origin.y=222;
-                             _tableView.frame=frame;
-                             _tableView.hidden=FALSE;
-                             // [self.view addSubview:_tableView];
-                             [self.tableView reloadData];
-                         }
-                         /*CGRect frame;
-                          frame.origin.x=0;
-                          frame.size.height=self.view.frame.size.height-222;//([eventos count]*75);
-                          frame.size.width=320;
-                          frame.origin.y=222;
-                          _tableView.frame=frame;*/
-                         
-                    /***** }
-                     completion:^(BOOL finished){
-                         if (finished)
-                         {}
-                         //  mapa.backgroundColor=[UIColor blackColor];
-                         
-                         //  [top_menu removeFromSuperview];
-                         //   NSLog(@"falso");
-                     }];
-    
-}
-*/
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
    
@@ -987,7 +891,7 @@ calloutAccessoryControlTapped:(UIControl *)control
 -(IBAction)opcciones:(id)sender
 {
     //[[UIView alloc]initWithFrame:CGRectMake(5, 24, self.view.frame.size.width-10, self.view.frame.size.height-29)];
-      delegate.isOption=TRUE;
+    delegate.isOption=TRUE;
     NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"Opcciones" owner:nil options:nil];
     
     // Find the view among nib contents (not too hard assuming there is only one view in it).
@@ -998,7 +902,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     opcciones.layer.cornerRadius = 5;
     opcciones.layer.masksToBounds = YES;
     
-    self.navigationController.navigationBarHidden = YES;
+   
   
     
     [UIView transitionFromView:self.view
@@ -1007,20 +911,20 @@ calloutAccessoryControlTapped:(UIControl *)control
                        options:UIViewAnimationOptionTransitionFlipFromTop
                     completion:nil];
     
-    
+     self.navigationController.navigationBarHidden = YES;
     
    // [self.view addSubview:opcciones];
 
 }
 -(void)cerrarOpcciones{
     delegate.isOption=FALSE;
-
+self.navigationController.navigationBarHidden = NO;
     [UIView transitionFromView:opcciones
                         toView:self.view
                       duration:1
                        options:UIViewAnimationOptionTransitionFlipFromBottom
                     completion:nil];
-     self.navigationController.navigationBarHidden = NO;
+     
     //[opcciones removeFromSuperview];
 }
 @end
