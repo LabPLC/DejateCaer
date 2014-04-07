@@ -16,5 +16,6 @@
 @property (strong, nonatomic) NSString *isInFacebook;
 @property (assign, nonatomic) BOOL FB;
 @property (assign, nonatomic) BOOL TW;
+@property (assign, nonatomic) BOOL isOption;
 
 @end

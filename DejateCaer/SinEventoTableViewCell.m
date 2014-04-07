@@ -23,6 +23,7 @@
         _nombre.numberOfLines = 3;
         
         [self   addSubview:_nombre];
+         self.backgroundColor=[UIColor clearColor];
     }
     return self;
 }

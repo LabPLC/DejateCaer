@@ -48,12 +48,13 @@
     BOOL isDidLoad;
     BOOL isEmpty;
     BOOL findCenter;
+    
     UIView *vista;
     UITapGestureRecognizer* touchViewGest;
     UITapGestureRecognizer* tapRecMap;
     UIButton *bucar_aqui;
-    
-    UIView *vista_atras;
+    UIView *opcciones;
+   // UIView *vista_atras;
     
     CLLocationCoordinate2D centre;
     AppDelegate *delegate;
@@ -111,8 +112,11 @@
 }
 - (void)viewDidLoad
 {
+    delegate.isOption=FALSE;
     findCenter=FALSE;
     //Añadimos un escuchado de eventos de notificationController  para recargar la pagina
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cerrarOpcciones) name:@"aceptar" object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:@"SlideMenu" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(putView) name:@"ShowMenu" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quitView) name:@"HiddenMenu" object:nil];
@@ -131,7 +135,6 @@
     ;
     //Titulo para la vista en el navegation controller
     self.title=@"Eventos";
-    
     
     //Copiamos el radio del delegado por default es  2000 metros
     radio=delegate.user_radio;//@"2000";
@@ -181,9 +184,7 @@
 }
 -(void)crearTabla{
     
-    vista_atras=[[UIView alloc]initWithFrame:CGRectMake(0, 70, self.view.frame.size.width, _heighTableViewHeader)];
-    vista_atras.backgroundColor=[UIColor greenColor];
-    [self.view addSubview:vista_atras];
+  
     
     _tableView                  = [[UITableView alloc]  initWithFrame: CGRectMake(0, 70, 320, _heighTableView)];
     _tableView.tableHeaderView  = [[UIView alloc]       initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, _heighTableViewHeader)];
@@ -249,6 +250,7 @@
 
 // Move DOWN the tableView to show the "entire" mapView
 -(void) openShutter{
+    isDidLoad=false;
     touchMap=TRUE;
     bucar_aqui.hidden=FALSE;
     [UIView animateWithDuration:0.2
@@ -340,6 +342,7 @@
     //obtenemos la posicion del usuario
     currentLatitud=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.latitude];
     currentLongitud=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.longitude];
+    radio=delegate.user_radio;
     // guardamos el radio anteriot
     radio_anterior=radio;
     
@@ -484,14 +487,24 @@
     
     [mapa removeAnnotation:annotationPointUbication];
     annotationPointUbication=nil;
+  findCenter=FALSE;
+    [self llamada_asincrona];
+    
+    
     CLLocationCoordinate2D SCL;
-    NSString *lat=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.latitude];
-    ;
-    NSString *lot=[NSString stringWithFormat:@"%.8f", LocationManager.location.coordinate.longitude];
-    ;
-    SCL.latitude = [lat doubleValue];
-    SCL.longitude = [lot doubleValue];
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(SCL, 2000, 2000);
+    if (!touchMap) {
+        if (!isDidLoad) {
+            SCL.latitude = LocationManager.location.coordinate.latitude+0.009;
+        }
+        else
+        SCL.latitude = LocationManager.location.coordinate.latitude-0.019;
+    }
+    else{
+    SCL.latitude = LocationManager.location.coordinate.latitude+0.0;
+    }
+    
+    SCL.longitude = LocationManager.location.coordinate.longitude;
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(SCL, 4000, 4000);
     [mapa setShowsUserLocation:YES];
     [mapa setRegion:region animated:YES];
     //aqui debemos añadir un pin personalizado
@@ -613,11 +626,23 @@
         }
         else{
             if (!isEmpty) {
-                   DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
-            detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
-            detalles.evento=[eventos objectAtIndex:indexPath.row];
-            detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-            [self.navigationController pushViewController:detalles animated:YES];
+                 DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
+                if ([delegate.alto intValue] < 568)
+                {
+                    detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion2"];
+
+                }
+                
+                else
+                {
+                    
+                    detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
+
+                }
+               
+                detalles.evento=[eventos objectAtIndex:indexPath.row];
+                detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+                [self.navigationController pushViewController:detalles animated:YES];
             }
          
         }
@@ -642,6 +667,7 @@
         
         
         eventCell *cell=[[eventCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"customCell"];
+        
         if(indexPath.row == 0){
           
          
@@ -658,6 +684,7 @@
     
         if (cell == nil) {
     }
+        cell.selectionStyle= UITableViewCellSelectionStyleNone;
     cell.nombre.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"nombre"];
     cell.hora.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"hora"];
     double metros= [[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"] doubleValue];
@@ -782,7 +809,7 @@ calloutAccessoryControlTapped:(UIControl *)control
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+   /*
     if (!isDidLoad) { //paso al didLoad?
         // NSLog(@"volviste");
         [mapa addGestureRecognizer:tapRecMap];
@@ -810,7 +837,7 @@ calloutAccessoryControlTapped:(UIControl *)control
             [self.tableView reloadData];
         }
         
-    }
+    }*/
 }
 
 -(void)reload{
@@ -879,7 +906,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     centre = [mapa centerCoordinate];
     NSLog(@"%f, %f", centre.latitude, centre.longitude);
     //[mapa removeAnnotation:annotationPointUbication];
-    
+    radio=delegate.user_radio;
     annotationPointUbication = [[Mipin alloc] initWithTitle:@"Centro" subtitle:@"" andCoordinate:centre tipo:@"ubicacion" evento:0];
     
    // [mapa addAnnotation:annotationPointUbication];
@@ -955,5 +982,45 @@ calloutAccessoryControlTapped:(UIControl *)control
             [tableView.tableFooterView setBackgroundColor:[UIColor whiteColor]];
         }
     }
+}
+
+-(IBAction)opcciones:(id)sender
+{
+    //[[UIView alloc]initWithFrame:CGRectMake(5, 24, self.view.frame.size.width-10, self.view.frame.size.height-29)];
+      delegate.isOption=TRUE;
+    NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"Opcciones" owner:nil options:nil];
+    
+    // Find the view among nib contents (not too hard assuming there is only one view in it).
+    opcciones = [nibContents lastObject];
+    opcciones.frame=CGRectMake(5, 24, self.view.frame.size.width-10, self.view.frame.size.height-29);
+    opcciones.backgroundColor=[UIColor grayColor];
+    opcciones.alpha=1;
+    opcciones.layer.cornerRadius = 5;
+    opcciones.layer.masksToBounds = YES;
+    
+    self.navigationController.navigationBarHidden = YES;
+  
+    
+    [UIView transitionFromView:self.view
+                        toView:opcciones
+                      duration:1
+                       options:UIViewAnimationOptionTransitionFlipFromTop
+                    completion:nil];
+    
+    
+    
+   // [self.view addSubview:opcciones];
+
+}
+-(void)cerrarOpcciones{
+    delegate.isOption=FALSE;
+
+    [UIView transitionFromView:opcciones
+                        toView:self.view
+                      duration:1
+                       options:UIViewAnimationOptionTransitionFlipFromBottom
+                    completion:nil];
+     self.navigationController.navigationBarHidden = NO;
+    //[opcciones removeFromSuperview];
 }
 @end

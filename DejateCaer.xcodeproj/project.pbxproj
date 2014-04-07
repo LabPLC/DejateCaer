@@ -38,6 +38,8 @@
 		F3AECC7E18D3849F0012748D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECC7D18D3849F0012748D /* CoreLocation.framework */; };
 		F3AECC8118D3881B0012748D /* MapaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AECC8018D3881B0012748D /* MapaViewController.m */; };
 		F3AECE7F18D8B5C50012748D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECE7E18D8B5C50012748D /* FacebookSDK.framework */; };
+		F3B9EC4018EF2A5500204323 /* Opcciones.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B9EC3F18EF2A5500204323 /* Opcciones.xib */; };
+		F3B9EC4318EF2D7900204323 /* Opcciones.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B9EC4218EF2D7900204323 /* Opcciones.m */; };
 		F3D6F0B318ED1759007F9E31 /* SinEventoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D6F0B218ED1759007F9E31 /* SinEventoTableViewCell.m */; };
 		F3D6F0B518EE1FB7007F9E31 /* yo.png in Resources */ = {isa = PBXBuildFile; fileRef = F3D6F0B418EE1FB7007F9E31 /* yo.png */; };
 		F3D6F0B718EE837E007F9E31 /* codigo.png in Resources */ = {isa = PBXBuildFile; fileRef = F3D6F0B618EE837E007F9E31 /* codigo.png */; };
@@ -96,6 +98,9 @@
 		F3AECC7F18D3881B0012748D /* MapaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapaViewController.h; sourceTree = "<group>"; };
 		F3AECC8018D3881B0012748D /* MapaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapaViewController.m; sourceTree = "<group>"; };
 		F3AECE7E18D8B5C50012748D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		F3B9EC3F18EF2A5500204323 /* Opcciones.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Opcciones.xib; sourceTree = "<group>"; };
+		F3B9EC4118EF2D7900204323 /* Opcciones.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Opcciones.h; sourceTree = "<group>"; };
+		F3B9EC4218EF2D7900204323 /* Opcciones.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Opcciones.m; sourceTree = "<group>"; };
 		F3D6F0B118ED1759007F9E31 /* SinEventoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SinEventoTableViewCell.h; path = DejateCaer/SinEventoTableViewCell.h; sourceTree = "<group>"; };
 		F3D6F0B218ED1759007F9E31 /* SinEventoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SinEventoTableViewCell.m; path = DejateCaer/SinEventoTableViewCell.m; sourceTree = "<group>"; };
 		F3D6F0B418EE1FB7007F9E31 /* yo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yo.png; sourceTree = "<group>"; };
@@ -184,6 +189,9 @@
 				F332E87418D185AD00DF538D /* DescripcionViewController.m */,
 				F332E84C18D161BA00DF538D /* ViewController.h */,
 				F332E84D18D161BA00DF538D /* ViewController.m */,
+				F3B9EC3F18EF2A5500204323 /* Opcciones.xib */,
+				F3B9EC4118EF2D7900204323 /* Opcciones.h */,
+				F3B9EC4218EF2D7900204323 /* Opcciones.m */,
 				F332E84F18D161BA00DF538D /* Images.xcassets */,
 				F332E83B18D161BA00DF538D /* Supporting Files */,
 			);
@@ -329,6 +337,7 @@
 				F3D6F0B518EE1FB7007F9E31 /* yo.png in Resources */,
 				F332E84818D161BA00DF538D /* Main_iPhone.storyboard in Resources */,
 				F332E87D18D197B300DF538D /* menuButton@2x.png in Resources */,
+				F3B9EC4018EF2A5500204323 /* Opcciones.xib in Resources */,
 				F332E83F18D161BA00DF538D /* InfoPlist.strings in Resources */,
 				F348B41A18DA86B500566356 /* news.png in Resources */,
 				F3A6401B18E49BB6004AF17F /* markerblue.png in Resources */,
@@ -355,6 +364,7 @@
 			files = (
 				F3D6F0B318ED1759007F9E31 /* SinEventoTableViewCell.m in Sources */,
 				F332E87218D16CB100DF538D /* eventCell.m in Sources */,
+				F3B9EC4318EF2D7900204323 /* Opcciones.m in Sources */,
 				F3A6401F18E4A693004AF17F /* CalloutAnnotation.m in Sources */,
 				F332E84E18D161BA00DF538D /* ViewController.m in Sources */,
 				F332E84518D161BA00DF538D /* AppDelegate.m in Sources */,
