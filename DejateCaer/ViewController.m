@@ -468,7 +468,7 @@
     }}
     
     //Quitamos la vista de loading y paramos el spinner
-    [spinner stopAnimating];
+   // [spinner stopAnimating];
     //[loading removeFromSuperview];
     loading.hidden=TRUE;
     
@@ -483,6 +483,7 @@
     [mapa removeAnnotation:annotationPointUbication];
     annotationPointUbication=nil;
   findCenter=FALSE;
+    loading.hidden=FALSE;
     [self llamada_asincrona];
     
     
@@ -747,6 +748,7 @@ calloutAccessoryControlTapped:(UIControl *)control
 -(void)reload{
     NSLog(@"reload");
     radio=delegate.user_radio;
+    loading.hidden=TRUE;
     [self llamada_asincrona];
 }
 #pragma mark - MapView Delegate
@@ -805,8 +807,9 @@ calloutAccessoryControlTapped:(UIControl *)control
     else
         [self zoomToUserLocation:mapa.userLocation minLatitude:self.latitudeUserUp];*/
 }
--(IBAction)getCenter:(id)sender{
+-(IBAction)xnter:(id)sender{
     findCenter=TRUE;
+    loading.hidden=FALSE;
     centre = [mapa centerCoordinate];
     NSLog(@"%f, %f", centre.latitude, centre.longitude);
     //[mapa removeAnnotation:annotationPointUbication];
