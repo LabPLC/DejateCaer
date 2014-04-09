@@ -47,7 +47,11 @@
     BOOL isDidLoad;
     BOOL isEmpty;
     BOOL findCenter;
-    
+    UIView *flechas; //diseño
+    UITapGestureRecognizer* tapFlechas;//diseño
+    UIButton *encuentrame;//diseño
+    UIButton *herramientas;//diseño
+
     UIView *vista;
     UITapGestureRecognizer* touchViewGest;
     UITapGestureRecognizer* tapRecMap;
@@ -103,22 +107,39 @@
     _latitudeUserDown           = OPEN_SHUTTER_LATITUDE_MINUS;
     _default_Y_mapView          = DEFAULT_Y_OFFSET;
 }
--(void)putView{
-[self.view addSubview:vista];
-}
--(void) quitView{
-    [vista removeFromSuperview];
-}
+
+
 - (void)viewDidLoad
 {
+     encuentrame = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [encuentrame addTarget:self
+               action:@selector(aMethod:)
+     forControlEvents:UIControlEventTouchUpInside];
+     encuentrame.frame = CGRectMake(283, 27, 30, 30.0);
+    UIImage *btnImage = [UIImage imageNamed:@"findme.png"];
+    UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, encuentrame.frame.size.width, encuentrame.frame.size.height)];
+    img.image=btnImage;
+    [encuentrame addSubview:img];
+    
+    herramientas = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [herramientas addTarget:self
+                    action:@selector(opcciones:)
+          forControlEvents:UIControlEventTouchUpInside];
+    herramientas.frame = CGRectMake(283, 65, 30, 30.0);
+    UIImage *btnImage2 = [UIImage imageNamed:@"tools.png"];
+    UIImageView *img2=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, herramientas.frame.size.width, herramientas.frame.size.height)];
+    img2.image=btnImage2;
+    [herramientas addSubview:img2];
+    //[encuentrame setImage:btnImage forState:UIControlStateNormal];
+   // [button setTitle:@"Show View" forState:UIControlStateNormal];
+   
+   /// [view addSubview:button];
+    
     delegate.isOption=FALSE;
     findCenter=FALSE;
     //Añadimos un escuchado de eventos de notificationController  para recargar la pagina
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cerrarOpcciones) name:@"aceptar" object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(actualizar) name:@"actualizar" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(putView) name:@"ShowMenu" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quitView) name:@"HiddenMenu" object:nil];
     
     //Le asignamos el valor falso a la variable ShowMenu ya que en un
 
@@ -177,7 +198,8 @@
     bucar_aqui.backgroundColor=[UIColor whiteColor];
     bucar_aqui.hidden=TRUE;
     [mapa addSubview:bucar_aqui];
-       
+   // [self closeShutter];
+    [self handleTapMapView:nil];
     [super viewDidLoad];
 	
 }
@@ -185,11 +207,12 @@
     
   
     
-    _tableView                  = [[UITableView alloc]  initWithFrame: CGRectMake(0, 70, 320, _heighTableView)];
-    _tableView.tableHeaderView  = [[UIView alloc]       initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, _heighTableViewHeader)];
+    _tableView                  = [[UITableView alloc]  initWithFrame: CGRectMake(0, 64, 320, self.view.frame.size.height-64)];
+    
+    _tableView.tableHeaderView  = [[UIView alloc]       initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, 290)];
     _tableView.rowHeight=90;
     [_tableView setBackgroundColor:[UIColor clearColor]];
-    
+    _tableView.tableHeaderView.backgroundColor=[UIColor grayColor];
     // Add gesture to gestures
     _tapMapViewGesture      = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                       action:@selector(handleTapMapView:)];
@@ -202,6 +225,9 @@
     _tableView.dataSource   = self;
     _tableView.delegate     = self;
     [self.view addSubview:_tableView];
+     tapFlechas = [[UITapGestureRecognizer alloc]
+                                      initWithTarget:self action:@selector(touchTabla)];
+    [flechas addGestureRecognizer:tapFlechas];
     //esto es lo mio
     /*
     //Creamos la tabla  y la escondemos
@@ -226,30 +252,85 @@
 #pragma mark - Internal Methods
 
 - (void)handleTapMapView:(UIGestureRecognizer *)gesture {
-    if(!self.isShutterOpen){
+   /* if(!self.isShutterOpen){
         // Move the tableView down to let the map appear entirely
         [self openShutter];
         // Inform the delegate
         if([self.delegate respondsToSelector:@selector(didTapOnMapView)]){
             [self.delegate didTapOnMapView];
         }
-    }
+    }*/
+    NSLog(@"push tap on the header");
+    /* self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, 0)];
+     self.tableView.frame           = CGRectMake(0, 278,320, self.view.frame.size.height-64);*/
+    
+    touchMap=FALSE;
+    bucar_aqui.hidden=true;
+    
+    [self.tableView setContentOffset:CGPointZero animated:NO];
+    [UIView animateWithDuration:0.2
+                          delay:0.1
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         
+                         mapa.frame             = CGRectMake(0, 0, 320, self.view.frame.size.height-30);
+                         [mapa addSubview:encuentrame];
+                         [mapa addSubview:herramientas];
+                         
+                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, 30)];
+                         self.tableView.tableHeaderView.backgroundColor=[UIColor clearColor];
+                         [flechas.layer setShadowOpacity:.75];
+                         NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas" owner:nil options:nil];
+                         
+                         // Find the view among nib contents (not too hard assuming there is only one view in it).
+                         flechas = [nibContents lastObject];
+                         flechas.frame=CGRectMake(0, 0, 320, 30);
+
+                         //flechas=[[UIView alloc]initWithFrame:CGRectMake(0,0, 320, 30)];
+                        // flechas.backgroundColor=[UIColor blackColor];
+                         CGRect shadowFrame      = flechas.layer.bounds;
+                         CGPathRef shadowPath    = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+                         flechas.layer.shadowPath   = shadowPath;
+                         [flechas.layer setShadowOffset:CGSizeMake(-2, -2)];
+                         [flechas.layer setShadowColor:[[UIColor grayColor] CGColor]];
+                                                 [flechas addGestureRecognizer:tapFlechas];
+                         [self.tableView.tableHeaderView addSubview:flechas];
+                         
+                         
+                         self.tableView.frame           = CGRectMake(0, mapa.frame.size.height,320, 30);
+                     }
+                     completion:^(BOOL finished){
+                         self.isShutterOpen = NO;
+                         [self.tableView setScrollEnabled:YES];
+                         [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
+                         
+                         // Center the user 's location
+                         [self zoomToUserLocation:mapa.userLocation minLatitude:self.latitudeUserUp];
+                         
+                         // Inform the delegate
+                         if([self.delegate respondsToSelector:@selector(didTableViewMoveUp)]){
+                             [self.delegate didTableViewMoveUp];
+                         }
+                     }];
+
+
 }
 
 - (void)handleTapTableView:(UIGestureRecognizer *)gesture {
-    if(self.isShutterOpen){
+   /* if(self.isShutterOpen){
         // Move the tableView up to reach is origin position
         [self closeShutter];
         // Inform the delegate
         if([self.delegate respondsToSelector:@selector(didTapOnTableView)]){
             [self.delegate didTapOnTableView];
         }
-    }
+    }*/
+    NSLog(@"push on the header");
 }
 
 // Move DOWN the tableView to show the "entire" mapView
 -(void) openShutter{
-    isDidLoad=false;
+    /*isDidLoad=false;
     touchMap=TRUE;
     bucar_aqui.hidden=FALSE;
     [UIView animateWithDuration:0.2
@@ -270,20 +351,46 @@
                          if([self.delegate respondsToSelector:@selector(didTableViewMoveDown)]){
                              [self.delegate didTableViewMoveDown];
                          }
-                     }];
+                     }];*/
 }
+
 
 // Move UP the tableView to get its original position
 -(void) closeShutter{
     touchMap=FALSE;
     bucar_aqui.hidden=true;
+
+    
     [UIView animateWithDuration:0.2
                           delay:0.1
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         mapa.frame             = CGRectMake(0, self.default_Y_mapView, mapa.frame.size.width, mapa.frame.size.height);
-                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, _headerYOffSet, self.view.frame.size.width, self.heighTableViewHeader)];
-                         self.tableView.frame           = CGRectMake(0, self.default_Y_tableView, self.tableView.frame.size.width, self.tableView.frame.size.height);
+                         
+                         mapa.frame             = CGRectMake(0, 0, 320, 278);
+                         [mapa addSubview:encuentrame];
+                         [mapa addSubview:herramientas];
+                         
+                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, self.view.frame.size.height-0)];
+                         self.tableView.tableHeaderView.backgroundColor=[UIColor clearColor];
+                    
+                        // flechas=[[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-30, 320, 30)];
+                         flechas.backgroundColor=[UIColor blackColor];
+                         CGRect shadowFrame      = flechas.layer.bounds;
+                         CGPathRef shadowPath    = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+                         flechas.layer.shadowPath   = shadowPath;
+                         [flechas.layer setShadowOffset:CGSizeMake(-2, -2)];
+                         [flechas.layer setShadowColor:[[UIColor grayColor] CGColor]];
+                         [flechas.layer setShadowOpacity:.75];
+                         NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas" owner:nil options:nil];
+                         
+                         // Find the view among nib contents (not too hard assuming there is only one view in it).
+                         flechas = [nibContents lastObject];
+                         flechas.frame=CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-30, 320, 30);
+                          [flechas addGestureRecognizer:tapFlechas];
+                         [self.tableView.tableHeaderView addSubview:flechas];
+
+                         
+                         self.tableView.frame           = CGRectMake(0, 0,320, self.view.frame.size.height);
                      }
                      completion:^(BOOL finished){
                          self.isShutterOpen = NO;
@@ -315,8 +422,9 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if(self.displayMap)
-        [self openShutter];
+  //
+    //if(self.displayMap)
+       // [self openShutter];
 }
 
 
@@ -547,6 +655,10 @@
                 detalles.evento=[eventos objectAtIndex:indexPath.row];
                 detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
                 [self.navigationController pushViewController:detalles animated:YES];
+                
+                
+            [self presentViewController:detalles animated:YES completion:NULL];
+                
             }
          
         }
@@ -701,8 +813,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
     detalles.evento=[eventos objectAtIndex:view.tag];
     detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self.navigationController pushViewController:detalles animated:YES];
-}
+[self presentViewController:detalles animated:YES completion:NULL];}
 
 
 -(void)actualizar{
@@ -865,14 +976,14 @@ calloutAccessoryControlTapped:(UIControl *)control
                        options:UIViewAnimationOptionTransitionFlipFromTop
                     completion:nil];
     
-     self.navigationController.navigationBarHidden = YES;
+  //   self.navigationController.navigationBarHidden = YES;
     
    // [self.view addSubview:opcciones];
 
 }
 -(void)cerrarOpcciones{
     delegate.isOption=FALSE;
-self.navigationController.navigationBarHidden = NO;
+//self.navigationController.navigationBarHidden = NO;
     [UIView transitionFromView:opcciones
                         toView:self.view
                       duration:1
@@ -880,5 +991,61 @@ self.navigationController.navigationBarHidden = NO;
                     completion:nil];
      
     //[opcciones removeFromSuperview];
+}
+-(void)touchTabla{
+    touchMap=FALSE;
+    bucar_aqui.hidden=true;
+    
+    
+    [UIView animateWithDuration:0.2
+                          delay:0.1
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                          self.tableView.frame           = CGRectMake(0, 0,320, self.view.frame.size.height);
+                         
+                         mapa.frame             = CGRectMake(0, 0, 320, 278);
+                         [mapa addSubview:encuentrame];
+                         [mapa addSubview:herramientas];
+                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, self.view.frame.size.height/2)];
+                         self.tableView.tableHeaderView.backgroundColor=[UIColor clearColor];
+                         
+                         
+                         NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas" owner:nil options:nil];
+                         
+                         // Find the view among nib contents (not too hard assuming there is only one view in it).
+                        
+                         flechas = [nibContents lastObject];
+                         flechas.frame=CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-30, 320, 30);
+                         [self.tableView.tableHeaderView addSubview:flechas];
+                         [flechas addGestureRecognizer:tapFlechas];
+
+                         //flechas=[[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-30, 320, 30)];
+                         flechas.backgroundColor=[UIColor blackColor];
+                        
+                         
+                         
+                         
+                        
+                         
+                     }
+                     completion:^(BOOL finished){
+                         self.isShutterOpen = NO;
+                         [self.tableView setScrollEnabled:YES];
+                         [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
+                         
+                         // Center the user 's location
+                         [self zoomToUserLocation:mapa.userLocation minLatitude:self.latitudeUserUp];
+                         
+                         // Inform the delegate
+                         if([self.delegate respondsToSelector:@selector(didTableViewMoveUp)]){
+                             [self.delegate didTableViewMoveUp];
+                         }
+                     }];
+
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+
+NSLog(@"scrolleando tabla");
+   // [self closeShutter];
 }
 @end

@@ -51,6 +51,7 @@
                         <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.20000000000000001" minValue="0.0" maxValue="1.5" translatesAutoresizingMaskIntoConstraints="NO" id="tKU-Wu-hb9">
                             <rect key="frame" x="39" y="49" width="243" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="slideRadioChangee:" destination="-2" eventType="valueChanged" id="itX-nr-rOA"/>
                             </connections>

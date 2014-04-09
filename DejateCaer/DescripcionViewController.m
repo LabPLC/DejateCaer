@@ -76,7 +76,7 @@
    
     inicio.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentViewController:inicio animated:YES completion:NULL];
-
+    //[self presentViewController:inicio animated:YES completion:NULL];
 }
 - (void)didReceiveMemoryWarning
 {

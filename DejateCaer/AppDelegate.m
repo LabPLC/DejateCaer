@@ -29,7 +29,7 @@
     }
     else{
         controller = (ViewController*)[mainStoryboard
-                                       instantiateViewControllerWithIdentifier: @"main"];
+                                       instantiateViewControllerWithIdentifier: @"inicio"];
     }
     
      self.window.rootViewController = controller;
