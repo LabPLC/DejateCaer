@@ -47,6 +47,7 @@
     BOOL isDidLoad;
     BOOL isEmpty;
     BOOL findCenter;
+    BOOL isArrow;  //diseño
     UIView *flechas; //diseño
     UITapGestureRecognizer* tapFlechas;//diseño
     UIButton *encuentrame;//diseño
@@ -111,9 +112,10 @@
 
 - (void)viewDidLoad
 {
+    isArrow=FALSE;
      encuentrame = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [encuentrame addTarget:self
-               action:@selector(aMethod:)
+               action:@selector(getCurrentLocation:)
      forControlEvents:UIControlEventTouchUpInside];
      encuentrame.frame = CGRectMake(283, 27, 30, 30.0);
     UIImage *btnImage = [UIImage imageNamed:@"findme.png"];
@@ -273,27 +275,20 @@
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          
-                         mapa.frame             = CGRectMake(0, 0, 320, self.view.frame.size.height-30);
+                         //custom al mapa
+                         mapa.frame = CGRectMake(0, 0, 320, self.view.frame.size.height-30);
                          [mapa addSubview:encuentrame];
                          [mapa addSubview:herramientas];
                          
-                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, 30)];
+                         
+                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
                          self.tableView.tableHeaderView.backgroundColor=[UIColor clearColor];
-                         [flechas.layer setShadowOpacity:.75];
+                        
                          NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas" owner:nil options:nil];
                          
                          // Find the view among nib contents (not too hard assuming there is only one view in it).
                          flechas = [nibContents lastObject];
-                         flechas.frame=CGRectMake(0, 0, 320, 30);
-
-                         //flechas=[[UIView alloc]initWithFrame:CGRectMake(0,0, 320, 30)];
-                        // flechas.backgroundColor=[UIColor blackColor];
-                         CGRect shadowFrame      = flechas.layer.bounds;
-                         CGPathRef shadowPath    = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
-                         flechas.layer.shadowPath   = shadowPath;
-                         [flechas.layer setShadowOffset:CGSizeMake(-2, -2)];
-                         [flechas.layer setShadowColor:[[UIColor grayColor] CGColor]];
-                                                 [flechas addGestureRecognizer:tapFlechas];
+                         [flechas addGestureRecognizer:tapFlechas];
                          [self.tableView.tableHeaderView addSubview:flechas];
                          
                          
@@ -993,6 +988,10 @@ calloutAccessoryControlTapped:(UIControl *)control
     //[opcciones removeFromSuperview];
 }
 -(void)touchTabla{
+    if (!isArrow) {
+        
+    isArrow=TRUE; //diseño
+    
     touchMap=FALSE;
     bucar_aqui.hidden=true;
     
@@ -1006,11 +1005,12 @@ calloutAccessoryControlTapped:(UIControl *)control
                          mapa.frame             = CGRectMake(0, 0, 320, 278);
                          [mapa addSubview:encuentrame];
                          [mapa addSubview:herramientas];
+                         
                          self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, self.view.frame.size.height/2)];
                          self.tableView.tableHeaderView.backgroundColor=[UIColor clearColor];
                          
                          
-                         NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas" owner:nil options:nil];
+                         NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas_cierran" owner:nil options:nil];
                          
                          // Find the view among nib contents (not too hard assuming there is only one view in it).
                         
@@ -1020,7 +1020,7 @@ calloutAccessoryControlTapped:(UIControl *)control
                          [flechas addGestureRecognizer:tapFlechas];
 
                          //flechas=[[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-30, 320, 30)];
-                         flechas.backgroundColor=[UIColor blackColor];
+                         flechas.backgroundColor=[UIColor whiteColor];
                         
                          
                          
@@ -1041,6 +1041,11 @@ calloutAccessoryControlTapped:(UIControl *)control
                              [self.delegate didTableViewMoveUp];
                          }
                      }];
+    }
+    else{
+        isArrow=FALSE;
+        [self handleTapMapView:nil];
+    }
 
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
