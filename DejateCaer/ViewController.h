@@ -22,6 +22,9 @@
 @end
 
 @interface ViewController : UIViewController  <MKMapViewDelegate ,UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
+{
+MKReverseGeocoder *geocoder ;
+}
 @property (strong, nonatomic) CLLocationManager *LocationManager;
 @property (nonatomic, retain) IBOutlet MKMapView *mapa;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
