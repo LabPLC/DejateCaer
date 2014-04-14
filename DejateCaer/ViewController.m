@@ -233,27 +233,26 @@
 }
 
 #pragma mark - Internal Methods
-
+//vista de la lista escondida
 - (void)handleTapMapView:(UIGestureRecognizer *)gesture {
-    
+     self.tableView.scrollEnabled=FALSE;
     NSLog(@"push tap on the header");
        [self.tableView setContentOffset:CGPointZero animated:NO];
     [UIView animateWithDuration:0.2
                           delay:0.1
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         
-                         //custom al mapa
+                                                  //custom al mapa
                          mapa.frame = CGRectMake(0, 0, 320, self.view.frame.size.height-30);
                          [mapa addSubview:contenedor_flotante];
                          self.tableView.frame           = CGRectMake(0, self.view.frame.size.height-30,320, 30);
-                         
+                        
                          
                         
 
                      }
                      completion:^(BOOL finished){
-                        
+                         
                          self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
                          self.tableView.tableHeaderView.backgroundColor=[UIColor greenColor];
                          
@@ -273,8 +272,9 @@
                          }
                      }];
     
-    
+ _tableView.scrollEnabled=FALSE;
 }
+
 
 - (void)handleTapTableView:(UIGestureRecognizer *)gesture {
     
@@ -294,7 +294,7 @@
                          mapa.frame             = CGRectMake(0, 0, 320, 278);
                          [mapa addSubview:contenedor_flotante];
                          
-                         
+                         self.tableView.scrollEnabled=YES;
                          self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, self.view.frame.size.height-0)];
                          self.tableView.tableHeaderView.backgroundColor=[UIColor clearColor];
                          
@@ -795,6 +795,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     
     //[opcciones removeFromSuperview];
 }
+// vista de cuando se muestra la lista
 -(void)touchTabla{
     if (!isArrow) {
         
@@ -815,7 +816,7 @@ calloutAccessoryControlTapped:(UIControl *)control
                              
                              self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, self.view.frame.size.height/2)];
                              self.tableView.tableHeaderView.backgroundColor=[UIColor clearColor];
-                             
+                             self.tableView.scrollEnabled=YES;
                              
                              NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas_cierran" owner:nil options:nil];
                              
@@ -856,7 +857,7 @@ calloutAccessoryControlTapped:(UIControl *)control
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     
     NSLog(@"scrolleando tabla");
-    // [self closeShutter];
+   //  [self touchTabla];
 }
 -(void) getPlaces{
     dispatch_async(dispatch_get_main_queue(), ^{
