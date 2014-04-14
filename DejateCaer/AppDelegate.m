@@ -24,12 +24,12 @@
     
     if ( [_alto intValue] < 568) {
         controller = (ViewController*)[mainStoryboard
-                                       instantiateViewControllerWithIdentifier: @"main2"];
+                                       instantiateViewControllerWithIdentifier: @"inicio2"];
         
     }
     else{
         controller = (ViewController*)[mainStoryboard
-                                       instantiateViewControllerWithIdentifier: @"main"];
+                                       instantiateViewControllerWithIdentifier: @"inicio"];
     }
     
      self.window.rootViewController = controller;
