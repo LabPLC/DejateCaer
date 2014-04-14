@@ -9,7 +9,6 @@
 #import "DescripcionViewController.h"
 #import "ViewController.h"
 #import "MapaViewController.h"
-#import "RutaViewController.h"
 #import <Social/Social.h>
 @interface DescripcionViewController ()
 
@@ -97,18 +96,6 @@
     }
 }
 -(IBAction)ruta:(id)sender{
-    
-    NSString* currentLatitud=[NSString stringWithFormat:@"%.8f", _LocationManager.location.coordinate.latitude];
-    NSString*currentLongitud=[NSString stringWithFormat:@"%.8f", _LocationManager.location.coordinate.longitude];
-    
-    RutaViewController *ruta= [[self storyboard] instantiateViewControllerWithIdentifier:@"ruta"];//[[MapaViewController alloc]init];
-    ruta.latitud_destino=[_evento objectForKey:@"latitud"];
-    ruta.longitud_destino=[_evento objectForKey:@"longitud"];
-    ruta.latitud_origen=currentLatitud;
-    ruta.longitud_origen=currentLongitud;
-    //mapa.nombre=[_evento objectForKey:@"nombre"];
-    //mapa.view.backgroundColor=[UIColor whiteColor];
-    [self.navigationController pushViewController:ruta animated:YES];
-
+   
 }
 @end

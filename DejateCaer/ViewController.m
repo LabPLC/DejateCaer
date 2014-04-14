@@ -246,10 +246,16 @@
                          //custom al mapa
                          mapa.frame = CGRectMake(0, 0, 320, self.view.frame.size.height-30);
                          [mapa addSubview:contenedor_flotante];
+                         self.tableView.frame           = CGRectMake(0, self.view.frame.size.height-30,320, 30);
                          
                          
+                        
+
+                     }
+                     completion:^(BOOL finished){
+                        
                          self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
-                         self.tableView.tableHeaderView.backgroundColor=[UIColor clearColor];
+                         self.tableView.tableHeaderView.backgroundColor=[UIColor greenColor];
                          
                          NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas" owner:nil options:nil];
                          
@@ -257,11 +263,6 @@
                          flechas = [nibContents lastObject];
                          [flechas addGestureRecognizer:tapFlechas];
                          [self.tableView.tableHeaderView addSubview:flechas];
-                         
-                         
-                         self.tableView.frame           = CGRectMake(0, mapa.frame.size.height,320, 30);
-                     }
-                     completion:^(BOOL finished){
                          self.isShutterOpen = NO;
                          [self.tableView setScrollEnabled:YES];
                          [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
