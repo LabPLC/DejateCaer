@@ -31,7 +31,7 @@
   @property (nonatomic, retain) IBOutlet UIView *Opcciones;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 
-@property (nonatomic, weak)     id<SLParallaxControllerDelegate>    delegate;
+//@property (nonatomic, weak)     id<SLParallaxControllerDelegate>    delegate;
 @property (nonatomic)           float                               heighTableView;
 @property (nonatomic)           float                               heighTableViewHeader;
 @property (nonatomic)           float                               minHeighTableViewHeader;

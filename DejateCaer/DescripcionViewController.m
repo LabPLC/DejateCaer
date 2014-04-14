@@ -69,7 +69,8 @@
 }
 -(IBAction)regresar:(id)sender
 {
-    [self dismissModalViewControllerAnimated:NO];
+   // [self dismissModalViewControllerAnimated:NO];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 - (void)didReceiveMemoryWarning
 {

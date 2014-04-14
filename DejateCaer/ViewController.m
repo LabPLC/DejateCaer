@@ -231,6 +231,7 @@
 //vista de la lista escondida
 - (void)handleTapMapView:(UIGestureRecognizer *)gesture {
     NSLog(@"push tap on the header");
+      [_tableView setContentOffset:CGPointMake(0, 0) animated:NO];
       // [self.tableView setContentOffset:CGPointZero animated:NO];
     [UIView animateWithDuration:0.2
                           delay:0.1
@@ -261,9 +262,9 @@
                          [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
                          
                                                 // Inform the delegate
-                         if([self.delegate respondsToSelector:@selector(didTableViewMoveUp)]){
+                      /*   if([self.delegate respondsToSelector:@selector(didTableViewMoveUp)]){
                              [self.delegate didTableViewMoveUp];
-                         }
+                         }*/
                      }];
     
     
@@ -742,7 +743,8 @@ calloutAccessoryControlTapped:(UIControl *)control
 // vista de cuando se muestra la lista
 -(void)touchTabla{
     if (!isArrow) {
-        
+     
+
         isArrow=TRUE; //diseño
         
        [UIView animateWithDuration:0.2
@@ -784,9 +786,9 @@ calloutAccessoryControlTapped:(UIControl *)control
                              
                           
                              // Inform the delegate
-                             if([self.delegate respondsToSelector:@selector(didTableViewMoveUp)]){
+                           /*  if([self.delegate respondsToSelector:@selector(didTableViewMoveUp)]){
                                  [self.delegate didTableViewMoveUp];
-                             }
+                             }*/
                          }];
     }
     else{
