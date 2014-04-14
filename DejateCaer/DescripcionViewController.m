@@ -70,13 +70,7 @@
 }
 -(IBAction)regresar:(id)sender
 {
-    ViewController *inicio;//=[[DescripcionViewController alloc]init];
-    
-    inicio = [[self storyboard] instantiateViewControllerWithIdentifier:@"inicio"];
-   
-    inicio.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:inicio animated:YES completion:NULL];
-    //[self presentViewController:inicio animated:YES completion:NULL];
+    [self dismissModalViewControllerAnimated:NO];
 }
 - (void)didReceiveMemoryWarning
 {
