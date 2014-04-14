@@ -221,6 +221,7 @@
 
 -(void)setupMapView{
     mapa                        = [[MKMapView alloc] initWithFrame:CGRectMake(0, 64, 320, _heighTableView)];
+    mapa.rotateEnabled = NO;
     [mapa setShowsUserLocation:YES];
     mapa.delegate = self;
     [self.view insertSubview:mapa
