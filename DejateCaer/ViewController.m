@@ -837,20 +837,27 @@ calloutAccessoryControlTapped:(UIControl *)control
             
         }
         else{
-        NSLog(@"%@",buscar.text);
-    [self.view endEditing:YES];
-    [self getPlacesApple];
-        }}
-    else{
-    [self.view endEditing:YES];}
-    if (textField.text && textField.text.length > 0)
-    {
-        NSLog(@"%@",buscar.text);    }
-    else
-    {
-        NSLog(@"caviox");
+          
+        }
     }
-    return YES;
+    
+    else{
+        [self.view endEditing:YES];
+    }
+    
+        if (textField.text && textField.text.length > 0)
+        {
+            NSLog(@"%@",buscar.text);
+            NSLog(@"%@",buscar.text);
+            [self.view endEditing:YES];
+            [self getPlacesApple];
+        }
+        else
+        {
+            UIAlertView *alerta=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"Introduce un lugar de búsqueda" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+            [alerta show];
+        }
+        return YES;
 }
 
 -(void)getPlacesApple{
@@ -859,9 +866,13 @@ calloutAccessoryControlTapped:(UIControl *)control
     [geocoder geocodeAddressString:direccion completionHandler:^(NSArray *placemarks, NSError *error) {
         if (error)
         {
+            UIAlertView *alerta=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"No encontramos el lugar que buscas" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+            [alerta show];
             NSLog(@"Geocode failed with error: %@", error);
             //[self displayError:error];
+            
             return;
+            
         }
         
         CLPlacemark *placemark=[placemarks objectAtIndex:0];
