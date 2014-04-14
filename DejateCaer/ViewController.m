@@ -14,11 +14,7 @@
 #import "Mipin.h"
 #import "CalloutAnnotation.h"
 
-//#define SCREEN_HEIGHT_WITHOUT_STATUS_BAR     [[UIScreen mainScreen] bounds].size.height - 65
-//#define HEIGHT_STATUS_BAR                    64
-//#define Y_DOWN_TABLEVIEW                     SCREEN_HEIGHT_WITHOUT_STATUS_BAR - 40
-//#define DEFAULT_HEIGHT_HEADER                100.0f
-//#define MIN_HEIGHT_HEADER                    0.0f
+
 #define DEFAULT_Y_OFFSET                     ([[UIScreen mainScreen] bounds].size.height == 480.0f) ? -200.0f : -250.0f
 #define FULL_Y_OFFSET                        20.0f
 #define MIN_Y_OFFSET_TO_REACH                -30
@@ -67,7 +63,7 @@
     UIActivityIndicatorView *spinner;
 }
 @synthesize mapa,LocationManager;
-//@synthesize heighTableViewHeader    = _heighTableViewHeader;
+
 @synthesize minHeighTableViewHeader = _minHeighTableViewHeader;
 @synthesize heighTableView          = _heighTableView;
 @synthesize default_Y_mapView       = _default_Y_mapView;
@@ -97,11 +93,7 @@
 
 // Set all view we will need
 -(void)setup{
-    //_heighTableViewHeader       = DEFAULT_HEIGHT_HEADER;
-   // _heighTableView             = SCREEN_HEIGHT_WITHOUT_STATUS_BAR;
-   // _minHeighTableViewHeader    = MIN_HEIGHT_HEADER;
-    //_default_Y_tableView        = HEIGHT_STATUS_BAR;
-   // _Y_tableViewOnBottom        = Y_DOWN_TABLEVIEW;
+
     _minYOffsetToReach          = MIN_Y_OFFSET_TO_REACH;
     _latitudeUserUp             = CLOSE_SHUTTER_LATITUDE_MINUS;
     _latitudeUserDown           = OPEN_SHUTTER_LATITUDE_MINUS;
@@ -218,9 +210,11 @@
     _tableView.dataSource   = self;
     _tableView.delegate     = self;
     [self.view addSubview:_tableView];
+    
     tapFlechas = [[UITapGestureRecognizer alloc]
                   initWithTarget:self action:@selector(touchTabla)];
     [flechas addGestureRecognizer:tapFlechas];
+    _tableView.scrollEnabled=FALSE;
     
 }
 
@@ -235,9 +229,8 @@
 #pragma mark - Internal Methods
 //vista de la lista escondida
 - (void)handleTapMapView:(UIGestureRecognizer *)gesture {
-     self.tableView.scrollEnabled=FALSE;
     NSLog(@"push tap on the header");
-       [self.tableView setContentOffset:CGPointZero animated:NO];
+      // [self.tableView setContentOffset:CGPointZero animated:NO];
     [UIView animateWithDuration:0.2
                           delay:0.1
                         options: UIViewAnimationOptionCurveEaseOut
@@ -263,7 +256,7 @@
                          [flechas addGestureRecognizer:tapFlechas];
                          [self.tableView.tableHeaderView addSubview:flechas];
                          self.isShutterOpen = NO;
-                         [self.tableView setScrollEnabled:YES];
+                           _tableView.scrollEnabled=FALSE;
                          [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
                          
                                                 // Inform the delegate
@@ -272,7 +265,7 @@
                          }
                      }];
     
- _tableView.scrollEnabled=FALSE;
+    
 }
 
 
@@ -281,56 +274,6 @@
     NSLog(@"push on the header");
 }
 
-
--(void) closeShutter{
-   
-    
-    
-    [UIView animateWithDuration:0.2
-                          delay:0.1
-                        options: UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         
-                         mapa.frame             = CGRectMake(0, 0, 320, 278);
-                         [mapa addSubview:contenedor_flotante];
-                         
-                         self.tableView.scrollEnabled=YES;
-                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, self.view.frame.size.height-0)];
-                         self.tableView.tableHeaderView.backgroundColor=[UIColor clearColor];
-                         
-                         // flechas=[[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-30, 320, 30)];
-                         flechas.backgroundColor=[UIColor blackColor];
-                         CGRect shadowFrame      = flechas.layer.bounds;
-                         CGPathRef shadowPath    = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
-                         flechas.layer.shadowPath   = shadowPath;
-                         [flechas.layer setShadowOffset:CGSizeMake(-2, -2)];
-                         [flechas.layer setShadowColor:[[UIColor grayColor] CGColor]];
-                         [flechas.layer setShadowOpacity:.75];
-                         NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas" owner:nil options:nil];
-                         
-                         // Find the view among nib contents (not too hard assuming there is only one view in it).
-                         flechas = [nibContents lastObject];
-                         flechas.frame=CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-30, 320, 30);
-                         [flechas addGestureRecognizer:tapFlechas];
-                         [self.tableView.tableHeaderView addSubview:flechas];
-                         
-                         
-                         self.tableView.frame           = CGRectMake(0, 0,320, self.view.frame.size.height);
-                     }
-                     completion:^(BOOL finished){
-                         self.isShutterOpen = NO;
-                         [self.tableView setScrollEnabled:YES];
-                         [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
-                         
-                         // Center the user 's location
-                         [self zoomToUserLocation:mapa.userLocation minLatitude:self.latitudeUserUp];
-                         
-                         // Inform the delegate
-                         if([self.delegate respondsToSelector:@selector(didTableViewMoveUp)]){
-                             [self.delegate didTableViewMoveUp];
-                         }
-                     }];
-}
 
 
 #pragma mark - Table view Delegate
@@ -627,6 +570,18 @@
 
 
 
+
+
+-(void)actualizar{
+    NSLog(@"reload");
+    radio=delegate.user_radio;
+ 
+        [self getCurrentLocation:nil];
+   
+    //[self llamada_asincrona];
+}
+#pragma mark - MapView Delegate
+
 - (MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation: (id<MKAnnotation>) annotation {
     
     
@@ -720,18 +675,6 @@ calloutAccessoryControlTapped:(UIControl *)control
     [self presentViewController:detalles animated:YES completion:NULL];}
 
 
--(void)actualizar{
-    NSLog(@"reload");
-    radio=delegate.user_radio;
- 
-        [self getCurrentLocation:nil];
-   
-    //[self llamada_asincrona];
-}
-#pragma mark - MapView Delegate
-
-
-
 
 
 
@@ -801,10 +744,7 @@ calloutAccessoryControlTapped:(UIControl *)control
         
         isArrow=TRUE; //diseño
         
-       
-        
-        
-        [UIView animateWithDuration:0.2
+       [UIView animateWithDuration:0.2
                               delay:0.1
                             options: UIViewAnimationOptionCurveEaseOut
                          animations:^{
