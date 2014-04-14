@@ -113,6 +113,7 @@
     [contenedor_flotante addSubview:lupa];
     buscar=[[UITextField alloc]initWithFrame:CGRectMake(37, 0, 158, 35)];
     buscar.delegate = self;
+    buscar.placeholder=@"Zamora 54,Condesa,Cuahutemoc";
     [contenedor_flotante addSubview:buscar];
     encuentrame = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [encuentrame addTarget:self

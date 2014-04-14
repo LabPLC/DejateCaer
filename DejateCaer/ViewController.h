@@ -21,7 +21,7 @@
 
 @end
 
-@interface ViewController : UIViewController  <MKMapViewDelegate ,UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
+@interface ViewController : UIViewController  <MKMapViewDelegate ,UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate,UITextFieldDelegate>
 
 
 @property (strong, nonatomic) CLLocationManager *LocationManager;
@@ -42,9 +42,7 @@
 @property (nonatomic)           float                               latitudeUserUp;
 @property (nonatomic)           float                               latitudeUserDown;
 
-// Move the map in terms of user location
-// @minLatitude : subtract to the current user's latitude to move it on Y axis in order to view it when the map move
-- (void)zoomToUserLocation:(MKUserLocation *)userLocation minLatitude:(float)minLatitude;
+
 
 
 - (IBAction)getCurrentLocation:(id)sender;
