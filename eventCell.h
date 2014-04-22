@@ -1,8 +1,8 @@
 //
-//  eventCell.h
+//  DescripcionViewController.m
 //  DejateCaer
-//
-//  Created by Carlos Castellanos on 12/03/14.
+//  @rockarloz
+//  Created by Carlos Castellanos on 13/03/14.
 //  Copyright (c) 2014 Carlos Castellanos. All rights reserved.
 //
 

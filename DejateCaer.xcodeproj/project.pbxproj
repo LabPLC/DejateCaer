@@ -32,7 +32,6 @@
 		F348B41A18DA86B500566356 /* news.png in Resources */ = {isa = PBXBuildFile; fileRef = F348B41918DA86B500566356 /* news.png */; };
 		F3A6401918E490F6004AF17F /* Mipin.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A6401818E490F6004AF17F /* Mipin.m */; };
 		F3A6401B18E49BB6004AF17F /* markerblue.png in Resources */ = {isa = PBXBuildFile; fileRef = F3A6401A18E49BB6004AF17F /* markerblue.png */; };
-		F3A6401F18E4A693004AF17F /* CalloutAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A6401E18E4A693004AF17F /* CalloutAnnotation.m */; };
 		F3AECC7E18D3849F0012748D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECC7D18D3849F0012748D /* CoreLocation.framework */; };
 		F3AECC8118D3881B0012748D /* MapaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AECC8018D3881B0012748D /* MapaViewController.m */; };
 		F3B9EC4018EF2A5500204323 /* Opcciones.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B9EC3F18EF2A5500204323 /* Opcciones.xib */; };
@@ -104,8 +103,6 @@
 		F3A6401718E490F6004AF17F /* Mipin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mipin.h; path = ../Mipin.h; sourceTree = "<group>"; };
 		F3A6401818E490F6004AF17F /* Mipin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mipin.m; path = ../Mipin.m; sourceTree = "<group>"; };
 		F3A6401A18E49BB6004AF17F /* markerblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = markerblue.png; path = ../markerblue.png; sourceTree = "<group>"; };
-		F3A6401D18E4A693004AF17F /* CalloutAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalloutAnnotation.h; path = DejateCaer/CalloutAnnotation.h; sourceTree = "<group>"; };
-		F3A6401E18E4A693004AF17F /* CalloutAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalloutAnnotation.m; path = DejateCaer/CalloutAnnotation.m; sourceTree = "<group>"; };
 		F3AECC7D18D3849F0012748D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F3AECC7F18D3881B0012748D /* MapaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapaViewController.h; sourceTree = "<group>"; };
 		F3AECC8018D3881B0012748D /* MapaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapaViewController.m; sourceTree = "<group>"; };
@@ -258,8 +255,6 @@
 		F3AECC7918D36D2B0012748D /* Celdas */ = {
 			isa = PBXGroup;
 			children = (
-				F3A6401D18E4A693004AF17F /* CalloutAnnotation.h */,
-				F3A6401E18E4A693004AF17F /* CalloutAnnotation.m */,
 				F332E87018D16CB100DF538D /* eventCell.h */,
 				F332E87118D16CB100DF538D /* eventCell.m */,
 				F3D6F0B118ED1759007F9E31 /* SinEventoTableViewCell.h */,
@@ -434,7 +429,6 @@
 				F3D6F0B318ED1759007F9E31 /* SinEventoTableViewCell.m in Sources */,
 				F332E87218D16CB100DF538D /* eventCell.m in Sources */,
 				F3B9EC4318EF2D7900204323 /* Opcciones.m in Sources */,
-				F3A6401F18E4A693004AF17F /* CalloutAnnotation.m in Sources */,
 				F3C680BD18FCD4440092D6D8 /* CustomCalloutAnnotation.m in Sources */,
 				F332E84E18D161BA00DF538D /* ViewController.m in Sources */,
 				F332E84518D161BA00DF538D /* AppDelegate.m in Sources */,

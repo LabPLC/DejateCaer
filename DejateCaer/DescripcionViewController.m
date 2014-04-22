@@ -65,7 +65,7 @@
     [_mapa addAnnotation:annotationPoint];*/
     
     [_mapa setShowsUserLocation:YES];
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(SCL, 2000, 2000);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(newCoord, 2000, 2000);
     [_mapa setRegion:region animated:YES];
     [super viewDidLoad];
 	// Do any additional setup after loading the view.

@@ -148,6 +148,7 @@
   
     //Añadimos un escuchado de eventos de notificationController  para recargar la pagina
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cerrarOpcciones) name:@"aceptar" object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(actualizar) name:@"actualizar" object:nil];
     
 
@@ -236,11 +237,15 @@
     mapa.delegate = self;
     [self.view insertSubview:mapa
                 belowSubview: _tableView];
+    UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc]
+                                      initWithTarget:self action:@selector(touchMap)];
+    [mapa addGestureRecognizer:tapRec];
 }
 
 #pragma mark - Internal Methods
 //vista de la lista escondida
 - (void)handleTapMapView:(UIGestureRecognizer *)gesture {
+     [self.view endEditing:YES];
     NSLog(@"push tap on the header");
       [_tableView setContentOffset:CGPointMake(0, 0) animated:NO];
       // [self.tableView setContentOffset:CGPointZero animated:NO];
@@ -876,7 +881,7 @@ calloutAccessoryControlTapped:(UIControl *)control
 
 -(void)getPlacesApple{
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    NSString *direccion=[NSString stringWithFormat:@"%@,distrito federal",buscar.text];
+    NSString *direccion=[NSString stringWithFormat:@"%@,Mexico,distrito federal",buscar.text];
     [geocoder geocodeAddressString:direccion completionHandler:^(NSArray *placemarks, NSError *error) {
         if (error)
         {
@@ -926,25 +931,10 @@ calloutAccessoryControlTapped:(UIControl *)control
         
     }*/
      }
--(void)goToDetalles{
-    DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
-    if ([delegate.alto intValue] < 568)
-    {
-        detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion2"];
-        
-    }
-    
-    else
-    {
-        
-        detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
-        
-    }
-    
-    // detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
-    //detalles.evento=[eventos objectAtIndex:view.tag];
-    detalles.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:detalles animated:YES completion:NULL];}
+
+-(void)touchMap{
+     [self.view endEditing:YES];
+}
 
 @end
 

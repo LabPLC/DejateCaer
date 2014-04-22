@@ -27,5 +27,8 @@
  // Drawing code
  }
  */
+-(IBAction)detalles:(id)sender{
 
+    
+}
 @end
