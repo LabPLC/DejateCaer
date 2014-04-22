@@ -14,7 +14,7 @@
 @synthesize title, subtitle, coordinate,tipo,id_event;
 
 // Implementamos el método de inicialización del objeto.
-- (id)initWithTitle:(NSString *)aTitle subtitle:(NSString*)aSubtitle andCoordinate:(CLLocationCoordinate2D)coord tipo:(NSString*)atipo evento:(int)id_evento
+- (id)initWithTitle:(NSString *)aTitle subtitle:(NSString*)aSubtitle andCoordinate:(CLLocationCoordinate2D)coord tipo:(NSString*)atipo evento:(int)id_evento lugar:(NSString*)alugar hora:(NSString*)ahora
 {
 	self = [super init];
 	title = aTitle;
@@ -22,6 +22,8 @@
 	coordinate = coord;
     tipo=atipo;
     id_event=id_evento;
+    _lugar=alugar;
+    _hora=ahora;
     
 	return self;
 }

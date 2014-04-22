@@ -91,6 +91,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Eventario"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

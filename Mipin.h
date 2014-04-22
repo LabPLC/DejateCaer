@@ -26,10 +26,12 @@
 @property (nonatomic, copy) NSString *tipo;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
+@property (nonatomic, copy) NSString *lugar;
+@property (nonatomic, copy) NSString *hora;
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 
 // Y el método de inicialización
-- (id)initWithTitle:(NSString *)aTitle subtitle:(NSString*)aSubtitle andCoordinate:(CLLocationCoordinate2D)coord tipo:(NSString*)atipo evento:(int)id_evento;
+- (id)initWithTitle:(NSString *)aTitle subtitle:(NSString*)aSubtitle andCoordinate:(CLLocationCoordinate2D)coord tipo:(NSString*)atipo evento:(int)id_evento lugar:(NSString*)alugar hora:(NSString*)ahora;
 @property (nonatomic, weak) CalloutAnnotation *calloutAnnotation;
 
 @end

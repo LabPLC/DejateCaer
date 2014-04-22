@@ -14,11 +14,12 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1];
         // Initialization code
         UIView *selectedView = [[UIView alloc]init];
-        selectedView.backgroundColor = [UIColor clearColor];
+        selectedView.backgroundColor = [UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1];
         _nombre=[[UILabel alloc]initWithFrame:CGRectMake(10, 5, 250, 70)];
-        _nombre.textColor=[UIColor blueColor];
+        _nombre.textColor=[UIColor whiteColor];
         [_nombre setFont:[UIFont systemFontOfSize:16]];
         _nombre.numberOfLines = 3;
         

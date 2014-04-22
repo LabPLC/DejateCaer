@@ -16,6 +16,8 @@
     if (self) {
         self.coordinate = coordinate;
         self.title = title;
+        
+        
     }
     return self;
 }

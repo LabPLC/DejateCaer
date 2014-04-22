@@ -19,5 +19,5 @@
 -(IBAction)regresar:(id)sender;
 -(IBAction)twittear:(id)sender;
 - (IBAction)postToFacebook:(id)sender;
--(IBAction)ruta:(id)sender;
+
 @end

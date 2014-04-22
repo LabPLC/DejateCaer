@@ -1,7 +1,7 @@
 //
 //  ViewController.m
 //  DejateCaer
-//
+//  @rockarloz
 //  Created by Carlos Castellanos on 12/03/14.
 //  Copyright (c) 2014 Carlos Castellanos. All rights reserved.
 //
@@ -12,7 +12,8 @@
 #import "DescripcionViewController.h"
 #import "AppDelegate.h"
 #import "Mipin.h"
-#import "CalloutAnnotation.h"
+#import "CustomCalloutAnnotation.h"
+//#import "CalloutAnnotation.h"
 
 
 #define DEFAULT_Y_OFFSET                     ([[UIScreen mainScreen] bounds].size.height == 480.0f) ? -200.0f : -250.0f
@@ -51,13 +52,13 @@
     UIView *contenedor_flotante;
     
   
-   
+    UITapGestureRecognizer* tapDetails;//diseño
     UITapGestureRecognizer* tapRecMap;
     UIView *opcciones;
     // UIView *vista_atras;
     
     AppDelegate *delegate;
-    Mipin *annotationPointUbication;
+ 
     
     UIView *loading;
     UIActivityIndicatorView *spinner;
@@ -105,21 +106,25 @@
 {
     // [self getPlacesApple];
     isArrow=FALSE;
+    self.view.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1];
     
-    contenedor_flotante=[[UIView alloc]initWithFrame:CGRectMake(5, 25, 273, 35)];
+    
+    //Crea contenedor de busqueda
+    contenedor_flotante=[[UIView alloc]initWithFrame:CGRectMake(5, 25, 310, 35)];
     contenedor_flotante.backgroundColor=[UIColor whiteColor];
     UIImageView *lupa=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
     lupa.image=[UIImage imageNamed:@"search.png"];
     [contenedor_flotante addSubview:lupa];
-    buscar=[[UITextField alloc]initWithFrame:CGRectMake(37, 0, 158, 35)];
+    buscar=[[UITextField alloc]initWithFrame:CGRectMake(37, 0, 205, 35)];
     buscar.delegate = self;
     buscar.placeholder=@"Zamora 54,Condesa,Cuahutemoc";
     [contenedor_flotante addSubview:buscar];
+    
     encuentrame = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [encuentrame addTarget:self
                     action:@selector(getCurrentLocation:)
           forControlEvents:UIControlEventTouchUpInside];
-    encuentrame.frame = CGRectMake(203, 0, 35, 35);
+    encuentrame.frame = CGRectMake(240, 0, 35, 35);
     UIImage *btnImage = [UIImage imageNamed:@"findme.png"];
     UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, encuentrame.frame.size.width, encuentrame.frame.size.height)];
     img.image=btnImage;
@@ -129,14 +134,14 @@
     [herramientas addTarget:self
                      action:@selector(opcciones:)
            forControlEvents:UIControlEventTouchUpInside];
-    herramientas.frame = CGRectMake(238, 0, 35, 35);
+    herramientas.frame = CGRectMake(275, 0, 35, 35);
     UIImage *btnImage2 = [UIImage imageNamed:@"tools.png"];
     UIImageView *img2=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, herramientas.frame.size.width, herramientas.frame.size.height)];
     img2.image=btnImage2;
     [herramientas addSubview:img2];
     [contenedor_flotante addSubview:encuentrame];
     [contenedor_flotante addSubview:herramientas];
-    
+    //Termina contenedor de busqueda
     
     
     delegate.isOption=FALSE;
@@ -145,7 +150,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cerrarOpcciones) name:@"aceptar" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(actualizar) name:@"actualizar" object:nil];
     
-    //Le asignamos el valor falso a la variable ShowMenu ya que en un
+
     
     
     
@@ -214,6 +219,11 @@
     
     tapFlechas = [[UITapGestureRecognizer alloc]
                   initWithTarget:self action:@selector(touchTabla)];
+    
+    
+    tapDetails = [[UITapGestureRecognizer alloc]
+                  initWithTarget:self action:@selector(goToDetalles)];
+    
     [flechas addGestureRecognizer:tapFlechas];
     _tableView.scrollEnabled=FALSE;
     
@@ -435,7 +445,8 @@
             
             CLLocationCoordinate2D newCoord = {newLat, newLon};
             
-            Mipin *annotationPoint = [[Mipin alloc] initWithTitle:[lugar objectForKey:@"nombre"] subtitle:[lugar objectForKey:@"direccion"] andCoordinate:newCoord tipo:@"" evento:i];
+            Mipin *annotationPoint = [[Mipin alloc] initWithTitle:[lugar objectForKey:@"nombre"] subtitle:[lugar objectForKey:@"direccion"] andCoordinate:newCoord tipo:@"" evento:i lugar:[lugar objectForKey:@"lugar"] hora:[lugar objectForKey:@"hora"]];
+            
             [mapa addAnnotation:annotationPoint];
         }}
     
@@ -457,7 +468,7 @@
 
 
 - (IBAction)getCurrentLocation:(id)sender {
-    
+    loading.hidden=FALSE;
     
     CLLocationCoordinate2D SCL;
     
@@ -476,6 +487,8 @@
 {
     
     
+    if (!isEmpty) {
+        
     
     DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
     if ([delegate.alto intValue] < 568)
@@ -492,13 +505,13 @@
     }
     
     detalles.evento=[eventos objectAtIndex:indexPath.row];
-    detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    detalles.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self.navigationController pushViewController:detalles animated:YES];
     
     
     [self presentViewController:detalles animated:YES completion:NULL];
     
-    
+    }
     
     
     
@@ -561,7 +574,7 @@
             //  cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
             // cell = [topLevelObjects objectAtIndex:0];
         }
-        cell.nombre.text= @"No encontramos eventos";
+        cell.nombre.text= @"No encontramos eventos cerca de este lugar intenta ampliando el radio";
         return cell;
         
     }
@@ -587,12 +600,11 @@
 
 - (MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation: (id<MKAnnotation>) annotation {
     
-    
-    if ([annotation isKindOfClass:[CalloutAnnotation class]]) {
+   /* if ([annotation isKindOfClass:[CalloutAnnotation class]]) {
         return nil;
         // NSLog(@"fue letrerito");
     }
-    else{
+    else{*/
         Mipin  *anotacion1 = (Mipin*)annotation;
         
         
@@ -603,19 +615,13 @@
         }
         
         MKAnnotationView *aView = [[MKAnnotationView alloc] initWithAnnotation:anotacion1 reuseIdentifier:@"pinView"];
+    
         UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         [rightButton setTitle:annotation.title forState:UIControlStateNormal];
         [aView setRightCalloutAccessoryView:rightButton];
-        
-        //\\-------------------------------------------------------------------------------///
-        //Creo el nombre de la imagen
-        //\\-------------------------------------------------------------------------------///
-        
-        
-        
-        //\\-------------------------------------------------------------------------------///
-        // Configuramos la vista del mapa
-        //\\-------------------------------------------------------------------------------///
+    
+   // [aView setBackgroundColor:[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:0.7]];
+
         aView.canShowCallout = YES;
         aView.enabled = YES;
         aView.centerOffset = CGPointMake(0, -20);
@@ -626,7 +632,7 @@
             imagen = [UIImage imageNamed:@"yo.png"];
         }
         else{
-            imagen = [UIImage imageNamed:@"markerblue.png"];
+            imagen = [UIImage imageNamed:@"pin.png"];
         }
         
         aView.image = imagen;
@@ -636,20 +642,21 @@
         
         if ([anotacion1.tipo isEqualToString:@"ubicacion"]) {
             CGRect frame = aView.frame;
-            frame.size.width = 37;
-            frame.size.height = 37;
+            frame.size.width = 43;
+            frame.size.height = 71;
             aView.frame = frame;
         }
         else{
             CGRect frame = aView.frame;
-            frame.size.width = 35;
+            frame.size.width = 30;
             frame.size.height = 40;
             aView.frame = frame;
             
         }
         
         
-        return aView;}
+        return aView;
+    //}
     
     
 }
@@ -658,6 +665,7 @@
 calloutAccessoryControlTapped:(UIControl *)control
 {
     
+   
     DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
     if ([delegate.alto intValue] < 568)
     {
@@ -674,7 +682,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     
     // detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
     detalles.evento=[eventos objectAtIndex:view.tag];
-    detalles.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    detalles.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:detalles animated:YES completion:NULL];}
 
 
@@ -697,7 +705,8 @@ calloutAccessoryControlTapped:(UIControl *)control
             // Add a footer to hide the background
             int footerHeight = tableHeight - cellsHeight;
             tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, footerHeight)];
-            [tableView.tableFooterView setBackgroundColor:[UIColor whiteColor]];
+            
+            [tableView.tableFooterView setBackgroundColor:[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1]];
         }
     }
 }
@@ -711,7 +720,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     // Find the view among nib contents (not too hard assuming there is only one view in it).
     opcciones = [nibContents lastObject];
     opcciones.frame=CGRectMake(5, 24, self.view.frame.size.width-10, self.view.frame.size.height-29);
-    opcciones.backgroundColor=[UIColor grayColor];
+    //opcciones.backgroundColor=[UIColor grayColor];
     opcciones.alpha=1;
     opcciones.layer.cornerRadius = 5;
     opcciones.layer.masksToBounds = YES;
@@ -772,7 +781,7 @@ calloutAccessoryControlTapped:(UIControl *)control
                              [flechas addGestureRecognizer:tapFlechas];
                              
                              //flechas=[[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-30, 320, 30)];
-                             flechas.backgroundColor=[UIColor whiteColor];
+                           //  flechas.backgroundColor=[UIColor whiteColor];
                              
                              
                              
@@ -861,6 +870,7 @@ calloutAccessoryControlTapped:(UIControl *)control
             UIAlertView *alerta=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"Introduce un lugar de búsqueda" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
             [alerta show];
         }
+     [self.view endEditing:YES];
         return YES;
 }
 
@@ -882,10 +892,59 @@ calloutAccessoryControlTapped:(UIControl *)control
         CLPlacemark *placemark=[placemarks objectAtIndex:0];
         NSLog(@"Received placemarks: %@", placemarks);
         NSLog(@"%f,%f",placemark.location.coordinate.latitude,placemark.location.coordinate.longitude);
+        loading.hidden=FALSE;
         [self llamada_asincrona: placemark.location.coordinate.latitude Y:placemark.location.coordinate.longitude];
         //[self displayPlacemarks:placemarks];
     }];
     
 }
+
+
+
+-(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+    for (UIView *subview in view.subviews ){
+        [subview removeFromSuperview];
+    }
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    /*if(![view.annotation isKindOfClass:[MKUserLocation class]]) {
+        CustomCalloutAnnotation *calloutView = (CustomCalloutAnnotation *)[[[NSBundle mainBundle] loadNibNamed:@"CustomCallOutView" owner:self options:nil] objectAtIndex:0];
+        CGRect calloutViewFrame = calloutView.frame;
+        calloutViewFrame.origin = CGPointMake(-calloutViewFrame.size.width/2 + 85, -calloutViewFrame.size.height);
+        calloutView.frame = calloutViewFrame;
+        calloutView.nombre.text=@"fsdfr";
+        [calloutView.nombre setText:[(Mipin*)[view annotation] title]];
+        [calloutView.lugar setText:[(Mipin*)[view annotation] lugar]];
+        [calloutView.hora setText:[(Mipin*)[view annotation] hora]];
+        UIView *d=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 00)];
+        d.backgroundColor=[UIColor greenColor];
+        [calloutView addSubview:d];
+        [calloutView addGestureRecognizer:tapDetails];
+        [view addSubview:calloutView];
+         
+        
+    }*/
+     }
+-(void)goToDetalles{
+    DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
+    if ([delegate.alto intValue] < 568)
+    {
+        detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion2"];
+        
+    }
+    
+    else
+    {
+        
+        detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
+        
+    }
+    
+    // detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
+    //detalles.evento=[eventos objectAtIndex:view.tag];
+    detalles.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:detalles animated:YES completion:NULL];}
+
 @end
 
