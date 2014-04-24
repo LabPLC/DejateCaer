@@ -50,6 +50,7 @@
     UIButton *herramientas;//diseño
     UITextField *buscar;//diseño
     UIView *contenedor_flotante;
+    UIButton *bucar_aqui;
     
   
     UITapGestureRecognizer* tapDetails;//diseño
@@ -240,6 +241,7 @@
     UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc]
                                       initWithTarget:self action:@selector(touchMap)];
     [mapa addGestureRecognizer:tapRec];
+    [self crearBuscaAqui];
 }
 
 #pragma mark - Internal Methods
@@ -935,6 +937,38 @@ calloutAccessoryControlTapped:(UIControl *)control
 -(void)touchMap{
      [self.view endEditing:YES];
 }
+
+
+-(IBAction)getCenter:(id)sender{
+    
+    loading.hidden=FALSE;
+    CLLocationCoordinate2D centre = [mapa centerCoordinate];
+    NSLog(@"%f, %f", centre.latitude, centre.longitude);
+    //[mapa removeAnnotation:annotationPointUbication];
+    radio=delegate.user_radio;
+   // annotationPointUbication = [[Mipin alloc] initWithTitle:@"Centro" subtitle:@"" andCoordinate:centre tipo:@"ubicacion" evento:0];
+    
+    // [mapa addAnnotation:annotationPointUbication];
+    
+    //obtenemos la posicion del usuario
+    currentLatitud=[NSString stringWithFormat:@"%.8f", centre.latitude];
+    currentLongitud=[NSString stringWithFormat:@"%.8f", centre.longitude];
+    // guardamos el radio anteriot
+    [self llamada_asincrona:centre.latitude Y:centre.longitude];
+    
+}
+-(void)crearBuscaAqui{
+bucar_aqui = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+[bucar_aqui addTarget:self
+               action:@selector(getCenter:)
+     forControlEvents:UIControlEventTouchUpInside];
+[bucar_aqui setTitle:@"Bucar en esta zona" forState:UIControlStateNormal];
+bucar_aqui.frame = CGRectMake(80 , 70, 160.0, 40.0);
+bucar_aqui.backgroundColor=[UIColor whiteColor];
+//bucar_aqui.hidden=TRUE;
+    [mapa addSubview:bucar_aqui];
+}
+
 
 @end
 
