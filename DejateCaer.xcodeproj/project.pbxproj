@@ -348,6 +348,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Carlos Castellanos";
 				TargetAttributes = {
+					F332E83018D161BA00DF538D = {
+						DevelopmentTeam = E48473Z6UM;
+					};
 					F332E85418D161BA00DF538D = {
 						TestTargetID = F332E83018D161BA00DF538D;
 					};
@@ -562,7 +565,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Juan Castellanos Morales (72F8A7A6R7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/carloscastellanos/Documents/DejateCaer/FacebookSDK,
@@ -573,7 +577,7 @@
 				INFOPLIST_FILE = "DejateCaer/DejateCaer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F42F7706-20E6-4378-95AE-B0750E1D6A2E";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -584,7 +588,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Juan Castellanos Morales (72F8A7A6R7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/carloscastellanos/Documents/DejateCaer/FacebookSDK,
@@ -595,7 +600,7 @@
 				INFOPLIST_FILE = "DejateCaer/DejateCaer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F42F7706-20E6-4378-95AE-B0750E1D6A2E";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
