@@ -50,6 +50,7 @@
 		F3C680BD18FCD4440092D6D8 /* CustomCalloutAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C680BC18FCD4440092D6D8 /* CustomCalloutAnnotation.m */; };
 		F3C680BF18FCD6520092D6D8 /* CustomCallOutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3C680BE18FCD6520092D6D8 /* CustomCallOutView.xib */; };
 		F3C680C118FCD9C00092D6D8 /* callout.png in Resources */ = {isa = PBXBuildFile; fileRef = F3C680C018FCD9C00092D6D8 /* callout.png */; };
+		F3CF6EB0190ACEA4003E86EA /* ViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CF6EAF190ACEA4003E86EA /* ViewControllerTest.m */; };
 		F3CFBFFF18FD083C00206262 /* regresar.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CFBFFB18FD083C00206262 /* regresar.png */; };
 		F3CFC00018FD083C00206262 /* evento.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CFBFFC18FD083C00206262 /* evento.png */; };
 		F3CFC00118FD083C00206262 /* donde.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CFBFFD18FD083C00206262 /* donde.png */; };
@@ -100,8 +101,8 @@
 		F332E87318D185AD00DF538D /* DescripcionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescripcionViewController.h; sourceTree = "<group>"; };
 		F332E87418D185AD00DF538D /* DescripcionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescripcionViewController.m; sourceTree = "<group>"; };
 		F348B41918DA86B500566356 /* news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = news.png; sourceTree = "<group>"; };
-		F3A6401718E490F6004AF17F /* Mipin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mipin.h; path = ../Mipin.h; sourceTree = "<group>"; };
-		F3A6401818E490F6004AF17F /* Mipin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mipin.m; path = ../Mipin.m; sourceTree = "<group>"; };
+		F3A6401718E490F6004AF17F /* Mipin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mipin.h; sourceTree = "<group>"; };
+		F3A6401818E490F6004AF17F /* Mipin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mipin.m; sourceTree = "<group>"; };
 		F3A6401A18E49BB6004AF17F /* markerblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = markerblue.png; path = ../markerblue.png; sourceTree = "<group>"; };
 		F3AECC7D18D3849F0012748D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F3AECC7F18D3881B0012748D /* MapaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapaViewController.h; sourceTree = "<group>"; };
@@ -120,10 +121,11 @@
 		F3C680B318FCA9520092D6D8 /* icono.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icono.png; sourceTree = "<group>"; };
 		F3C680B718FCAD4E0092D6D8 /* arrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrows.png; sourceTree = "<group>"; };
 		F3C680B918FCCD870092D6D8 /* arrows2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrows2.png; sourceTree = "<group>"; };
-		F3C680BB18FCD4440092D6D8 /* CustomCalloutAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCalloutAnnotation.h; sourceTree = "<group>"; };
-		F3C680BC18FCD4440092D6D8 /* CustomCalloutAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCalloutAnnotation.m; sourceTree = "<group>"; };
+		F3C680BB18FCD4440092D6D8 /* CustomCalloutAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCalloutAnnotation.h; path = DejateCaer/CustomCalloutAnnotation.h; sourceTree = "<group>"; };
+		F3C680BC18FCD4440092D6D8 /* CustomCalloutAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCalloutAnnotation.m; path = DejateCaer/CustomCalloutAnnotation.m; sourceTree = "<group>"; };
 		F3C680BE18FCD6520092D6D8 /* CustomCallOutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCallOutView.xib; sourceTree = "<group>"; };
 		F3C680C018FCD9C00092D6D8 /* callout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = callout.png; sourceTree = "<group>"; };
+		F3CF6EAF190ACEA4003E86EA /* ViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerTest.m; sourceTree = "<group>"; };
 		F3CFBFFB18FD083C00206262 /* regresar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = regresar.png; sourceTree = "<group>"; };
 		F3CFBFFC18FD083C00206262 /* evento.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evento.png; sourceTree = "<group>"; };
 		F3CFBFFD18FD083C00206262 /* donde.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donde.png; sourceTree = "<group>"; };
@@ -163,7 +165,7 @@
 		F332E82818D161BA00DF538D = {
 			isa = PBXGroup;
 			children = (
-				F3AECC7918D36D2B0012748D /* Celdas */,
+				F3CF6EAD190ACE37003E86EA /* Modelos */,
 				F3AECC7C18D374810012748D /* Imagenes */,
 				F332E83A18D161BA00DF538D /* DejateCaer */,
 				F332E85C18D161BA00DF538D /* DejateCaerTests */,
@@ -197,8 +199,6 @@
 		F332E83A18D161BA00DF538D /* DejateCaer */ = {
 			isa = PBXGroup;
 			children = (
-				F3A6401718E490F6004AF17F /* Mipin.h */,
-				F3A6401818E490F6004AF17F /* Mipin.m */,
 				F332E84318D161BA00DF538D /* AppDelegate.h */,
 				F332E84418D161BA00DF538D /* AppDelegate.m */,
 				F3AECC7F18D3881B0012748D /* MapaViewController.h */,
@@ -207,15 +207,10 @@
 				F332E87418D185AD00DF538D /* DescripcionViewController.m */,
 				F332E84C18D161BA00DF538D /* ViewController.h */,
 				F332E84D18D161BA00DF538D /* ViewController.m */,
-				F3C680BE18FCD6520092D6D8 /* CustomCallOutView.xib */,
-				F3C680BB18FCD4440092D6D8 /* CustomCalloutAnnotation.h */,
-				F3C680BC18FCD4440092D6D8 /* CustomCalloutAnnotation.m */,
 				F3B9EC4118EF2D7900204323 /* Opcciones.h */,
 				F3B9EC4218EF2D7900204323 /* Opcciones.m */,
-				F332E84618D161BA00DF538D /* Main_iPhone.storyboard */,
-				F32CF00518F5A9220098A5CF /* flechas.xib */,
-				F32CF01718F5F5AF0098A5CF /* flechas_cierran.xib */,
-				F3B9EC3F18EF2A5500204323 /* Opcciones.xib */,
+				F3CF6EAF190ACEA4003E86EA /* ViewControllerTest.m */,
+				F3CF6EAE190ACE63003E86EA /* Vistas */,
 				F332E84F18D161BA00DF538D /* Images.xcassets */,
 				F332E83B18D161BA00DF538D /* Supporting Files */,
 			);
@@ -299,6 +294,30 @@
 				F3C680AB18FC9ADC0092D6D8 /* NIISansLight.ttf */,
 			);
 			path = "NII Sans";
+			sourceTree = "<group>";
+		};
+		F3CF6EAD190ACE37003E86EA /* Modelos */ = {
+			isa = PBXGroup;
+			children = (
+				F3AECC7918D36D2B0012748D /* Celdas */,
+				F3A6401718E490F6004AF17F /* Mipin.h */,
+				F3A6401818E490F6004AF17F /* Mipin.m */,
+				F3C680BB18FCD4440092D6D8 /* CustomCalloutAnnotation.h */,
+				F3C680BC18FCD4440092D6D8 /* CustomCalloutAnnotation.m */,
+			);
+			name = Modelos;
+			sourceTree = "<group>";
+		};
+		F3CF6EAE190ACE63003E86EA /* Vistas */ = {
+			isa = PBXGroup;
+			children = (
+				F332E84618D161BA00DF538D /* Main_iPhone.storyboard */,
+				F3C680BE18FCD6520092D6D8 /* CustomCallOutView.xib */,
+				F32CF00518F5A9220098A5CF /* flechas.xib */,
+				F32CF01718F5F5AF0098A5CF /* flechas_cierran.xib */,
+				F3B9EC3F18EF2A5500204323 /* Opcciones.xib */,
+			);
+			name = Vistas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -446,6 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3CF6EB0190ACEA4003E86EA /* ViewControllerTest.m in Sources */,
 				F332E86318D161BA00DF538D /* DejateCaerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -571,6 +591,7 @@
 					"$(inherited)",
 					/Users/carloscastellanos/Documents/DejateCaer/FacebookSDK,
 					/Users/carloscastellanos/Documents/DejateCaer,
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DejateCaer/DejateCaer-Prefix.pch";
@@ -594,6 +615,7 @@
 					"$(inherited)",
 					/Users/carloscastellanos/Documents/DejateCaer/FacebookSDK,
 					/Users/carloscastellanos/Documents/DejateCaer,
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DejateCaer/DejateCaer-Prefix.pch";

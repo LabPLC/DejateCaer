@@ -1,25 +1,24 @@
 //
-//  DejateCaerTests.m
-//  DejateCaerTests
+//  ViewControllerTest.m
+//  DejateCaer
 //
-//  Created by Carlos Castellanos on 12/03/14.
+//  Created by Carlos Castellanos on 25/04/14.
 //  Copyright (c) 2014 Carlos Castellanos. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface DejateCaerTests : XCTestCase
+@interface ViewControllerTest : XCTestCase
 
 @end
 
-@implementation DejateCaerTests
+@implementation ViewControllerTest
 
 - (void)setUp
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
-
 
 - (void)tearDown
 {

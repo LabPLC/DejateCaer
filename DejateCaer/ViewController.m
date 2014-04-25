@@ -391,6 +391,22 @@
             }
             //[self getLista];
         }
+        else {
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"Erro de conexion a internet, revisa tu conexcion y  vuelve a intentarlo " delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+            [alert show];
+            _tableView.rowHeight=450;
+            NSArray *vacio=[[NSArray alloc]initWithObjects:@"VACIO", nil];
+            eventos=vacio;
+            isEmpty=TRUE;
+            
+            /*radio= [NSString stringWithFormat:@"%i",[radio integerValue]+1000];
+             NSLog(@"nuevo radio %@",radio);
+             [self llamada_asincrona];*/
+            [self getMapa:latitud Y :longitud];
+            [self.tableView reloadData];
+
+            loading.hidden=TRUE;
+        }
     });
     
 }
