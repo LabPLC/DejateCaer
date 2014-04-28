@@ -1,8 +1,7 @@
 language: objective-c
 script:
   - brew update
-  - ./bin/brewv 0.1.15
-  - brew switch xctool 0.1.15
+  - brew upgrade xctool
   - xctool -project DejateCaer.xcodeproj -scheme DejateCaer -sdk iphonesimulator7.1 build test ONLY_ACTIVE_ARCH=NO
 notifications:
   email:
