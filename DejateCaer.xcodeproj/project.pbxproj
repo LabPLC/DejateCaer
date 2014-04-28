@@ -40,7 +40,6 @@
 		F3C680AC18FC9ADC0092D6D8 /* NIISans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3C680A918FC9ADC0092D6D8 /* NIISans-Bold.ttf */; };
 		F3C680AD18FC9ADC0092D6D8 /* NIISans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3C680AA18FC9ADC0092D6D8 /* NIISans.ttf */; };
 		F3C680AE18FC9ADC0092D6D8 /* NIISansLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3C680AB18FC9ADC0092D6D8 /* NIISansLight.ttf */; };
-		F3C680B018FCA7130092D6D8 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = F3C680AF18FCA7130092D6D8 /* pin.png */; };
 		F3C680B418FCA9520092D6D8 /* icono80.png in Resources */ = {isa = PBXBuildFile; fileRef = F3C680B118FCA9520092D6D8 /* icono80.png */; };
 		F3C680B518FCA9520092D6D8 /* icono58.png in Resources */ = {isa = PBXBuildFile; fileRef = F3C680B218FCA9520092D6D8 /* icono58.png */; };
 		F3C680B618FCA9520092D6D8 /* icono.png in Resources */ = {isa = PBXBuildFile; fileRef = F3C680B318FCA9520092D6D8 /* icono.png */; };
@@ -50,6 +49,15 @@
 		F3C680BF18FCD6520092D6D8 /* CustomCallOutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3C680BE18FCD6520092D6D8 /* CustomCallOutView.xib */; };
 		F3C680C118FCD9C00092D6D8 /* callout.png in Resources */ = {isa = PBXBuildFile; fileRef = F3C680C018FCD9C00092D6D8 /* callout.png */; };
 		F3CF6EB0190ACEA4003E86EA /* ViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CF6EAF190ACEA4003E86EA /* ViewControllerTest.m */; };
+		F3CF6EB4190EC998003E86EA /* mas.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CF6EB3190EC998003E86EA /* mas.png */; };
+		F3CF6EB8190ECBBC003E86EA /* flecha.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CF6EB6190ECBBC003E86EA /* flecha.png */; };
+		F3CF6EB9190ECBBC003E86EA /* lupa.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CF6EB7190ECBBC003E86EA /* lupa.png */; };
+		F3CF6EBB190ECE22003E86EA /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CF6EBA190ECE22003E86EA /* pin.png */; };
+		F3CF6EBD190ED506003E86EA /* flechas.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CF6EBC190ED506003E86EA /* flechas.png */; };
+		F3CF6EC1190EE07E003E86EA /* marker.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CF6EBE190EE07E003E86EA /* marker.png */; };
+		F3CF6EC2190EE07E003E86EA /* precio.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CF6EBF190EE07E003E86EA /* precio.png */; };
+		F3CF6EC3190EE07E003E86EA /* reloj.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CF6EC0190EE07E003E86EA /* reloj.png */; };
+		F3CF6EC5190EE084003E86EA /* asterisco.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CF6EC4190EE084003E86EA /* asterisco.png */; };
 		F3CFBFFF18FD083C00206262 /* regresar.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CFBFFB18FD083C00206262 /* regresar.png */; };
 		F3CFC00018FD083C00206262 /* evento.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CFBFFC18FD083C00206262 /* evento.png */; };
 		F3CFC00118FD083C00206262 /* donde.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CFBFFD18FD083C00206262 /* donde.png */; };
@@ -113,7 +121,6 @@
 		F3C680A918FC9ADC0092D6D8 /* NIISans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NIISans-Bold.ttf"; sourceTree = "<group>"; };
 		F3C680AA18FC9ADC0092D6D8 /* NIISans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NIISans.ttf; sourceTree = "<group>"; };
 		F3C680AB18FC9ADC0092D6D8 /* NIISansLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NIISansLight.ttf; sourceTree = "<group>"; };
-		F3C680AF18FCA7130092D6D8 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
 		F3C680B118FCA9520092D6D8 /* icono80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icono80.png; sourceTree = "<group>"; };
 		F3C680B218FCA9520092D6D8 /* icono58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icono58.png; sourceTree = "<group>"; };
 		F3C680B318FCA9520092D6D8 /* icono.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icono.png; sourceTree = "<group>"; };
@@ -125,6 +132,15 @@
 		F3C680C018FCD9C00092D6D8 /* callout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = callout.png; sourceTree = "<group>"; };
 		F3CF6EAF190ACEA4003E86EA /* ViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerTest.m; sourceTree = "<group>"; };
 		F3CF6EB1190AD92B003E86EA /* ViewController_ViewControllerClassExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController_ViewControllerClassExtension.h; sourceTree = "<group>"; };
+		F3CF6EB3190EC998003E86EA /* mas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mas.png; sourceTree = "<group>"; };
+		F3CF6EB6190ECBBC003E86EA /* flecha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flecha.png; sourceTree = "<group>"; };
+		F3CF6EB7190ECBBC003E86EA /* lupa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lupa.png; sourceTree = "<group>"; };
+		F3CF6EBA190ECE22003E86EA /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
+		F3CF6EBC190ED506003E86EA /* flechas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flechas.png; sourceTree = "<group>"; };
+		F3CF6EBE190EE07E003E86EA /* marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker.png; sourceTree = "<group>"; };
+		F3CF6EBF190EE07E003E86EA /* precio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = precio.png; sourceTree = "<group>"; };
+		F3CF6EC0190EE07E003E86EA /* reloj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reloj.png; sourceTree = "<group>"; };
+		F3CF6EC4190EE084003E86EA /* asterisco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asterisco.png; sourceTree = "<group>"; };
 		F3CFBFFB18FD083C00206262 /* regresar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = regresar.png; sourceTree = "<group>"; };
 		F3CFBFFC18FD083C00206262 /* evento.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evento.png; sourceTree = "<group>"; };
 		F3CFBFFD18FD083C00206262 /* donde.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donde.png; sourceTree = "<group>"; };
@@ -255,7 +271,8 @@
 		F3AECC7C18D374810012748D /* Imagenes */ = {
 			isa = PBXGroup;
 			children = (
-				F3C680AF18FCA7130092D6D8 /* pin.png */,
+				F3CF6EBA190ECE22003E86EA /* pin.png */,
+				F3CF6EB5190ECBA1003E86EA /* Barra */,
 				F3C680A418FC3F080092D6D8 /* tw.png */,
 				F3C680A518FC3F080092D6D8 /* fb.png */,
 				F32CF00718F5A98D0098A5CF /* tools.png */,
@@ -275,6 +292,11 @@
 				F3C680B218FCA9520092D6D8 /* icono58.png */,
 				F3C680B318FCA9520092D6D8 /* icono.png */,
 				F3C680C018FCD9C00092D6D8 /* callout.png */,
+				F3CF6EB3190EC998003E86EA /* mas.png */,
+				F3CF6EBE190EE07E003E86EA /* marker.png */,
+				F3CF6EBF190EE07E003E86EA /* precio.png */,
+				F3CF6EC0190EE07E003E86EA /* reloj.png */,
+				F3CF6EC4190EE084003E86EA /* asterisco.png */,
 			);
 			name = Imagenes;
 			sourceTree = "<group>";
@@ -325,6 +347,16 @@
 				F3B9EC4218EF2D7900204323 /* Opcciones.m */,
 			);
 			name = Controladores;
+			sourceTree = "<group>";
+		};
+		F3CF6EB5190ECBA1003E86EA /* Barra */ = {
+			isa = PBXGroup;
+			children = (
+				F3CF6EBC190ED506003E86EA /* flechas.png */,
+				F3CF6EB6190ECBBC003E86EA /* flecha.png */,
+				F3CF6EB7190ECBBC003E86EA /* lupa.png */,
+			);
+			name = Barra;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -407,10 +439,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3CF6EB8190ECBBC003E86EA /* flecha.png in Resources */,
+				F3CF6EB4190EC998003E86EA /* mas.png in Resources */,
 				F3C680C118FCD9C00092D6D8 /* callout.png in Resources */,
 				F3C680A618FC3F080092D6D8 /* tw.png in Resources */,
 				F3C680BA18FCCD870092D6D8 /* arrows2.png in Resources */,
 				F3D6F0B718EE837E007F9E31 /* codigo.png in Resources */,
+				F3CF6EC3190EE07E003E86EA /* reloj.png in Resources */,
+				F3CF6EC1190EE07E003E86EA /* marker.png in Resources */,
+				F3CF6EBD190ED506003E86EA /* flechas.png in Resources */,
 				F3C680B818FCAD4E0092D6D8 /* arrows.png in Resources */,
 				F3C680B618FCA9520092D6D8 /* icono.png in Resources */,
 				F32CF00B18F5A98D0098A5CF /* tools.png in Resources */,
@@ -418,15 +455,18 @@
 				F3CFBFFF18FD083C00206262 /* regresar.png in Resources */,
 				F32CF00D18F5A98D0098A5CF /* search.png in Resources */,
 				F332E85018D161BA00DF538D /* Images.xcassets in Resources */,
+				F3CF6EC2190EE07E003E86EA /* precio.png in Resources */,
 				F3CFC00218FD083C00206262 /* hora.png in Resources */,
+				F3CF6EB9190ECBBC003E86EA /* lupa.png in Resources */,
+				F3CF6EC5190EE084003E86EA /* asterisco.png in Resources */,
 				F3D6F0B518EE1FB7007F9E31 /* yo.png in Resources */,
 				F332E84818D161BA00DF538D /* Main_iPhone.storyboard in Resources */,
 				F3CFC00118FD083C00206262 /* donde.png in Resources */,
+				F3CF6EBB190ECE22003E86EA /* pin.png in Resources */,
 				F3B9EC4018EF2A5500204323 /* Opcciones.xib in Resources */,
 				F332E83F18D161BA00DF538D /* InfoPlist.strings in Resources */,
 				F3C680AC18FC9ADC0092D6D8 /* NIISans-Bold.ttf in Resources */,
 				F3C680AD18FC9ADC0092D6D8 /* NIISans.ttf in Resources */,
-				F3C680B018FCA7130092D6D8 /* pin.png in Resources */,
 				F3C680B518FCA9520092D6D8 /* icono58.png in Resources */,
 				F348B41A18DA86B500566356 /* news.png in Resources */,
 				F32CF01818F5F5AF0098A5CF /* flechas_cierran.xib in Resources */,

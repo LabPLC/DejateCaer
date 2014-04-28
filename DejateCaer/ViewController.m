@@ -40,6 +40,7 @@
     UIButton *herramientas;//diseño
     UITextField *buscar;//diseño
     UIView *contenedor_flotante;
+    UIView *vista_auxiliar;
     UIButton *bucar_aqui;
     
   
@@ -191,9 +192,9 @@
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
                                                   //custom al mapa
-                         mapa.frame = CGRectMake(0, 0, 320, self.view.frame.size.height-30);
+                         mapa.frame = CGRectMake(0, 0, 320, self.view.frame.size.height-53);
                          [mapa addSubview:contenedor_flotante];
-                         self.tableView.frame           = CGRectMake(0, self.view.frame.size.height-30,320, 30);
+                         self.tableView.frame           = CGRectMake(0, self.view.frame.size.height-53,320, 53);
                         
                          
                         
@@ -201,7 +202,7 @@
                      }
                      completion:^(BOOL finished){
                          
-                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 53)];
                          self.tableView.tableHeaderView.backgroundColor=[UIColor greenColor];
                          
                          NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas" owner:nil options:nil];
@@ -371,7 +372,7 @@
             
             CLLocationCoordinate2D newCoord = {newLat, newLon};
             
-            Mipin *annotationPoint = [[Mipin alloc] initWithTitle:[lugar objectForKey:@"nombre"] subtitle:[lugar objectForKey:@"direccion"] andCoordinate:newCoord tipo:@"" evento:i lugar:[lugar objectForKey:@"lugar"] hora:[lugar objectForKey:@"hora"]];
+            Mipin *annotationPoint = [[Mipin alloc] initWithTitle:[lugar objectForKey:@"nombre"] subtitle:[lugar objectForKey:@"lugar"] andCoordinate:newCoord tipo:@"" evento:i lugar:[lugar objectForKey:@"lugar"] hora:[lugar objectForKey:@"hora"]];
             
             [mapa addAnnotation:annotationPoint];
         }}
@@ -599,7 +600,7 @@
                              [mapa addSubview:contenedor_flotante];
                              
                              
-                             self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, self.view.frame.size.height/2)];
+                             self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, self.view.frame.size.height/2+70)];
                              self.tableView.tableHeaderView.backgroundColor=[UIColor clearColor];
                              self.tableView.scrollEnabled=YES;
                              
@@ -608,7 +609,8 @@
                              // llamar la vista desde el XIB
                              
                              flechas = [nibContents lastObject];
-                             flechas.frame=CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-30, 320, 30);
+                             flechas.frame=CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-90, 320, 90);
+                           //  self.tableView.tableHeaderView.backgroundColor=[UIColor blackColor];
                              [self.tableView.tableHeaderView addSubview:flechas];
                              [flechas addGestureRecognizer:tapFlechas];
                              
@@ -740,8 +742,8 @@
     }
     else{
         CGRect frame = aView.frame;
-        frame.size.width = 30;
-        frame.size.height = 40;
+        frame.size.width = 48;
+        frame.size.height = 52;
         aView.frame = frame;
         
     }
@@ -854,25 +856,38 @@ calloutAccessoryControlTapped:(UIControl *)control
 -(void)crearBarraBusqueda{
     //Crea contenedor de busqueda
     contenedor_flotante=[[UIView alloc]initWithFrame:CGRectMake(5, 25, 310, 35)];
-    contenedor_flotante.backgroundColor=[UIColor whiteColor];
-    UIImageView *lupa=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
-    lupa.image=[UIImage imageNamed:@"search.png"];
-    [contenedor_flotante addSubview:lupa];
+    contenedor_flotante.backgroundColor=[UIColor blackColor];
+    vista_auxiliar=[[UIView alloc]initWithFrame:CGRectMake(1, 1, 308, 33)];
+    vista_auxiliar.backgroundColor=[UIColor whiteColor];
+    [contenedor_flotante addSubview:vista_auxiliar];
+
+    
+    UIImageView *lupa=[[UIImageView alloc]initWithFrame:CGRectMake(7, 7, 18, 18)];
+    lupa.image=[UIImage imageNamed:@"lupa.png"];
+    [vista_auxiliar addSubview:lupa];
+    
     buscar=[[UITextField alloc]initWithFrame:CGRectMake(37, 0, 205, 35)];
     buscar.delegate = self;
     buscar.placeholder=@"Zamora 54,Condesa,Cuahutemoc";
-    [contenedor_flotante addSubview:buscar];
+    [buscar setFont:[UIFont systemFontOfSize:10]];
+
+    [vista_auxiliar addSubview:buscar];
+    
+    UIView * aux=[[UIView alloc]initWithFrame:CGRectMake(240, 0, 1, 34)];
+    aux.backgroundColor=[UIColor blackColor];
     
     encuentrame = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [encuentrame addTarget:self
                     action:@selector(getCurrentLocation:)
           forControlEvents:UIControlEventTouchUpInside];
     encuentrame.frame = CGRectMake(240, 0, 35, 35);
-    UIImage *btnImage = [UIImage imageNamed:@"findme.png"];
+    UIImage *btnImage = [UIImage imageNamed:@"flecha.png"];
     UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, encuentrame.frame.size.width, encuentrame.frame.size.height)];
     img.image=btnImage;
     [encuentrame addSubview:img];
     
+    UIView * aux2=[[UIView alloc]initWithFrame:CGRectMake(275, 0, 1, 34)];
+    aux2.backgroundColor=[UIColor blackColor];
     herramientas = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [herramientas addTarget:self
                      action:@selector(opcciones:)
@@ -882,8 +897,10 @@ calloutAccessoryControlTapped:(UIControl *)control
     UIImageView *img2=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, herramientas.frame.size.width, herramientas.frame.size.height)];
     img2.image=btnImage2;
     [herramientas addSubview:img2];
-    [contenedor_flotante addSubview:encuentrame];
-    [contenedor_flotante addSubview:herramientas];
+    [vista_auxiliar addSubview:aux2];
+    [vista_auxiliar addSubview:aux];
+    [vista_auxiliar addSubview:encuentrame];
+    [vista_auxiliar addSubview:herramientas];
     //Termina contenedor de busqueda
     
     
@@ -895,9 +912,11 @@ bucar_aqui = [UIButton buttonWithType:UIButtonTypeRoundedRect];
                action:@selector(getCenter:)
      forControlEvents:UIControlEventTouchUpInside];
 [bucar_aqui setTitle:@"Bucar en esta zona" forState:UIControlStateNormal];
-bucar_aqui.frame = CGRectMake(80 , 70, 160.0, 40.0);
-bucar_aqui.backgroundColor=[UIColor whiteColor];
-//bucar_aqui.hidden=TRUE;
+bucar_aqui.frame = CGRectMake(80 , 55, 160.0, 40.0);
+    bucar_aqui.tintColor=[UIColor whiteColor];
+bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:0.8];
+
+    //bucar_aqui.hidden=TRUE;
     [mapa addSubview:bucar_aqui];
 }
 

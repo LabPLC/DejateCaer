@@ -27,7 +27,7 @@
         _nombre=[[UILabel alloc]initWithFrame:CGRectMake(10, 5, 235, 70)];
         _nombre.textColor=[UIColor whiteColor];
         //[_nombre setFont:[UIFont systemFontOfSize:16]];
-        [_nombre setFont:[UIFont fontWithName:@"NIISans-Bold" size:16]];
+        [_nombre setFont:[UIFont fontWithName:@"NIISans" size:15]];
         _nombre.numberOfLines = 3;
         
         [self   addSubview:_nombre];
@@ -35,7 +35,7 @@
         _hora=[[UILabel alloc]initWithFrame:CGRectMake(10, 60, 300, 34)];
         _hora.textColor=[UIColor whiteColor];
         //[_hora setFont:[UIFont systemFontOfSize:10]];
-        [_hora setFont:[UIFont fontWithName:@"NIISansLight" size:10]];
+        [_hora setFont:[UIFont fontWithName:@"NIISansLight" size:12]];
 
         [self   addSubview:_hora];
         
@@ -44,7 +44,7 @@
         _distancia.text=@"300 m";
         _distancia.textColor=[UIColor whiteColor];
         // [_distancia setFont:[UIFont systemFontOfSize:14]];
-        [_distancia setFont:[UIFont fontWithName:@"NIISansLight" size:13]];
+        [_distancia setFont:[UIFont fontWithName:@"NIISansLight" size:12]];
         [self    addSubview:_distancia];
         
        // cell.selectedBackgroundView =  selectedView;

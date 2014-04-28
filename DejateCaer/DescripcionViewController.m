@@ -31,6 +31,7 @@
 - (void)viewDidLoad
 {   [_mapa setDelegate:self];
 
+    
 
     
     _LocationManager = [[CLLocationManager alloc] init];
@@ -39,9 +40,13 @@
     [_LocationManager startUpdatingLocation];
     
     _nombre.text=[_evento objectForKey:@"nombre"];
+     [_nombre setFont:[UIFont fontWithName:@"NIISans-Bold" size:17]];
     _lugar.text=[_evento objectForKey:@"lugar"];
+    [_lugar setFont:[UIFont fontWithName:@"NIISans" size:17]];
     _horario.text=[_evento objectForKey:@"hora"];
+         [_horario setFont:[UIFont fontWithName:@"NIISans" size:17]];
     _direccion.text=[_evento objectForKey:@"direccion"];
+         [_direccion setFont:[UIFont fontWithName:@"NIISansLight" size:17]];
     CLLocationCoordinate2D SCL;
     SCL.latitude = [[_evento objectForKey:@"latitud"] doubleValue];
     SCL.longitude = [[_evento objectForKey:@"longitud"]doubleValue];
