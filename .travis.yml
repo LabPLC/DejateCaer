@@ -1,2 +1,6 @@
 language: objective-c
-script: xctool -project DejateCaer.xcodeproj -scheme DejateCaer -sdk iphonesimulator build test
+script: xctool -project DejateCaer.xcodeproj -scheme DejateCaer -sdk iphonesimulator7.0 build test ONLY_ACTIVE_ARCH=NO
+notifications:
+  email:
+    recipients:
+      - rockarlos@me.com
