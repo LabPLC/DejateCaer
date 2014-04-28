@@ -9,7 +9,6 @@
 #import "Mipin.h"
 #import "DescripcionViewController.h"
 #import "ViewController.h"
-#import "MapaViewController.h"
 #import <Social/Social.h>
 @interface DescripcionViewController ()
 
