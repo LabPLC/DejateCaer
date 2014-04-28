@@ -17,7 +17,7 @@
 
 @implementation DescripcionViewController
 {
-    BOOL touch_map;
+
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,10 +30,8 @@
 
 - (void)viewDidLoad
 {   [_mapa setDelegate:self];
-    touch_map=FALSE;
-    UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc]
-                                      initWithTarget:self action:@selector(touchMap)];
-    [_mapa addGestureRecognizer:tapRec];
+
+
     
     _LocationManager = [[CLLocationManager alloc] init];
     _LocationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
@@ -69,14 +67,6 @@
     [_mapa setRegion:region animated:YES];
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-}
--(void)touchMap{
-  /*  MapaViewController *mapa= [[self storyboard] instantiateViewControllerWithIdentifier:@"mapa"];//[[MapaViewController alloc]init];
-    mapa.latitud=[_evento objectForKey:@"latitud"];
-    mapa.longitud=[_evento objectForKey:@"longitud"];
-    mapa.nombre=[_evento objectForKey:@"nombre"];
-    mapa.view.backgroundColor=[UIColor whiteColor];
-[self.navigationController pushViewController:mapa animated:YES];*/
 }
 
 -(IBAction)regresar:(id)sender

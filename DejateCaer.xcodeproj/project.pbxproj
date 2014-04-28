@@ -25,7 +25,6 @@
 		F332E85818D161BA00DF538D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F332E83418D161BA00DF538D /* Foundation.framework */; };
 		F332E85918D161BA00DF538D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F332E83818D161BA00DF538D /* UIKit.framework */; };
 		F332E86118D161BA00DF538D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F332E85F18D161BA00DF538D /* InfoPlist.strings */; };
-		F332E86318D161BA00DF538D /* DejateCaerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F332E86218D161BA00DF538D /* DejateCaerTests.m */; };
 		F332E86D18D1630600DF538D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F332E86C18D1630600DF538D /* MapKit.framework */; };
 		F332E87218D16CB100DF538D /* eventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F332E87118D16CB100DF538D /* eventCell.m */; };
 		F332E87518D185AD00DF538D /* DescripcionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F332E87418D185AD00DF538D /* DescripcionViewController.m */; };
@@ -94,7 +93,6 @@
 		F332E85618D161BA00DF538D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F332E85E18D161BA00DF538D /* DejateCaerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DejateCaerTests-Info.plist"; sourceTree = "<group>"; };
 		F332E86018D161BA00DF538D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F332E86218D161BA00DF538D /* DejateCaerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DejateCaerTests.m; sourceTree = "<group>"; };
 		F332E86C18D1630600DF538D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F332E87018D16CB100DF538D /* eventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventCell.h; sourceTree = "<group>"; };
 		F332E87118D16CB100DF538D /* eventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eventCell.m; sourceTree = "<group>"; };
@@ -126,6 +124,7 @@
 		F3C680BE18FCD6520092D6D8 /* CustomCallOutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCallOutView.xib; sourceTree = "<group>"; };
 		F3C680C018FCD9C00092D6D8 /* callout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = callout.png; sourceTree = "<group>"; };
 		F3CF6EAF190ACEA4003E86EA /* ViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerTest.m; sourceTree = "<group>"; };
+		F3CF6EB1190AD92B003E86EA /* ViewController_ViewControllerClassExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController_ViewControllerClassExtension.h; sourceTree = "<group>"; };
 		F3CFBFFB18FD083C00206262 /* regresar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = regresar.png; sourceTree = "<group>"; };
 		F3CFBFFC18FD083C00206262 /* evento.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evento.png; sourceTree = "<group>"; };
 		F3CFBFFD18FD083C00206262 /* donde.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donde.png; sourceTree = "<group>"; };
@@ -165,8 +164,6 @@
 		F332E82818D161BA00DF538D = {
 			isa = PBXGroup;
 			children = (
-				F3CF6EAD190ACE37003E86EA /* Modelos */,
-				F3AECC7C18D374810012748D /* Imagenes */,
 				F332E83A18D161BA00DF538D /* DejateCaer */,
 				F332E85C18D161BA00DF538D /* DejateCaerTests */,
 				F332E83318D161BA00DF538D /* Frameworks */,
@@ -199,16 +196,14 @@
 		F332E83A18D161BA00DF538D /* DejateCaer */ = {
 			isa = PBXGroup;
 			children = (
+				F3AECC7C18D374810012748D /* Imagenes */,
+				F3CF6EAD190ACE37003E86EA /* Modelos */,
 				F332E84318D161BA00DF538D /* AppDelegate.h */,
 				F332E84418D161BA00DF538D /* AppDelegate.m */,
+				F3CF6EB2190ADC24003E86EA /* Controladores */,
 				F3AECC7F18D3881B0012748D /* MapaViewController.h */,
 				F3AECC8018D3881B0012748D /* MapaViewController.m */,
-				F332E87318D185AD00DF538D /* DescripcionViewController.h */,
-				F332E87418D185AD00DF538D /* DescripcionViewController.m */,
-				F332E84C18D161BA00DF538D /* ViewController.h */,
-				F332E84D18D161BA00DF538D /* ViewController.m */,
-				F3B9EC4118EF2D7900204323 /* Opcciones.h */,
-				F3B9EC4218EF2D7900204323 /* Opcciones.m */,
+				F3CF6EB1190AD92B003E86EA /* ViewController_ViewControllerClassExtension.h */,
 				F3CF6EAF190ACEA4003E86EA /* ViewControllerTest.m */,
 				F3CF6EAE190ACE63003E86EA /* Vistas */,
 				F332E84F18D161BA00DF538D /* Images.xcassets */,
@@ -232,7 +227,6 @@
 		F332E85C18D161BA00DF538D /* DejateCaerTests */ = {
 			isa = PBXGroup;
 			children = (
-				F332E86218D161BA00DF538D /* DejateCaerTests.m */,
 				F332E85D18D161BA00DF538D /* Supporting Files */,
 			);
 			path = DejateCaerTests;
@@ -283,7 +277,6 @@
 				F3C680C018FCD9C00092D6D8 /* callout.png */,
 			);
 			name = Imagenes;
-			path = DejateCaer;
 			sourceTree = "<group>";
 		};
 		F3C680A818FC9ADC0092D6D8 /* NII Sans */ = {
@@ -306,6 +299,7 @@
 				F3C680BC18FCD4440092D6D8 /* CustomCalloutAnnotation.m */,
 			);
 			name = Modelos;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		F3CF6EAE190ACE63003E86EA /* Vistas */ = {
@@ -318,6 +312,19 @@
 				F3B9EC3F18EF2A5500204323 /* Opcciones.xib */,
 			);
 			name = Vistas;
+			sourceTree = "<group>";
+		};
+		F3CF6EB2190ADC24003E86EA /* Controladores */ = {
+			isa = PBXGroup;
+			children = (
+				F332E84C18D161BA00DF538D /* ViewController.h */,
+				F332E84D18D161BA00DF538D /* ViewController.m */,
+				F332E87318D185AD00DF538D /* DescripcionViewController.h */,
+				F332E87418D185AD00DF538D /* DescripcionViewController.m */,
+				F3B9EC4118EF2D7900204323 /* Opcciones.h */,
+				F3B9EC4218EF2D7900204323 /* Opcciones.m */,
+			);
+			name = Controladores;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,7 +473,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3CF6EB0190ACEA4003E86EA /* ViewControllerTest.m in Sources */,
-				F332E86318D161BA00DF538D /* DejateCaerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

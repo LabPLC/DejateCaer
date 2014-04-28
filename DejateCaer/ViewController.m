@@ -13,29 +13,19 @@
 #import "AppDelegate.h"
 #import "Mipin.h"
 #import "CustomCalloutAnnotation.h"
-//#import "CalloutAnnotation.h"
 
 
-#define DEFAULT_Y_OFFSET                     ([[UIScreen mainScreen] bounds].size.height == 480.0f) ? -200.0f : -250.0f
-#define FULL_Y_OFFSET                        20.0f
-#define MIN_Y_OFFSET_TO_REACH                -30
-#define OPEN_SHUTTER_LATITUDE_MINUS          .005
-#define CLOSE_SHUTTER_LATITUDE_MINUS         -0.013
+
 
 @interface ViewController ()
-
-
 @property (strong, nonatomic)   UITapGestureRecognizer  *tapMapViewGesture;
 @property (strong, nonatomic)   UITapGestureRecognizer  *tapTableViewGesture;
-@property (nonatomic)           CGRect                  headerFrame;
-@property (nonatomic)           float                   headerYOffSet;
-@property (nonatomic)           BOOL                    isShutterOpen;
-@property (nonatomic)           BOOL                    displayMap;
+
 @end
 
 @implementation ViewController
 {
-    NSArray *eventos;
+  //  NSArray *eventos;
     NSString *currentLatitud;
     NSString *currentLongitud;
     NSString *radio;
@@ -60,127 +50,59 @@
     
     AppDelegate *delegate;
  
-    
+    //Vista de Loading que se presenta mientras se hace la peticion 
     UIView *loading;
     UIActivityIndicatorView *spinner;
 }
-@synthesize mapa,LocationManager;
+@synthesize mapa,LocationManager,eventos;
 
-@synthesize minHeighTableViewHeader = _minHeighTableViewHeader;
 @synthesize heighTableView          = _heighTableView;
-@synthesize default_Y_mapView       = _default_Y_mapView;
-@synthesize default_Y_tableView     = _default_Y_tableView;
-@synthesize Y_tableViewOnBottom     = _Y_tableViewOnBottom;
-@synthesize latitudeUserUp          = _latitudeUserUp;
-@synthesize latitudeUserDown        = _latitudeUserDown;
-@synthesize minYOffsetToReach       = _minYOffsetToReach;
--(void)slideMenu{
-    
-}
+
+
+
 -(id)init{
     self =  [super init];
     if(self){
-        [self setup];
+       
     }
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder{
-    self = [super initWithCoder:aDecoder];
-    if(self){
-        [self setup];
-    }
-    return self;
-}
 
-// Set all view we will need
--(void)setup{
-
-    _minYOffsetToReach          = MIN_Y_OFFSET_TO_REACH;
-    _latitudeUserUp             = CLOSE_SHUTTER_LATITUDE_MINUS;
-    _latitudeUserDown           = OPEN_SHUTTER_LATITUDE_MINUS;
-    _default_Y_mapView          = DEFAULT_Y_OFFSET;
-}
 
 
 - (void)viewDidLoad
 {
-    // [self getPlacesApple];
-    isArrow=FALSE;
+    //Definde Fondo de la vista
     self.view.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1];
+   
     
-    
-    //Crea contenedor de busqueda
-    contenedor_flotante=[[UIView alloc]initWithFrame:CGRectMake(5, 25, 310, 35)];
-    contenedor_flotante.backgroundColor=[UIColor whiteColor];
-    UIImageView *lupa=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
-    lupa.image=[UIImage imageNamed:@"search.png"];
-    [contenedor_flotante addSubview:lupa];
-    buscar=[[UITextField alloc]initWithFrame:CGRectMake(37, 0, 205, 35)];
-    buscar.delegate = self;
-    buscar.placeholder=@"Zamora 54,Condesa,Cuahutemoc";
-    [contenedor_flotante addSubview:buscar];
-    
-    encuentrame = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [encuentrame addTarget:self
-                    action:@selector(getCurrentLocation:)
-          forControlEvents:UIControlEventTouchUpInside];
-    encuentrame.frame = CGRectMake(240, 0, 35, 35);
-    UIImage *btnImage = [UIImage imageNamed:@"findme.png"];
-    UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, encuentrame.frame.size.width, encuentrame.frame.size.height)];
-    img.image=btnImage;
-    [encuentrame addSubview:img];
-    
-    herramientas = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [herramientas addTarget:self
-                     action:@selector(opcciones:)
-           forControlEvents:UIControlEventTouchUpInside];
-    herramientas.frame = CGRectMake(275, 0, 35, 35);
-    UIImage *btnImage2 = [UIImage imageNamed:@"tools.png"];
-    UIImageView *img2=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, herramientas.frame.size.width, herramientas.frame.size.height)];
-    img2.image=btnImage2;
-    [herramientas addSubview:img2];
-    [contenedor_flotante addSubview:encuentrame];
-    [contenedor_flotante addSubview:herramientas];
-    //Termina contenedor de busqueda
-    
-    
+    //Banderas para las vistas
+    isArrow=FALSE;
     delegate.isOption=FALSE;
   
     //Añadimos un escuchado de eventos de notificationController  para recargar la pagina
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cerrarOpcciones) name:@"aceptar" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(actualizar) name:@"actualizar" object:nil];
-    
 
-    
-    
-    
-    
     //declaramos un variable que nos servira como delegado
     delegate= (AppDelegate *) [[UIApplication sharedApplication] delegate];
     ;
-    //Titulo para la vista en el navegation controller
-    self.title=@"Eventos";
+   
     
     //Copiamos el radio del delegado por default es  2000 metros
     radio=delegate.user_radio;//@"2000";
+    [self crearBarraBusqueda];
     
     
+    //obtenemos la ubicacion del usuario y centramos el mapa ahi
     LocationManager = [[CLLocationManager alloc] init];
     LocationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
     LocationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
     [LocationManager startUpdatingLocation];
     
-    
-    
     [mapa setDelegate:self];
-    
-    
-    //llamamos metodo para crear la tabla
-    [self crearTabla];
-    
-    [self setupMapView];
     
     CLLocationCoordinate2D SCL;
     SCL.latitude = LocationManager.location.coordinate.latitude-0.020;
@@ -189,16 +111,28 @@
     [mapa setShowsUserLocation:YES];
     [mapa setRegion:region animated:YES];
     
-    [self crearLoadingView];
-    //obtenemos los eventos
-    [self llamada_asincrona:LocationManager.location.coordinate.latitude Y:LocationManager.location.coordinate.longitude];
     
+    
+    //llamamos metodo para crear la tabla
+    [self crearTabla];
+    
+    //iniciamos el mapa
+    [self setupMapView];
+    
+
+    
+    [self crearLoadingView];
+    
+    //obtenemos los eventos
+    [self obtenerEventos:LocationManager.location.coordinate.latitude Y:LocationManager.location.coordinate.longitude];
+    //iniciamos con la lista de evnetos oculta
     [self handleTapMapView:nil];
+    
     [super viewDidLoad];
 	
 }
+
 -(void)crearTabla{
-    
     
     
     _tableView                  = [[UITableView alloc]  initWithFrame: CGRectMake(0, 64, 320, self.view.frame.size.height-64)];
@@ -207,13 +141,14 @@
     _tableView.rowHeight=90;
     [_tableView setBackgroundColor:[UIColor clearColor]];
     _tableView.tableHeaderView.backgroundColor=[UIColor grayColor];
-    // Add gesture to gestures
+   
+    // Add Gestoss
     _tapMapViewGesture      = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                       action:@selector(handleTapMapView:)];
     _tapTableViewGesture    = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                       action:@selector(handleTapTableView:)];
     [_tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
-    //[_tableView addGestureRecognizer:_tapTableViewGesture];
+   
     
     _tableView.dataSource   = self;
     _tableView.delegate     = self;
@@ -223,9 +158,7 @@
                   initWithTarget:self action:@selector(touchTabla)];
     
     
-    tapDetails = [[UITapGestureRecognizer alloc]
-                  initWithTarget:self action:@selector(goToDetalles)];
-    
+       
     [flechas addGestureRecognizer:tapFlechas];
     _tableView.scrollEnabled=FALSE;
     
@@ -244,7 +177,9 @@
     [self crearBuscaAqui];
 }
 
-#pragma mark - Internal Methods
+
+#pragma mark - Comportamiento de la vista del mapa y lista
+
 //vista de la lista escondida
 - (void)handleTapMapView:(UIGestureRecognizer *)gesture {
      [self.view endEditing:YES];
@@ -271,18 +206,13 @@
                          
                          NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas" owner:nil options:nil];
                          
-                         // Find the view among nib contents (not too hard assuming there is only one view in it).
+                         // Cargamos la vista desde el XIB
                          flechas = [nibContents lastObject];
                          [flechas addGestureRecognizer:tapFlechas];
                          [self.tableView.tableHeaderView addSubview:flechas];
-                         self.isShutterOpen = NO;
                            _tableView.scrollEnabled=FALSE;
                          [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
-                         
-                                                // Inform the delegate
-                      /*   if([self.delegate respondsToSelector:@selector(didTableViewMoveUp)]){
-                             [self.delegate didTableViewMoveUp];
-                         }*/
+                    
                      }];
     
     
@@ -295,48 +225,21 @@
 }
 
 
-
-#pragma mark - Table view Delegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    // check if the Y offset is under the minus Y to reach
-    if (self.tableView.contentOffset.y < self.minYOffsetToReach){
-        if(!self.displayMap)
-            self.displayMap                      = YES;
-    }else{
-        if(self.displayMap)
-            self.displayMap                      = NO;
+-(int)respuestaObtenerEventos{
+    if (!isEmpty) {
+        //si tiene evento
+          return 1;
     }
-    
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    //
-    //if(self.displayMap)
-    // [self openShutter];
+    else {
+        //no tiene eventos
+        return 0;
+    }
 }
 
 
--(void)crearLoadingView{
-    //Creamos vista que contiene el spinner y lo enseñamos al usuario
-    loading=[[UIView alloc]initWithFrame:CGRectMake(10, 10
-                                                    , self.view.frame.size.width-20, self.view.frame.size.height-20)];
-    loading.backgroundColor=[UIColor blackColor];
-    loading.alpha=0.8;
-    loading.layer.cornerRadius = 5;
-    loading.layer.masksToBounds = YES;
-    
-    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [spinner setCenter:CGPointMake(loading.frame.size.width/2.0, loading.frame.size.height/2.0)];
-    [spinner startAnimating];
-    [loading addSubview:spinner];
-    [self.view addSubview:loading];
-    
-    
-}
 
-
--(void)llamada_asincrona :(float) latitud Y : (float) longitud {
+-(void)obtenerEventos :(float) latitud Y : (float) longitud {
+    
     //obtenemos la posicion del usuario
     currentLatitud=[NSString stringWithFormat:@"%.8f", latitud];
     currentLongitud=[NSString stringWithFormat:@"%.8f", longitud];
@@ -372,11 +275,11 @@
                 eventos=vacio;
                 isEmpty=TRUE;
                 
-                /*radio= [NSString stringWithFormat:@"%i",[radio integerValue]+1000];
-                 NSLog(@"nuevo radio %@",radio);
-                 [self llamada_asincrona];*/
+                
                 [self getMapa:latitud Y :longitud];
                 [self.tableView reloadData];
+                [self respuestaObtenerEventos];
+                
             }
             else{
                 _tableView.rowHeight=90;
@@ -385,11 +288,13 @@
                 [self getMapa:latitud Y :longitud];
                 
                 [self.tableView reloadData];
-                
+                  [self respuestaObtenerEventos];
                 
                 
             }
+           // [self respuetaObtenerEventos:1];
             //[self getLista];
+            
         }
         else {
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"Erro de conexion a internet, revisa tu conexcion y  vuelve a intentarlo " delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
@@ -398,17 +303,15 @@
             NSArray *vacio=[[NSArray alloc]initWithObjects:@"VACIO", nil];
             eventos=vacio;
             isEmpty=TRUE;
-            
-            /*radio= [NSString stringWithFormat:@"%i",[radio integerValue]+1000];
-             NSLog(@"nuevo radio %@",radio);
-             [self llamada_asincrona];*/
+          
             [self getMapa:latitud Y :longitud];
             [self.tableView reloadData];
 
             loading.hidden=TRUE;
+              [self respuestaObtenerEventos];
         }
     });
-    
+  
 }
 
 -(void)getLista {
@@ -501,11 +404,11 @@
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(SCL, 4000, 4000);
     [mapa setShowsUserLocation:YES];
     [mapa setRegion:region animated:YES];
-    [self llamada_asincrona:SCL.latitude Y:SCL.longitude];
+    [self obtenerEventos:SCL.latitude Y:SCL.longitude];
     
     
 }
-
+#pragma mark - Table view Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -544,11 +447,8 @@
 {
     return [eventos count];
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -606,112 +506,6 @@
     
 }
 
-
-
-
-
-
--(void)actualizar{
-    NSLog(@"reload");
-    radio=delegate.user_radio;
- 
-        [self getCurrentLocation:nil];
-   
-    //[self llamada_asincrona];
-}
-#pragma mark - MapView Delegate
-
-- (MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation: (id<MKAnnotation>) annotation {
-    
-   /* if ([annotation isKindOfClass:[CalloutAnnotation class]]) {
-        return nil;
-        // NSLog(@"fue letrerito");
-    }
-    else{*/
-        Mipin  *anotacion1 = (Mipin*)annotation;
-        
-        
-        // Comprobamos si se trata de la anotación correspondiente al usuario.
-        if ([annotation isKindOfClass:[MKUserLocation class]])
-        {
-            return nil;
-        }
-        
-        MKAnnotationView *aView = [[MKAnnotationView alloc] initWithAnnotation:anotacion1 reuseIdentifier:@"pinView"];
-    
-        UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        [rightButton setTitle:annotation.title forState:UIControlStateNormal];
-        [aView setRightCalloutAccessoryView:rightButton];
-    
-   // [aView setBackgroundColor:[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:0.7]];
-
-        aView.canShowCallout = YES;
-        aView.enabled = YES;
-        aView.centerOffset = CGPointMake(0, -20);
-        aView.tag=anotacion1.id_event;
-        aView.draggable = YES;
-        UIImage *imagen;
-        if ([anotacion1.tipo isEqualToString:@"ubicacion"]) {
-            imagen = [UIImage imageNamed:@"yo.png"];
-        }
-        else{
-            imagen = [UIImage imageNamed:@"pin.png"];
-        }
-        
-        aView.image = imagen;
-        //\\-------------------------------------------------------------------------------///
-        // Establecemos el tamaño óptimo para el Pin
-        //\\-------------------------------------------------------------------------------///
-        
-        if ([anotacion1.tipo isEqualToString:@"ubicacion"]) {
-            CGRect frame = aView.frame;
-            frame.size.width = 43;
-            frame.size.height = 71;
-            aView.frame = frame;
-        }
-        else{
-            CGRect frame = aView.frame;
-            frame.size.width = 30;
-            frame.size.height = 40;
-            aView.frame = frame;
-            
-        }
-        
-        
-        return aView;
-    //}
-    
-    
-}
-
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view
-calloutAccessoryControlTapped:(UIControl *)control
-{
-    
-   
-    DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
-    if ([delegate.alto intValue] < 568)
-    {
-        detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion2"];
-        
-    }
-    
-    else
-    {
-        
-        detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
-        
-    }
-    
-    // detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
-    detalles.evento=[eventos objectAtIndex:view.tag];
-    detalles.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:detalles animated:YES completion:NULL];}
-
-
-
-
-
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     //first get total rows in that section by current indexPath.
     NSInteger totalRow = [tableView numberOfRowsInSection:indexPath.section];
@@ -734,9 +528,26 @@ calloutAccessoryControlTapped:(UIControl *)control
     }
 }
 
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+
+-(void)actualizar{
+    NSLog(@"reload");
+    radio=delegate.user_radio;
+    
+    [self getCurrentLocation:nil];
+    
+}
 -(IBAction)opcciones:(id)sender
 {
-    //[[UIView alloc]initWithFrame:CGRectMake(5, 24, self.view.frame.size.width-10, self.view.frame.size.height-29)];
+
     delegate.isOption=TRUE;
     NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"Opcciones" owner:nil options:nil];
     
@@ -757,9 +568,7 @@ calloutAccessoryControlTapped:(UIControl *)control
                        options:UIViewAnimationOptionTransitionFlipFromTop
                     completion:nil];
     
-    //   self.navigationController.navigationBarHidden = YES;
-    
-    // [self.view addSubview:opcciones];
+  
     
 }
 -(void)cerrarOpcciones{
@@ -796,16 +605,12 @@ calloutAccessoryControlTapped:(UIControl *)control
                              
                              NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas_cierran" owner:nil options:nil];
                              
-                             // Find the view among nib contents (not too hard assuming there is only one view in it).
+                             // llamar la vista desde el XIB
                              
                              flechas = [nibContents lastObject];
                              flechas.frame=CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-30, 320, 30);
                              [self.tableView.tableHeaderView addSubview:flechas];
                              [flechas addGestureRecognizer:tapFlechas];
-                             
-                             //flechas=[[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-30, 320, 30)];
-                           //  flechas.backgroundColor=[UIColor whiteColor];
-                             
                              
                              
                              
@@ -813,16 +618,11 @@ calloutAccessoryControlTapped:(UIControl *)control
                              
                          }
                          completion:^(BOOL finished){
-                             self.isShutterOpen = NO;
+                            
                              [self.tableView setScrollEnabled:YES];
                              [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
                              
-                          
-                             // Inform the delegate
-                           /*  if([self.delegate respondsToSelector:@selector(didTableViewMoveUp)]){
-                                 [self.delegate didTableViewMoveUp];
-                             }*/
-                         }];
+                          }];
     }
     else{
         isArrow=FALSE;
@@ -830,41 +630,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     }
     
 }
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    
-    NSLog(@"scrolleando tabla");
-   //  [self touchTabla];
-}
--(void) getPlaces{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *direccion=buscar.text;//@"juan%20escutia%2094,la%20Condesa";
-        direccion = [direccion stringByReplacingOccurrencesOfString:@" "
-                                                         withString:@"%20"];
-        NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?key=TUAPIKEY&sensor=true&query=%@,distritofederal",direccion];
-        
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-        
-        if (data!=nil) {
-            
-            
-            NSString *dato=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSMutableString * miCadena = [NSMutableString stringWithString: dato];
-            NSData *data1 = [miCadena dataUsingEncoding:NSUTF8StringEncoding];
-            
-            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data1 options:NSJSONReadingAllowFragments error:nil];
-            NSDictionary *primero=[[jsonObject objectForKey:@"results"]objectAtIndex:0];
-            NSDictionary *coordenadas=[[primero objectForKey:@"geometry"] objectForKey:@"location"];
-            
-            [self llamada_asincrona: [[coordenadas objectForKey:@"lat"] floatValue] Y:[[coordenadas objectForKey:@"lng"] floatValue]];
-        }
-        else{
-            
-            //noencotramosdireecion typea bien
-        }
-        
-    });
-    
-}
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (buscar.text!=nil ) {
@@ -916,12 +682,101 @@ calloutAccessoryControlTapped:(UIControl *)control
         NSLog(@"Received placemarks: %@", placemarks);
         NSLog(@"%f,%f",placemark.location.coordinate.latitude,placemark.location.coordinate.longitude);
         loading.hidden=FALSE;
-        [self llamada_asincrona: placemark.location.coordinate.latitude Y:placemark.location.coordinate.longitude];
+        [self obtenerEventos: placemark.location.coordinate.latitude Y:placemark.location.coordinate.longitude];
         //[self displayPlacemarks:placemarks];
     }];
     
 }
 
+#pragma mark - MapView Delegate
+
+- (MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation: (id<MKAnnotation>) annotation {
+    
+    /* if ([annotation isKindOfClass:[CalloutAnnotation class]]) {
+     return nil;
+     // NSLog(@"fue letrerito");
+     }
+     else{*/
+    Mipin  *anotacion1 = (Mipin*)annotation;
+    
+    
+    // Comprobamos si se trata de la anotación correspondiente al usuario.
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+    {
+        return nil;
+    }
+    
+    MKAnnotationView *aView = [[MKAnnotationView alloc] initWithAnnotation:anotacion1 reuseIdentifier:@"pinView"];
+    
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    [rightButton setTitle:annotation.title forState:UIControlStateNormal];
+    [aView setRightCalloutAccessoryView:rightButton];
+    
+    // [aView setBackgroundColor:[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:0.7]];
+    
+    aView.canShowCallout = YES;
+    aView.enabled = YES;
+    aView.centerOffset = CGPointMake(0, -20);
+    aView.tag=anotacion1.id_event;
+    aView.draggable = YES;
+    UIImage *imagen;
+    if ([anotacion1.tipo isEqualToString:@"ubicacion"]) {
+        imagen = [UIImage imageNamed:@"yo.png"];
+    }
+    else{
+        imagen = [UIImage imageNamed:@"pin.png"];
+    }
+    
+    aView.image = imagen;
+    //\\-------------------------------------------------------------------------------///
+    // Establecemos el tamaño óptimo para el Pin
+    //\\-------------------------------------------------------------------------------///
+    
+    if ([anotacion1.tipo isEqualToString:@"ubicacion"]) {
+        CGRect frame = aView.frame;
+        frame.size.width = 43;
+        frame.size.height = 71;
+        aView.frame = frame;
+    }
+    else{
+        CGRect frame = aView.frame;
+        frame.size.width = 30;
+        frame.size.height = 40;
+        aView.frame = frame;
+        
+    }
+    
+    
+    return aView;
+    //}
+    
+    
+}
+//Metodo para ir a la siguiente vista desde el boton del CallOut en el marcador
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view
+calloutAccessoryControlTapped:(UIControl *)control
+{
+    
+    
+    DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
+    if ([delegate.alto intValue] < 568)
+    {
+        detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion2"];
+        
+    }
+    
+    else
+    {
+        
+        detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
+        
+    }
+    
+    // detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
+    detalles.evento=[eventos objectAtIndex:view.tag];
+    detalles.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:detalles animated:YES completion:NULL];
+}
 
 
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
@@ -930,6 +785,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     }
 }
 
+//Metodo para Cambiar el CallOutView del Marker en el mapa
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     /*if(![view.annotation isKindOfClass:[MKUserLocation class]]) {
         CustomCalloutAnnotation *calloutView = (CustomCalloutAnnotation *)[[[NSBundle mainBundle] loadNibNamed:@"CustomCallOutView" owner:self options:nil] objectAtIndex:0];
@@ -970,9 +826,69 @@ calloutAccessoryControlTapped:(UIControl *)control
     currentLatitud=[NSString stringWithFormat:@"%.8f", centre.latitude];
     currentLongitud=[NSString stringWithFormat:@"%.8f", centre.longitude];
     // guardamos el radio anteriot
-    [self llamada_asincrona:centre.latitude Y:centre.longitude];
+    [self obtenerEventos:centre.latitude Y:centre.longitude];
     
 }
+
+
+
+#pragma mark - Creando Vistas Auxiliates
+-(void)crearLoadingView{
+    //Creamos vista que contiene el spinner y lo enseñamos al usuario
+    loading=[[UIView alloc]initWithFrame:CGRectMake(10, 10
+                                                    , self.view.frame.size.width-20, self.view.frame.size.height-20)];
+    loading.backgroundColor=[UIColor blackColor];
+    loading.alpha=0.8;
+    loading.layer.cornerRadius = 5;
+    loading.layer.masksToBounds = YES;
+    
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [spinner setCenter:CGPointMake(loading.frame.size.width/2.0, loading.frame.size.height/2.0)];
+    [spinner startAnimating];
+    [loading addSubview:spinner];
+    [self.view addSubview:loading];
+    
+    
+}
+
+-(void)crearBarraBusqueda{
+    //Crea contenedor de busqueda
+    contenedor_flotante=[[UIView alloc]initWithFrame:CGRectMake(5, 25, 310, 35)];
+    contenedor_flotante.backgroundColor=[UIColor whiteColor];
+    UIImageView *lupa=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
+    lupa.image=[UIImage imageNamed:@"search.png"];
+    [contenedor_flotante addSubview:lupa];
+    buscar=[[UITextField alloc]initWithFrame:CGRectMake(37, 0, 205, 35)];
+    buscar.delegate = self;
+    buscar.placeholder=@"Zamora 54,Condesa,Cuahutemoc";
+    [contenedor_flotante addSubview:buscar];
+    
+    encuentrame = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [encuentrame addTarget:self
+                    action:@selector(getCurrentLocation:)
+          forControlEvents:UIControlEventTouchUpInside];
+    encuentrame.frame = CGRectMake(240, 0, 35, 35);
+    UIImage *btnImage = [UIImage imageNamed:@"findme.png"];
+    UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, encuentrame.frame.size.width, encuentrame.frame.size.height)];
+    img.image=btnImage;
+    [encuentrame addSubview:img];
+    
+    herramientas = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [herramientas addTarget:self
+                     action:@selector(opcciones:)
+           forControlEvents:UIControlEventTouchUpInside];
+    herramientas.frame = CGRectMake(275, 0, 35, 35);
+    UIImage *btnImage2 = [UIImage imageNamed:@"tools.png"];
+    UIImageView *img2=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, herramientas.frame.size.width, herramientas.frame.size.height)];
+    img2.image=btnImage2;
+    [herramientas addSubview:img2];
+    [contenedor_flotante addSubview:encuentrame];
+    [contenedor_flotante addSubview:herramientas];
+    //Termina contenedor de busqueda
+    
+    
+}
+
 -(void)crearBuscaAqui{
 bucar_aqui = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 [bucar_aqui addTarget:self
@@ -984,6 +900,51 @@ bucar_aqui.backgroundColor=[UIColor whiteColor];
 //bucar_aqui.hidden=TRUE;
     [mapa addSubview:bucar_aqui];
 }
+
+
+#pragma mark - Metodos Auxiliares
+
+-(int)test{
+
+    return 0;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    NSLog(@"scrolleando tabla");
+    //  [self touchTabla];
+}
+/*
+ -(void) getPlaces{
+ dispatch_async(dispatch_get_main_queue(), ^{
+ NSString *direccion=buscar.text;//@"juan%20escutia%2094,la%20Condesa";
+ direccion = [direccion stringByReplacingOccurrencesOfString:@" "
+ withString:@"%20"];
+ NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?key=TUAPIKEY&sensor=true&query=%@,distritofederal",direccion];
+ 
+ NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+ 
+ if (data!=nil) {
+ 
+ 
+ NSString *dato=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+ NSMutableString * miCadena = [NSMutableString stringWithString: dato];
+ NSData *data1 = [miCadena dataUsingEncoding:NSUTF8StringEncoding];
+ 
+ NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data1 options:NSJSONReadingAllowFragments error:nil];
+ NSDictionary *primero=[[jsonObject objectForKey:@"results"]objectAtIndex:0];
+ NSDictionary *coordenadas=[[primero objectForKey:@"geometry"] objectForKey:@"location"];
+ 
+ [self obtenerEventos: [[coordenadas objectForKey:@"lat"] floatValue] Y:[[coordenadas objectForKey:@"lng"] floatValue]];
+ }
+ else{
+ 
+ //noencotramosdireecion typea bien
+ }
+ 
+ });
+ 
+ }*/
 
 
 @end

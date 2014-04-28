@@ -12,38 +12,25 @@
 
 @protocol SLParallaxControllerDelegate <NSObject>
 
-// Tap handlers
--(void)didTapOnMapView;
--(void)didTapOnTableView;
-// TableView's move
--(void)didTableViewMoveDown;
--(void)didTableViewMoveUp;
 
 @end
 
 @interface ViewController : UIViewController  <MKMapViewDelegate ,UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate,UITextFieldDelegate>
 
-
 @property (strong, nonatomic) CLLocationManager *LocationManager;
 @property (nonatomic, retain) IBOutlet MKMapView *mapa;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic,strong)   NSArray *eventos;
+@property (nonatomic, retain) IBOutlet UIView *Opcciones;
 
-  @property (nonatomic, retain) IBOutlet UIView *Opcciones;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 
-//@property (nonatomic, weak)     id<SLParallaxControllerDelegate>    delegate;
+
 @property (nonatomic)           float                               heighTableView;
 @property (nonatomic)           float                               heighTableViewHeader;
-@property (nonatomic)           float                               minHeighTableViewHeader;
-@property (nonatomic)           float                               minYOffsetToReach;
-@property (nonatomic)           float                               default_Y_mapView;
-@property (nonatomic)           float                               default_Y_tableView;
-@property (nonatomic)           float                               Y_tableViewOnBottom;
-@property (nonatomic)           float                               latitudeUserUp;
-@property (nonatomic)           float                               latitudeUserDown;
+
+-(int)respuestaObtenerEventos;
 
 
 
 
-- (IBAction)getCurrentLocation:(id)sender;
 @end

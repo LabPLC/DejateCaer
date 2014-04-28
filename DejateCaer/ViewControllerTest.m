@@ -7,7 +7,9 @@
 //
 
 #import <XCTest/XCTest.h>
-
+#import "ViewController.h"
+#import "DescripcionViewController.h"
+#import "ViewController_ViewControllerClassExtension.h"
 @interface ViewControllerTest : XCTestCase
 
 @end
@@ -26,9 +28,49 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testMatchesDifferentCardWithSameContents
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    ViewController *firstView = [[ViewController alloc] init];
+    int e=0;
+    if (firstView.eventos!=nil)
+    {
+        e=1;
+    }
+    else{
+        e=0;
+    
+    }
+    
+    
+    XCTAssertEqual(e, 0, @" tenemos eventos");
+}
+-(void)testofTestGetEventos{
+    ViewController *firstView = [[ViewController alloc] init];
+    
+    //guardamos la respuesta
+    int returnValue = [firstView respuestaObtenerEventos];
+    //comparamos si es 1 
+    XCTAssertEqual(returnValue, 1, @" tenemoss 1");
+
 }
 
+
+-(void)testoftestmethod{
+
+
+    ViewController *firstView = [[ViewController alloc] init];
+    
+    int returnValue = [firstView test];
+        XCTAssertEqual(returnValue, 0, @" tenemoss 1");
+ 
+
+}
+-(void)testofcrearBarraBusqueda{
+
+    
+    DescripcionViewController *firstView = [[DescripcionViewController alloc] init];
+    
+  
+      [firstView twittear:nil];
+}
 @end
