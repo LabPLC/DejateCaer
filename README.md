@@ -1,6 +1,8 @@
 DejateCaer
 ==========
 
+[![Build Status](https://travis-ci.org/LabPLC/DejateCaer.svg?branch=master)](https://travis-ci.org/LabPLC/DejateCaer)
+
 Aplicación en iOS que encuentra eventos a tu alrededor.
 
 Es una Aplicación en iOS que permite al usuario encontrar eventos en la ciudad de mexico de una manera facil y amigable, los eventos que esta app presenta al usuario son eventos que distintas secretarias del gobierno de la ciudad de México provee.
