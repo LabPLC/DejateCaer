@@ -24,7 +24,21 @@ Enseña marcadores en el mapa:
 Lista de lugares:
 
 ![alt text](https://github.com/LabPLC/DejateCaer/blob/master/Capturas/lista.png?raw=true "lista")
+![alt text](https://github.com/LabPLC/DejateCaer/blob/master/Capturas/lista2.png?raw=true "lista2")
 
 Al seleccionar un eventos en cualquiera de las vistas, se mostrara los detalles de dicho evento
 
 ![alt text](https://github.com/LabPLC/DejateCaer/blob/master/Capturas/detalles.png?raw=true "detalles")
+
+Tambien puedes configurar el radio de búsqueda en la sección Opcciones
+![alt text](https://github.com/LabPLC/DejateCaer/blob/master/Capturas/opcciones.png?raw=true "opcciones")
+
+
+Para compilar el proyecto y probarlo con iOS 7.1.1  , se necesita XCODE Version 5.1.1 (5B1008).
+Los Frameworks que carga el proyecto para el funcionamiento de la aplicaciones son :
+
+1. CoreLocation
+2. MapKit
+3. Foundation 
+4. CoreGraphics
+5. XCTest (para Test  del archivo ViewControllerTest.m)
