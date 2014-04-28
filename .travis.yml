@@ -1,0 +1,3 @@
+language: objective-c
+xcode_project: DejateCaer.xcodeproj
+xcode_scheme: DejateCaer
