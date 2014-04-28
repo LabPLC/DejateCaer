@@ -1,3 +1,2 @@
 language: objective-c
-xcode_project: DejateCaer.xcodeproj
-xcode_scheme: DejateCaer
+script: xctool -project DejateCaer.xcodeproj -scheme DejateCaer -sdk iphonesimulator build test
