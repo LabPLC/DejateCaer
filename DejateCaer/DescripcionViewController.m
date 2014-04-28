@@ -46,7 +46,7 @@
     _horario.text=[_evento objectForKey:@"hora"];
          [_horario setFont:[UIFont fontWithName:@"NIISans" size:17]];
     _direccion.text=[_evento objectForKey:@"direccion"];
-         [_direccion setFont:[UIFont fontWithName:@"NIISansLight" size:17]];
+         [_direccion setFont:[UIFont fontWithName:@"NIISansLight" size:15]];
     CLLocationCoordinate2D SCL;
     SCL.latitude = [[_evento objectForKey:@"latitud"] doubleValue];
     SCL.longitude = [[_evento objectForKey:@"longitud"]doubleValue];
@@ -92,7 +92,7 @@
     {
         SLComposeViewController *tweetSheet = [SLComposeViewController
                                                composeViewControllerForServiceType:SLServiceTypeTwitter];
-        NSString *cuerpo=[NSString stringWithFormat:@"Me gusta el evento:%@ que será en %@ . #DejateCaerApp #DejateCaer #EventosCDMX",[_evento objectForKey:@"nombre"],[_evento objectForKey:@"lugar"]];
+        NSString *cuerpo=[NSString stringWithFormat:@"Me gusta el evento:%@ . #EventarioApp  #EventarioCDMX",[_evento objectForKey:@"nombre"]];
         [tweetSheet setInitialText:cuerpo];
         [self presentViewController:tweetSheet animated:YES completion:nil];
     }
@@ -108,7 +108,7 @@
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         
-        [controller setInitialText:[NSString stringWithFormat:@"Me gusta el evento:%@ que será en %@ . #DejateCaerApp #DejateCaer #EventosCDMX",[_evento objectForKey:@"nombre"],[_evento objectForKey:@"lugar"]]];
+        [controller setInitialText:[NSString stringWithFormat:@"Me gusta el evento:%@. #EventarioApp  #EventarioCDMX",[_evento objectForKey:@"nombre"]]];
         [self presentViewController:controller animated:YES completion:Nil];
     }
     

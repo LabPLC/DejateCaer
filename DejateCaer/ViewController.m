@@ -275,7 +275,8 @@
                 NSArray *vacio=[[NSArray alloc]initWithObjects:@"VACIO", nil];
                 eventos=vacio;
                 isEmpty=TRUE;
-                
+                UIAlertView *alerta=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"No encontramos el lugar que buscas" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+                [alerta show];
                 
                 [self getMapa:latitud Y :longitud];
                 [self.tableView reloadData];
@@ -837,10 +838,9 @@ calloutAccessoryControlTapped:(UIControl *)control
 #pragma mark - Creando Vistas Auxiliates
 -(void)crearLoadingView{
     //Creamos vista que contiene el spinner y lo enseñamos al usuario
-    loading=[[UIView alloc]initWithFrame:CGRectMake(10, 10
-                                                    , self.view.frame.size.width-20, self.view.frame.size.height-20)];
-    loading.backgroundColor=[UIColor blackColor];
-    loading.alpha=0.8;
+    loading=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-25, self.view.frame.size.height/2 -50, 50, 50)];
+    loading.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:0.8];
+   // loading.alpha=0.8;
     loading.layer.cornerRadius = 5;
     loading.layer.masksToBounds = YES;
     
