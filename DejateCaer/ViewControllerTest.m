@@ -28,6 +28,7 @@
     [super tearDown];
 }
 
+// comprobamos que el arreglo de eventos este inicializado y tenga eventos
 - (void)testMatchesDifferentCardWithSameContents
 {
     ViewController *firstView = [[ViewController alloc] init];
@@ -44,6 +45,8 @@
     
     XCTAssertEqual(e, 0, @" tenemos eventos");
 }
+
+//despues de cada llamada con el servidor verificamos el contenido del array eventos
 -(void)testofTestGetEventos{
     ViewController *firstView = [[ViewController alloc] init];
     
@@ -54,23 +57,9 @@
 
 }
 
+-(void) testConecction{
 
--(void)testoftestmethod{
-
-
-    ViewController *firstView = [[ViewController alloc] init];
-    
-    int returnValue = [firstView test];
-        XCTAssertEqual(returnValue, 0, @" tenemoss 1");
- 
 
 }
--(void)testofcrearBarraBusqueda{
 
-    
-    DescripcionViewController *firstView = [[DescripcionViewController alloc] init];
-    
-  
-      [firstView twittear:nil];
-}
 @end
