@@ -881,7 +881,7 @@ calloutAccessoryControlTapped:(UIControl *)control
                     action:@selector(getCurrentLocation:)
           forControlEvents:UIControlEventTouchUpInside];
     encuentrame.frame = CGRectMake(240, 0, 35, 35);
-    UIImage *btnImage = [UIImage imageNamed:@"flecha.png"];
+    UIImage *btnImage = [UIImage imageNamed:@"flecha2.png"];
     UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, encuentrame.frame.size.width, encuentrame.frame.size.height)];
     img.image=btnImage;
     [encuentrame addSubview:img];
