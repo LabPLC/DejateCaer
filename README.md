@@ -36,6 +36,13 @@ Para realizar una peticion al servidor de CodigoCDMX debes tomar encuenta que de
 2. Longitud
 3. Radio de búsqueda.
 
+#Ejecutar Aplicación 
+
+Para ejecutar la aplicación desde el simulador debes emular la ubicacion del simulador en la ciudad de México y asi poder tener resultados.
+
+Para ejecutar la aplicación desde el Dispositivo desbes usar tus provisionamientos de desarrollador, permitir de obtener la ubicación a la aplicación.
+
+
 #¿Cómo Funciona?
 
 La aplicación inicia buscando eventos cerca del a ubicación del usuario a un radio predeterminado de 2Km.
@@ -72,6 +79,6 @@ Tambien puedes configurar el radio de búsqueda en la sección Opcciones
 #Comentarios
 
 Para dejar dudas, sugerencias o comentarios:
-* Twitter : @rockarloz
+* Twitter: [@rockarloz](www.twitter.com/rockarloz)
 * e-mail: rockarlos@me.com
-* [Eventario](www.eventario.mx)
+* Web-Site: [Eventario](www.eventario.mx)
