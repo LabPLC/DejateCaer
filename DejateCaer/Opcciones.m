@@ -1,7 +1,8 @@
 //
 //  Opcciones.m
 //  DejateCaer
-//
+//  @rockarloz
+//  rockarlos@me.com
 //  Created by Carlos Castellanos on 04/04/14.
 //  Copyright (c) 2014 Carlos Castellanos. All rights reserved.
 //
@@ -89,6 +90,7 @@
 }
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
+    
     if (delegate.isOption) {
         [_slide addTarget:self action:@selector(slidingStopped:)forControlEvents:UIControlEventTouchUpInside];
         [_slide addTarget:self action:@selector(slidingStopped:)forControlEvents:UIControlEventTouchUpOutside];

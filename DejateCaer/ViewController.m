@@ -2,6 +2,7 @@
 //  ViewController.m
 //  DejateCaer
 //  @rockarloz
+//  rockarlos@me.com
 //  Created by Carlos Castellanos on 12/03/14.
 //  Copyright (c) 2014 Carlos Castellanos. All rights reserved.
 //
@@ -42,7 +43,7 @@
     UIView *contenedor_flotante;
     UIView *vista_auxiliar;
     UIButton *bucar_aqui;
-    
+   
   
     UITapGestureRecognizer* tapDetails;//diseño
     UITapGestureRecognizer* tapRecMap;
@@ -74,6 +75,8 @@
 
 - (void)viewDidLoad
 {
+    
+
     //Definde Fondo de la vista
     self.view.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1];
    
@@ -558,19 +561,16 @@
     
     // Find the view among nib contents (not too hard assuming there is only one view in it).
     opcciones = [nibContents lastObject];
-    opcciones.frame=CGRectMake(5, 24, self.view.frame.size.width-10, self.view.frame.size.height-29);
+    opcciones.frame=CGRectMake(2, 0, self.view.frame.size.width-4, self.view.frame.size.height);
     //opcciones.backgroundColor=[UIColor grayColor];
     opcciones.alpha=1;
     opcciones.layer.cornerRadius = 5;
     opcciones.layer.masksToBounds = YES;
     
-    
-    
-    
     [UIView transitionFromView:self.view
                         toView:opcciones
                       duration:1
-                       options:UIViewAnimationOptionTransitionFlipFromTop
+                       options:UIViewAnimationOptionBeginFromCurrentState
                     completion:nil];
     
   
@@ -582,7 +582,7 @@
     [UIView transitionFromView:opcciones
                         toView:self.view
                       duration:1
-                       options:UIViewAnimationOptionTransitionFlipFromBottom
+                       options:UIViewAnimationOptionBeginFromCurrentState
                     completion:nil];
     
     //[opcciones removeFromSuperview];
@@ -714,7 +714,7 @@
     
     MKAnnotationView *aView = [[MKAnnotationView alloc] initWithAnnotation:anotacion1 reuseIdentifier:@"pinView"];
     
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
     [rightButton setTitle:annotation.title forState:UIControlStateNormal];
     [aView setRightCalloutAccessoryView:rightButton];
     
@@ -730,7 +730,7 @@
         imagen = [UIImage imageNamed:@"yo.png"];
     }
     else{
-        imagen = [UIImage imageNamed:@"pin.png"];
+        imagen = [UIImage imageNamed:@"pin2.png"];
     }
     
     aView.image = imagen;
@@ -746,8 +746,8 @@
     }
     else{
         CGRect frame = aView.frame;
-        frame.size.width = 48;
-        frame.size.height = 52;
+        frame.size.width = 30;
+        frame.size.height = 40;
         aView.frame = frame;
         
     }
@@ -887,7 +887,8 @@ calloutAccessoryControlTapped:(UIControl *)control
     UIImage *btnImage = [UIImage imageNamed:@"flecha2.png"];
     UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, encuentrame.frame.size.width, encuentrame.frame.size.height)];
     img.image=btnImage;
-    [encuentrame addSubview:img];
+    [encuentrame setBackgroundImage:btnImage forState:UIControlStateNormal];
+    //[encuentrame addSubview:img];
     
     UIView * aux2=[[UIView alloc]initWithFrame:CGRectMake(275, 0, 1, 34)];
     aux2.backgroundColor=[UIColor blackColor];
@@ -898,7 +899,8 @@ calloutAccessoryControlTapped:(UIControl *)control
     herramientas.frame = CGRectMake(275, 0, 35, 35);
     UIImage *btnImage2 = [UIImage imageNamed:@"tools.png"];
     UIImageView *img2=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, herramientas.frame.size.width, herramientas.frame.size.height)];
-    img2.image=btnImage2;
+      [herramientas setBackgroundImage:btnImage2 forState:UIControlStateNormal];
+    //img2.image=btnImage2;
     [herramientas addSubview:img2];
     [vista_auxiliar addSubview:aux2];
     [vista_auxiliar addSubview:aux];
@@ -936,38 +938,24 @@ bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) bl
     NSLog(@"scrolleando tabla");
     //  [self touchTabla];
 }
-/*
- -(void) getPlaces{
- dispatch_async(dispatch_get_main_queue(), ^{
- NSString *direccion=buscar.text;//@"juan%20escutia%2094,la%20Condesa";
- direccion = [direccion stringByReplacingOccurrencesOfString:@" "
- withString:@"%20"];
- NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?key=TUAPIKEY&sensor=true&query=%@,distritofederal",direccion];
- 
- NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
- 
- if (data!=nil) {
- 
- 
- NSString *dato=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
- NSMutableString * miCadena = [NSMutableString stringWithString: dato];
- NSData *data1 = [miCadena dataUsingEncoding:NSUTF8StringEncoding];
- 
- NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data1 options:NSJSONReadingAllowFragments error:nil];
- NSDictionary *primero=[[jsonObject objectForKey:@"results"]objectAtIndex:0];
- NSDictionary *coordenadas=[[primero objectForKey:@"geometry"] objectForKey:@"location"];
- 
- [self obtenerEventos: [[coordenadas objectForKey:@"lat"] floatValue] Y:[[coordenadas objectForKey:@"lng"] floatValue]];
- }
- else{
- 
- //noencotramosdireecion typea bien
- }
- 
- });
- 
- }*/
-
-
+/*- (NSIndexPath *)indexPathForRowAtPoint:(CGPoint)point{
+    return point;
+}*/
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat height = scrollView.frame.size.height;
+    
+    CGFloat contentYoffset = scrollView.contentOffset.y;
+    NSLog(@"el y %f",contentYoffset);
+    if (contentYoffset<0) {
+            [self handleTapMapView:nil];
+    }
+    CGFloat distanceFromBottom = scrollView.contentSize.height - contentYoffset;
+    
+    if(distanceFromBottom < height)
+    {
+        NSLog(@"end of the table");
+    }
+}
 @end
 

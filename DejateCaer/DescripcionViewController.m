@@ -2,6 +2,7 @@
 //  DescripcionViewController.m
 //  DejateCaer
 //  @rockarloz
+//  rockarlos@me.com
 //  Created by Carlos Castellanos on 13/03/14.
 //  Copyright (c) 2014 Carlos Castellanos. All rights reserved.
 //
@@ -38,10 +39,13 @@
     _LocationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
     [_LocationManager startUpdatingLocation];
     
+    [_btnEventos.titleLabel setFont:[UIFont fontWithName:@"NIISansLight" size:19]];
+   // [_btnEventos.titleLabel setFont:[UIFont systemFontOfSize:10]];
     _nombre.text=[_evento objectForKey:@"nombre"];
-     [_nombre setFont:[UIFont fontWithName:@"NIISans-Bold" size:17]];
+     [_nombre setFont:[UIFont fontWithName:@"NIISans-Bold" size:18]];
     _lugar.text=[_evento objectForKey:@"lugar"];
     [_lugar setFont:[UIFont fontWithName:@"NIISans" size:17]];
+    
     _horario.text=[_evento objectForKey:@"hora"];
          [_horario setFont:[UIFont fontWithName:@"NIISans" size:17]];
     _direccion.text=[_evento objectForKey:@"direccion"];
@@ -145,7 +149,7 @@
     aView.draggable = YES;
     UIImage *imagen;
    
-        imagen = [UIImage imageNamed:@"pin.png"];
+        imagen = [UIImage imageNamed:@"pin2.png"];
     
     
     aView.image = imagen;

@@ -1,7 +1,8 @@
 //
 //  AppDelegate.m
 //  DejateCaer
-//
+//  @rockarloz
+//  rockarlos@me.com
 //  Created by Carlos Castellanos on 12/03/14.
 //  Copyright (c) 2014 Carlos Castellanos. All rights reserved.
 //
@@ -12,6 +13,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
     CGRect screenBound = [[UIScreen mainScreen] bounds];
     CGSize screenSize = screenBound.size;
     CGFloat screenHeight = screenSize.height;

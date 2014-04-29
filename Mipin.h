@@ -1,7 +1,8 @@
 //
 //  Mipin.h
 //  LugaresCDMX
-//
+//  @rockarloz
+//  rockarlos@me.com
 //  Created by Carlos Castellanos on 23/01/14.
 //  Copyright (c) 2014 Carlos Castellanos. All rights reserved.
 //

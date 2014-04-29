@@ -63,6 +63,9 @@
 		F3D6F0B318ED1759007F9E31 /* SinEventoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D6F0B218ED1759007F9E31 /* SinEventoTableViewCell.m */; };
 		F3D6F0B518EE1FB7007F9E31 /* yo.png in Resources */ = {isa = PBXBuildFile; fileRef = F3D6F0B418EE1FB7007F9E31 /* yo.png */; };
 		F3D6F0B718EE837E007F9E31 /* codigo.png in Resources */ = {isa = PBXBuildFile; fileRef = F3D6F0B618EE837E007F9E31 /* codigo.png */; };
+		F3DA27AF19100D1B004BB45C /* pin2.png in Resources */ = {isa = PBXBuildFile; fileRef = F3DA27AE19100D1B004BB45C /* pin2.png */; };
+		F3DA27B119100D2C004BB45C /* flecha2.png in Resources */ = {isa = PBXBuildFile; fileRef = F3DA27B019100D2C004BB45C /* flecha2.png */; };
+		F3DA27B31910234F004BB45C /* back2.png in Resources */ = {isa = PBXBuildFile; fileRef = F3DA27B21910234F004BB45C /* back2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +147,9 @@
 		F3D6F0B218ED1759007F9E31 /* SinEventoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SinEventoTableViewCell.m; path = DejateCaer/SinEventoTableViewCell.m; sourceTree = "<group>"; };
 		F3D6F0B418EE1FB7007F9E31 /* yo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yo.png; sourceTree = "<group>"; };
 		F3D6F0B618EE837E007F9E31 /* codigo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = codigo.png; sourceTree = "<group>"; };
+		F3DA27AE19100D1B004BB45C /* pin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin2.png; sourceTree = "<group>"; };
+		F3DA27B019100D2C004BB45C /* flecha2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flecha2.png; sourceTree = "<group>"; };
+		F3DA27B21910234F004BB45C /* back2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,7 +270,9 @@
 		F3AECC7C18D374810012748D /* Imagenes */ = {
 			isa = PBXGroup;
 			children = (
+				F3DA27B21910234F004BB45C /* back2.png */,
 				F3CF6EBA190ECE22003E86EA /* pin.png */,
+				F3DA27AE19100D1B004BB45C /* pin2.png */,
 				F3CF6EB5190ECBA1003E86EA /* Barra */,
 				F3C680A418FC3F080092D6D8 /* tw.png */,
 				F3C680A518FC3F080092D6D8 /* fb.png */,
@@ -347,6 +355,7 @@
 				F3CF6EBC190ED506003E86EA /* flechas.png */,
 				F3CF6EB6190ECBBC003E86EA /* flecha.png */,
 				F3CF6EB7190ECBBC003E86EA /* lupa.png */,
+				F3DA27B019100D2C004BB45C /* flecha2.png */,
 			);
 			name = Barra;
 			sourceTree = "<group>";
@@ -443,6 +452,7 @@
 				F3C680B818FCAD4E0092D6D8 /* arrows.png in Resources */,
 				F3C680B618FCA9520092D6D8 /* icono.png in Resources */,
 				F32CF00B18F5A98D0098A5CF /* tools.png in Resources */,
+				F3DA27AF19100D1B004BB45C /* pin2.png in Resources */,
 				F3C680B418FCA9520092D6D8 /* icono80.png in Resources */,
 				F3CFBFFF18FD083C00206262 /* regresar.png in Resources */,
 				F32CF00D18F5A98D0098A5CF /* search.png in Resources */,
@@ -459,6 +469,7 @@
 				F332E83F18D161BA00DF538D /* InfoPlist.strings in Resources */,
 				F3C680AC18FC9ADC0092D6D8 /* NIISans-Bold.ttf in Resources */,
 				F3C680AD18FC9ADC0092D6D8 /* NIISans.ttf in Resources */,
+				F3DA27B119100D2C004BB45C /* flecha2.png in Resources */,
 				F3C680B518FCA9520092D6D8 /* icono58.png in Resources */,
 				F348B41A18DA86B500566356 /* news.png in Resources */,
 				F32CF01818F5F5AF0098A5CF /* flechas_cierran.xib in Resources */,
@@ -468,6 +479,7 @@
 				F32CF00618F5A9220098A5CF /* flechas.xib in Resources */,
 				F3CFC00018FD083C00206262 /* evento.png in Resources */,
 				F32CF00E18F5A98D0098A5CF /* findme.png in Resources */,
+				F3DA27B31910234F004BB45C /* back2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
