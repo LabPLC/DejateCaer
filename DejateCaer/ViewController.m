@@ -206,8 +206,7 @@
                      completion:^(BOOL finished){
                          
                          self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 53)];
-                         self.tableView.tableHeaderView.backgroundColor=[UIColor greenColor];
-                         
+                      
                          NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas" owner:nil options:nil];
                          
                          // Cargamos la vista desde el XIB
@@ -216,7 +215,7 @@
                          [self.tableView.tableHeaderView addSubview:flechas];
                            _tableView.scrollEnabled=FALSE;
                          [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
-                    
+                    flechas.hidden=FALSE;
                      }];
     
     
@@ -278,7 +277,7 @@
                 NSArray *vacio=[[NSArray alloc]initWithObjects:@"VACIO", nil];
                 eventos=vacio;
                 isEmpty=TRUE;
-                UIAlertView *alerta=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"No encontramos el lugar que buscas" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+                UIAlertView *alerta=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"No encontramos eventos cerca de este lugar intenta ampliando el radio desde el menú opcciones" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
                 [alerta show];
                 
                 [self getMapa:latitud Y :longitud];
@@ -793,6 +792,7 @@ calloutAccessoryControlTapped:(UIControl *)control
 
 //Metodo para Cambiar el CallOutView del Marker en el mapa
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+   
     /*if(![view.annotation isKindOfClass:[MKUserLocation class]]) {
         CustomCalloutAnnotation *calloutView = (CustomCalloutAnnotation *)[[[NSBundle mainBundle] loadNibNamed:@"CustomCallOutView" owner:self options:nil] objectAtIndex:0];
         CGRect calloutViewFrame = calloutView.frame;
@@ -957,5 +957,8 @@ bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) bl
         NSLog(@"end of the table");
     }
 }
+
+
+
 @end
 

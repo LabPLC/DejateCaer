@@ -113,5 +113,16 @@
 
 
 }
+-(IBAction)acerca:(id)sender{
+
+    UIAlertView *acerca=[[UIAlertView alloc]initWithTitle:@"Acerca de Eventario" message:@"Eventario permite al usuario encontrar eventos en la ciudad de mexico de una manera facil y amigable, los eventos que esta app presenta al usuario son eventos que distintas secretarias del gobierno de la ciudad de México provee. Con esto se logra promover la cultura de la Ciudad de México , dando asi al usuario la opcción de encontrar la oferta diaria de eventos en la ciudad." delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+    [acerca show];
+}
+
+-(IBAction)terminos:(id)sender{
+    
+    UIAlertView *terminos=[[UIAlertView alloc]initWithTitle:@"Términos de Uso" message:@"Esta aplicación es de codigo abierto...." delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+    [terminos show];
+}
 
 @end

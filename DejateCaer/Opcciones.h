@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *Aceptar;
 @property (weak, nonatomic) IBOutlet UISlider *slide;
 @property (weak, nonatomic) IBOutlet UILabel *radiolbl;
-
+-(IBAction)terminos:(id)sender;
+-(IBAction)acerca:(id)sender;
 @end
