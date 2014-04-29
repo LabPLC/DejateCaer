@@ -91,7 +91,7 @@
     {
         SLComposeViewController *tweetSheet = [SLComposeViewController
                                                composeViewControllerForServiceType:SLServiceTypeTwitter];
-        NSString *cuerpo=[NSString stringWithFormat:@"Me gusta el evento:%@ . #EventarioApp  #EventarioCDMX",[_evento objectForKey:@"nombre"]];
+        NSString *cuerpo=[NSString stringWithFormat:@"Me gusta el evento:%@  @EventarioCDMX #EventarioApp",[_evento objectForKey:@"nombre"]];
         [tweetSheet setInitialText:cuerpo];
         [self presentViewController:tweetSheet animated:YES completion:nil];
     }

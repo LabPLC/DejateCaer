@@ -397,7 +397,10 @@
 
 - (IBAction)getCurrentLocation:(id)sender {
     loading.hidden=FALSE;
-    
+    LocationManager = [[CLLocationManager alloc] init];
+    LocationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
+    LocationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
+    [LocationManager startUpdatingLocation];
     CLLocationCoordinate2D SCL;
     
     SCL.latitude = LocationManager.location.coordinate.latitude;
