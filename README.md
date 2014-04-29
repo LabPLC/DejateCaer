@@ -7,7 +7,7 @@ Aplicación en iOS que encuentra eventos a tu alrededor.
 
 Es una Aplicación en iOS que permite al usuario encontrar eventos en la ciudad de mexico de una manera facil y amigable, los eventos que esta app presenta al usuario son eventos que distintas secretarias del gobierno de la ciudad de México provee.
 
-Con esto se logra promover la cultura de la Ciudad de México , dando asi al usuario la opcción al usuario de encontrar la oferta diaria de eventos en la ciudad.
+Con esto se logra promover la cultura de la Ciudad de México , dando asi al usuario la opcción de encontrar la oferta diaria de eventos en la ciudad.
 
 #Construir 
 
@@ -36,11 +36,21 @@ Para realizar una peticion al servidor de CodigoCDMX debes tomar encuenta que de
 2. Longitud
 3. Radio de búsqueda.
 
+#Ejecutar Aplicación 
+
+Para ejecutar la aplicación desde el simulador debes emular la ubicacion del simulador en la ciudad de México y asi poder tener resultados.
+
+Para ejecutar la aplicación desde el Dispositivo desbes usar tus provisionamientos de desarrollador, permitir de obtener la ubicación a la aplicación.
+
+
 #¿Cómo Funciona?
 
 La aplicación inicia buscando eventos cerca del a ubicación del usuario a un radio predeterminado de 2Km.
 
-![alt text](https://github.com/LabPLC/DejateCaer/blob/master/Capturas/cerca.png?raw=true "cerca")
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LabPLC/DejateCaer/master/Capturas/mapa.png" alt="cerca" height="460" width="240"/>
+  </p>
+
 
 El usuario puede ralizar la búsqueda eventos alrededor del lugar que indique en la barra de búsqueda:
 
@@ -69,6 +79,6 @@ Tambien puedes configurar el radio de búsqueda en la sección Opcciones
 #Comentarios
 
 Para dejar dudas, sugerencias o comentarios:
-Twitter : @rockarloz
-e-mail: rockarlos@me.com
-
+* Twitter: [@rockarloz](www.twitter.com/rockarloz)
+* e-mail: rockarlos@me.com
+* Web-Site: [Eventario](www.eventario.mx)
