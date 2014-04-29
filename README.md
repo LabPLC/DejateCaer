@@ -7,6 +7,8 @@ Aplicación en iOS que encuentra eventos a tu alrededor.
 
 Es una Aplicación en iOS que permite al usuario encontrar eventos en la ciudad de mexico de una manera facil y amigable, los eventos que esta app presenta al usuario son eventos que distintas secretarias del gobierno de la ciudad de México provee.
 
+Con esto se logra promover la cultura de la Ciudad de México , dando asi al usuario la opcción al usuario de encontrar la oferta diaria de eventos en la ciudad.
+
 #Construir 
 
 Para compilar el proyecto y probarlo con iOS 7.1.1  , se necesita XCODE Version 5.1.1 (5B1008).
@@ -17,6 +19,22 @@ Los Frameworks que carga el proyecto para el funcionamiento de la aplicaciones s
 3. Foundation 
 4. CoreGraphics
 5. XCTest (para Test  del archivo ViewControllerTest.m)
+
+#Datos 
+
+Los datos que la aplicacion presentan provienen de la Secretaria de Turismo y la Secretaria de Cultura de la Ciudad de México, para consultalos en su formato original sigue los siguiente enlaces:
+
+1. [Cultura](http://www.cultura.df.gob.mx/index.php/cartelera/eventos)
+2. [Turismo](http://www.mexicocity.gob.mx/calendario.php?cat=21100&sub=0&evento=2014-4-19)
+
+Para consultar los datos en formato json :
+
+1.  [CodigoCDMX](http://codigo.labplc.mx/~rockarloz/dejatecaer/dejatecaer.php?longitud=-99.13330667&latitud=19.42342714&radio=2000&fecha=2014-03-18)
+
+Para realizar una peticion al servidor de CodigoCDMX debes tomar encuenta que debes mandar los siguientes parametros:
+1. Latitud
+2. Longitud
+3. Radio de búsqueda.
 
 #¿Cómo Funciona?
 
@@ -48,4 +66,9 @@ Al seleccionar un eventos en cualquiera de las vistas, se mostrara los detalles 
 Tambien puedes configurar el radio de búsqueda en la sección Opcciones
 ![alt text](https://github.com/LabPLC/DejateCaer/blob/master/Capturas/opcciones.png?raw=true "opcciones")
 
+#Comentarios
+
+Para dejar dudas, sugerencias o comentarios:
+Twitter : @rockarloz
+e-mail: rockarlos@me.com
 
