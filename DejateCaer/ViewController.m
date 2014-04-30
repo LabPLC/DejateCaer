@@ -657,7 +657,7 @@
             NSLog(@"%@",buscar.text);
             NSLog(@"%@",buscar.text);
             [self.view endEditing:YES];
-            [self getPlacesApple];
+            [self getPlaces];
         }
         else
         {
@@ -958,6 +958,48 @@ bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) bl
     }
 }
 
+-(void) getPlaces{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *direccion=buscar.text;//@"juan%20escutia%2094,la%20Condesa";
+       
+        
+        NSData *stringData = [direccion dataUsingEncoding: NSASCIIStringEncoding allowLossyConversion: YES];
+        
+        direccion = [[NSString alloc] initWithData: stringData encoding: NSASCIIStringEncoding];      direccion = [direccion stringByReplacingOccurrencesOfString:@" "
+                                                         withString:@"%20"];
+        NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?key=TuKey&sensor=true&query=%@,distritofederal",direccion];
+        
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+        
+        if (data!=nil) {
+            
+            
+            NSString *dato=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSMutableString * miCadena = [NSMutableString stringWithString: dato];
+            
+            NSData *data1 = [miCadena dataUsingEncoding:NSUTF8StringEncoding];
+            
+            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data1 options:NSJSONReadingAllowFragments error:nil];
+            NSArray *aux=[jsonObject objectForKey:@"results"];
+            if ([aux count]==0) {
+                UIAlertView *alerta=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"No encontramos el lugar que buscas, intenta con otra direccón" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+                [alerta show];
+            }
+            else{
+            NSDictionary *primero=[[jsonObject objectForKey:@"results"]objectAtIndex:0];
+            NSDictionary *coordenadas=[[primero objectForKey:@"geometry"] objectForKey:@"location"];
+            
+                [self obtenerEventos: [[coordenadas objectForKey:@"lat"] floatValue] Y:[[coordenadas objectForKey:@"lng"] floatValue]];}
+        }
+        else{
+            
+            UIAlertView *alerta=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"No encontramos el lugar que buscas, intenta con otra direccón" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+            [alerta show];
+        }
+        
+    });
+    
+}
 
 
 @end
