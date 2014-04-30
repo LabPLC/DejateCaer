@@ -40,41 +40,47 @@ Para realizar una peticion al servidor de CodigoCDMX debes tomar encuenta que de
 
 Para ejecutar la aplicación desde el simulador debes emular la ubicacion del simulador en la ciudad de México y asi poder tener resultados.
 
-Para ejecutar la aplicación desde el Dispositivo desbes usar tus provisionamientos de desarrollador, permitir de obtener la ubicación a la aplicación.
+Para ejecutar la aplicación desde el Dispositivo debes usar tus provisionamientos de desarrollador, permitir de obtener la ubicación a la aplicación.
+El Dispotivo debe tener iOS7. 
 
 
 #¿Cómo Funciona?
 
 La aplicación inicia buscando eventos cerca del a ubicación del usuario a un radio predeterminado de 2Km.
 
+El usuario puede ralizar la búsqueda eventos alrededor del lugar que indique en la barra de búsqueda.
 <p align="center">
   <img src="https://raw.githubusercontent.com/LabPLC/DejateCaer/master/Capturas/mapa.png" alt="cerca" height="460" width="240"/>
+  <img src="https://raw.githubusercontent.com/LabPLC/DejateCaer/master/Capturas/buscar.png" alt="cerca" height="460" width="240"/>
   </p>
 
 
-El usuario puede ralizar la búsqueda eventos alrededor del lugar que indique en la barra de búsqueda:
-
-![alt text](https://github.com/LabPLC/DejateCaer/blob/master/Capturas/buscar.png?raw=true "buscar")
 
 La aplicacíon presenta los eventos de 2 formas:
 
-Enseña marcadores en el mapa:
 
-![alt text](https://github.com/LabPLC/DejateCaer/blob/master/Capturas/mapa.png?raw=true "mapa")
 
 Lista de lugares:
 
 En la lista de lugares los eventos de manera que se enseñen primero los eventos mas cercanos al punto de búsqueda.
 
-![alt text](https://github.com/LabPLC/DejateCaer/blob/master/Capturas/lista.png?raw=true "lista")
-![alt text](https://github.com/LabPLC/DejateCaer/blob/master/Capturas/lista2.png?raw=true "lista2")
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LabPLC/DejateCaer/master/Capturas/lista.png" alt="lista" height="460" width="240"/>
+  <img src="https://raw.githubusercontent.com/LabPLC/DejateCaer/master/Capturas/lista2.png" alt="lista2" height="460" width="240"/>
+  </p>
+
 
 Al seleccionar un eventos en cualquiera de las vistas, se mostrara los detalles de dicho evento, y tambien compartir dicha informacion en las redes sociales.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LabPLC/DejateCaer/master/Capturas/detalles.png" alt="detalles" height="460" width="240"/>
 
-![alt text](https://github.com/LabPLC/DejateCaer/blob/master/Capturas/detalles.png?raw=true "detalles")
+  </p>
 
 Tambien puedes configurar el radio de búsqueda en la sección Opcciones
-![alt text](https://github.com/LabPLC/DejateCaer/blob/master/Capturas/opcciones.png?raw=true "opcciones")
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LabPLC/DejateCaer/master/Capturas/opciones.png" alt="detalles" height="460" width="240"/>
+
+  </p>
 
 #Comentarios
 
