@@ -46,6 +46,8 @@
 		F3C680BD18FCD4440092D6D8 /* CustomCalloutAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C680BC18FCD4440092D6D8 /* CustomCalloutAnnotation.m */; };
 		F3C680BF18FCD6520092D6D8 /* CustomCallOutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3C680BE18FCD6520092D6D8 /* CustomCallOutView.xib */; };
 		F3C680C118FCD9C00092D6D8 /* callout.png in Resources */ = {isa = PBXBuildFile; fileRef = F3C680C018FCD9C00092D6D8 /* callout.png */; };
+		F3C94DDA1911ACE40035A016 /* Facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = F3C94DD91911ACE40035A016 /* Facebook.png */; };
+		F3C94DDC1911ACED0035A016 /* Twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = F3C94DDB1911ACED0035A016 /* Twitter.png */; };
 		F3CF6EB0190ACEA4003E86EA /* ViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CF6EAF190ACEA4003E86EA /* ViewControllerTest.m */; };
 		F3CF6EB4190EC998003E86EA /* mas.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CF6EB3190EC998003E86EA /* mas.png */; };
 		F3CF6EB8190ECBBC003E86EA /* flecha.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CF6EB6190ECBBC003E86EA /* flecha.png */; };
@@ -128,6 +130,8 @@
 		F3C680BC18FCD4440092D6D8 /* CustomCalloutAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCalloutAnnotation.m; path = DejateCaer/CustomCalloutAnnotation.m; sourceTree = "<group>"; };
 		F3C680BE18FCD6520092D6D8 /* CustomCallOutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCallOutView.xib; sourceTree = "<group>"; };
 		F3C680C018FCD9C00092D6D8 /* callout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = callout.png; sourceTree = "<group>"; };
+		F3C94DD91911ACE40035A016 /* Facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Facebook.png; sourceTree = "<group>"; };
+		F3C94DDB1911ACED0035A016 /* Twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Twitter.png; sourceTree = "<group>"; };
 		F3CF6EAF190ACEA4003E86EA /* ViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerTest.m; path = ../DejateCaer/ViewControllerTest.m; sourceTree = "<group>"; };
 		F3CF6EB1190AD92B003E86EA /* ViewController_ViewControllerClassExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController_ViewControllerClassExtension.h; path = ../DejateCaer/ViewController_ViewControllerClassExtension.h; sourceTree = "<group>"; };
 		F3CF6EB3190EC998003E86EA /* mas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mas.png; sourceTree = "<group>"; };
@@ -270,6 +274,8 @@
 		F3AECC7C18D374810012748D /* Imagenes */ = {
 			isa = PBXGroup;
 			children = (
+				F3C94DD91911ACE40035A016 /* Facebook.png */,
+				F3C94DDB1911ACED0035A016 /* Twitter.png */,
 				F3DA27B21910234F004BB45C /* back2.png */,
 				F3CF6EBA190ECE22003E86EA /* pin.png */,
 				F3DA27AE19100D1B004BB45C /* pin2.png */,
@@ -459,6 +465,7 @@
 				F332E85018D161BA00DF538D /* Images.xcassets in Resources */,
 				F3CF6EC2190EE07E003E86EA /* precio.png in Resources */,
 				F3CFC00218FD083C00206262 /* hora.png in Resources */,
+				F3C94DDA1911ACE40035A016 /* Facebook.png in Resources */,
 				F3CF6EB9190ECBBC003E86EA /* lupa.png in Resources */,
 				F3CF6EC5190EE084003E86EA /* asterisco.png in Resources */,
 				F3D6F0B518EE1FB7007F9E31 /* yo.png in Resources */,
@@ -478,6 +485,7 @@
 				F3C680A718FC3F080092D6D8 /* fb.png in Resources */,
 				F32CF00618F5A9220098A5CF /* flechas.xib in Resources */,
 				F3CFC00018FD083C00206262 /* evento.png in Resources */,
+				F3C94DDC1911ACED0035A016 /* Twitter.png in Resources */,
 				F32CF00E18F5A98D0098A5CF /* findme.png in Resources */,
 				F3DA27B31910234F004BB45C /* back2.png in Resources */,
 			);
@@ -644,7 +652,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DejateCaer/DejateCaer-Prefix.pch";
 				INFOPLIST_FILE = "DejateCaer/DejateCaer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -668,7 +676,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DejateCaer/DejateCaer-Prefix.pch";
 				INFOPLIST_FILE = "DejateCaer/DejateCaer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
