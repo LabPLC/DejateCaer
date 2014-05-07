@@ -16,7 +16,7 @@
 
 @end
 
-@interface ViewController : UIViewController  <MKMapViewDelegate ,UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate,UITextFieldDelegate>
+@interface ViewController : UIViewController  <UIGestureRecognizerDelegate,MKMapViewDelegate ,UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate,UITextFieldDelegate>
 
 @property (strong, nonatomic) CLLocationManager *LocationManager;
 @property (nonatomic, retain) IBOutlet MKMapView *mapa;

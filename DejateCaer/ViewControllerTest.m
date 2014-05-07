@@ -54,7 +54,7 @@
     //guardamos la respuesta
     int returnValue = [firstView respuestaObtenerEventos];
     //comparamos si es 1 
-    XCTAssertEqual(returnValue, 1, @" tenemoss 1");
+    XCTAssertEqual(returnValue, 1, @" tenemos eventos");
 
 }
 

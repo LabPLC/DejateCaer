@@ -92,7 +92,7 @@
 
     //declaramos un variable que nos servira como delegado
     delegate= (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    ;
+    
    
     
     //Copiamos el radio del delegado por default es  2000 metros
@@ -186,8 +186,9 @@
 
 //vista de la lista escondida
 - (void)handleTapMapView:(UIGestureRecognizer *)gesture {
+    isArrow=NO;
      [self.view endEditing:YES];
-    NSLog(@"push tap on the header");
+    //NSLog(@"lista escondida");
       [_tableView setContentOffset:CGPointMake(0, 0) animated:NO];
       // [self.tableView setContentOffset:CGPointZero animated:NO];
     [UIView animateWithDuration:0.2
@@ -199,19 +200,37 @@
                          [mapa addSubview:contenedor_flotante];
                          self.tableView.frame           = CGRectMake(0, self.view.frame.size.height-53,320, 53);
                         
-                         
+                                                  self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 53)];
                         
 
                      }
                      completion:^(BOOL finished){
                          
-                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 53)];
+
                       
                          NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas" owner:nil options:nil];
                          
                          // Cargamos la vista desde el XIB
-                         flechas = [nibContents lastObject];
+                        // flechas = [nibContents lastObject];
+                         UIView *view2=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 52)];
+                         view2.backgroundColor=[UIColor clearColor];
                          [flechas addGestureRecognizer:tapFlechas];
+                         UIImageView *mas=[[UIImageView alloc]initWithFrame:CGRectMake(140, 5, 45, 45)];
+                         mas.image=[UIImage imageNamed:@"mas.png"];
+                        [self.tableView.tableHeaderView addSubview:mas];
+                          [self.tableView.tableHeaderView addSubview:view2];
+                           [view2 addGestureRecognizer:tapFlechas];
+                         self.tableView.tableHeaderView.userInteractionEnabled = YES;
+                         UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc]
+                                                        initWithTarget:self action:@selector(handlePan:)];
+                         [pgr setMinimumNumberOfTouches:1];
+                         [pgr setMaximumNumberOfTouches:1];
+                         [pgr setDelegate:self];
+                         
+                         [self.tableView.tableHeaderView addGestureRecognizer:pgr];
+
+                         
+                         
                          [self.tableView.tableHeaderView addSubview:flechas];
                            _tableView.scrollEnabled=FALSE;
                          [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
@@ -224,7 +243,7 @@
 
 - (void)handleTapTableView:(UIGestureRecognizer *)gesture {
     
-    NSLog(@"push on the header");
+   // NSLog(@"push on the header");
 }
 
 
@@ -301,7 +320,7 @@
             
         }
         else {
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"Erro de conexion a internet, revisa tu conexcion y  vuelve a intentarlo " delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"Error,revisa tu conexión de internet y  vuelve a intentarlo " delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
             [alert show];
             _tableView.rowHeight=450;
             NSArray *vacio=[[NSArray alloc]initWithObjects:@"VACIO", nil];
@@ -439,7 +458,7 @@
     
     detalles.evento=[eventos objectAtIndex:indexPath.row];
     detalles.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self.navigationController pushViewController:detalles animated:YES];
+   // [self.navigationController pushViewController:detalles animated:YES];
     
     
     [self presentViewController:detalles animated:YES completion:NULL];
@@ -546,8 +565,7 @@
 
 
 -(void)actualizar{
-    NSLog(@"reload");
-    radio=delegate.user_radio;
+       radio=delegate.user_radio;
     
     [self getCurrentLocation:nil];
     
@@ -610,12 +628,17 @@
                              NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas_cierran" owner:nil options:nil];
                              
                              // llamar la vista desde el XIB
+                           
+                       
+                             
+                             
                              
                              flechas = [nibContents lastObject];
                              flechas.frame=CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-90, 320, 90);
                            //  self.tableView.tableHeaderView.backgroundColor=[UIColor blackColor];
-                             [self.tableView.tableHeaderView addSubview:flechas];
+                                                         [self.tableView.tableHeaderView addSubview:flechas];
                              [flechas addGestureRecognizer:tapFlechas];
+                             
                              
                              
                              
@@ -654,8 +677,8 @@
     
         if (textField.text && textField.text.length > 0)
         {
-            NSLog(@"%@",buscar.text);
-            NSLog(@"%@",buscar.text);
+           // NSLog(@"%@",buscar.text);
+           // NSLog(@"%@",buscar.text);
             [self.view endEditing:YES];
             [self getPlaces];
         }
@@ -676,7 +699,7 @@
         {
             UIAlertView *alerta=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"No encontramos el lugar que buscas" delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
             [alerta show];
-            NSLog(@"Geocode failed with error: %@", error);
+           // NSLog(@"Geocode failed with error: %@", error);
             //[self displayError:error];
             
             return;
@@ -684,8 +707,8 @@
         }
         
         CLPlacemark *placemark=[placemarks objectAtIndex:0];
-        NSLog(@"Received placemarks: %@", placemarks);
-        NSLog(@"%f,%f",placemark.location.coordinate.latitude,placemark.location.coordinate.longitude);
+      //  NSLog(@"Received placemarks: %@", placemarks);
+       // NSLog(@"%f,%f",placemark.location.coordinate.latitude,placemark.location.coordinate.longitude);
         loading.hidden=FALSE;
         [self obtenerEventos: placemark.location.coordinate.latitude Y:placemark.location.coordinate.longitude];
         //[self displayPlacemarks:placemarks];
@@ -818,10 +841,10 @@ calloutAccessoryControlTapped:(UIControl *)control
 
 
 -(IBAction)getCenter:(id)sender{
-    
+        [self.view endEditing:YES];
     loading.hidden=FALSE;
     CLLocationCoordinate2D centre = [mapa centerCoordinate];
-    NSLog(@"%f, %f", centre.latitude, centre.longitude);
+   // NSLog(@"%f, %f", centre.latitude, centre.longitude);
     //[mapa removeAnnotation:annotationPointUbication];
     radio=delegate.user_radio;
    // annotationPointUbication = [[Mipin alloc] initWithTitle:@"Centro" subtitle:@"" andCoordinate:centre tipo:@"ubicacion" evento:0];
@@ -935,7 +958,7 @@ bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) bl
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     
-    NSLog(@"scrolleando tabla");
+    //NSLog(@"scrolleando tabla");
     //  [self touchTabla];
 }
 /*- (NSIndexPath *)indexPathForRowAtPoint:(CGPoint)point{
@@ -946,7 +969,7 @@ bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) bl
     CGFloat height = scrollView.frame.size.height;
     
     CGFloat contentYoffset = scrollView.contentOffset.y;
-    NSLog(@"el y %f",contentYoffset);
+   // NSLog(@"el y %f",contentYoffset);
     if (contentYoffset<0) {
             [self handleTapMapView:nil];
     }
@@ -954,7 +977,7 @@ bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) bl
     
     if(distanceFromBottom < height)
     {
-        NSLog(@"end of the table");
+     //   NSLog(@"end of the table");
     }
 }
 
@@ -967,7 +990,7 @@ bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) bl
         
         direccion = [[NSString alloc] initWithData: stringData encoding: NSASCIIStringEncoding];      direccion = [direccion stringByReplacingOccurrencesOfString:@" "
                                                          withString:@"%20"];
-        NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?key=TuKey&sensor=true&query=%@,distritofederal",direccion];
+        NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?key=TUAPIKEY&sensor=true&query=%@,distritofederal",direccion];
         
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
         
@@ -1000,7 +1023,20 @@ bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) bl
     });
     
 }
-
+-(IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
+   
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint translatedPoint = [recognizer translationInView:self.view];
+         NSLog(@"magnitude: %f", translatedPoint.y);
+        if (translatedPoint.y<0) {
+             NSLog(@"arriba");
+             isArrow=FALSE;
+            [self touchTabla];
+            
+        }
+        
+    }
+}
 
 @end
 
