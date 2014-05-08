@@ -19,6 +19,19 @@ Los Frameworks que carga el proyecto para el funcionamiento de la aplicaciones s
 3. Foundation 
 4. CoreGraphics
 5. XCTest (para Test  del archivo ViewControllerTest.m)
+6. Parse Framework  [Descargar](https://www.parse.com/docs/downloads/)
+7. AudioToolbox
+8. CFNetwork
+9. CoreGraphics
+10. CoreLocation
+11. libz.dylib
+12. MobileCoreServices
+13. QuartzCore
+14. Security
+15. StoreKit
+16. SystemConfiguration
+
+Si no deseas utilizar push notification puedes omitir los frameworks desde el numero 6.
 
 #Datos 
 
@@ -88,3 +101,9 @@ Para dejar dudas, sugerencias o comentarios:
 * Twitter: [@rockarloz](www.twitter.com/rockarloz)
 * e-mail: rockarlos@me.com
 * Web-Site: [Eventario](www.eventario.mx)
+
+#Referencias
+
+ * [Parse Tutorial push notifications](https://www.parse.com/tutorials/ios-push-notifications)
+
+ * [Agregar parse a tu proyecto existente](https://www.parse.com/apps/quickstart#parse_push/ios/existing)
