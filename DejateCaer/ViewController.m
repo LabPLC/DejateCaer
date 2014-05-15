@@ -320,7 +320,7 @@
             
         }
         else {
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"Error,revisa tu conexión de internet y  vuelve a intentarlo " delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Mensaje" message:@"Revisa tu conexión de internet y  vuelve a intentarlo. " delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
             [alert show];
             _tableView.rowHeight=450;
             NSArray *vacio=[[NSArray alloc]initWithObjects:@"VACIO", nil];
@@ -990,7 +990,7 @@ bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) bl
         
         direccion = [[NSString alloc] initWithData: stringData encoding: NSASCIIStringEncoding];      direccion = [direccion stringByReplacingOccurrencesOfString:@" "
                                                          withString:@"%20"];
-        NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?key=TUAPIKEY&sensor=true&query=%@,distritofederal",direccion];
+        NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?key=TUKEY&sensor=true&query=%@,distritofederal",direccion];
         
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
         

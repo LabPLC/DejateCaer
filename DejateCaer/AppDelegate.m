@@ -14,11 +14,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    [Parse setApplicationId:@"TUAPIID"
-                  clientKey:@"TUAPIKEY"];
-
-    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
+        [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
      UIRemoteNotificationTypeAlert|
      UIRemoteNotificationTypeSound];
     

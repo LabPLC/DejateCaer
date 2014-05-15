@@ -24,6 +24,8 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIMainStoryboardFile~iphone</key>
+	<string>Main_iPhone</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>NIISansLight.ttf</string>
@@ -32,8 +34,6 @@
 	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main_iPhone</string>
-	<key>UIMainStoryboardFile~ipad</key>
-	<string>Main_iPad</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

@@ -10,7 +10,6 @@
 		F32CF00618F5A9220098A5CF /* flechas.xib in Resources */ = {isa = PBXBuildFile; fileRef = F32CF00518F5A9220098A5CF /* flechas.xib */; };
 		F32CF00B18F5A98D0098A5CF /* tools.png in Resources */ = {isa = PBXBuildFile; fileRef = F32CF00718F5A98D0098A5CF /* tools.png */; };
 		F32CF00D18F5A98D0098A5CF /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = F32CF00918F5A98D0098A5CF /* search.png */; };
-		F32CF00E18F5A98D0098A5CF /* findme.png in Resources */ = {isa = PBXBuildFile; fileRef = F32CF00A18F5A98D0098A5CF /* findme.png */; };
 		F32CF01818F5F5AF0098A5CF /* flechas_cierran.xib in Resources */ = {isa = PBXBuildFile; fileRef = F32CF01718F5F5AF0098A5CF /* flechas_cierran.xib */; };
 		F332E83518D161BA00DF538D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F332E83418D161BA00DF538D /* Foundation.framework */; };
 		F332E83718D161BA00DF538D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F332E83618D161BA00DF538D /* CoreGraphics.framework */; };
@@ -42,8 +41,6 @@
 		F3AECC7E18D3849F0012748D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECC7D18D3849F0012748D /* CoreLocation.framework */; };
 		F3B9EC4018EF2A5500204323 /* Opcciones.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B9EC3F18EF2A5500204323 /* Opcciones.xib */; };
 		F3B9EC4318EF2D7900204323 /* Opcciones.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B9EC4218EF2D7900204323 /* Opcciones.m */; };
-		F3C680A618FC3F080092D6D8 /* tw.png in Resources */ = {isa = PBXBuildFile; fileRef = F3C680A418FC3F080092D6D8 /* tw.png */; };
-		F3C680A718FC3F080092D6D8 /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = F3C680A518FC3F080092D6D8 /* fb.png */; };
 		F3C680AC18FC9ADC0092D6D8 /* NIISans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3C680A918FC9ADC0092D6D8 /* NIISans-Bold.ttf */; };
 		F3C680AD18FC9ADC0092D6D8 /* NIISans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3C680AA18FC9ADC0092D6D8 /* NIISans.ttf */; };
 		F3C680AE18FC9ADC0092D6D8 /* NIISansLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3C680AB18FC9ADC0092D6D8 /* NIISansLight.ttf */; };
@@ -93,7 +90,6 @@
 		F32CF00518F5A9220098A5CF /* flechas.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = flechas.xib; sourceTree = "<group>"; };
 		F32CF00718F5A98D0098A5CF /* tools.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tools.png; sourceTree = "<group>"; };
 		F32CF00918F5A98D0098A5CF /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
-		F32CF00A18F5A98D0098A5CF /* findme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = findme.png; sourceTree = "<group>"; };
 		F32CF01718F5F5AF0098A5CF /* flechas_cierran.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = flechas_cierran.xib; sourceTree = "<group>"; };
 		F332E83118D161BA00DF538D /* DejateCaer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DejateCaer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F332E83418D161BA00DF538D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -134,8 +130,6 @@
 		F3B9EC3F18EF2A5500204323 /* Opcciones.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Opcciones.xib; sourceTree = "<group>"; };
 		F3B9EC4118EF2D7900204323 /* Opcciones.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Opcciones.h; sourceTree = "<group>"; };
 		F3B9EC4218EF2D7900204323 /* Opcciones.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Opcciones.m; sourceTree = "<group>"; };
-		F3C680A418FC3F080092D6D8 /* tw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tw.png; sourceTree = "<group>"; };
-		F3C680A518FC3F080092D6D8 /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb.png; sourceTree = "<group>"; };
 		F3C680A918FC9ADC0092D6D8 /* NIISans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NIISans-Bold.ttf"; sourceTree = "<group>"; };
 		F3C680AA18FC9ADC0092D6D8 /* NIISans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NIISans.ttf; sourceTree = "<group>"; };
 		F3C680AB18FC9ADC0092D6D8 /* NIISansLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NIISansLight.ttf; sourceTree = "<group>"; };
@@ -316,13 +310,10 @@
 				F3CF6EBA190ECE22003E86EA /* pin.png */,
 				F3DA27AE19100D1B004BB45C /* pin2.png */,
 				F3CF6EB5190ECBA1003E86EA /* Barra */,
-				F3C680A418FC3F080092D6D8 /* tw.png */,
-				F3C680A518FC3F080092D6D8 /* fb.png */,
 				F32CF00718F5A98D0098A5CF /* tools.png */,
 				F3C680B918FCCD870092D6D8 /* arrows2.png */,
 				F3C680B718FCAD4E0092D6D8 /* arrows.png */,
 				F32CF00918F5A98D0098A5CF /* search.png */,
-				F32CF00A18F5A98D0098A5CF /* findme.png */,
 				F3D6F0B618EE837E007F9E31 /* codigo.png */,
 				F3D6F0B418EE1FB7007F9E31 /* yo.png */,
 				F348B41918DA86B500566356 /* news.png */,
@@ -485,7 +476,6 @@
 				F3CF6EB8190ECBBC003E86EA /* flecha.png in Resources */,
 				F3CF6EB4190EC998003E86EA /* mas.png in Resources */,
 				F3C680C118FCD9C00092D6D8 /* callout.png in Resources */,
-				F3C680A618FC3F080092D6D8 /* tw.png in Resources */,
 				F3C680BA18FCCD870092D6D8 /* arrows2.png in Resources */,
 				F3D6F0B718EE837E007F9E31 /* codigo.png in Resources */,
 				F3CF6EC3190EE07E003E86EA /* reloj.png in Resources */,
@@ -518,11 +508,9 @@
 				F32CF01818F5F5AF0098A5CF /* flechas_cierran.xib in Resources */,
 				F3C680BF18FCD6520092D6D8 /* CustomCallOutView.xib in Resources */,
 				F3C680AE18FC9ADC0092D6D8 /* NIISansLight.ttf in Resources */,
-				F3C680A718FC3F080092D6D8 /* fb.png in Resources */,
 				F32CF00618F5A9220098A5CF /* flechas.xib in Resources */,
 				F3CFC00018FD083C00206262 /* evento.png in Resources */,
 				F3C94DDC1911ACED0035A016 /* Twitter.png in Resources */,
-				F32CF00E18F5A98D0098A5CF /* findme.png in Resources */,
 				F3DA27B31910234F004BB45C /* back2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -689,7 +677,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DejateCaer/DejateCaer-Prefix.pch";
 				INFOPLIST_FILE = "DejateCaer/DejateCaer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -714,7 +702,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DejateCaer/DejateCaer-Prefix.pch";
 				INFOPLIST_FILE = "DejateCaer/DejateCaer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
