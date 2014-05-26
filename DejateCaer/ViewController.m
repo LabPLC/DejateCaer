@@ -26,6 +26,7 @@
 
 @implementation ViewController
 {
+ 
   //  NSArray *eventos;
     NSString *currentLatitud;
     NSString *currentLongitud;
@@ -71,12 +72,15 @@
 }
 
 
-
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 
 - (void)viewDidLoad
 {
     
-
+   
     //Definde Fondo de la vista
     self.view.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1];
    
@@ -196,7 +200,7 @@
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
                                                   //custom al mapa
-                         mapa.frame = CGRectMake(0, 0, 320, self.view.frame.size.height-53);
+                         mapa.frame = CGRectMake(0, 20, 320, self.view.frame.size.height-73);
                          [mapa addSubview:contenedor_flotante];
                          self.tableView.frame           = CGRectMake(0, self.view.frame.size.height-53,320, 53);
                         
@@ -269,27 +273,29 @@
     // guardamos el radio anteriot
     radio_anterior=radio;
     
-    NSString *urlString =@"http://codigo.labplc.mx/~rockarloz/dejatecaer/dejatecaer.php";
-    NSString *url=[NSString stringWithFormat:@"%@?longitud=%@&latitud=%@&radio=%@&fecha=2014-03-18",urlString,currentLongitud,currentLatitud,radio];
-    
+    NSString *urlString =@"http://dev.codigo.labplc.mx/EventarioWeb/eventos.json";
+    NSString *url=[NSString stringWithFormat:@"%@?lon=%@&lat=%@&dist=%@",urlString,currentLongitud,currentLatitud,radio];
+   // NSString *url=@"http://dev.codigo.labplc.mx/EventarioWeb/eventos.json";
+    NSLog(@"%@",url);
     dispatch_async(dispatch_get_main_queue(), ^{
         
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
         
         if ([data length] >0  )
         {
-            NSArray *lugares;
-            NSString *dato=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                      NSString *dato=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSMutableString * miCadena = [NSMutableString stringWithString: dato];
             NSData *data1 = [miCadena dataUsingEncoding:NSUTF8StringEncoding];
             
-            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data1 options:NSJSONReadingAllowFragments error:nil];
+           
+           // lugares= [jsonObject objectForKey:@"eventos"];//[consulta objectForKey:@"ubicaciones"];
             
-            NSMutableDictionary *consulta=[[NSMutableDictionary alloc]init];
-            consulta = [jsonObject objectForKey:@"eventos"];
-            lugares= [jsonObject objectForKey:@"eventos"];//[consulta objectForKey:@"ubicaciones"];
+            eventos=[NSJSONSerialization JSONObjectWithData:data1 options:NSJSONReadingAllowFragments error:nil];
             
-            eventos=lugares;
+            
+            
+
+
             
             if ([eventos count]==0) {
                 _tableView.rowHeight=450;
@@ -305,6 +311,11 @@
                 
             }
             else{
+                for (int i=0; i<=[eventos count]-1; i++) {
+                    NSString *d=[[eventos objectAtIndex:i] objectForKey:@"imagen"];
+                    
+                    [self performSelectorInBackground: @selector(buscar_imagen:) withObject: d];
+                }
                 _tableView.rowHeight=90;
                 isEmpty=FALSE;
                 //Mandamos a llamar la lista para llenarla y enseñarla
@@ -394,7 +405,7 @@
             
             CLLocationCoordinate2D newCoord = {newLat, newLon};
             
-            Mipin *annotationPoint = [[Mipin alloc] initWithTitle:[lugar objectForKey:@"nombre"] subtitle:[lugar objectForKey:@"lugar"] andCoordinate:newCoord tipo:@"" evento:i lugar:[lugar objectForKey:@"lugar"] hora:[lugar objectForKey:@"hora"]];
+            Mipin *annotationPoint = [[Mipin alloc] initWithTitle:[lugar objectForKey:@"nombre"] subtitle:[lugar objectForKey:@"lugar"] andCoordinate:newCoord tipo:@"" evento:i lugar:[lugar objectForKey:@"lugar"] hora:[lugar objectForKey:@"hora_inicio"]];
             
             [mapa addAnnotation:annotationPoint];
         }}
@@ -443,18 +454,10 @@
         
     
     DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
-    if ([delegate.alto intValue] < 568)
-    {
-        detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion2"];
-        
-    }
-    
-    else
-    {
         
         detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
         
-    }
+    
     
     detalles.evento=[eventos objectAtIndex:indexPath.row];
     detalles.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -499,16 +502,34 @@
         
         if (cell == nil) {
         }
+        
+        
         cell.selectionStyle= UITableViewCellSelectionStyleNone;
+        
+       // [self buscar_imagen:[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"imagen"]];
+        
+        
+        cell.imagen.image= [delegate.cacheImagenes objectForKey:[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"imagen"]];
+        
         cell.nombre.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"nombre"];
-        cell.hora.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"hora"];
+        NSString *horas=[[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"hora_inicio"]
+         stringByReplacingOccurrencesOfString:@"2000-01-01T" withString:@""];
+        horas=[horas  stringByReplacingOccurrencesOfString:@":00Z" withString:@""];
+       
+        NSString *horasfin=[[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"hora_fin"]
+                         stringByReplacingOccurrencesOfString:@"2000-01-01T" withString:@""];
+        horasfin=[horasfin  stringByReplacingOccurrencesOfString:@":00Z" withString:@""];
+        
+        cell.hora.text=[NSString stringWithFormat:@("%@ a %@"),horas,horasfin];
+        //cell.hora.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"hora_inicio"];
         double metros= [[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"] doubleValue];
-        if (metros>=1000) {
-            metros=(metros/1000);
+        if (metros>=1) {
+            //metros=(metros/1000);
             
-            cell.distancia.text= [NSString stringWithFormat:(@"%.2f Km"),metros];
+            cell.distancia.text= [NSString stringWithFormat:(@"%@ Km."),[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"]];
         }
         else{
+            NSLog(@"%@",[[eventos objectAtIndex:indexPath.row ] objectForKey:@"distancia"]);
             cell.distancia.text= [NSString stringWithFormat:(@"%@ m"),[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"]];
         }
         return cell;
@@ -615,9 +636,9 @@
                               delay:0.1
                             options: UIViewAnimationOptionCurveEaseOut
                          animations:^{
-                             self.tableView.frame           = CGRectMake(0, 0,320, self.view.frame.size.height);
+                             self.tableView.frame           = CGRectMake(0, 20,320, self.view.frame.size.height);
                              
-                             mapa.frame             = CGRectMake(0, 0, 320, 278);
+                             mapa.frame             = CGRectMake(0, 20, 320, 278);
                              [mapa addSubview:contenedor_flotante];
                              
                              
@@ -787,18 +808,18 @@ calloutAccessoryControlTapped:(UIControl *)control
     
     
     DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
-    if ([delegate.alto intValue] < 568)
+   /* if ([delegate.alto intValue] < 568)
     {
         detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion2"];
         
     }
     
     else
-    {
+    {*/
         
         detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
         
-    }
+   // }
     
     // detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
     detalles.evento=[eventos objectAtIndex:view.tag];
@@ -841,8 +862,10 @@ calloutAccessoryControlTapped:(UIControl *)control
 
 
 -(IBAction)getCenter:(id)sender{
-        [self.view endEditing:YES];
+ 
     loading.hidden=FALSE;
+    
+    [self.view endEditing:YES];
     CLLocationCoordinate2D centre = [mapa centerCoordinate];
    // NSLog(@"%f, %f", centre.latitude, centre.longitude);
     //[mapa removeAnnotation:annotationPointUbication];
@@ -881,7 +904,7 @@ calloutAccessoryControlTapped:(UIControl *)control
 
 -(void)crearBarraBusqueda{
     //Crea contenedor de busqueda
-    contenedor_flotante=[[UIView alloc]initWithFrame:CGRectMake(5, 25, 310, 35)];
+    contenedor_flotante=[[UIView alloc]initWithFrame:CGRectMake(5, 5, 310, 35)];
     contenedor_flotante.backgroundColor=[UIColor blackColor];
     vista_auxiliar=[[UIView alloc]initWithFrame:CGRectMake(1, 1, 308, 33)];
     vista_auxiliar.backgroundColor=[UIColor whiteColor];
@@ -939,8 +962,8 @@ bucar_aqui = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 [bucar_aqui addTarget:self
                action:@selector(getCenter:)
      forControlEvents:UIControlEventTouchUpInside];
-[bucar_aqui setTitle:@"Bucar en esta zona" forState:UIControlStateNormal];
-bucar_aqui.frame = CGRectMake(80 , 55, 160.0, 40.0);
+[bucar_aqui setTitle:@"Buscar en esta zona" forState:UIControlStateNormal];
+bucar_aqui.frame = CGRectMake(80 , 40, 160.0, 40.0);
     bucar_aqui.tintColor=[UIColor whiteColor];
 bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:0.8];
 
@@ -990,7 +1013,7 @@ bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) bl
         
         direccion = [[NSString alloc] initWithData: stringData encoding: NSASCIIStringEncoding];      direccion = [direccion stringByReplacingOccurrencesOfString:@" "
                                                          withString:@"%20"];
-        NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?key=TUKEY&sensor=true&query=%@,distritofederal",direccion];
+        NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?key=&sensor=true&query=%@,distritofederal",direccion];
         
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
         
@@ -1036,6 +1059,25 @@ bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) bl
         }
         
     }
+}
+
+
+-(void)buscar_imagen:(NSString *) url
+{
+   
+    
+    NSObject *o = [delegate.cacheImagenes objectForKey:url];
+    if( o == nil ){
+        @try{
+            [delegate.cacheImagenes setObject:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: url]]]
+                     forKey:url];
+        }
+        @catch (NSException *exception) {
+            
+        }
+    }
+    
+    
 }
 
 @end

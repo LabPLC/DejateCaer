@@ -13,4 +13,5 @@
 @property (nonatomic,retain) IBOutlet UILabel *nombre;
 @property (nonatomic,retain) IBOutlet UILabel *hora;
 @property (nonatomic,retain) IBOutlet UILabel *distancia;
+@property (nonatomic,retain) IBOutlet UIImageView *imagen;
 @end

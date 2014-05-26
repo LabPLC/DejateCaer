@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F312730A192ABEBB002E4119 /* ResenaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3127309192ABEBB002E4119 /* ResenaViewController.m */; };
 		F32CF00618F5A9220098A5CF /* flechas.xib in Resources */ = {isa = PBXBuildFile; fileRef = F32CF00518F5A9220098A5CF /* flechas.xib */; };
 		F32CF00B18F5A98D0098A5CF /* tools.png in Resources */ = {isa = PBXBuildFile; fileRef = F32CF00718F5A98D0098A5CF /* tools.png */; };
 		F32CF00D18F5A98D0098A5CF /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = F32CF00918F5A98D0098A5CF /* search.png */; };
@@ -37,7 +38,12 @@
 		F34A80C919142EBE000E26CF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34A80C819142EBE000E26CF /* Security.framework */; };
 		F34A80CB19142EC6000E26CF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34A80CA19142EC6000E26CF /* StoreKit.framework */; };
 		F34A80CD19142ECE000E26CF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34A80CC19142ECE000E26CF /* SystemConfiguration.framework */; };
+		F389ECA3192FBA91001FB68B /* web.png in Resources */ = {isa = PBXBuildFile; fileRef = F389ECA0192FBA91001FB68B /* web.png */; };
+		F389ECA4192FBA91001FB68B /* fecha.png in Resources */ = {isa = PBXBuildFile; fileRef = F389ECA1192FBA91001FB68B /* fecha.png */; };
+		F389ECA5192FBA91001FB68B /* contacto.png in Resources */ = {isa = PBXBuildFile; fileRef = F389ECA2192FBA91001FB68B /* contacto.png */; };
 		F3A6401918E490F6004AF17F /* Mipin.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A6401818E490F6004AF17F /* Mipin.m */; };
+		F3A9AF531926D89A00E0F3F1 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F3A9AF521926D89A00E0F3F1 /* 1.jpg */; };
+		F3A9AF561927067700E0F3F1 /* MapaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A9AF551927067700E0F3F1 /* MapaViewController.m */; };
 		F3AECC7E18D3849F0012748D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECC7D18D3849F0012748D /* CoreLocation.framework */; };
 		F3B9EC4018EF2A5500204323 /* Opcciones.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B9EC3F18EF2A5500204323 /* Opcciones.xib */; };
 		F3B9EC4318EF2D7900204323 /* Opcciones.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B9EC4218EF2D7900204323 /* Opcciones.m */; };
@@ -87,6 +93,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F3127308192ABEBB002E4119 /* ResenaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResenaViewController.h; sourceTree = "<group>"; };
+		F3127309192ABEBB002E4119 /* ResenaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResenaViewController.m; sourceTree = "<group>"; };
 		F32CF00518F5A9220098A5CF /* flechas.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = flechas.xib; sourceTree = "<group>"; };
 		F32CF00718F5A98D0098A5CF /* tools.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tools.png; sourceTree = "<group>"; };
 		F32CF00918F5A98D0098A5CF /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
@@ -124,8 +132,14 @@
 		F34A80C819142EBE000E26CF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F34A80CA19142EC6000E26CF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F34A80CC19142ECE000E26CF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F389ECA0192FBA91001FB68B /* web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.png; sourceTree = "<group>"; };
+		F389ECA1192FBA91001FB68B /* fecha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fecha.png; sourceTree = "<group>"; };
+		F389ECA2192FBA91001FB68B /* contacto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contacto.png; sourceTree = "<group>"; };
 		F3A6401718E490F6004AF17F /* Mipin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mipin.h; sourceTree = "<group>"; };
 		F3A6401818E490F6004AF17F /* Mipin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mipin.m; sourceTree = "<group>"; };
+		F3A9AF521926D89A00E0F3F1 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		F3A9AF541927067700E0F3F1 /* MapaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapaViewController.h; sourceTree = "<group>"; };
+		F3A9AF551927067700E0F3F1 /* MapaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapaViewController.m; sourceTree = "<group>"; };
 		F3AECC7D18D3849F0012748D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F3B9EC3F18EF2A5500204323 /* Opcciones.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Opcciones.xib; sourceTree = "<group>"; };
 		F3B9EC4118EF2D7900204323 /* Opcciones.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Opcciones.h; sourceTree = "<group>"; };
@@ -329,7 +343,11 @@
 				F3CF6EBE190EE07E003E86EA /* marker.png */,
 				F3CF6EBF190EE07E003E86EA /* precio.png */,
 				F3CF6EC0190EE07E003E86EA /* reloj.png */,
+				F3A9AF521926D89A00E0F3F1 /* 1.jpg */,
 				F3CF6EC4190EE084003E86EA /* asterisco.png */,
+				F389ECA0192FBA91001FB68B /* web.png */,
+				F389ECA1192FBA91001FB68B /* fecha.png */,
+				F389ECA2192FBA91001FB68B /* contacto.png */,
 			);
 			name = Imagenes;
 			sourceTree = "<group>";
@@ -378,6 +396,10 @@
 				F332E87418D185AD00DF538D /* DescripcionViewController.m */,
 				F3B9EC4118EF2D7900204323 /* Opcciones.h */,
 				F3B9EC4218EF2D7900204323 /* Opcciones.m */,
+				F3A9AF541927067700E0F3F1 /* MapaViewController.h */,
+				F3A9AF551927067700E0F3F1 /* MapaViewController.m */,
+				F3127308192ABEBB002E4119 /* ResenaViewController.h */,
+				F3127309192ABEBB002E4119 /* ResenaViewController.m */,
 			);
 			name = Controladores;
 			sourceTree = "<group>";
@@ -488,6 +510,7 @@
 				F3C680B418FCA9520092D6D8 /* icono80.png in Resources */,
 				F3CFBFFF18FD083C00206262 /* regresar.png in Resources */,
 				F32CF00D18F5A98D0098A5CF /* search.png in Resources */,
+				F389ECA3192FBA91001FB68B /* web.png in Resources */,
 				F332E85018D161BA00DF538D /* Images.xcassets in Resources */,
 				F3CF6EC2190EE07E003E86EA /* precio.png in Resources */,
 				F3CFC00218FD083C00206262 /* hora.png in Resources */,
@@ -496,12 +519,15 @@
 				F3CF6EC5190EE084003E86EA /* asterisco.png in Resources */,
 				F3D6F0B518EE1FB7007F9E31 /* yo.png in Resources */,
 				F332E84818D161BA00DF538D /* Main_iPhone.storyboard in Resources */,
+				F389ECA5192FBA91001FB68B /* contacto.png in Resources */,
 				F3CFC00118FD083C00206262 /* donde.png in Resources */,
 				F3CF6EBB190ECE22003E86EA /* pin.png in Resources */,
 				F3B9EC4018EF2A5500204323 /* Opcciones.xib in Resources */,
+				F389ECA4192FBA91001FB68B /* fecha.png in Resources */,
 				F332E83F18D161BA00DF538D /* InfoPlist.strings in Resources */,
 				F3C680AC18FC9ADC0092D6D8 /* NIISans-Bold.ttf in Resources */,
 				F3C680AD18FC9ADC0092D6D8 /* NIISans.ttf in Resources */,
+				F3A9AF531926D89A00E0F3F1 /* 1.jpg in Resources */,
 				F3DA27B119100D2C004BB45C /* flecha2.png in Resources */,
 				F3C680B518FCA9520092D6D8 /* icono58.png in Resources */,
 				F348B41A18DA86B500566356 /* news.png in Resources */,
@@ -531,12 +557,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3D6F0B318ED1759007F9E31 /* SinEventoTableViewCell.m in Sources */,
+				F3A9AF561927067700E0F3F1 /* MapaViewController.m in Sources */,
 				F332E87218D16CB100DF538D /* eventCell.m in Sources */,
 				F3B9EC4318EF2D7900204323 /* Opcciones.m in Sources */,
 				F3C680BD18FCD4440092D6D8 /* CustomCalloutAnnotation.m in Sources */,
 				F332E84E18D161BA00DF538D /* ViewController.m in Sources */,
 				F332E84518D161BA00DF538D /* AppDelegate.m in Sources */,
 				F332E84118D161BA00DF538D /* main.m in Sources */,
+				F312730A192ABEBB002E4119 /* ResenaViewController.m in Sources */,
 				F332E87518D185AD00DF538D /* DescripcionViewController.m in Sources */,
 				F3A6401918E490F6004AF17F /* Mipin.m in Sources */,
 			);

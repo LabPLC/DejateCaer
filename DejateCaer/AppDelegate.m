@@ -14,7 +14,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-        [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
+    
+     _cacheImagenes=[[NSMutableDictionary alloc]init];
+ 
+
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
      UIRemoteNotificationTypeAlert|
      UIRemoteNotificationTypeSound];
     
@@ -23,8 +27,8 @@
     CGSize screenSize = screenBound.size;
     CGFloat screenHeight = screenSize.height;
     _alto= [NSString stringWithFormat:@"%f",screenHeight];
-    //definimos por default un radio de 500 metros
-    _user_radio=@"2000";
+    //definimos por default un radio de 500 metrosr
+    _user_radio=@"2";
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
     //Idenfica El Tamaño de la Pantalla
     ViewController *controller;

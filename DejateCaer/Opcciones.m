@@ -47,37 +47,48 @@
 {
     // Drawing code
 }
-*/
+ */
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 -(void)inicio{
-    int radio=[delegate.user_radio intValue];
+    double radio=[delegate.user_radio intValue];
     if (radio==0) {
-        radio=500;
+       // radio=500;
     }
-    if (radio>=1000) {
-        radio=radio/1000;
-        _radiolbl.text= [NSString stringWithFormat:@"%i km.",radio];
+    if (radio>=1) {
+        radio=radio;
+        _radiolbl.text= [NSString stringWithFormat:@"%.0f km.",radio];
     }
     else{
-        _radiolbl.text= [NSString stringWithFormat:@"%i m.",radio];
+        _radiolbl.text=@"500 m.";
+     //   _radiolbl.text= [NSString stringWithFormat:@"%f m.",radio];
 	}
 
 }
 - (IBAction) slideRadioChangee:(UISlider *)sender {
     
-    int radio = [[NSString stringWithFormat:@" %.1f", [sender value]] doubleValue]*10000;
-    delegate.user_radio=[NSString stringWithFormat:@"%i",radio];
+    double radio = [[NSString stringWithFormat:@" %.1f", [sender value]] doubleValue];
+    delegate.user_radio=[NSString stringWithFormat:@"%.0f",radio*10];
     if (radio==0) {
-        radio=500;
+        radio=0.05;
+         delegate.user_radio=@"0.5";
     }
-    if (radio>=1000) {
-        radio=radio/1000;
-        _radiolbl.text= [NSString stringWithFormat:@"%i km.",radio];
+    if (radio>=0.1) {
+        radio=radio;
+        _radiolbl.text= [NSString stringWithFormat:@"%.0f km.",radio*10];
+    }
+    else if (radio==0.5)
+    {
+    _radiolbl.text=@"500";
     }
     else{
-        _radiolbl.text= [NSString stringWithFormat:@"%i m.",radio];
+         _radiolbl.text=@"500 m.";
+        // _radiolbl.text= [NSString stringWithFormat:@"%.0f m.",radio*10];
 	}
     
-    NSLog(@"%i",radio );
+    NSLog(@"%f",radio );
 }
 
 - (void) slidingStopped:(id)sender
@@ -85,6 +96,7 @@
     NSLog(@"stopped sliding");
     [[NSNotificationCenter defaultCenter] postNotificationName:@"actualizar" object:nil];
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [self inicio];
 }
@@ -101,9 +113,15 @@
 }
 
 -(void)didMoveToSuperview{
+    
      delegate= (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    _slide.value=[delegate.user_radio doubleValue]/10000;
-    if (delegate.isOption) {
+    if ([delegate.user_radio isEqualToString:@"0.5"]) {
+        _slide.value=0;
+    }else
+    {
+    _slide.value=[delegate.user_radio doubleValue]/10;
+    }
+        if (delegate.isOption) {
         [_slide addTarget:self action:@selector(slidingStopped:)forControlEvents:UIControlEventTouchUpInside];
         [_slide addTarget:self action:@selector(slidingStopped:)forControlEvents:UIControlEventTouchUpOutside];
         [self inicio];
