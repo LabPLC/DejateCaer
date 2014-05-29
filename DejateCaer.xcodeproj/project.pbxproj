@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F312730A192ABEBB002E4119 /* ResenaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3127309192ABEBB002E4119 /* ResenaViewController.m */; };
+		F312900C19379E930037CA26 /* buscaaqui.png in Resources */ = {isa = PBXBuildFile; fileRef = F312900B19379E930037CA26 /* buscaaqui.png */; };
 		F32CF00618F5A9220098A5CF /* flechas.xib in Resources */ = {isa = PBXBuildFile; fileRef = F32CF00518F5A9220098A5CF /* flechas.xib */; };
 		F32CF00B18F5A98D0098A5CF /* tools.png in Resources */ = {isa = PBXBuildFile; fileRef = F32CF00718F5A98D0098A5CF /* tools.png */; };
 		F32CF00D18F5A98D0098A5CF /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = F32CF00918F5A98D0098A5CF /* search.png */; };
@@ -41,6 +42,7 @@
 		F389ECA3192FBA91001FB68B /* web.png in Resources */ = {isa = PBXBuildFile; fileRef = F389ECA0192FBA91001FB68B /* web.png */; };
 		F389ECA4192FBA91001FB68B /* fecha.png in Resources */ = {isa = PBXBuildFile; fileRef = F389ECA1192FBA91001FB68B /* fecha.png */; };
 		F389ECA5192FBA91001FB68B /* contacto.png in Resources */ = {isa = PBXBuildFile; fileRef = F389ECA2192FBA91001FB68B /* contacto.png */; };
+		F3A420881935079D0032A715 /* ast.png in Resources */ = {isa = PBXBuildFile; fileRef = F3A420871935079D0032A715 /* ast.png */; };
 		F3A6401918E490F6004AF17F /* Mipin.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A6401818E490F6004AF17F /* Mipin.m */; };
 		F3A9AF531926D89A00E0F3F1 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F3A9AF521926D89A00E0F3F1 /* 1.jpg */; };
 		F3A9AF561927067700E0F3F1 /* MapaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A9AF551927067700E0F3F1 /* MapaViewController.m */; };
@@ -95,6 +97,7 @@
 /* Begin PBXFileReference section */
 		F3127308192ABEBB002E4119 /* ResenaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResenaViewController.h; sourceTree = "<group>"; };
 		F3127309192ABEBB002E4119 /* ResenaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResenaViewController.m; sourceTree = "<group>"; };
+		F312900B19379E930037CA26 /* buscaaqui.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buscaaqui.png; sourceTree = "<group>"; };
 		F32CF00518F5A9220098A5CF /* flechas.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = flechas.xib; sourceTree = "<group>"; };
 		F32CF00718F5A98D0098A5CF /* tools.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tools.png; sourceTree = "<group>"; };
 		F32CF00918F5A98D0098A5CF /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
@@ -135,6 +138,7 @@
 		F389ECA0192FBA91001FB68B /* web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.png; sourceTree = "<group>"; };
 		F389ECA1192FBA91001FB68B /* fecha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fecha.png; sourceTree = "<group>"; };
 		F389ECA2192FBA91001FB68B /* contacto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contacto.png; sourceTree = "<group>"; };
+		F3A420871935079D0032A715 /* ast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ast.png; sourceTree = "<group>"; };
 		F3A6401718E490F6004AF17F /* Mipin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mipin.h; sourceTree = "<group>"; };
 		F3A6401818E490F6004AF17F /* Mipin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mipin.m; sourceTree = "<group>"; };
 		F3A9AF521926D89A00E0F3F1 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
@@ -348,6 +352,8 @@
 				F389ECA0192FBA91001FB68B /* web.png */,
 				F389ECA1192FBA91001FB68B /* fecha.png */,
 				F389ECA2192FBA91001FB68B /* contacto.png */,
+				F3A420871935079D0032A715 /* ast.png */,
+				F312900B19379E930037CA26 /* buscaaqui.png */,
 			);
 			name = Imagenes;
 			sourceTree = "<group>";
@@ -521,6 +527,7 @@
 				F332E84818D161BA00DF538D /* Main_iPhone.storyboard in Resources */,
 				F389ECA5192FBA91001FB68B /* contacto.png in Resources */,
 				F3CFC00118FD083C00206262 /* donde.png in Resources */,
+				F3A420881935079D0032A715 /* ast.png in Resources */,
 				F3CF6EBB190ECE22003E86EA /* pin.png in Resources */,
 				F3B9EC4018EF2A5500204323 /* Opcciones.xib in Resources */,
 				F389ECA4192FBA91001FB68B /* fecha.png in Resources */,
@@ -537,6 +544,7 @@
 				F32CF00618F5A9220098A5CF /* flechas.xib in Resources */,
 				F3CFC00018FD083C00206262 /* evento.png in Resources */,
 				F3C94DDC1911ACED0035A016 /* Twitter.png in Resources */,
+				F312900C19379E930037CA26 /* buscaaqui.png in Resources */,
 				F3DA27B31910234F004BB45C /* back2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

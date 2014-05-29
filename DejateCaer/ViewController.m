@@ -6,7 +6,7 @@
 //  Created by Carlos Castellanos on 12/03/14.
 //  Copyright (c) 2014 Carlos Castellanos. All rights reserved.
 //
-
+#define SCROLL_UPDATE_DISTANCE          .80
 #import "ViewController.h"
 #import "eventCell.h"
 #import "SinEventoTableViewCell.h"
@@ -32,7 +32,7 @@
     NSString *currentLongitud;
     NSString *radio;
     NSString *radio_anterior;
-    
+    int moviendo;
     BOOL isEmpty;
     
     BOOL isArrow;  //diseño
@@ -52,6 +52,7 @@
     // UIView *vista_atras;
     
     AppDelegate *delegate;
+    CLLocationCoordinate2D initialLocation;
  
     //Vista de Loading que se presenta mientras se hace la peticion 
     UIView *loading;
@@ -79,10 +80,11 @@
 
 - (void)viewDidLoad
 {
-    
-   
+    //variable para contar las veces que se mueve el mapa
+    moviendo=0;
     //Definde Fondo de la vista
-    self.view.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1];
+    self.view.backgroundColor=[UIColor whiteColor];
+   // self.view.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1];
    
     
     //Banderas para las vistas
@@ -112,10 +114,10 @@
     
     [mapa setDelegate:self];
     
-    CLLocationCoordinate2D SCL;
-    SCL.latitude = LocationManager.location.coordinate.latitude-0.020;
-    SCL.longitude = LocationManager.location.coordinate.longitude;
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(SCL, 4000, 4000);
+    
+    initialLocation.latitude = LocationManager.location.coordinate.latitude-0.020;
+    initialLocation.longitude = LocationManager.location.coordinate.longitude;
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(initialLocation, 4000, 4000);
     [mapa setShowsUserLocation:YES];
     [mapa setRegion:region animated:YES];
     
@@ -137,19 +139,20 @@
     [self handleTapMapView:nil];
     
     [super viewDidLoad];
+    
 	
 }
 
 -(void)crearTabla{
     
     
-    _tableView                  = [[UITableView alloc]  initWithFrame: CGRectMake(0, 64, 320, self.view.frame.size.height-64)];
+    _tableView = [[UITableView alloc]  initWithFrame: CGRectMake(0, 64, 320, self.view.frame.size.height-64)];
     
     _tableView.tableHeaderView  = [[UIView alloc]       initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, 290)];
     _tableView.rowHeight=90;
     [_tableView setBackgroundColor:[UIColor clearColor]];
     _tableView.tableHeaderView.backgroundColor=[UIColor grayColor];
-   
+   [self.tableView setSeparatorColor:[UIColor redColor]];
     // Add Gestoss
     _tapMapViewGesture      = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                       action:@selector(handleTapMapView:)];
@@ -191,6 +194,11 @@
 //vista de la lista escondida
 - (void)handleTapMapView:(UIGestureRecognizer *)gesture {
     isArrow=NO;
+    UIView *linea=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 1)];
+    linea.backgroundColor=[UIColor clearColor];
+    UIImageView *mas=[[UIImageView alloc]initWithFrame:CGRectMake(140, 5, 45, 45)];
+    mas.image=[UIImage imageNamed:@"mas.png"];
+    mas.hidden=TRUE;
      [self.view endEditing:YES];
     //NSLog(@"lista escondida");
       [_tableView setContentOffset:CGPointMake(0, 0) animated:NO];
@@ -205,25 +213,31 @@
                          self.tableView.frame           = CGRectMake(0, self.view.frame.size.height-53,320, 53);
                         
                                                   self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 53)];
+                         
+                         //NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas" owner:nil options:nil];
+                         
+                         // Cargamos la vista desde el XIB
+                         // flechas = [nibContents lastObject];
+                        
+                         
+                         UIView *view2=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 52)];
+                         view2.backgroundColor=[UIColor clearColor];
+                         [flechas addGestureRecognizer:tapFlechas];
+                        
+                         [self.tableView.tableHeaderView addSubview:linea];
+                         [self.tableView.tableHeaderView addSubview:mas];
+                         [self.tableView.tableHeaderView addSubview:view2];
+                         [view2 addGestureRecognizer:tapFlechas];
+                         
                         
 
                      }
                      completion:^(BOOL finished){
                          
 
-                      
-                         NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"flechas" owner:nil options:nil];
-                         
-                         // Cargamos la vista desde el XIB
-                        // flechas = [nibContents lastObject];
-                         UIView *view2=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 52)];
-                         view2.backgroundColor=[UIColor clearColor];
-                         [flechas addGestureRecognizer:tapFlechas];
-                         UIImageView *mas=[[UIImageView alloc]initWithFrame:CGRectMake(140, 5, 45, 45)];
-                         mas.image=[UIImage imageNamed:@"mas.png"];
-                        [self.tableView.tableHeaderView addSubview:mas];
-                          [self.tableView.tableHeaderView addSubview:view2];
-                           [view2 addGestureRecognizer:tapFlechas];
+                         linea.backgroundColor=[UIColor blackColor];
+                         mas.hidden=FALSE;
+                        
                          self.tableView.tableHeaderView.userInteractionEnabled = YES;
                          UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc]
                                                         initWithTarget:self action:@selector(handlePan:)];
@@ -238,7 +252,7 @@
                          [self.tableView.tableHeaderView addSubview:flechas];
                            _tableView.scrollEnabled=FALSE;
                          [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
-                    flechas.hidden=FALSE;
+                         flechas.hidden=FALSE;
                      }];
     
     
@@ -273,7 +287,7 @@
     // guardamos el radio anteriot
     radio_anterior=radio;
     
-    NSString *urlString =@"http://dev.codigo.labplc.mx/EventarioWeb/eventos.json";
+    NSString *urlString =@"http://eventario.mx/eventos.json";
     NSString *url=[NSString stringWithFormat:@"%@?lon=%@&lat=%@&dist=%@",urlString,currentLongitud,currentLatitud,radio];
    // NSString *url=@"http://dev.codigo.labplc.mx/EventarioWeb/eventos.json";
     NSLog(@"%@",url);
@@ -509,7 +523,7 @@
        // [self buscar_imagen:[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"imagen"]];
         
         
-        cell.imagen.image= [delegate.cacheImagenes objectForKey:[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"imagen"]];
+        cell.imagen.image=[UIImage imageNamed:@"ast.png"]; //[delegate.cacheImagenes objectForKey:[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"imagen"]];
         
         cell.nombre.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"nombre"];
         NSString *horas=[[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"hora_inicio"]
@@ -570,7 +584,9 @@
             int footerHeight = tableHeight - cellsHeight;
             tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, footerHeight)];
             
-            [tableView.tableFooterView setBackgroundColor:[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1]];
+          //  [tableView.tableFooterView setBackgroundColor:[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1]];
+            
+            [tableView.tableFooterView setBackgroundColor:[UIColor whiteColor]];
         }
     }
 }
@@ -642,7 +658,7 @@
                              [mapa addSubview:contenedor_flotante];
                              
                              
-                             self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, self.view.frame.size.height/2+70)];
+                             self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, self.view.frame.size.height/2+50)];
                              self.tableView.tableHeaderView.backgroundColor=[UIColor clearColor];
                              self.tableView.scrollEnabled=YES;
                              
@@ -655,7 +671,7 @@
                              
                              
                              flechas = [nibContents lastObject];
-                             flechas.frame=CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-90, 320, 90);
+                             flechas.frame=CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-60, 320, 60);
                            //  self.tableView.tableHeaderView.backgroundColor=[UIColor blackColor];
                                                          [self.tableView.tableHeaderView addSubview:flechas];
                              [flechas addGestureRecognizer:tapFlechas];
@@ -862,7 +878,7 @@ calloutAccessoryControlTapped:(UIControl *)control
 
 
 -(IBAction)getCenter:(id)sender{
- 
+    [bucar_aqui removeFromSuperview];
     loading.hidden=FALSE;
     
     [self.view endEditing:YES];
@@ -919,6 +935,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     buscar.delegate = self;
     buscar.placeholder=@"Zamora 54,Condesa,Cuahutemoc";
     [buscar setFont:[UIFont systemFontOfSize:10]];
+    buscar.returnKeyType = UIReturnKeySearch;
 
     [vista_auxiliar addSubview:buscar];
     
@@ -962,13 +979,17 @@ bucar_aqui = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 [bucar_aqui addTarget:self
                action:@selector(getCenter:)
      forControlEvents:UIControlEventTouchUpInside];
-[bucar_aqui setTitle:@"Buscar en esta zona" forState:UIControlStateNormal];
-bucar_aqui.frame = CGRectMake(80 , 40, 160.0, 40.0);
+//[bucar_aqui setTitle:@"Buscar en esta zona" forState:UIControlStateNormal];
+    UIImage *buttonImage=[UIImage imageNamed:@"buscaaqui.png"];
+    [bucar_aqui setBackgroundImage:buttonImage forState:UIControlStateNormal];
+ 
+bucar_aqui.frame = CGRectMake(80 , 40, 160.0, 60.0);
     bucar_aqui.tintColor=[UIColor whiteColor];
-bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:0.8];
+//bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:0.8];
+    bucar_aqui.backgroundColor=[UIColor clearColor];
 
     //bucar_aqui.hidden=TRUE;
-    [mapa addSubview:bucar_aqui];
+    //[mapa addSubview:bucar_aqui];
 }
 
 
@@ -1013,7 +1034,7 @@ bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) bl
         
         direccion = [[NSString alloc] initWithData: stringData encoding: NSASCIIStringEncoding];      direccion = [direccion stringByReplacingOccurrencesOfString:@" "
                                                          withString:@"%20"];
-        NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?key=&sensor=true&query=%@,distritofederal",direccion];
+        NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?key=TUKEY&sensor=true&query=%@,distritofederal",direccion];
         
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
         
@@ -1080,5 +1101,48 @@ bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) bl
     
 }
 
+
+// moviendo el mapa
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    moviendo++;
+    NSLog(@"regionDidChangeAnimated");
+    MKCoordinateRegion mapRegion;
+    // set the center of the map region to the now updated map view center
+    mapRegion.center = mapView.centerCoordinate;
+    
+    mapRegion.span.latitudeDelta = 0.3; // you likely don't need these... just kinda hacked this out
+    mapRegion.span.longitudeDelta = 0.3;
+    
+    // get the lat & lng of the map region
+    double lat = mapRegion.center.latitude;
+    double lng = mapRegion.center.longitude;
+
+    // note: I have a variable I have saved called lastLocationCoordinate. It is of type
+    // CLLocationCoordinate2D and I initially set it in the didUpdateUserLocation
+    // delegate method. I also update it again when this function is called
+    // so I always have the last mapRegion center point to compare the present one with
+    CLLocation *before = [[CLLocation alloc] initWithLatitude:initialLocation.latitude longitude:initialLocation.longitude];
+    CLLocation *now = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+    
+    CLLocationDistance distance = ([before distanceFromLocation:now]) * 0.000621371192;
+    
+    
+    NSLog(@"Scrolled distance: %@", [NSString stringWithFormat:@"%.02f", distance]);
+    
+    if( distance > SCROLL_UPDATE_DISTANCE )
+    { NSLog(@"se movio");
+        if (moviendo>3) {
+            
+        
+       [mapa addSubview:bucar_aqui];
+           }
+    }
+    
+    // resave the last location center for the next map move event
+    initialLocation.latitude = mapRegion.center.latitude;
+    initialLocation.longitude = mapRegion.center.longitude;
+    
+}
 @end
 

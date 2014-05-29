@@ -15,8 +15,9 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1];
+        //self.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1];
         // Initialization code
+        self.backgroundColor=[UIColor whiteColor];
         UIView *selectedView = [[UIView alloc]init];
         selectedView.backgroundColor = [UIColor clearColor];
         _nombre=[[UILabel alloc]initWithFrame:CGRectMake(10, 5, 250, 70)];
@@ -26,7 +27,7 @@
         [_nombre setFont:[UIFont fontWithName:@"NIISansLight" size:16]];
         
         _nombre.numberOfLines = 3;
-        
+           _nombre.textColor=[UIColor redColor];
         [self   addSubview:_nombre];
         self.selectedBackgroundView=selectedView;
         

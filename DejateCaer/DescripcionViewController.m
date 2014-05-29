@@ -93,6 +93,12 @@
    // [_btnEventos.titleLabel setFont:[UIFont systemFontOfSize:10]];
     _nombre.text=[_evento objectForKey:@"nombre"];
      [_nombre setFont:[UIFont fontWithName:@"NIISans-Bold" size:17]];
+    [_nombre sizeToFit];
+    
+    _categoria.frame=CGRectMake(36, _nombre.frame.size.height+8, 111, 22);
+    _categoria.text=[_evento objectForKey:@"categoria"];
+    [_categoria setFont:[UIFont fontWithName:@"NIISans" size:15]];
+    
     _lugar.text=[_evento objectForKey:@"lugar"];
     [_lugar setFont:[UIFont fontWithName:@"NIISans" size:17]];
     
@@ -116,9 +122,6 @@
     
     _precio.text=[_evento objectForKey:@"precio"];
     [_precio setFont:[UIFont fontWithName:@"NIISans" size:17]];
-    
-    _categoria.text=[_evento objectForKey:@"categoria"];
-    [_categoria setFont:[UIFont fontWithName:@"NIISans" size:17]];
     
     _contacto.text=[_evento objectForKey:@"contacto"];
     [_contacto setFont:[UIFont fontWithName:@"NIISans" size:17]];

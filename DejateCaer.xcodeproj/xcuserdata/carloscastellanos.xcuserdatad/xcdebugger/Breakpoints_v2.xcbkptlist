@@ -6,15 +6,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422296021.100808"
+            timestampString = "423078054.758393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "-respuestaObtenerEventos"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422296021.100808"
+            timestampString = "423078054.758393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "-respuestaObtenerEventos"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422296021.100808"
+            timestampString = "423078054.758393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
+            startingLineNumber = "273"
+            endingLineNumber = "273"
             landmarkName = "-respuestaObtenerEventos"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422296021.100808"
+            timestampString = "423078054.758393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
             landmarkName = "-respuestaObtenerEventos"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422819580.276602"
+            timestampString = "423078581.950571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "992"
-            endingLineNumber = "992"
+            startingLineNumber = "1013"
+            endingLineNumber = "1013"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422819580.276602"
+            timestampString = "423078581.950571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "840"
-            endingLineNumber = "840"
+            startingLineNumber = "856"
+            endingLineNumber = "856"
             landmarkName = "-mapView:didSelectAnnotationView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422819580.276602"
+            timestampString = "423078581.950571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "839"
-            endingLineNumber = "839"
+            startingLineNumber = "855"
+            endingLineNumber = "855"
             landmarkName = "-mapView:didSelectAnnotationView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422819580.276602"
+            timestampString = "423078581.950571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "810"
-            endingLineNumber = "810"
+            startingLineNumber = "826"
+            endingLineNumber = "826"
             landmarkName = "-mapView:annotationView:calloutAccessoryControlTapped:"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422819580.276602"
+            timestampString = "423078581.950571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "716"
-            endingLineNumber = "716"
+            startingLineNumber = "732"
+            endingLineNumber = "732"
             landmarkName = "-getPlacesApple"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422819580.276602"
+            timestampString = "423078581.950571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "730"
-            endingLineNumber = "730"
+            startingLineNumber = "746"
+            endingLineNumber = "746"
             landmarkName = "-getPlacesApple"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422819580.276602"
+            timestampString = "423078581.950571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1051"
-            endingLineNumber = "1051"
+            startingLineNumber = "1072"
+            endingLineNumber = "1072"
             landmarkName = "-handlePan:"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422819580.276602"
+            timestampString = "423078581.950571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "630"
-            endingLineNumber = "630"
+            startingLineNumber = "646"
+            endingLineNumber = "646"
             landmarkName = "-touchTabla"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422296021.100808"
+            timestampString = "423078054.758393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
             landmarkName = "-handleTapMapView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422296021.100808"
+            timestampString = "423078054.758393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "-handleTapMapView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422819580.276602"
+            timestampString = "423078581.950571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1069"
-            endingLineNumber = "1069"
+            startingLineNumber = "1090"
+            endingLineNumber = "1090"
             landmarkName = "-buscar_imagen:"
             landmarkType = "5">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422296021.100808"
+            timestampString = "423078054.758393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "398"
-            endingLineNumber = "398"
+            startingLineNumber = "412"
+            endingLineNumber = "412"
             landmarkName = "-getMapa:Y:"
             landmarkType = "5">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422296021.100808"
+            timestampString = "423078054.758393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
             landmarkName = "-obtenerEventos:Y:"
             landmarkType = "5">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422296021.100808"
+            timestampString = "423078054.758393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "-obtenerEventos:Y:"
             landmarkType = "5">
          </BreakpointContent>
@@ -330,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422296021.100808"
+            timestampString = "423078054.758393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
             landmarkName = "-obtenerEventos:Y:"
             landmarkType = "5">
             <Locations>
@@ -424,11 +424,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/ViewController.m"
-            timestampString = "422819580.276602"
+            timestampString = "423078054.758393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "525"
-            endingLineNumber = "525"
+            startingLineNumber = "539"
+            endingLineNumber = "539"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -440,11 +440,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/DescripcionViewController.m"
-            timestampString = "422820111.303127"
+            timestampString = "422821208.912645"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
             landmarkName = "-web:"
             landmarkType = "5">
          </BreakpointContent>
@@ -456,12 +456,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DejateCaer/DescripcionViewController.m"
-            timestampString = "422820111.303127"
+            timestampString = "422821208.912645"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "335"
-            endingLineNumber = "335"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
             landmarkName = "-web:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DejateCaer/ViewController.m"
+            timestampString = "423078581.950571"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1133"
+            endingLineNumber = "1133"
+            landmarkName = "-mapView:regionDidChangeAnimated:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
