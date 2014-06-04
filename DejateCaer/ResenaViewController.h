@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ResenaViewController : UIViewController
+@interface ResenaViewController : UIViewController<UIWebViewDelegate>
 @property (nonatomic,retain) NSString *texto;
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UITextView *descripcion;

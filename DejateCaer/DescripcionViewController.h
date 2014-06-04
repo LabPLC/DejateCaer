@@ -13,13 +13,14 @@
 @property (nonatomic,retain) NSMutableDictionary *evento;
 @property (strong, nonatomic) CLLocationManager *LocationManager;
 @property (weak, nonatomic) IBOutlet UILabel *nombre;
+@property (weak, nonatomic) IBOutlet UIImageView *imagen;
 
 @property (weak, nonatomic) IBOutlet UILabel *categoria;
+@property (weak, nonatomic) IBOutlet UIImageView *img_cat;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *horario;
 @property (weak, nonatomic) IBOutlet UILabel *fecha;
-
-@property (weak, nonatomic) IBOutlet UIImageView *imagen;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *contacto;
@@ -27,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *precio;
 
 @property (weak, nonatomic) IBOutlet UILabel *direccion;
+
 @property (weak, nonatomic) IBOutlet UILabel *lugar;
 
 @property (weak, nonatomic) IBOutlet UIView *vistaaux1;

@@ -105,14 +105,15 @@
     radio=delegate.user_radio;//@"2000";
     [self crearBarraBusqueda];
     
-    
+    [mapa setDelegate:self];
     //obtenemos la ubicacion del usuario y centramos el mapa ahi
     LocationManager = [[CLLocationManager alloc] init];
+    
     LocationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
     LocationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
     [LocationManager startUpdatingLocation];
     
-    [mapa setDelegate:self];
+    
     
     
     initialLocation.latitude = LocationManager.location.coordinate.latitude-0.020;
@@ -466,10 +467,20 @@
     
     if (!isEmpty) {
         
-    
-    DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
+        DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
+        if ([delegate.alto intValue] < 568)
+        {
+            detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion2"];
+            
+        }
         
-        detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
+        else
+        {
+            
+            detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
+            
+        }
+   
         
     
     
@@ -522,8 +533,8 @@
         
        // [self buscar_imagen:[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"imagen"]];
         
-        
-        cell.imagen.image=[UIImage imageNamed:@"ast.png"]; //[delegate.cacheImagenes objectForKey:[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"imagen"]];
+        NSString *cat=[NSString stringWithFormat:@("%@.png"),[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"categoria"]];
+        cell.imagen.image=[UIImage imageNamed:cat]; //[delegate.cacheImagenes objectForKey:[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"imagen"]];
         
         cell.nombre.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"nombre"];
         NSString *horas=[[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"hora_inicio"]
@@ -534,7 +545,7 @@
                          stringByReplacingOccurrencesOfString:@"2000-01-01T" withString:@""];
         horasfin=[horasfin  stringByReplacingOccurrencesOfString:@":00Z" withString:@""];
         
-        cell.hora.text=[NSString stringWithFormat:@("%@ a %@"),horas,horasfin];
+        cell.hora.text=[NSString stringWithFormat:@("%@ - %@"),horas,horasfin];
         //cell.hora.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"hora_inicio"];
         double metros= [[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"] doubleValue];
         if (metros>=1) {
@@ -824,18 +835,18 @@ calloutAccessoryControlTapped:(UIControl *)control
     
     
     DescripcionViewController *detalles;//=[[DescripcionViewController alloc]init];
-   /* if ([delegate.alto intValue] < 568)
+    if ([delegate.alto intValue] < 568)
     {
         detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion2"];
         
     }
     
     else
-    {*/
+    {
         
         detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
         
-   // }
+    }
     
     // detalles = [[self storyboard] instantiateViewControllerWithIdentifier:@"descripcion"];
     detalles.evento=[eventos objectAtIndex:view.tag];
@@ -927,7 +938,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     [contenedor_flotante addSubview:vista_auxiliar];
 
     
-    UIImageView *lupa=[[UIImageView alloc]initWithFrame:CGRectMake(7, 7, 18, 18)];
+    UIImageView *lupa=[[UIImageView alloc]initWithFrame:CGRectMake(7, 7, 15, 15)];
     lupa.image=[UIImage imageNamed:@"lupa.png"];
     [vista_auxiliar addSubview:lupa];
     
@@ -950,7 +961,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     UIImage *btnImage = [UIImage imageNamed:@"flecha2.png"];
     UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, encuentrame.frame.size.width, encuentrame.frame.size.height)];
     img.image=btnImage;
-    [encuentrame setBackgroundImage:btnImage forState:UIControlStateNormal];
+    [encuentrame setImage:btnImage forState:UIControlStateNormal];
     //[encuentrame addSubview:img];
     
     UIView * aux2=[[UIView alloc]initWithFrame:CGRectMake(275, 0, 1, 34)];
@@ -979,14 +990,14 @@ bucar_aqui = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 [bucar_aqui addTarget:self
                action:@selector(getCenter:)
      forControlEvents:UIControlEventTouchUpInside];
-//[bucar_aqui setTitle:@"Buscar en esta zona" forState:UIControlStateNormal];
-    UIImage *buttonImage=[UIImage imageNamed:@"buscaaqui.png"];
-    [bucar_aqui setBackgroundImage:buttonImage forState:UIControlStateNormal];
+[bucar_aqui setTitle:@"Buscar en esta zona" forState:UIControlStateNormal];
+    //UIImage *buttonImage=[UIImage imageNamed:@"buscaaqui.png"];
+//    [bucar_aqui setBackgroundImage:buttonImage forState:UIControlStateNormal];
  
-bucar_aqui.frame = CGRectMake(80 , 40, 160.0, 60.0);
+bucar_aqui.frame = CGRectMake(40 , 45, 240, 30.0);
     bucar_aqui.tintColor=[UIColor whiteColor];
-//bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:0.8];
-    bucar_aqui.backgroundColor=[UIColor clearColor];
+bucar_aqui.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:0.98];
+  //  bucar_aqui.backgroundColor=[UIColor clearColor];
 
     //bucar_aqui.hidden=TRUE;
     //[mapa addSubview:bucar_aqui];

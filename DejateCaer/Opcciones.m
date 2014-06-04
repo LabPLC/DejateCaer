@@ -36,8 +36,13 @@
 
 }
 - (IBAction)Aceptar:(id)sender {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"actualizar" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"aceptar"  object:self];
     
+}
+-(IBAction)atras:(id)sender{
+ [[NSNotificationCenter defaultCenter] postNotificationName:@"aceptar"  object:self];
 }
 
 /*
@@ -94,7 +99,7 @@
 - (void) slidingStopped:(id)sender
 {
     NSLog(@"stopped sliding");
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"actualizar" object:nil];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"actualizar" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

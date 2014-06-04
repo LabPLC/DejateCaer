@@ -16,8 +16,7 @@
 {
     
      _cacheImagenes=[[NSMutableDictionary alloc]init];
-   
-
+    
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
      UIRemoteNotificationTypeAlert|
      UIRemoteNotificationTypeSound];

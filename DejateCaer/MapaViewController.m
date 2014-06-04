@@ -71,6 +71,7 @@
     NSLog(@"coordiante : source %f, ActualPosition %f", carPosition.placemark.coordinate.latitude ,actualPosition.placemark.coordinate.latitude);
     MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
     request.source = actualPosition;
+    request.transportType = MKDirectionsTransportTypeWalking;
     request.destination = carPosition;
     request.requestsAlternateRoutes = YES;
     
@@ -93,7 +94,8 @@
     if ([overlay isKindOfClass:[MKPolyline class]]) {
         MKPolyline *route = overlay;
         MKPolylineRenderer *routeRenderer = [[MKPolylineRenderer alloc] initWithPolyline:route];
-        routeRenderer.strokeColor = [UIColor blueColor];
+        routeRenderer.strokeColor = [UIColor redColor];
+         routeRenderer.lineWidth = 3;
         return routeRenderer;
     }
     else return nil;

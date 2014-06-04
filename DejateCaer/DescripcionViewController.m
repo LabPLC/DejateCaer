@@ -41,14 +41,19 @@
     return UIStatusBarStyleLightContent;
 }
 - (void)viewDidLoad
+
 {
+    _mapa.scrollEnabled=NO;
     if ([[_evento objectForKey:@"precio"] isEqualToString:@"No disponible"]) {
+        [ _btnPrecio setImage:[UIImage imageNamed:@"dinero0.png"] forState:UIControlStateNormal];
         _btnPrecio.enabled=FALSE;
     }
     if ([[_evento objectForKey:@"contacto"] isEqualToString:@"No disponible"]) {
+         [ _btnContacto setImage:[UIImage imageNamed:@"telefono0.png"] forState:UIControlStateNormal];
         _btnContacto.enabled=FALSE;
     }
     if ([[_evento objectForKey:@"pagina"] isEqualToString:@"No disponible"]) {
+        [ _btnWeb setImage:[UIImage imageNamed:@"web0.png"] forState:UIControlStateNormal];
         _btnWeb.enabled=FALSE;
     }
     UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc]
@@ -82,7 +87,7 @@
 
     
     [_scrollView setScrollEnabled:YES];
-    [_scrollView setContentSize:CGSizeMake(320, 630)];
+    [_scrollView setContentSize:CGSizeMake(320, 430)];
     
     _LocationManager = [[CLLocationManager alloc] init];
     _LocationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
@@ -91,34 +96,43 @@
     
     [_btnEventos.titleLabel setFont:[UIFont fontWithName:@"NIISansLight" size:19]];
    // [_btnEventos.titleLabel setFont:[UIFont systemFontOfSize:10]];
+    
     _nombre.text=[_evento objectForKey:@"nombre"];
-     [_nombre setFont:[UIFont fontWithName:@"NIISans-Bold" size:17]];
+    [_nombre setFont:[UIFont fontWithName:@"NIISans-Bold" size:15]];
     [_nombre sizeToFit];
     
-    _categoria.frame=CGRectMake(36, _nombre.frame.size.height+8, 111, 22);
+   
+    _img_cat.image=[UIImage imageNamed:[_evento objectForKey:@"categoria"]];//[UIImage imageNamed:[NSString stringWithFormat:@("%@.png"),[_evento objectForKey:@"categoria"]]];
+   // _categoria.frame=CGRectMake(36, _nombre.frame.size.height+8, 111, 22);
     _categoria.text=[_evento objectForKey:@"categoria"];
-    [_categoria setFont:[UIFont fontWithName:@"NIISans" size:15]];
+    [_categoria setFont:[UIFont fontWithName:@"NIISans" size:13]];
     
     _lugar.text=[_evento objectForKey:@"lugar"];
-    [_lugar setFont:[UIFont fontWithName:@"NIISans" size:17]];
+    [_lugar setFont:[UIFont fontWithName:@"NIISans" size:14]];
     
-   NSString *horas= [[_evento objectForKey:@"hora_inicio"]
+    NSString *horas= [[_evento objectForKey:@"hora_inicio"]
                                      stringByReplacingOccurrencesOfString:@"2000-01-01T" withString:@""];
+    
     NSString *horasfin= [[_evento objectForKey:@"hora_fin"]
                       stringByReplacingOccurrencesOfString:@"2000-01-01T" withString:@""];
     
    horasfin=[ horasfin stringByReplacingOccurrencesOfString:@":00Z" withString:@""];
     horas=[ horas stringByReplacingOccurrencesOfString:@":00Z" withString:@""];
     
-    _horario.text=[NSString stringWithFormat:@("%@ a %@"),horas,horasfin];
+    _horario.text=[NSString stringWithFormat:@("%@ - %@"),horas,horasfin];
 
     //_horario.text=[_evento objectForKey:@"hora_inicio"];
-    [_horario setFont:[UIFont fontWithName:@"NIISans" size:15]];
-     [_fecha setFont:[UIFont fontWithName:@"NIISans" size:15]];
-    _fecha.text=[NSString stringWithFormat:@("%@ a %@"),[_evento objectForKey:@"fecha_inicio"],[_evento objectForKey:@"fecha_fin"]];
+    [_horario setFont:[UIFont fontWithName:@"NIISans" size:12]];
+    [_fecha setFont:[UIFont fontWithName:@"NIISans" size:11]];
+    NSArray* f1 = [[_evento objectForKey:@"fecha_inicio"] componentsSeparatedByString: @"-"];
+    NSString* nf1 = [NSString stringWithFormat:@("%@/%@/%@"),[f1 objectAtIndex: 2],[f1 objectAtIndex: 1],[f1 objectAtIndex: 0]];
+    NSArray* f2 = [[_evento objectForKey:@"fecha_fin"] componentsSeparatedByString: @"-"];
+    NSString* nf2 = [NSString stringWithFormat:@("%@/%@/%@"),[f2 objectAtIndex: 2],[f2 objectAtIndex: 1],[f2 objectAtIndex: 0]];
+    
+    _fecha.text=[NSString stringWithFormat:@("%@ - %@"),nf1,nf2];
     
     _direccion.text=[_evento objectForKey:@"direccion"];
-         [_direccion setFont:[UIFont fontWithName:@"NIISansLight" size:15]];
+         [_direccion setFont:[UIFont fontWithName:@"NIISansLight" size:12]];
     
     _precio.text=[_evento objectForKey:@"precio"];
     [_precio setFont:[UIFont fontWithName:@"NIISans" size:17]];
@@ -276,15 +290,19 @@
     
     UIView *alerta=[[UIView alloc]initWithFrame:CGRectMake(22, 130, 276, 250)];
     alerta.backgroundColor=[UIColor whiteColor];
+    alerta.alpha=0.98;
     alerta.layer.cornerRadius = 5;
     alerta.layer.masksToBounds = YES;
     
     UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(alerta.frame.size.width/2-60, 10, 200, 50)];
-    desc.text=@"Descripcción";
+    desc.text=@"Descripción";
+    desc.font=[UIFont fontWithName:@"Helvetica-Bold" size:18];
     [alerta addSubview:desc];
     
     UITextView *texto=[[UITextView alloc]initWithFrame:CGRectMake(14, 60, 252, 150)];
     texto.editable=NO;
+    [texto setFont:[UIFont systemFontOfSize:13]];
+    [texto setTextAlignment:NSTextAlignmentJustified];
     texto.backgroundColor=[UIColor clearColor];
     texto.text=[_evento objectForKey:@"descripcion"];
     [alerta addSubview:texto];
@@ -293,7 +311,7 @@
     [alerta addSubview:linea];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.tintColor=[UIColor blueColor];
+    button.tintColor=[UIColor colorWithRed:24/255 green:156/255 blue:255/255 alpha:1];
     button.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
     [button addTarget:self
                action:@selector(cerrar_reseña)

@@ -9,7 +9,10 @@
 #import "ResenaViewController.h"
 
 @interface ResenaViewController ()
-
+{
+    UIView *loading;
+      UIActivityIndicatorView *spinner;
+}
 @end
 
 @implementation ResenaViewController
@@ -31,6 +34,19 @@
  
     
     
+    loading=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-25, self.view.frame.size.height/2 -50, 50, 50)];
+    loading.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:0.8];
+    // loading.alpha=0.8;
+    loading.layer.cornerRadius = 5;
+    loading.layer.masksToBounds = YES;
+    
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [spinner setCenter:CGPointMake(loading.frame.size.width/2.0, loading.frame.size.height/2.0)];
+    [spinner startAnimating];
+    [loading addSubview:spinner];
+    
+    _webView.delegate=self;
+
     NSURL *url3 = [NSURL URLWithString:_texto];
     
     
@@ -53,6 +69,16 @@
 {
     // [self dismissModalViewControllerAnimated:NO];
     [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+- (void) webViewDidStartLoad:(UIWebView *)webView {
+    
+    [self.view addSubview:loading];
+}
+
+- (void) webViewDidFinishLoad:(UIWebView *)webView {
+    
+    [loading removeFromSuperview];
 }
 /*
 #pragma mark - Navigation

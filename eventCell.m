@@ -18,7 +18,7 @@
         // self.backgroundColor=[UIColor colorWithRed:(243/255.0) green:(23/255.0) blue:(52/255.0) alpha:1];
         self.backgroundColor=[UIColor colorWithRed:(255/255.0) green:(255/255.0) blue:(255/255.0) alpha:1];
         
-        _imagen=[[UIImageView alloc] initWithFrame:CGRectMake(10, 20, 55, 55)];
+        _imagen=[[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 35, 35)];
         _imagen.layer.cornerRadius = 10;
         _imagen.layer.masksToBounds = YES;
         [self addSubview:_imagen];
