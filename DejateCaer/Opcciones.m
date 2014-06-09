@@ -12,6 +12,7 @@
 @implementation Opcciones
 {
     AppDelegate *delegate;
+    double radio;
 }
 - (id)initWithFrame:(CGRect)frame
 {
@@ -37,6 +38,11 @@
 }
 - (IBAction)Aceptar:(id)sender {
     
+    if (radio<1) {
+        radio=0.05;
+        delegate.user_radio=@"0.5";
+    }else{
+        delegate.user_radio=[NSString stringWithFormat:@"%.0f",radio*10];}
     [[NSNotificationCenter defaultCenter] postNotificationName:@"actualizar" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"aceptar"  object:self];
     
@@ -58,12 +64,12 @@
     return UIStatusBarStyleLightContent;
 }
 -(void)inicio{
-    double radio=[delegate.user_radio intValue];
+     radio=[delegate.user_radio doubleValue];
     if (radio==0) {
        // radio=500;
     }
     if (radio>=1) {
-        radio=radio;
+        //radio=radio;
         _radiolbl.text= [NSString stringWithFormat:@"%.0f km.",radio];
     }
     else{
@@ -74,14 +80,14 @@
 }
 - (IBAction) slideRadioChangee:(UISlider *)sender {
     
-    double radio = [[NSString stringWithFormat:@" %.1f", [sender value]] doubleValue];
-    delegate.user_radio=[NSString stringWithFormat:@"%.0f",radio*10];
+     radio = [[NSString stringWithFormat:@" %.1f", [sender value]] doubleValue];
+   
     if (radio==0) {
         radio=0.05;
-         delegate.user_radio=@"0.5";
+        // delegate.user_radio=@"0.5";
     }
     if (radio>=0.1) {
-        radio=radio;
+       // radio=radio;
         _radiolbl.text= [NSString stringWithFormat:@"%.0f km.",radio*10];
     }
     else if (radio==0.5)

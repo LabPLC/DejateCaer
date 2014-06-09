@@ -30,7 +30,6 @@
 		F342E0C6193E41BE00A4FF4E /* icono_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = F342E0C4193E41BE00A4FF4E /* icono_facebook.png */; };
 		F342E0C7193E41BE00A4FF4E /* icono_twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = F342E0C5193E41BE00A4FF4E /* icono_twitter.png */; };
 		F342E0CB193E468C00A4FF4E /* lupa.png in Resources */ = {isa = PBXBuildFile; fileRef = F342E0C8193E468C00A4FF4E /* lupa.png */; };
-		F342E0D0193E663B00A4FF4E /* flecha2.png in Resources */ = {isa = PBXBuildFile; fileRef = F342E0CE193E663B00A4FF4E /* flecha2.png */; };
 		F342E0D1193E663B00A4FF4E /* tools.png in Resources */ = {isa = PBXBuildFile; fileRef = F342E0CF193E663B00A4FF4E /* tools.png */; };
 		F342E0DB193E8DE400A4FF4E /* Aprendizaje.png in Resources */ = {isa = PBXBuildFile; fileRef = F342E0D2193E8DE400A4FF4E /* Aprendizaje.png */; };
 		F342E0DC193E8DE400A4FF4E /* Cine.png in Resources */ = {isa = PBXBuildFile; fileRef = F342E0D3193E8DE400A4FF4E /* Cine.png */; };
@@ -41,7 +40,6 @@
 		F342E0E1193E8DE400A4FF4E /* Música.png in Resources */ = {isa = PBXBuildFile; fileRef = F342E0D8193E8DE400A4FF4E /* Música.png */; };
 		F342E0E2193E8DE400A4FF4E /* Teatro.png in Resources */ = {isa = PBXBuildFile; fileRef = F342E0D9193E8DE400A4FF4E /* Teatro.png */; };
 		F342E0E3193E8DE400A4FF4E /* Tecnologia.png in Resources */ = {isa = PBXBuildFile; fileRef = F342E0DA193E8DE400A4FF4E /* Tecnologia.png */; };
-		F34A80BD19142E72000E26CF /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34A80BC19142E72000E26CF /* Parse.framework */; };
 		F34A80BF19142E88000E26CF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34A80BE19142E88000E26CF /* AudioToolbox.framework */; };
 		F34A80C119142E8D000E26CF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34A80C019142E8D000E26CF /* CFNetwork.framework */; };
 		F34A80C319142EA2000E26CF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F34A80C219142EA2000E26CF /* libz.dylib */; };
@@ -54,6 +52,7 @@
 		F3A6401918E490F6004AF17F /* Mipin.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A6401818E490F6004AF17F /* Mipin.m */; };
 		F3A9AF561927067700E0F3F1 /* MapaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A9AF551927067700E0F3F1 /* MapaViewController.m */; };
 		F3AECC7E18D3849F0012748D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AECC7D18D3849F0012748D /* CoreLocation.framework */; };
+		F3B9D9A01940CDF1000D97FD /* flecha2.png in Resources */ = {isa = PBXBuildFile; fileRef = F3B9D99F1940CDF1000D97FD /* flecha2.png */; };
 		F3B9EC4018EF2A5500204323 /* Opcciones.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B9EC3F18EF2A5500204323 /* Opcciones.xib */; };
 		F3B9EC4318EF2D7900204323 /* Opcciones.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B9EC4218EF2D7900204323 /* Opcciones.m */; };
 		F3C680AC18FC9ADC0092D6D8 /* NIISans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3C680A918FC9ADC0092D6D8 /* NIISans-Bold.ttf */; };
@@ -139,7 +138,6 @@
 		F342E0C4193E41BE00A4FF4E /* icono_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icono_facebook.png; sourceTree = "<group>"; };
 		F342E0C5193E41BE00A4FF4E /* icono_twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icono_twitter.png; sourceTree = "<group>"; };
 		F342E0C8193E468C00A4FF4E /* lupa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lupa.png; sourceTree = "<group>"; };
-		F342E0CE193E663B00A4FF4E /* flecha2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flecha2.png; sourceTree = "<group>"; };
 		F342E0CF193E663B00A4FF4E /* tools.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tools.png; sourceTree = "<group>"; };
 		F342E0D2193E8DE400A4FF4E /* Aprendizaje.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Aprendizaje.png; sourceTree = "<group>"; };
 		F342E0D3193E8DE400A4FF4E /* Cine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cine.png; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 		F342E0D8193E8DE400A4FF4E /* Música.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Música.png"; sourceTree = "<group>"; };
 		F342E0D9193E8DE400A4FF4E /* Teatro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Teatro.png; sourceTree = "<group>"; };
 		F342E0DA193E8DE400A4FF4E /* Tecnologia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tecnologia.png; sourceTree = "<group>"; };
-		F34A80BC19142E72000E26CF /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		F34A80BE19142E88000E26CF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F34A80C019142E8D000E26CF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F34A80C219142EA2000E26CF /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -165,6 +162,7 @@
 		F3A9AF541927067700E0F3F1 /* MapaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapaViewController.h; sourceTree = "<group>"; };
 		F3A9AF551927067700E0F3F1 /* MapaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapaViewController.m; sourceTree = "<group>"; };
 		F3AECC7D18D3849F0012748D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F3B9D99F1940CDF1000D97FD /* flecha2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flecha2.png; sourceTree = "<group>"; };
 		F3B9EC3F18EF2A5500204323 /* Opcciones.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Opcciones.xib; sourceTree = "<group>"; };
 		F3B9EC4118EF2D7900204323 /* Opcciones.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Opcciones.h; sourceTree = "<group>"; };
 		F3B9EC4218EF2D7900204323 /* Opcciones.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Opcciones.m; sourceTree = "<group>"; };
@@ -229,7 +227,6 @@
 				F3AECC7E18D3849F0012748D /* CoreLocation.framework in Frameworks */,
 				F332E86D18D1630600DF538D /* MapKit.framework in Frameworks */,
 				F332E83918D161BA00DF538D /* UIKit.framework in Frameworks */,
-				F34A80BD19142E72000E26CF /* Parse.framework in Frameworks */,
 				F332E83518D161BA00DF538D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,7 +274,6 @@
 				F34A80C219142EA2000E26CF /* libz.dylib */,
 				F34A80C019142E8D000E26CF /* CFNetwork.framework */,
 				F34A80BE19142E88000E26CF /* AudioToolbox.framework */,
-				F34A80BC19142E72000E26CF /* Parse.framework */,
 				F3AECC7D18D3849F0012748D /* CoreLocation.framework */,
 				F332E86C18D1630600DF538D /* MapKit.framework */,
 				F332E83418D161BA00DF538D /* Foundation.framework */,
@@ -462,7 +458,7 @@
 				F3FEA85F193D261200C584FC /* telefono1.png */,
 				F3FEA860193D261200C584FC /* web0.png */,
 				F3FEA861193D261200C584FC /* web1.png */,
-				F342E0CE193E663B00A4FF4E /* flecha2.png */,
+				F3B9D99F1940CDF1000D97FD /* flecha2.png */,
 				F342E0CF193E663B00A4FF4E /* tools.png */,
 			);
 			name = "Nuevos Iconos";
@@ -571,6 +567,7 @@
 				F3F176F6193D71A30004A288 /* nombre.png in Resources */,
 				F3CFBFFF18FD083C00206262 /* regresar.png in Resources */,
 				F332E85018D161BA00DF538D /* Images.xcassets in Resources */,
+				F3B9D9A01940CDF1000D97FD /* flecha2.png in Resources */,
 				F3C94DDA1911ACE40035A016 /* Facebook.png in Resources */,
 				F3CF6EC5190EE084003E86EA /* asterisco.png in Resources */,
 				F342E0DC193E8DE400A4FF4E /* Cine.png in Resources */,
@@ -589,7 +586,6 @@
 				F332E83F18D161BA00DF538D /* InfoPlist.strings in Resources */,
 				F3C680AC18FC9ADC0092D6D8 /* NIISans-Bold.ttf in Resources */,
 				F3C680AD18FC9ADC0092D6D8 /* NIISans.ttf in Resources */,
-				F342E0D0193E663B00A4FF4E /* flecha2.png in Resources */,
 				F342E0D1193E663B00A4FF4E /* tools.png in Resources */,
 				F3C680B518FCA9520092D6D8 /* icono58.png in Resources */,
 				F342E0C6193E41BE00A4FF4E /* icono_facebook.png in Resources */,

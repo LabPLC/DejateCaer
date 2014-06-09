@@ -515,13 +515,6 @@
             
             
             
-            CGRect shadowFrame      = cell.layer.bounds;
-            CGPathRef shadowPath    = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
-            cell.layer.shadowPath   = shadowPath;
-            [cell.layer setShadowOffset:CGSizeMake(-2, -2)];
-            [cell.layer setShadowColor:[[UIColor grayColor] CGColor]];
-            [cell.layer setShadowOpacity:.75];
-            
         }
         
         
@@ -547,7 +540,11 @@
         
         cell.hora.text=[NSString stringWithFormat:@("%@ - %@"),horas,horasfin];
         //cell.hora.text= [[eventos objectAtIndex:indexPath.row ]   objectForKey:@"hora_inicio"];
-        double metros= [[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"] doubleValue];
+        float metros= [[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"] doubleValue];
+        
+        
+        cell.distancia.text= [NSString stringWithFormat:(@"%.2f Km."),metros];
+        /*
         if (metros>=1) {
             //metros=(metros/1000);
             
@@ -556,7 +553,7 @@
         else{
             NSLog(@"%@",[[eventos objectAtIndex:indexPath.row ] objectForKey:@"distancia"]);
             cell.distancia.text= [NSString stringWithFormat:(@"%@ m"),[[eventos objectAtIndex:indexPath.row ]   objectForKey:@"distancia"]];
-        }
+        }*/
         return cell;
     }
     
@@ -663,13 +660,13 @@
                               delay:0.1
                             options: UIViewAnimationOptionCurveEaseOut
                          animations:^{
-                             self.tableView.frame           = CGRectMake(0, 20,320, self.view.frame.size.height);
+                             self.tableView.frame           = CGRectMake(0, 20,320, self.view.frame.size.height-20);
                              
                              mapa.frame             = CGRectMake(0, 20, 320, 278);
                              [mapa addSubview:contenedor_flotante];
                              
                              
-                             self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, self.view.frame.size.height/2+50)];
+                             self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0, self.view.frame.size.width, self.view.frame.size.height/2+34)];
                              self.tableView.tableHeaderView.backgroundColor=[UIColor clearColor];
                              self.tableView.scrollEnabled=YES;
                              
@@ -682,7 +679,12 @@
                              
                              
                              flechas = [nibContents lastObject];
-                             flechas.frame=CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-60, 320, 60);
+                             flechas.frame=CGRectMake(0, self.tableView.tableHeaderView.frame.size.height-40, 320, 50);
+                             
+                             
+                             
+
+                             
                            //  self.tableView.tableHeaderView.backgroundColor=[UIColor blackColor];
                                                          [self.tableView.tableHeaderView addSubview:flechas];
                              [flechas addGestureRecognizer:tapFlechas];
@@ -961,7 +963,7 @@ calloutAccessoryControlTapped:(UIControl *)control
     UIImage *btnImage = [UIImage imageNamed:@"flecha2.png"];
     UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, encuentrame.frame.size.width, encuentrame.frame.size.height)];
     img.image=btnImage;
-    [encuentrame setImage:btnImage forState:UIControlStateNormal];
+    [encuentrame setBackgroundImage:btnImage forState:UIControlStateNormal];
     //[encuentrame addSubview:img];
     
     UIView * aux2=[[UIView alloc]initWithFrame:CGRectMake(275, 0, 1, 34)];

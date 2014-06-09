@@ -23,6 +23,8 @@
   //  MKMapView *mapa;
     AppDelegate *delegate;
     UIView *reseña;
+    UIView *preciov;
+    UIView *contactov;
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -105,7 +107,7 @@
     _img_cat.image=[UIImage imageNamed:[_evento objectForKey:@"categoria"]];//[UIImage imageNamed:[NSString stringWithFormat:@("%@.png"),[_evento objectForKey:@"categoria"]]];
    // _categoria.frame=CGRectMake(36, _nombre.frame.size.height+8, 111, 22);
     _categoria.text=[_evento objectForKey:@"categoria"];
-    [_categoria setFont:[UIFont fontWithName:@"NIISans" size:13]];
+    [_categoria setFont:[UIFont fontWithName:@"NIISans" size:14]];
     
     _lugar.text=[_evento objectForKey:@"lugar"];
     [_lugar setFont:[UIFont fontWithName:@"NIISans" size:14]];
@@ -123,7 +125,7 @@
 
     //_horario.text=[_evento objectForKey:@"hora_inicio"];
     [_horario setFont:[UIFont fontWithName:@"NIISans" size:12]];
-    [_fecha setFont:[UIFont fontWithName:@"NIISans" size:11]];
+    [_fecha setFont:[UIFont fontWithName:@"NIISans" size:12]];
     NSArray* f1 = [[_evento objectForKey:@"fecha_inicio"] componentsSeparatedByString: @"-"];
     NSString* nf1 = [NSString stringWithFormat:@("%@/%@/%@"),[f1 objectAtIndex: 2],[f1 objectAtIndex: 1],[f1 objectAtIndex: 0]];
     NSArray* f2 = [[_evento objectForKey:@"fecha_fin"] componentsSeparatedByString: @"-"];
@@ -294,31 +296,38 @@
     alerta.layer.cornerRadius = 5;
     alerta.layer.masksToBounds = YES;
     
-    UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(alerta.frame.size.width/2-60, 10, 200, 50)];
+    UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(alerta.frame.size.width/2-50, 10, 200, 50)];
+    //desc.tintColor=[UIColor redColor];
+    //desc.textColor=[UIColor redColor];
     desc.text=@"Descripción";
-    desc.font=[UIFont fontWithName:@"Helvetica-Bold" size:18];
+    desc.font=[UIFont fontWithName:@"NIISans-Bold" size:18];
     [alerta addSubview:desc];
     
     UITextView *texto=[[UITextView alloc]initWithFrame:CGRectMake(14, 60, 252, 150)];
     texto.editable=NO;
-    [texto setFont:[UIFont systemFontOfSize:13]];
-    [texto setTextAlignment:NSTextAlignmentJustified];
+    [texto setFont:[UIFont fontWithName:@"NIISans" size:13]];
+    //[texto setTextAlignment:NSTextAlignmentJustified];
     texto.backgroundColor=[UIColor clearColor];
     texto.text=[_evento objectForKey:@"descripcion"];
     [alerta addSubview:texto];
-    UIView *linea=[[UIView alloc]initWithFrame:CGRectMake(0, texto.frame.size.height+59, 276, 1)];
-    linea.backgroundColor=[UIColor lightGrayColor];
+    
+    
+    UIView *linea=[[UIView alloc]initWithFrame:CGRectMake(0, texto.frame.size.height+59, 276, 59)];
+    linea.backgroundColor=[UIColor redColor];
     [alerta addSubview:linea];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.tintColor=[UIColor colorWithRed:24/255 green:156/255 blue:255/255 alpha:1];
-    button.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
+   // button.tintColor=[UIColor colorWithRed:24/255 green:156/255 blue:255/255 alpha:1];
+    button.tintColor=[UIColor whiteColor];
+    
+    button.titleLabel.font = [UIFont fontWithName:@"NIISans-Bold" size:18];
     [button addTarget:self
                action:@selector(cerrar_reseña)
      forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"Aceptar" forState:UIControlStateNormal];
-    button.frame = CGRectMake(60, texto.frame.size.height+60, 160.0, 40.0);
-    [alerta addSubview:button];
+    
+    button.frame = CGRectMake(58, 4, 160.0, 40.0);
+    [linea addSubview:button];
     
     [reseña addSubview:alerta];
     [self.view addSubview:reseña];
@@ -332,21 +341,108 @@
 -(void)cerrar_reseña{
     [reseña removeFromSuperview];
 }
+-(void)cerrar_precio{
+    [preciov removeFromSuperview];
+}
+
+-(void)cerrar_contacto{
+    [contactov removeFromSuperview];
+}
 -(IBAction)precio:(id)sender
 {
     
-    UIAlertView *precio=[[UIAlertView alloc]initWithTitle:@"Precio" message: [_evento objectForKey:@"precio"] delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
-    [precio show];
+    preciov=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    preciov.backgroundColor=[UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.3];
     
+    UIView *alerta=[[UIView alloc]initWithFrame:CGRectMake(22, 200, 276, 150)];
+    alerta.backgroundColor=[UIColor whiteColor];
+    alerta.alpha=0.98;
+    alerta.layer.cornerRadius = 5;
+    alerta.layer.masksToBounds = YES;
+    
+    UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(alerta.frame.size.width/2-35, 10, 100, 20)];
+    //desc.tintColor=[UIColor redColor];
+    //desc.textColor=[UIColor redColor];
+    desc.text=@"Precio";
+    desc.font=[UIFont fontWithName:@"NIISans-Bold" size:18];
+    [alerta addSubview:desc];
+    
+    UITextView *texto=[[UITextView alloc]initWithFrame:CGRectMake(14, 40, 252, 70)];
+    texto.editable=NO;
+    [texto setFont:[UIFont fontWithName:@"NIISans" size:13]];
+    [texto setTextAlignment:NSTextAlignmentCenter];
+    texto.backgroundColor=[UIColor clearColor];
+    texto.text=[_evento objectForKey:@"precio"];
+    [alerta addSubview:texto];
+    
+    
+    UIView *linea=[[UIView alloc]initWithFrame:CGRectMake(0, texto.frame.size.height+40, 276, 40)];
+    linea.backgroundColor=[UIColor redColor];
+    [alerta addSubview:linea];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    // button.tintColor=[UIColor colorWithRed:24/255 green:156/255 blue:255/255 alpha:1];
+    button.tintColor=[UIColor whiteColor];
+    
+    button.titleLabel.font = [UIFont fontWithName:@"NIISans-Bold" size:18];
+    [button addTarget:self
+               action:@selector(cerrar_precio)
+     forControlEvents:UIControlEventTouchUpInside];
+    [button setTitle:@"Aceptar" forState:UIControlStateNormal];
+    
+    button.frame = CGRectMake(58, 4, 160.0, 40.0);
+    [linea addSubview:button];
+    
+    [preciov addSubview:alerta];
+    [self.view addSubview:preciov];
     
 }
 -(IBAction)contacto:(id)sender
 {
+    contactov=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    contactov.backgroundColor=[UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.3];
     
-    UIAlertView *contacto=[[UIAlertView alloc]initWithTitle:@"Contacto" message: [_evento objectForKey:@"contacto"] delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil, nil];
-    [contacto show];
+    UIView *alerta=[[UIView alloc]initWithFrame:CGRectMake(22, 200, 276, 150)];
+    alerta.backgroundColor=[UIColor whiteColor];
+    alerta.alpha=0.98;
+    alerta.layer.cornerRadius = 5;
+    alerta.layer.masksToBounds = YES;
+    
+    UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(alerta.frame.size.width/2-35, 10, 100, 20)];
+    //desc.tintColor=[UIColor redColor];
+    //desc.textColor=[UIColor redColor];
+    desc.text=@"Contacto";
+    desc.font=[UIFont fontWithName:@"NIISans-Bold" size:18];
+    [alerta addSubview:desc];
+    
+    UITextView *texto=[[UITextView alloc]initWithFrame:CGRectMake(14, 40, 252, 70)];
+    texto.editable=NO;
+    [texto setFont:[UIFont fontWithName:@"NIISans" size:13]];
+    [texto setTextAlignment:NSTextAlignmentCenter];
+    texto.backgroundColor=[UIColor clearColor];
+    texto.text=[_evento objectForKey:@"contacto"];
+    [alerta addSubview:texto];
     
     
+    UIView *linea=[[UIView alloc]initWithFrame:CGRectMake(0, texto.frame.size.height+40, 276, 40)];
+    linea.backgroundColor=[UIColor redColor];
+    [alerta addSubview:linea];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    // button.tintColor=[UIColor colorWithRed:24/255 green:156/255 blue:255/255 alpha:1];
+    button.tintColor=[UIColor whiteColor];
+    
+    button.titleLabel.font = [UIFont fontWithName:@"NIISans-Bold" size:18];
+    [button addTarget:self
+               action:@selector(cerrar_contacto)
+     forControlEvents:UIControlEventTouchUpInside];
+    [button setTitle:@"Aceptar" forState:UIControlStateNormal];
+    
+    button.frame = CGRectMake(58, 4, 160.0, 40.0);
+    [linea addSubview:button];
+    
+    [contactov addSubview:alerta];
+    [self.view addSubview:contactov];
 }
 -(IBAction)web:(id)sender
 {
