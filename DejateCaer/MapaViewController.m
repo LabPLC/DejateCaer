@@ -113,7 +113,18 @@
 }
 -(IBAction)getCurrentLocation:(id)sender
 {
-    [self viewDidLoad];
+     _LocationManager = [[CLLocationManager alloc] init];
+     _LocationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
+     _LocationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
+     [_LocationManager startUpdatingLocation];
+     CLLocationCoordinate2D SCL2;
+     
+     SCL2.latitude = _LocationManager.location.coordinate.latitude;
+     
+     SCL2.longitude = _LocationManager.location.coordinate.longitude;
+     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(SCL2, 4000, 4000);
+     [_mapa setShowsUserLocation:YES];
+     [_mapa setRegion:region animated:YES];
 }
 - (void)didReceiveMemoryWarning
 {
