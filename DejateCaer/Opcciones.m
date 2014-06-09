@@ -42,7 +42,7 @@
         radio=0.05;
         delegate.user_radio=@"0.5";
     }else{
-        delegate.user_radio=[NSString stringWithFormat:@"%.0f",radio*10];}
+        delegate.user_radio=[NSString stringWithFormat:@"%.0f",radio];}
     [[NSNotificationCenter defaultCenter] postNotificationName:@"actualizar" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"aceptar"  object:self];
     
@@ -87,8 +87,10 @@
         // delegate.user_radio=@"0.5";
     }
     if (radio>=0.1) {
-       // radio=radio;
         _radiolbl.text= [NSString stringWithFormat:@"%.0f km.",radio*10];
+        radio=radio*10;
+
+        
     }
     else if (radio==0.5)
     {
